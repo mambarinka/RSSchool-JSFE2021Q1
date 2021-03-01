@@ -1,0 +1,32 @@
+.articles {
+  background-color: $bg-grey-color;
+}
+
+.articles__wrapper {
+  @include wrapper;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 121px;
+  padding-bottom: 100px;
+}
+
+.articles__title {
+  @include h-model;
+  margin-bottom: 19px;
+
+  color: $font-darkgrey-color;
+  letter-spacing: normal;
+}
+
+.articles__description {
+  @include text-options(24px, 36px, 400, $font-lightgrey-color);
+  margin: 0;
+  margin-bottom: 120px;
+}
+
+.articles__slider {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}

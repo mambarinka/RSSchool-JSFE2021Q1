@@ -1,0 +1,62 @@
+.slider__button {
+  width: 30px;
+  height: 80px;
+  margin-top: 142px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+
+  &:hover .slider__button-icon {
+    fill: $main-orange-color;
+    transition-duration: 200ms;
+    cursor: pointer;
+  }
+
+  &--left {
+    margin-right: 60px;
+  }
+
+  &--right {
+    margin-left: 60px;
+  }
+}
+
+.slider__button-icon {
+  fill: $font-lightgrey-color;
+}
+
+.slider__list {
+  @include list-reset;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.slider__item {
+  display: inline-flex;
+  flex-shrink: 0;
+  position: relative;
+  width: 300px;
+  margin-right: 60px;
+}
+
+.slider__item-name {
+  @include text-options(22px, 36px, 400, $font-light-color);
+  position: absolute;
+  width: 100%;
+  bottom: 80px;
+  left: 0;
+  text-align: center;
+  z-index: 1;
+}
+
+.slider__item-description {
+  @include text-options(17px, 27px, 400, $font-light-color);
+  position: absolute;
+  width: 100%;
+  bottom: 42px;
+  left: 0;
+  text-align: center;
+  z-index: 1;
+}
