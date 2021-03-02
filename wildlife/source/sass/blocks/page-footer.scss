@@ -1,0 +1,27 @@
+.page-footer {
+  background-color: $bg-darkgrey-color;
+}
+
+.page-footer__wrapper {
+  @include wrapper;
+  display: flex;
+  align-items: center;
+  padding-top: 150px;
+  padding-bottom: 150px;
+
+  background: url("../img/bg-footer.jpg") no-repeat;
+}
+
+.page-footer__logo {
+  width: 222px;
+  margin-right: 138px;
+}
+
+.page-footer__site-map {
+  width: 476px;
+}
+
+.page-footer__social {
+  width: 241px;
+  margin-left: auto;
+}
