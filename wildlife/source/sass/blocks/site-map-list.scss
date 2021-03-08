@@ -3,6 +3,17 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  @include tablet {
+    justify-content: center;
+  }
+}
+
+.site-map-list__item {
+  @include tablet {
+    width: 60%;
+    text-align: center;
+  }
 }
 
 .site-map-list__link {

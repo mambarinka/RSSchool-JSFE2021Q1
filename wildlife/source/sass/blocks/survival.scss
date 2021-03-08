@@ -5,9 +5,9 @@
 .survival__wrapper {
   @include wrapper;
   position: relative;
-  z-index: 1;
   padding-top: 120px;
   padding-bottom: 242px;
+  z-index: 1;
 }
 
 .survival__title {

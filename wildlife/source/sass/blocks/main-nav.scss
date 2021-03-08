@@ -1,12 +1,25 @@
 .main-nav {
   display: flex;
-  width: 516px;
+  width: 43%;
+
+  @include tablet {
+    width: auto;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .main-nav__list {
   @include list-reset;
 
   display: flex;
+
+  @include mobile {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
 }
 
 .main-nav__item {
@@ -57,6 +70,12 @@
     &:hover {
       background-color: $main-orange-color;
       color: $font-light-color;
+      transition-duration: 200ms;
+    }
+
+    &:active {
+      background-color: $main-pressed-color;
+      border: 2px solid $main-pressed-color;
       transition-duration: 200ms;
     }
   }

@@ -5,13 +5,35 @@
   flex-wrap: wrap;
 }
 
+.social-list__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .social-list__link {
+  width: 40px;
+  height: 40px;
   font-size: 0;
 
-  &:hover .social-list__icon {
-    fill: $main-orange-color;
-    transform: scale(1.1);
-    transition-duration: 200ms;
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &--fb {
+    background: url("../img/icon-facebook.svg") no-repeat;
+  }
+
+  &--insta {
+    background: url("../img/icon-insta.svg") no-repeat;
+  }
+
+  &--pint {
+    background: url("../img/icon-pinterest.svg") no-repeat;
+  }
+
+  &--tg {
+    background: url("../img/icon-telegram.svg") no-repeat;
   }
 }
 

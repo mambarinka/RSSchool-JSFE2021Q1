@@ -29,4 +29,8 @@
   display: inline-flex;
   justify-content: space-between;
   width: 100%;
+
+  @include tablet {
+    width: 90%;
+  }
 }

@@ -33,6 +33,10 @@
   &::placeholder {
     @include text-options(23px, 27px, 400, $font-lightgrey-color);
   }
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .get-notified__button {

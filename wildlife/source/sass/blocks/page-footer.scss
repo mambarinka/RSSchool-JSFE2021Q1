@@ -10,6 +10,7 @@
   padding-bottom: 150px;
 
   background: url("../img/bg-footer.jpg") no-repeat;
+  background-size: cover;
 }
 
 .page-footer__logo {
@@ -18,10 +19,14 @@
 }
 
 .page-footer__site-map {
-  width: 476px;
+  width: 39.6%;
+
+  @include tablet {
+    width: 24%;
+  }
 }
 
 .page-footer__social {
-  width: 241px;
+  width: 20%;
   margin-left: auto;
 }
