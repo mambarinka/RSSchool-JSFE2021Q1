@@ -7,11 +7,21 @@
   @include tablet {
     justify-content: center;
   }
+
+  @include mobile {
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .site-map-list__item {
   @include tablet {
     width: 60%;
+    text-align: center;
+  }
+
+  @include mobile {
+    width: 100%;
     text-align: center;
   }
 }

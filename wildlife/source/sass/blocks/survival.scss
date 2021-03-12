@@ -8,6 +8,14 @@
   padding-top: 120px;
   padding-bottom: 242px;
   z-index: 1;
+
+  @include tablet {
+    padding-bottom: 188px;
+  }
+
+  @include mobile {
+    padding-bottom: 64px;
+  }
 }
 
 .survival__title {
@@ -24,9 +32,25 @@
   margin-bottom: 49px;
 
   color: $font-light-color;
+
+  @include tablet {
+    width: 40%;
+  }
+
+  @include mobile {
+    width: 40%;
+  }
 }
 
 .survival__donate {
   width: 13.3%;
   padding: 16px 22px;
+
+  @include tablet {
+    width: 30%;
+  }
+
+  @include mobile {
+    width: 30%;
+  }
 }

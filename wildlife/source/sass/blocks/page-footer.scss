@@ -11,11 +11,27 @@
 
   background: url("../img/bg-footer.jpg") no-repeat;
   background-size: cover;
+
+  @include tablet {
+    justify-content: space-between;
+  }
+
+  @include mobile {
+    justify-content: space-between;
+  }
 }
 
 .page-footer__logo {
   width: 222px;
   margin-right: 138px;
+
+  @include tablet {
+    margin-right: 0;
+  }
+
+  @include mobile {
+    margin-right: 0;
+  }
 }
 
 .page-footer__site-map {
@@ -29,4 +45,8 @@
 .page-footer__social {
   width: 20%;
   margin-left: auto;
+
+  @include tablet {
+    margin-left: 0;
+  }
 }
