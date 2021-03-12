@@ -14,16 +14,17 @@
 .get-notified__title {
   @include text-options(27px, 40px, 400, $font-darkgrey-color);
   margin: 0;
-  margin-bottom: 59px;
+  margin-bottom: 61px;
 }
 
 .get-notified__form {
   display: flex;
+  width: 55%;
 }
 
 .get-notified__input {
   @include text-options(23px, 27px, 400, $font-lightgrey-color);
-  width: 540px;
+  width: 82%;
   padding: 18px 14px 15px;
   background-color: transparent;
   border: 1px solid $font-lightgrey-color;
@@ -40,7 +41,7 @@
 }
 
 .get-notified__button {
-  width: 120px;
+  width: 18%;
   padding: 0;
   border: none;
   border-radius: 0 5px 5px 0;
