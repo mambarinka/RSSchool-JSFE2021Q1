@@ -4,34 +4,40 @@ const sliderItems = document.querySelectorAll(`.slider__item`);
 const buttonLeft = document.querySelector(`.slider__button--left`);
 const buttonRight = document.querySelector(`.slider__button--right`);
 
-let currentPosition = 0;
 let sliderArray = Array.from(sliderItems);
+let numberSlides = sliderItems.length;
+console.log(numberSlides);
+let now = 0;
+let array = [];
 
-function movePosition(position) {
-  if (position > 0 || position < -1080) {
-    return false;
-  }
-  currentPosition = position;
-
-  sliderArray.forEach(function (slide) {
-    slide.style.transform = `translateX(${position}px`;
-    slide.style.transitionDuration = `400ms`;
-  });
-
-  return currentPosition;
+for (let i = 0; i < numberSlides; i++) {
+  array.push(`-${i*360}px`); // массив с вариантами смещения слайдера для каждой картинки
 }
+console.log(array);
 
 buttonRight.addEventListener(`click`, function () {
-  movePosition(currentPosition + 360);
+  --now; // уменьшаем индекс картинки
+  console.log(now);
+  if (now < -(numberSlides - 3)) { // если залезли в отрицательную область, делаем текущей последнюю картинку
+    now = 0;
+  }
+
+  sliderArray.forEach(function (slide) {
+    slide.style.transform = `translateX(${array[-now]})`;
+    slide.style.transitionDuration = `400ms`;
+  });
 });
+
 buttonLeft.addEventListener(`click`, function () {
-  movePosition(currentPosition - 360);
+  ++now; // увеличиваем индекс картинки
+
+  if (now > numberSlides - 3) {
+    now = 0; // если индекс больше, чем может быть, делаем текущей первую картинку
+  }
+
+  sliderArray.forEach(function (slide) {
+    slide.style.transform = `translateX(${array[now]})`;
+    slide.style.transitionDuration = `400ms`;
+  });
 });
 
-buttonRight.removeEventListener(`click`, function () {
-  movePosition(currentPosition - 360);
-});
-
-buttonLeft.removeEventListener(`click`, function () {
-  movePosition(currentPosition + 360);
-});
