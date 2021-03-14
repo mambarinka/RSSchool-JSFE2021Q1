@@ -4,6 +4,7 @@ const piano = document.querySelector('.piano');
 const buttonContainer = document.querySelector('.btn-container');
 const buttons = document.querySelectorAll('.btn');
 const pianoКeys = document.querySelectorAll('.piano-key');
+const fullscreenButton = document.querySelector('.fullscreen');
 
 // ПРОИГРЫВАНИЕ НОТ ПРИ КЛИКЕ НА КЛАВИШУ
 
@@ -71,3 +72,24 @@ function btnToggle(event) {
 }
 
 buttonContainer.addEventListener('click', btnToggle);
+
+// ПОЛНОЭКРАННЫЙ РЕЖИМ
+
+function check() { // проверка 
+    console.log(document.fullscreenEnabled); // доступен ли полноэкранный режим 
+    console.dir(document.fullscreenElement);
+    // возвращает эл-т, который в данный мом-т предст. в этом док. в полн. режиме
+}
+
+fullscreenButton.addEventListener('click', check);
+
+function toggleScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen(); // возвращает корневой элемент страницы (html) 
+        // и запросить полноэкранный режим
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+fullscreenButton.addEventListener('click', toggleScreen);
