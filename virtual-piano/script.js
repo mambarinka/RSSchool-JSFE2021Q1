@@ -6,6 +6,8 @@ const buttons = document.querySelectorAll('.btn');
 const pianoКeys = document.querySelectorAll('.piano-key');
 const fullscreenButton = document.querySelector('.fullscreen');
 
+let isClick = false; // флаг, показывающий, что произошел клик
+
 // ПРОИГРЫВАНИЕ НОТ ПРИ КЛИКЕ НА КЛАВИШУ
 
 function playAudio(src) { // функция проигрывания звука на странице
@@ -17,19 +19,17 @@ function playAudio(src) { // функция проигрывания звука 
 
 function selectPlayNote(event) { //какая нота будет проигрываться
     if (event.target.classList.contains('piano-key')) {
+        console.log(event);
         const note = event.target.dataset.note;
+        // console.log(`note: ${note}`);
         const src = `assets/audio/${note}.mp3`;
+        // console.log(`src: ${src}`);
         playAudio(src);
     }
 }
 
 function addActiveClass(event) { // функция добавления актвиного класса
     if (event.target.classList.contains('piano-key')) {
-        pianoКeys.forEach((el) => {
-            if (el.classList.contains('btn-active')) {
-                el.classList.remove('btn-active');
-            }
-        });
         event.target.classList.add('btn-active');
     }
 }
@@ -39,7 +39,28 @@ function playNotesFinish() {
     addActiveClass(event);
 }
 
-piano.addEventListener('click', playNotesFinish);
+function removeActiveСlass(event) {
+    if (event.target.classList.contains('piano-key')) {
+        event.target.classList.remove('btn-active');
+    }
+}
+
+piano.addEventListener('mousedown', playNotesFinish);
+piano.addEventListener('mouseup', removeActiveСlass); //поставить на window???
+window.addEventListener('keydown', (event) => {
+    console.log(event);
+    if (event.code === 'KeyL') {
+        console.log('l');
+        //     console.log(event);
+        //     const noteKeyboard = event.target.dataset.note;
+        //    const srcKeyboard = `assets/audio/${noteKeyboard}.mp3`;
+        //    playAudio(srcKeyboard);
+    }
+
+    // addActiveClass();
+});
+
+window.addEventListener('keyup', removeActiveСlass);
 
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 

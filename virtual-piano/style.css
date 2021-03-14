@@ -186,6 +186,15 @@ body {
 	color: #d7dfe6;
 }
 
+.piano .btn-active {
+	transform: scale(0.96);
+}
+
+.piano .btn-active::before,
+.piano .btn-active::after {
+	color: #00c9b7;
+}
+
 .sharp:active {
 	border-top: 0;
 }
