@@ -169,18 +169,6 @@ body {
 	content: attr(data-letter);
 }
 
-.piano .show-before::before {
-	display: block;
-}
-
-.piano .show-after::after {
-	display: block;
-}
-
-.piano .hide-before::before {
-	display: none;
-}
-
 .piano-key:hover::before,
 .piano-key:hover::after {
 	color: #d7dfe6;

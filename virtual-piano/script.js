@@ -21,9 +21,7 @@ function selectPlayNote(event) { //какая нота будет проигры
     if (event.target.classList.contains('piano-key')) {
         console.log(event);
         const note = event.target.dataset.note;
-        // console.log(`note: ${note}`);
         const src = `assets/audio/${note}.mp3`;
-        // console.log(`src: ${src}`);
         playAudio(src);
     }
 }
@@ -39,7 +37,7 @@ function playNotesFinish() {
     addActiveClass(event);
 }
 
-function removeActiveСlass(event) {
+function removeActiveСlass(event) { // функция удаления актвиного класса
     if (event.target.classList.contains('piano-key')) {
         event.target.classList.remove('btn-active');
     }
@@ -48,16 +46,21 @@ function removeActiveСlass(event) {
 piano.addEventListener('mousedown', playNotesFinish);
 piano.addEventListener('mouseup', removeActiveСlass); //поставить на window???
 window.addEventListener('keydown', (event) => {
-    console.log(event);
-    if (event.code === 'KeyL') {
-        console.log('l');
-        //     console.log(event);
-        //     const noteKeyboard = event.target.dataset.note;
-        //    const srcKeyboard = `assets/audio/${noteKeyboard}.mp3`;
-        //    playAudio(srcKeyboard);
+    if (document.querySelector('.btn-notes').classList.contains('btn-active')) {
+        const note = event.key;
+        console.log(event);
+        console.log(event.key);
+        const src = `assets/audio/${note}.mp3`;
+        playAudio(src);
+    } else if (document.querySelector('.btn-letters').classList.contains('btn-active')) {
+        console.log(event);
+        console.log(event.key);
+        const div = document.querySelector(`div[data-letter="${event.key}"]`.toUpperCase());
+        console.log(div);
+        // const note = div.dataset.note;
+        // const src = `assets/audio/${note}.mp3`;
+        // playAudio(src);
     }
-
-    // addActiveClass();
 });
 
 window.addEventListener('keyup', removeActiveСlass);
@@ -65,18 +68,12 @@ window.addEventListener('keyup', removeActiveСlass);
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 
 
-function showHide(element, show, hide) {
-    element.classList.add(show);
-    element.classList.remove(hide);
-}
-
 function btnToggle(event) {
     if (event.target.classList.contains('btn-notes')) {
         event.target.classList.add('btn-active');
 
         pianoКeys.forEach(element => {
-            showHide(element, 'show-before', 'show-after');
-            element.classList.remove('hide-before');
+            element.classList.remove("letter");
         });
 
         document.querySelector('.btn-letters').classList.remove('btn-active');
@@ -84,8 +81,7 @@ function btnToggle(event) {
         event.target.classList.add('btn-active');
 
         pianoКeys.forEach(element => {
-            showHide(element, 'show-after', 'show-before');
-            element.classList.add('hide-before');
+            element.classList.add("letter");
         });
 
         document.querySelector('.btn-notes').classList.remove('btn-active');
