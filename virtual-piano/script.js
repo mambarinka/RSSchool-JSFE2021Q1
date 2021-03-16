@@ -6,8 +6,6 @@ const buttons = document.querySelectorAll('.btn');
 const pianoКeys = document.querySelectorAll('.piano-key');
 const fullscreenButton = document.querySelector('.fullscreen');
 
-let isClick = false; // флаг, показывающий, что произошел клик
-
 // ПРОИГРЫВАНИЕ НОТ ПРИ КЛИКЕ НА КЛАВИШУ
 
 function playAudio(src) { // функция проигрывания звука на странице
@@ -21,7 +19,9 @@ function selectPlayNote(event) { //какая нота будет проигры
     if (event.target.classList.contains('piano-key')) {
         console.log(event);
         const note = event.target.dataset.note;
+        console.log(note);
         const src = `assets/audio/${note}.mp3`;
+        console.log(src);
         playAudio(src);
     }
 }
@@ -46,29 +46,31 @@ function removeActiveСlass(event) { // функция удаления актв
 piano.addEventListener('mousedown', playNotesFinish);
 piano.addEventListener('mouseup', removeActiveСlass); //поставить на window???
 window.addEventListener('keydown', (event) => {
-    if (document.querySelector('.btn-notes').classList.contains('btn-active')) {
-        const note = event.key;
-        console.log(event);
-        console.log(event.key);
-        const src = `assets/audio/${note}.mp3`;
-        playAudio(src);
-    } else if (document.querySelector('.btn-letters').classList.contains('btn-active')) {
-        console.log(event);
-        console.log(event.key);
-        const div = document.querySelector(`div[data-letter="${event.key}"]`.toUpperCase());
-        console.log(div);
-        // const note = div.dataset.note;
-        // const src = `assets/audio/${note}.mp3`;
-        // playAudio(src);
+    let key;
+    console.log(event.code[3]);
+    if (isClickonLetters) {
+        key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
+        key.classList.add('btn-active');
+    } else if (!isClickonLetters) {
+        key = document.querySelector(`.piano-key[data-note="${event.code[3].toLowerCase()}"]`);
+        key.classList.add('btn-active');
+    } else {
+        return;
     }
+
+    let note = key.dataset.note;
+    const src = `assets/audio/${note}.mp3`;
+    playAudio(src);
 });
 
 window.addEventListener('keyup', removeActiveСlass);
 
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 
+let isClickonLetters = false;
 
 function btnToggle(event) {
+    isClickonLetters = false;
     if (event.target.classList.contains('btn-notes')) {
         event.target.classList.add('btn-active');
 
@@ -78,6 +80,7 @@ function btnToggle(event) {
 
         document.querySelector('.btn-letters').classList.remove('btn-active');
     } else {
+        isClickonLetters = true;
         event.target.classList.add('btn-active');
 
         pianoКeys.forEach(element => {
