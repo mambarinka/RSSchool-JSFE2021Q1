@@ -17,7 +17,7 @@ body {
 	min-height: 100vh;
 	background-color: #313940;
 	font-family: "Open Sans", Arial, Helvetica, sans-serif;
-	background: #313940;
+	background: #957B8D;
 	overflow-x: hidden;
 }
 
@@ -30,9 +30,11 @@ body {
 }
 
 .header-title {
-	line-height: 60px;
-	font-weight: 300;
+	line-height: 80px;
+	font-weight: 600;
 	color: #fff;
+	letter-spacing: 6px;
+	text-transform: uppercase;
 }
 
 .main {
@@ -50,30 +52,34 @@ body {
 .btn-container {
 	display: flex;
 	justify-content: space-between;
-	width: 306px;
+	width: 400px;
 	height: 40px;
 	margin: 0 auto;
 	margin-bottom: 80px;
 }
 
 .btn {
-	width: 150px;
-	height: 40px;
+	width: 185px;
+	height: 50px;
 	padding: 0 10px;
 	background-color: #454c53;
 	border: 0;
 	border-radius: 2px;
 	font-family: "Open Sans", sans-serif;
-	font-size: 16px;
-	font-weight: 300;
+	font-size: 20px;
+	font-weight: 500;
 	color: #fff;
 	outline: 0;
 	cursor: pointer;
 	transition: 0.3s;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 1px #111111, 2px 2px 2px #222222;
+	box-shadow: 0 -5px 10px -3px #3498db,
+		0 5px 10px -3px #2ecc71;
 }
 
 .btn:not(.btn-active):hover {
-	background-color: #515961;
+	background-color: #A0ABB6;
 }
 
 .btn:active {
@@ -81,11 +87,11 @@ body {
 }
 
 .btn-active {
-	background-color: #00b4a4;
+	background-color: #195780;
 }
 
 .btn-active:hover {
-	background-color: #00c9b7;
+	background-color: #318CC9;
 }
 
 .piano {
@@ -107,6 +113,8 @@ body {
 	border-radius: 0px 0px 12px 12px;
 	transition: 0.3s;
 	cursor: pointer;
+	box-shadow: 0 -5px 10px -3px #3498db,
+		0 5px 10px -3px #2ecc71;
 }
 
 .piano-key:hover {
@@ -127,7 +135,7 @@ body {
 .piano-key.sharp {
 	width: 54px;
 	height: 170px;
-	background-color: #313940;
+	background-color: #34495e;
 	border: 0;
 	border-radius: 0px 0px 9px 9px;
 	top: 0;
@@ -146,6 +154,7 @@ body {
 	border: 0;
 	border-radius: 0;
 	pointer-events: none;
+	box-shadow: none;
 }
 
 .piano-key::before,
@@ -157,11 +166,12 @@ body {
 	font-size: 26px;
 	line-height: 40px;
 	text-align: center;
-	color: #a2abb3;
+	color: #ffffff;
 	bottom: -45px;
 	left: 20px;
 	transition: 0.3s;
 	pointer-events: none;
+	text-shadow: 1px 1px 1px #111111, 2px 2px 2px #222222;
 }
 
 .piano-key::after {
@@ -176,11 +186,15 @@ body {
 
 .piano .btn-active {
 	transform: scale(0.96);
+	transition-duration: 200ms;
 }
 
 .piano .btn-active::before,
 .piano .btn-active::after {
-	color: #00c9b7;
+	color: #14405C;
+	font-size: 30px;
+	font-weight: 500;
+	text-shadow: none;
 }
 
 .sharp:active {
