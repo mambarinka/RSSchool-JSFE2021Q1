@@ -38,8 +38,7 @@ body {
 }
 
 .main {
-	min-height: calc(100vh - 110px);
-	padding: 60px 10px 0;
+	padding: 60px 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -279,8 +278,10 @@ body {
 	background-repeat: no-repeat;
 	background-position: left center;
 	line-height: 45px;
-	color: #cbd5de;
+	color: #195780;
 	font-size: 16px;
+	font-weight: 800;
+	letter-spacing: 2px;
 	font-family: "Open Sans", sans-serif;
 	transition: 0.3s;
 }
@@ -308,7 +309,7 @@ body {
 	right: 0;
 	font-size: 21px;
 	letter-spacing: -2px;
-	color: #cbd5de;
+	color: #195780;
 	line-height: 0.9;
 	font-weight: bold;
 	transition: 0.3s;
