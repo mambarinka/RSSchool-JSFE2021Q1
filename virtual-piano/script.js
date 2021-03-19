@@ -54,7 +54,7 @@ function removeActiveСlassMouse(event) { // функция удаления а�
 }
 
 piano.addEventListener('mousedown', playNotesMouse, false);
-piano.addEventListener('mouseup', stopPlayNotesMouse);
+piano.addEventListener('mouseup', stopPlayNotesMouse); //window!!!!!!!!!!!!!
 
 // КЛАВИАТУРА
 function selectPlayNoteKeyboard(event) { //какая нота будет проигрываться
