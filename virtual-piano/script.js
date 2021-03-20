@@ -7,7 +7,7 @@ const pianoКeys = document.querySelectorAll('.piano-key');
 const fullscreenButton = document.querySelector('.fullscreen');
 let key;
 
-// ПРОИГРЫВАНИЕ НОТ ПРИ КЛИКЕ НА КЛАВИШУ
+// ПРОИГРЫВАНИЕ НОТ ПРИ КЛИКЕ/НАЖАТИИ НА КЛАВИШУ
 function playAudio(src) { // функция проигрывания звука на странице
     const audio = new Audio();
     audio.src = src;
@@ -32,7 +32,7 @@ function playNotesMouse(event) {
     pianoКeys.forEach(element => {
         element.addEventListener('mouseover', selectPlayNoteMouse);
         element.addEventListener('mouseover', addActiveClassMouse);
-        element.addEventListener("mouseout", removeActiveСlassMouse);
+        element.addEventListener('mouseout', removeActiveСlassMouse);
     });
 }
 
@@ -41,7 +41,7 @@ function stopPlayNotesMouse(event) {
         removeActiveСlassMouse(event);
         element.removeEventListener('mouseover', selectPlayNoteMouse);
         element.removeEventListener('mouseover', addActiveClassMouse);
-        element.removeEventListener("mouseout", removeActiveСlassMouse);
+        element.removeEventListener('mouseout', removeActiveСlassMouse);
     });
 }
 
@@ -54,15 +54,15 @@ function removeActiveСlassMouse(event) { // функция удаления а�
 }
 
 piano.addEventListener('mousedown', playNotesMouse, false);
-piano.addEventListener('mouseup', stopPlayNotesMouse); //window!!!!!!!!!!!!!
+window.addEventListener('mouseup', stopPlayNotesMouse);
 
 // КЛАВИАТУРА
 function selectPlayNoteKeyboard(event) { //какая нота будет проигрываться
-    key = document.querySelector(`.piano-key[data-note="${event.code[3].toLowerCase()}"]`);
+    // key = document.querySelector(`.piano-key[data-note="${event.code[3].toLowerCase()}"]`);
 
-    if (isClickonLetters) {
+    // if (isClickonLetters) {
         key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
-    }
+    // }
     if (!key || event.repeat) {
         return;
     }
@@ -97,24 +97,24 @@ window.addEventListener('keyup', removeActiveСlassKeyboard);
 
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 
-let isClickonLetters = false;
+// let isClickonLetters = false;
 
 function btnToggle(event) {
-    isClickonLetters = false;
+    // isClickonLetters = false;
     if (event.target.classList.contains('btn-notes')) {
         event.target.classList.add('btn-active');
 
         pianoКeys.forEach(element => {
-            element.classList.remove("letter");
+            element.classList.remove('letter');
         });
 
         document.querySelector('.btn-letters').classList.remove('btn-active');
     } else {
-        isClickonLetters = true;
+        // isClickonLetters = true;
         event.target.classList.add('btn-active');
 
         pianoКeys.forEach(element => {
-            element.classList.add("letter");
+            element.classList.add('letter');
         });
 
         document.querySelector('.btn-notes').classList.remove('btn-active');
