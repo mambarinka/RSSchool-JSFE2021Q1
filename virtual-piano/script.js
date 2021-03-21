@@ -6,8 +6,9 @@ const buttons = document.querySelectorAll('.btn');
 const pianoКeys = document.querySelectorAll('.piano-key');
 const fullscreenButton = document.querySelector('.fullscreen');
 let key;
+let isClickOnKey = false;
 
-// ПРОИГРЫВАНИЕ НОТ ПРИ КЛИКЕ/НАЖАТИИ НА КЛАВИШУ
+
 function playAudio(src) { // функция проигрывания звука на странице
     const audio = new Audio();
     audio.src = src;
@@ -15,92 +16,92 @@ function playAudio(src) { // функция проигрывания звука 
     audio.play();
 }
 
-// МЫШЬ 
-function selectPlayNoteMouse(event) { //какая нота будет проигрываться
-    const note = event.target.dataset.note;
-    const src = `assets/audio/${note}.mp3`;
-    console.log(src);
-    playAudio(src);
+function addActiveClass(element, adClass) {
+    element.classList.add(adClass);
 }
 
-function playNotesMouse(event) {
-    if (event.target.classList.contains('piano-key')) {
-        console.log(event.target);
-        selectPlayNoteMouse(event);
-        addActiveClassMouse(event);
+function removeActiveСlass(element, adClass) {
+    if (!element) {
+        return;
     }
-    pianoКeys.forEach(element => {
-        element.addEventListener('mouseover', selectPlayNoteMouse);
-        element.addEventListener('mouseover', addActiveClassMouse);
-        element.addEventListener('mouseout', removeActiveСlassMouse);
-    });
+    element.classList.remove(adClass);
+}
+
+// МЫШЬ 
+function playNotesMouse(event) {
+    onMouseOver(event);
+    piano.addEventListener('mouseover', onMouseOver);
+    piano.addEventListener('mouseout', onMouseOut);
+
 }
 
 function stopPlayNotesMouse(event) {
-    pianoКeys.forEach(element => {
-        removeActiveСlassMouse(event);
-        element.removeEventListener('mouseover', selectPlayNoteMouse);
-        element.removeEventListener('mouseover', addActiveClassMouse);
-        element.removeEventListener('mouseout', removeActiveСlassMouse);
-    });
+    onMouseOut(event);
+    piano.removeEventListener('mouseover', onMouseOver);
+    piano.removeEventListener('mouseout', onMouseOut);
 }
 
-function addActiveClassMouse(event) { // функция добавления актвиного класса
-    event.target.classList.add('btn-active');
+function onMouseOver(event) {
+    key = event.target;
+    console.log(key);
+    if (key.classList.contains('piano-key')) {
+        const note = key.dataset.note;
+        const src = `assets/audio/${note}.mp3`;
+        playAudio(src);
+        console.log(src);
+        addActiveClass(key, 'btn-active');
+    }
 }
 
-function removeActiveСlassMouse(event) { // функция удаления актвиного класса
-    event.target.classList.remove('btn-active');
+function onMouseOut(event) {
+    key = event.target;
+    if (key.classList.contains('piano-key')) {
+        removeActiveСlass(event.target, 'btn-active');
+    }
 }
 
-piano.addEventListener('mousedown', playNotesMouse, false);
+piano.addEventListener('mousedown', playNotesMouse);
 window.addEventListener('mouseup', stopPlayNotesMouse);
 
-// КЛАВИАТУРА
-function selectPlayNoteKeyboard(event) { //какая нота будет проигрываться
-    // key = document.querySelector(`.piano-key[data-note="${event.code[3].toLowerCase()}"]`);
 
-    // if (isClickonLetters) {
-        key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
-    // }
-    if (!key || event.repeat) {
+// КЛАВИАТУРА
+function playNotesKeyboard(event) {
+    onKeyboardOver(event);
+    piano.addEventListener('mouseover', onKeyboardOver);
+    piano.addEventListener('mouseout', onKeyboarOut);
+}
+
+function stopPlayNotesKeyboard(event) {
+    onKeyboarOut(event);
+    piano.removeEventListener('mouseover', onKeyboardOver);
+    piano.removeEventListener('mouseout', onKeyboarOut);
+}
+
+function onKeyboardOver(event) {
+    key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
+    if (!key || event.repeat || event.code === 'AltLeft') {
         return;
     }
     console.log(key);
-    let note = key.dataset.note;
+    const note = key.dataset.note;
     const src = `assets/audio/${note}.mp3`;
     console.log(src);
     playAudio(src);
+    addActiveClass(key, 'btn-active');
 }
 
-function playNotesKeyboard(event) {
-    selectPlayNoteKeyboard(event);
-    addActiveClassKeyboard();
-}
-
-function addActiveClassKeyboard() { // функция добавления актвиного класса
-    if (!key) {
-        return;
-    }
-    key.classList.add('btn-active');
-}
-
-function removeActiveСlassKeyboard() { // функция удаления актвиного класса
-    if (!key) {
-        return;
-    }
-    key.classList.remove('btn-active');
+function onKeyboarOut(event) {
+    key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
+    removeActiveСlass(key, 'btn-active');
 }
 
 window.addEventListener('keydown', playNotesKeyboard);
-window.addEventListener('keyup', removeActiveСlassKeyboard);
+window.addEventListener('keyup', stopPlayNotesKeyboard);
 
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 
-// let isClickonLetters = false;
 
 function btnToggle(event) {
-    // isClickonLetters = false;
     if (event.target.classList.contains('btn-notes')) {
         event.target.classList.add('btn-active');
 
@@ -110,7 +111,6 @@ function btnToggle(event) {
 
         document.querySelector('.btn-letters').classList.remove('btn-active');
     } else {
-        // isClickonLetters = true;
         event.target.classList.add('btn-active');
 
         pianoКeys.forEach(element => {
