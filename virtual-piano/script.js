@@ -65,21 +65,11 @@ window.addEventListener('mouseup', stopPlayNotesMouse);
 
 
 // КЛАВИАТУРА
-function playNotesKeyboard(event) {
-    onKeyboardOver(event);
-    piano.addEventListener('mouseover', onKeyboardOver);
-    piano.addEventListener('mouseout', onKeyboarOut);
-}
+let isKeyPressed = false;
 
-function stopPlayNotesKeyboard(event) {
-    onKeyboarOut(event);
-    piano.removeEventListener('mouseover', onKeyboardOver);
-    piano.removeEventListener('mouseout', onKeyboarOut);
-}
-
-function onKeyboardOver(event) {
+function onKeyboardDown(event) {   
     key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
-    if (!key || event.repeat || event.code === 'AltLeft') {
+    if (!key || event.repeat || event.code === 'AltLeft' || isKeyPressed) {
         return;
     }
     console.log(key);
@@ -88,15 +78,17 @@ function onKeyboardOver(event) {
     console.log(src);
     playAudio(src);
     addActiveClass(key, 'btn-active');
+    isKeyPressed = false;
 }
 
-function onKeyboarOut(event) {
+function onKeyboarUp(event) {
+    isKeyPressed = true;
     key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
     removeActiveСlass(key, 'btn-active');
 }
 
-window.addEventListener('keydown', playNotesKeyboard);
-window.addEventListener('keyup', stopPlayNotesKeyboard);
+window.addEventListener('keydown', onKeyboardDown);
+window.addEventListener('keyup', onKeyboarUp);
 
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 
