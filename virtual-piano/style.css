@@ -61,7 +61,7 @@ body {
 	width: 185px;
 	height: 50px;
 	padding: 0 10px;
-	background-color: #454c53;
+	background-color: #BAA6B4;
 	border: 0;
 	border-radius: 2px;
 	font-family: "Open Sans", sans-serif;
@@ -73,22 +73,19 @@ body {
 	transition: 0.3s;
 	text-transform: uppercase;
 	text-shadow: 1px 1px 1px #111111, 2px 2px 2px #222222;
-	box-shadow: 0 -5px 10px -3px #3498db,
-		0 5px 10px -3px #2ecc71;
-	opacity: 0.7;
+
 }
 
-.btn:not(.btn-active):hover {
-	background-color: #A0ABB6;
-}
-
-.btn:active {
-	background-color: #00c9b7;
+.btn:hover {
+	background-color: #AF8EA5;
+	box-shadow: 0 -5px 10px 0 #0567A8,
+		0 5px 10px 0 #168D49;
 }
 
 .btn-active {
 	background-color: #195780;
-	opacity: 1;
+	box-shadow: 0 -5px 10px -3px #3498db,
+		0 5px 10px -3px #2ecc71;
 }
 
 .btn-active:hover {
@@ -120,6 +117,8 @@ body {
 
 .piano-key:hover {
 	background-color: #fff;
+	box-shadow: 0 -5px 10px 0 #0567A8,
+		0 5px 10px 0 #168D49;
 }
 
 .keys-sharp {
@@ -154,7 +153,7 @@ body {
 
 .piano-key-active:hover::before,
 .piano-key-active:hover::after {
-  color: #00b4a4;
+	color: #00b4a4;
 }
 
 .piano-key.none {
@@ -205,10 +204,8 @@ body {
 	text-shadow: none;
 }
 
-.sharp:hover {
-	background-color: #4E6B88;
-}
 .sharp:active {
+	background-color: #14405C;
 	border-top: 0;
 }
 
@@ -291,9 +288,8 @@ body {
 	background-position: left center;
 	line-height: 45px;
 	color: #195780;
-	font-size: 16px;
-	font-weight: 800;
-	letter-spacing: 2px;
+	font-size: 17px;
+	font-weight: 600;
 	font-family: "Open Sans", sans-serif;
 	transition: 0.3s;
 }
