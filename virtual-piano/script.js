@@ -28,19 +28,6 @@ function removeActiveСlass(element, adClass) {
 }
 
 // МЫШЬ 
-function playNotesMouse(event) {
-    onMouseOver(event);
-    piano.addEventListener('mouseover', onMouseOver);
-    piano.addEventListener('mouseout', onMouseOut);
-
-}
-
-function stopPlayNotesMouse(event) {
-    onMouseOut(event);
-    piano.removeEventListener('mouseover', onMouseOver);
-    piano.removeEventListener('mouseout', onMouseOut);
-}
-
 function onMouseOver(event) {
     key = event.target;
     console.log(key);
@@ -60,16 +47,27 @@ function onMouseOut(event) {
     }
 }
 
+function playNotesMouse(event) {
+    onMouseOver(event);
+    piano.addEventListener('mouseover', onMouseOver);
+    piano.addEventListener('mouseout', onMouseOut);
+
+}
+
+function stopPlayNotesMouse(event) {
+    onMouseOut(event);
+    piano.removeEventListener('mouseover', onMouseOver);
+    piano.removeEventListener('mouseout', onMouseOut);
+}
+
 piano.addEventListener('mousedown', playNotesMouse);
-window.addEventListener('mouseup', stopPlayNotesMouse);
+document.addEventListener('mouseup', stopPlayNotesMouse);
 
 
 // КЛАВИАТУРА
-let isKeyPressed = false;
-
-function onKeyboardDown(event) {   
+function playNotesKeyboard(event) {
     key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
-    if (!key || event.repeat || event.code === 'AltLeft' || isKeyPressed) {
+    if (!key || event.repeat || event.code === 'AltLeft') {
         return;
     }
     console.log(key);
@@ -78,17 +76,15 @@ function onKeyboardDown(event) {
     console.log(src);
     playAudio(src);
     addActiveClass(key, 'btn-active');
-    isKeyPressed = false;
 }
 
-function onKeyboarUp(event) {
-    isKeyPressed = true;
+function stopPlayNotesKeyboard(event) {
     key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
     removeActiveСlass(key, 'btn-active');
 }
 
-window.addEventListener('keydown', onKeyboardDown);
-window.addEventListener('keyup', onKeyboarUp);
+document.addEventListener('keydown', playNotesKeyboard);
+document.addEventListener('keyup', stopPlayNotesKeyboard);
 
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 
