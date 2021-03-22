@@ -188,12 +188,14 @@ body {
 
 .piano-key:hover::before,
 .piano-key:hover::after {
-	color: #d7dfe6;
+	color: #80B4D6;
 }
 
 .piano-key.btn-active {
 	transform: scale(0.96);
 	transition-duration: 200ms;
+	box-shadow: 0 -5px 10px 4px #0567A8,
+	0 5px 10px 4px #168D49;
 }
 
 .piano .btn-active::before,
