@@ -28,28 +28,20 @@ function removeActiveСlass(element, adClass) {
 }
 
 // МЫШЬ 
-function playNotesMouse(event) {
-    onMouseOver(event);
-    piano.addEventListener('mouseover', onMouseOver);
-    piano.addEventListener('mouseout', onMouseOut);
-
-}
-
-function stopPlayNotesMouse(event) {
-    onMouseOut(event);
-    piano.removeEventListener('mouseover', onMouseOver);
-    piano.removeEventListener('mouseout', onMouseOut);
-}
-
 function onMouseOver(event) {
     key = event.target;
-    console.log(key);
-    if (key.classList.contains('piano-key')) {
-        const note = key.dataset.note;
-        const src = `assets/audio/${note}.mp3`;
-        playAudio(src);
-        console.log(src);
-        addActiveClass(key, 'btn-active');
+
+    if (key.classList.contains('btn-active')) {
+        return;
+    } else {
+        console.log(key);
+        if (key.classList.contains('piano-key')) {
+            const note = key.dataset.note;
+            const src = `assets/audio/${note}.mp3`;
+            playAudio(src);
+            console.log(src);
+            addActiveClass(key, 'btn-active');
+        }
     }
 }
 
@@ -60,16 +52,25 @@ function onMouseOut(event) {
     }
 }
 
-piano.addEventListener('mousedown', playNotesMouse);
-window.addEventListener('mouseup', stopPlayNotesMouse);
+function playNotesMouse(event) {
+    onMouseOver(event);
+    piano.addEventListener('mousemove', onMouseOver);
+    piano.addEventListener('mouseout', onMouseOut);
+}
 
+function stopPlayNotesMouse(event) {
+    onMouseOut(event);
+    piano.removeEventListener('mousemove', onMouseOver);
+    piano.removeEventListener('mouseout', onMouseOut);
+}
+
+piano.addEventListener('mousedown', playNotesMouse);
+document.addEventListener('mouseup', stopPlayNotesMouse);
 
 // КЛАВИАТУРА
-let isKeyPressed = false;
-
-function onKeyboardDown(event) {   
+function playNotesKeyboard(event) {
     key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
-    if (!key || event.repeat || event.code === 'AltLeft' || isKeyPressed) {
+    if (!key || event.repeat || event.code === 'AltLeft') {
         return;
     }
     console.log(key);
@@ -78,21 +79,17 @@ function onKeyboardDown(event) {
     console.log(src);
     playAudio(src);
     addActiveClass(key, 'btn-active');
-    isKeyPressed = false;
 }
 
-function onKeyboarUp(event) {
-    isKeyPressed = true;
+function stopPlayNotesKeyboard(event) {
     key = document.querySelector(`.piano-key[data-letter="${event.code[3]}"]`);
     removeActiveСlass(key, 'btn-active');
 }
 
-window.addEventListener('keydown', onKeyboardDown);
-window.addEventListener('keyup', onKeyboarUp);
-
+document.addEventListener('keydown', playNotesKeyboard);
+document.addEventListener('keyup', stopPlayNotesKeyboard);
 
 // ПЕРЕКЛЮЧЕНИЕ NOTES/LETTERS 
-
 function btnToggle(event) {
     if (event.target.classList.contains('btn-notes')) {
         event.target.classList.add('btn-active');
@@ -129,7 +126,9 @@ function toggleScreen() {
         document.documentElement.requestFullscreen(); // возвращает корневой элемент страницы (html) 
         // и запросить полноэкранный режим
     } else {
-        document.exitFullscreen();
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
     }
 }
 
