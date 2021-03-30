@@ -1,0 +1,30 @@
+.button {
+  display: inline-block;
+  width: 100%;
+
+  @include text-options(12px, 15px, 700, $white-color);
+
+  text-align: center;
+  vertical-align: middle;
+
+  background-color: $main-color;
+
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $main-hover-color;
+  }
+
+  @include tablet {
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  @include mobile {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}

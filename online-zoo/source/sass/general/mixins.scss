@@ -1,0 +1,91 @@
+@mixin desktop() {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin mobile() {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin wrapper() {
+  @include desktop {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+
+  @include mobile {
+    width: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@mixin list-reset() {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin h-model() {
+  margin: 0;
+  color: $text-grey-color;
+
+  @include desktop {
+    font-size: 55px;
+    line-height: 80px;
+    font-weight: 600;
+
+
+    letter-spacing: -1.25px;
+  }
+
+  @include tablet {
+    font-size: 30px;
+    line-height: 45px;
+  }
+
+  @include mobile {
+    font-size: 24px;
+    line-height: 36px;
+  }
+}
+
+@mixin p-model() {
+  margin: 0;
+  letter-spacing: -0.5px;
+
+  @include desktop {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 400;
+    color: $text-grey-color;
+    opacity: 0.7;
+  }
+
+  @include tablet {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  @include mobile {
+    font-size: 16px;
+    line-height: 28px;
+    color: $text-darkgrey-color;
+  }
+}
+
+@mixin text-options($size, $height, $weight, $color) {
+  font-size: $size;
+  line-height: $height;
+  font-weight: $weight;
+  color: $color;
+}

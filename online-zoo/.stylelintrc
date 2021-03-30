@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-htmlacademy",
+
+  "rules": {
+    "declaration-no-important": true,
+    "indentation": [2, {"ignore": ["inside-parens"]}]
+  },
+
+    "ignoreFiles": [
+    "source/sass/general/normalize.scss",
+    "source/js/picturefill.js",
+    "source/js/svg4everybody.js"
+  ]
+}
