@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Zoo</title>
+  <link rel="preload" href="../../assets/fonts/roboto400.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto500.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto700.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto900.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/poppins500.woff2" as="font" crossorigin>
   <link href="index-style.min.css" rel="stylesheet">
 </head>
 
@@ -12,10 +17,39 @@
   <div style="display: none;">
     <include src="build/assets/icons/sprite.svg"></include>
   </div>
-  <header class="red">
-    <a>
-      <img src="../../assets/images/logo-online-zoo.svg" width="59" height="42" alt="logo of Online Zoo">
-    </a>
+  <header class="page-header">
+    <div class="wrapper page-header__wrapper">
+      <a class="logo">
+        <img class="logo__image" src="../../assets/images/logo-online-zoo.svg" width="59" height="42"
+          alt="Logo of Online-zoo">
+      </a>
+      <nav class="main-nav main-nav--closed main-nav--nojs">
+        <ul class="main-nav__list">
+          <li class="main-nav__item">
+            <a class="main-nav__link main-nav__link--current">About</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../zoos/zoos-page.html">Zoos</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../map/map.html">Map</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="#contact-us">Contact us</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
+          </li>
+        </ul>
+      </nav>
+      <label class="switch" tabindex="0">
+        <input type="checkbox">
+        <span class="switch__slider"></span>
+      </label>
+      <h1 class="visually-hidden">Online zoo where you can watch and feed the animal</h1>
+    </div>
+
+  </header>
 </body>
 
 </html>

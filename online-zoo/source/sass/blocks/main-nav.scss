@@ -1,0 +1,62 @@
+.main-nav {
+  display: flex;
+  justify-content: center;
+  width: 40.5%;
+}
+
+.main-nav__list {
+  @include list-reset;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.main-nav__item {
+  display: flex;
+  justify-content: center;
+  padding: 8px 6.3%;
+}
+
+.main-nav__link {
+  @include text-options(16px, 19px, 500, $title-grey-dark-color);
+  position: relative;
+  width: 100%;
+  text-align: center;
+  cursor: default;
+
+  &::after {
+    position: absolute;
+    display: none;
+    content: "";
+    width: 100%;
+    height: 1px;
+
+    background: $title-grey-dark-color;
+  }
+
+  &--current {
+    &::after {
+      position: absolute;
+      display: block;
+      content: "";
+      width: 100%;
+      height: 1px;
+
+      background: $title-grey-dark-color;
+    }
+  }
+
+  &[href] {
+    cursor: pointer;
+  }
+
+  &[href]:hover,
+  &[href]:focus {
+    font-weight: 900;
+  }
+
+  &[href]:active::after {
+    display: block;
+  }
+}

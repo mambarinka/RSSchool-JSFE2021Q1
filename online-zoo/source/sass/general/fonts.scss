@@ -1,31 +1,39 @@
-// @font-face {
-//   font-family: "Montserrat";
-//   font-weight: 400;
-//   font-display: swap;
-//   src: url("../fonts/montserrat400.woff2") format("woff2"),
-//     url("../fonts/montserrat400.woff") format("woff");
-// }
+@font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../assets/fonts/roboto400.woff2") format("woff2"),
+    url("../../assets/fonts/roboto400.woff") format("woff");
+}
 
-// @font-face {
-//   font-family: "Montserrat";
-//   font-weight: 500;
-//   font-display: swap;
-//   src: url("../fonts/montserrat500.woff2") format("woff2"),
-//     url("../fonts/montserrat500.woff") format("woff");
-// }
+@font-face {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../assets/fonts/roboto500.woff2") format("woff2"),
+    url("../../assets/fonts/roboto500.woff2") format("woff");
+}
 
-// @font-face {
-//   font-family: "Montserrat";
-//   font-weight: 600;
-//   font-display: swap;
-//   src: url("../fonts/montserrat600.woff2") format("woff2"),
-//     url("../fonts/montserrat600.woff") format("woff");
-// }
+@font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../assets/fonts/roboto700.woff2") format("woff2"),
+    url("../../assets/fonts/roboto700.woff2") format("woff");
+}
 
-// @font-face {
-//   font-family: "Montserrat";
-//   font-weight: 700;
-//   font-display: swap;
-//   src: url("../fonts/montserrat600.woff2") format("woff2"),
-//     url("../fonts/montserrat600.woff") format("woff");
-// }
+@font-face {
+  font-family: "Roboto";
+  font-weight: 900;
+  font-display: swap;
+  src: url("../../assets/fonts/roboto900.woff2") format("woff2"),
+    url("../../assets/fonts/roboto900.woff2") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../assets/fonts/poppins500.woff2") format("woff2"),
+    url("../../assets/fonts/poppins500.woff2") format("woff");
+}

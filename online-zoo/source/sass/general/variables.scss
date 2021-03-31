@@ -1,14 +1,20 @@
-$font: "Montserrat", "Arial Narrow", sans-serif;
+$font-main: "Roboto", "Arial", sans-serif;
+$font-popup: "Poppins", "Helvetica", sans-serif;
 
-$main-color: #fe7865;
-$main-hover-color: #f17d4b;
-$light-grey-color: #fbf8f8;
-$text-grey-color: #2c2e3f;
-$text-middlegrey-color: #48494d;
-$text-darkgrey-color: #141517;
+$bg-white1-color: #ffffff;
+$bg-white2-color: #fbfbfb;
+// $bg-grey-color: #f2f2f2;
+$title-grey-dark-color: #333333;
+$text-grey-dark-color: #444444;
+$text-grey-color: #4f4f4f;
+$text-white-color: #fefefe;
+$switch-grey-color: #f2f2f2;
+// $title-color: #111111;
+// $subtitle-color: #222222;
+$main-green-color: #4ad7cb;
+// $minor-green-color: #5eaa2f;
+// $border-table-color: #cdcdcd;
 
-$white-color: #ffffff;
-$black-color: #000000;
 
-$retina-dpi: 144dpi;
-$retina-dppx: 1.5dppx;
+// темная тема
+$switch-grey-dark-color: #4f4f4f;
