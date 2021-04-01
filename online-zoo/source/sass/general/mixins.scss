@@ -17,12 +17,10 @@
 // }
 
 @mixin wrapper() {
-  @include desktop {
-    max-width: 1920px;
-    margin: 0 auto;
-    padding-left: 152px;
-    padding-right: 149px;
-  }
+  max-width: 1920px;
+  margin: 0 auto;
+  padding-left: 152px;
+  padding-right: 149px;
 }
 
 @mixin list-reset() {
@@ -34,12 +32,9 @@
 @mixin h2-model() {
   margin: 0;
   color: $title-grey-dark-color;
-
-  @include desktop {
-    font-size: 48px;
-    line-height: 56px;
-    font-weight: 900;
-  }
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 900;
 }
 
 @mixin p-model() {

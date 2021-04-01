@@ -2,29 +2,25 @@
   display: inline-block;
   width: 100%;
 
-  @include text-options(12px, 15px, 700, $white-color);
+  @include text-options(18px, 21px, 900, $bg-white1-color);
 
   text-align: center;
   vertical-align: middle;
 
-  background-color: $main-color;
+  // background-color: $main-green-color;
+  background: linear-gradient(106.89deg, $gradien-first-color -14.32%, $gradien-second-color 100.68%);
+  border-radius: 3px;
 
   text-decoration: none;
-  letter-spacing: 2px;
   text-transform: uppercase;
+  transition-duration: 200ms;
   cursor: pointer;
 
   &:hover {
-    background-color: $main-hover-color;
+    background: linear-gradient(106.89deg, #1daf8b -14.32%, #26b6c0 100.68%);
   }
 
-  @include tablet {
-    font-size: 10px;
-    line-height: 12px;
-  }
-
-  @include mobile {
-    font-size: 10px;
-    line-height: 12px;
+  &:active {
+    background: linear-gradient(106.89deg, #167e64 -14.32%, #158289 100.68%);
   }
 }

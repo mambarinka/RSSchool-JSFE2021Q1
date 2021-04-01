@@ -1,0 +1,12 @@
+.slider {
+  overflow: hidden;
+}
+
+.slider__list {
+  @include list-reset;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  // overflow: hidden;
+}
