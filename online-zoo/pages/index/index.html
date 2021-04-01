@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Zoo</title>
+  <link rel="preload" href="../../assets/fonts/roboto400.woff2" as="font" crossorigin="">
+  <link rel="preload" href="../../assets/fonts/roboto500.woff2" as="font" crossorigin="">
+  <link rel="preload" href="../../assets/fonts/roboto700.woff2" as="font" crossorigin="">
+  <link rel="preload" href="../../assets/fonts/roboto900.woff2" as="font" crossorigin="">
+  <link rel="preload" href="../../assets/fonts/poppins500.woff2" as="font" crossorigin="">
   <link href="index-style.min.css" rel="stylesheet">
 </head>
 
@@ -22,10 +27,115 @@
 <path d="M19.15 1.575C18.6075 0.61 18.0188 0.4325 16.82 0.365C15.6225 0.28375 12.6112 0.25 10.0025 0.25C7.38875 0.25 4.37625 0.28375 3.18 0.36375C1.98375 0.4325 1.39375 0.60875 0.84625 1.575C0.2875 2.53875 0 4.19875 0 7.12125C0 7.12375 0 7.125 0 7.125C0 7.1275 0 7.12875 0 7.12875V7.13125C0 10.0413 0.2875 11.7137 0.84625 12.6675C1.39375 13.6325 1.9825 13.8075 3.17875 13.8888C4.37625 13.9588 7.38875 14 10.0025 14C12.6112 14 15.6225 13.9587 16.8212 13.89C18.02 13.8087 18.6087 13.6338 19.1513 12.6688C19.715 11.715 20 10.0425 20 7.1325C20 7.1325 20 7.12875 20 7.12625C20 7.12625 20 7.12375 20 7.1225C20 4.19875 19.715 2.53875 19.15 1.575ZM7.5 10.875V3.375L13.75 7.125L7.5 10.875Z" fill="#FEFEFE"></path>
 </symbol></svg>
   </div>
-  <header class="red">
-    <a>
-      <img src="../../assets/images/logo-online-zoo.svg" width="59" height="42" alt="logo of Online Zoo">
-    </a>
-</header></body>
+  <header class="page-header">
+    <div class="wrapper page-header__wrapper">
+      <a class="logo">
+        <img class="logo__image" src="../../assets/images/logo-online-zoo.svg" width="59" height="42" alt="Logo of Online-zoo">
+      </a>
+      <nav class="main-nav main-nav--closed main-nav--nojs">
+        <ul class="main-nav__list">
+          <li class="main-nav__item">
+            <a class="main-nav__link main-nav__link--current">About</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../zoos/zoos-page.html">Zoos</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../map/map.html">Map</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="#contact-us">Contact us</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
+          </li>
+        </ul>
+      </nav>
+      <label class="switch" tabindex="0">
+        <input type="checkbox">
+        <span class="switch__slider"></span>
+      </label>
+      <h1 class="visually-hidden">Online zoo where you can watch and feed the animal</h1>
+    </div>
+  </header>
+  <main class="page-main page-main--index">
+    <section class="watch">
+      <div class="wrapper watch__wrapper">
+        <h2 class="watch__title">Watch your favorite animal online</h2>
+        <a class="button watch__link" href="../zoos/zoos-page.html">watch online</a>
+        <div class="slider watch__slider">
+          <ul class="slider__list watch__slider-list">
+            <li class="slider__item watch__slider-item">
+              <img src="../../assets/images/slider-watch-eagles.jpg" alt="photo of eagles" class="slider__item-img  watch__slider-item-img">
+            </li>
+            <li class="slider__item watch__slider-item watch__slider-item--active">
+              <img src="../../assets/images/slider-watch-panda.jpg" alt="photo of panda" class="slider__item-img watch__slider-item-img watch__slider-item-img--active">
+              <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
+                is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
+              <a href="../zoos/zoos-page.html" class="watch__slider-item-link watch__slider-item-link--watch">Watch
+                online</a>
+              <a href="../zoos/zoos-page.html" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
+            </li>
+            <li class="slider__item watch__slider-item">
+              <img src="../../assets/images/slider-watch-gorilla.jpg" alt="photo of gorilla" class="slider__item-img  watch__slider-item-img">
+            </li>
+            <li class="slider__item watch__slider-item">
+              <img src="../../assets/images/slider-watch-crocodile.jpg" alt="photo of crocodile" class="slider__item-img watch__slider-item-img">
+            </li>
+            <li class="slider__item watch__slider-item">
+              <img src="../../assets/images/slider-watch-fox.jpg" alt="photo of fox" class="slider__item-img watch__slider-item-img">
+            </li>
+            <li class="slider__item watch__slider-item">
+              <img src="../../assets/images/slider-watch-sloth.jpg" alt="photo of sloth" class="slider__item-img watch__slider-item-img">
+            </li>
+            <li class="slider__item watch__slider-item">
+              <img src="../../assets/images/slider-watch-elephants.jpg" alt="photo of elephants" class="slider__item-img watch__slider-item-img">
+            </li>
+            <li class="slider__item watch__slider-item">
+              <img src="../../assets/images/slider-watch-leopard.jpg" alt="photo of leopard" class="slider__item-img watch__slider-item-img">
+            </li>
+          </ul>
+        </div>
+        <div class="range watch__range">
+          <div class="range__values">
+            <label class="range__value range__value--active" for="watch-range">02</label>
+            <label class="range__value" for="watch-range">08</label>
+          </div>
+          <input class="range__input" id="watch-range" type="range" min="01" max="08" step="1" value="02">
+        </div>
+      </div>
+      <ul class="watch__social-list">
+        <li class="watch__social-item">
+          <a href="#" class="watch__social-link">Instagram
+            <svg class="watch__social-icon" width="20" height="20">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="watch__social-item">
+          <a href="#" class="watch__social-link">Twitter
+            <svg class="watch__social-icon" width="20" height="20">
+              <use xlink:href="#icon-twitter"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="watch__social-item">
+          <a href="#" class="watch__social-link">Youtube
+            <svg class="watch__social-icon" width="20" height="20">
+              <use xlink:href="#icon-youtube"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="watch__social-item">
+          <a href="#" class="watch__social-link">Vkontakte
+            <svg class="watch__social-icon" width="20" height="20">
+              <use xlink:href="#icon-vkontakte"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
 
 </html>
