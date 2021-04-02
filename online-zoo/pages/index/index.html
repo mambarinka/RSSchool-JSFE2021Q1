@@ -62,7 +62,7 @@
     <section class="watch">
       <div class="wrapper watch__wrapper">
         <h2 class="watch__title">Watch your favorite animal online</h2>
-        <a class="button watch__link" href="../zoos/zoos-page.html">watch online</a>
+        <a class="button button--watch watch__link" href="../zoos/zoos-page.html">watch online</a>
         <div class="slider watch__slider">
           <ul class="slider__list watch__slider-list">
             <li class="slider__item watch__slider-item">
@@ -97,11 +97,11 @@
           </ul>
         </div>
         <div class="range watch__range">
-          <div class="range__values">
-            <label class="range__value range__value--active" for="watch-range">02</label>
-            <label class="range__value" for="watch-range">08</label>
+          <div class="range__values watch__range-values">
+            <label class="range__value range__value--active watch__range-value  watch__range-value--active" for="watch-range">02</label>
+            <label class="range__value watch__range-value" for="watch-range">08</label>
           </div>
-          <input class="range__input" id="watch-range" type="range" min="01" max="08" step="1" value="02">
+          <input class="range__input watch__range-input" id="watch-range" type="range" min="01" max="08" step="1" value="02">
         </div>
       </div>
       <ul class="watch__social-list">
@@ -134,6 +134,42 @@
           </a>
         </li>
       </ul>
+    </section>
+    <section class="how-works">
+      <div class="how-works__wrapper">
+        <h2 class="how-works__title">How it works?</h2>
+        <p class="how-works__description">As a voice for wildlife, we are devastated by the impact of the 2020
+          Australian bushfires on precious species and their habitat, and we are determined to assist in all aspects,
+          including providing veterinary support and raising much-needed emergency funds. Zoo Online saves wildlife and
+          inspires everyone to make conservation a priority in their lives. Animals have the right to a pain-free and
+          happy life. They have equal claim to the resources of this planet, and deserve a life of dignity and
+          compassion.As a voice for wildlife, we are devastated by the impact of the 2020 Australian bushfires on
+          precious species and their habitat.</p>
+        <div class="slider how-works__slider">
+          <ul class="slider__list how-works__slider-list">
+            <li class="slider__item how-works__slider-item">
+              <img src="../../assets/images/slider-how-works-deer.jpg" alt="photo of deer" class="slider__item-img how-works__slider-item-img">
+            </li>
+            <li class="slider__item how-works__slider-item how-works__slider-item--active">
+              <img src="../../assets/images/slider-how-works-panda.jpg" alt="photo of panda" class="slider__item-img how-works__slider-item-img how-works__slider-item-img--active">
+            </li>
+            <li class="slider__item how-works__slider-item">
+              <img src="../../assets/images/slider-how-works-monkeys.jpg" alt="photo of monkeys" class="slider__item-img how-works__slider-item-img">
+            </li>
+            <li class="slider__item how-works__slider-item">
+              <img src="../../assets/images/slider-how-works-black-monkeys.jpg" alt="photo of black monkeys" class="slider__item-img how-works__slider-item-img">
+            </li>
+          </ul>
+        </div>
+        <div class="range how-works__range">
+          <div class="range__values">
+            <label class="range__value range__value--active" for="how-works-range">01</label>
+            <label class="range__value" for="how-works-range">04</label>
+          </div>
+          <input class="range__input" id="how-works-range" type="range" min="01" max="08" step="1" value="01">
+        </div>
+        <a class="button button--watch how-works__link" href="../zoos/zoos-page.html">watch online</a>
+      </div>
     </section>
   </main>
 </body>
