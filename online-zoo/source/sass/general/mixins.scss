@@ -16,11 +16,25 @@
 //   }
 // }
 
-@mixin wrapper() {
+@mixin wrapper-widest() {
   max-width: 1920px;
   margin: 0 auto;
   padding-left: 152px;
   padding-right: 149px;
+}
+
+@mixin wrapper-wide() {
+  max-width: 1618px;
+  margin: 0 auto;
+  padding-left: 209px;
+  padding-right: 2109px;
+}
+
+@mixin wrapper-middle() {
+  max-width: 1199px;
+  margin: 0 auto;
+  padding-left: 204px;
+  padding-right: 205px;
 }
 
 @mixin list-reset() {
@@ -39,13 +53,10 @@
 
 @mixin p-model() {
   margin: 0;
-
-  @include desktop {
-    font-size: 14px;
-    line-height: 16px;
-    font-weight: 400;
-    color: $text-grey-color;
-  }
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: $text-grey-color;
 }
 
 @mixin text-options($size, $height, $weight, $color) {

@@ -1,6 +1,6 @@
 .button {
   display: inline-block;
-  width: 100%;
+  width: 245px;
 
   @include text-options(18px, 21px, 900, $bg-white1-color);
 
@@ -22,5 +22,22 @@
 
   &:active {
     background: linear-gradient(106.89deg, #167e64 -14.32%, #158289 100.68%);
+  }
+
+  &--watch {
+    position: relative;
+    padding-left: 36px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 32px;
+      height: 32px;
+      top: 12px;
+      left: 39px;
+      background: url("../../assets/images/arrow-watch.svg") no-repeat center;
+      border: 1px solid $bg-white1-color;
+      border-radius: 50%;
+    }
   }
 }
