@@ -1,0 +1,47 @@
+.inspires {
+  padding-top: 101px;
+  padding-bottom: 131px;
+  background-color: $switch-grey-color;
+}
+
+.inspires__wrapper {
+  @include wrapper-wide;
+}
+
+.inspires__list {
+  @include list-reset;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inspires__list-item {
+  width: calc(100% / 3);
+  padding-top: 95px;
+
+  &:not(:last-child) {
+    margin-right: 31px;
+  }
+
+  &--what {
+    background: url("../../assets/images/inspires-what.svg") no-repeat center top;
+  }
+
+  &--mission {
+    background: url("../../assets/images/inspires-mission.svg") no-repeat center top;
+  }
+
+  &--believe {
+    background: url("../../assets/images/inspires-believe.svg") no-repeat center top;
+  }
+}
+
+.inspires__item-title {
+  @include text-options(20px, 23px, 900, $title-grey-dark-color);
+  margin: 0;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.inspites__item-description {
+  @include p-model;
+}
