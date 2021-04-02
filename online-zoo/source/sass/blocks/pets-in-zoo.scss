@@ -1,0 +1,139 @@
+.pets-in-zoo {
+  padding-top: 100px;
+  background-color: $bg-white2-color;
+}
+
+.pets-in-zoo__wrapper {
+  @include wrapper-wide;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.pets-in-zoo__title {
+  @include h2-model;
+  margin-bottom: 36px;
+}
+
+.pets-in-zoo__slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 1298px;
+  margin-bottom: 28px;
+}
+
+.pets-in-zoo__slider-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition-duration: 2ms;
+
+  &:hover .pets-in-zoo__button-icon {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px $main-green-color);
+  }
+}
+
+.pets-in-zoo__slider-list {
+  width: 100%;
+  overflow: hidden;
+}
+
+.pets-in-zoo__slider-item {
+  // display: flex;
+  // align-items: flex-end;
+  // flex-wrap: wrap;
+  position: relative;
+  width: calc(100% / 4);
+  padding-left: 17px;
+  padding-right: 13px;
+  cursor: pointer;
+
+  .pets-in-zoo__item-wrapper {
+    display: none;
+  }
+
+  &--active {
+    .pets-in-zoo__item-wrapper {
+      display: block;
+    }
+  }
+
+  &:hover .pets-in-zoo__item-img {
+    filter: brightness(50%);
+  }
+
+  &:hover .pets-in-zoo__item-wrapper {
+    display: block;
+    animation: bounce 0.6s;
+  }
+}
+
+.pets-in-zoo__item-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.pets-in-zoo__slider-item-description {
+  @include text-options(14px, 16px, 400, $bg-white1-color);
+  position: absolute;
+  width: 70%;
+  margin: 0;
+  left: 23px;
+  bottom: 86px;
+}
+
+.pets-in-zoo__slider-item-link {
+  @include text-options(12px, 14px, 500, $main-green-color);
+  position: absolute;
+  display: inline-block;
+  width: calc(100% / 2);
+  padding-top: 6px;
+  padding-bottom: 6px;
+  bottom: 47px;
+  text-transform: uppercase;
+
+  &--watch {
+    margin-right: auto;
+    padding-left: 49px;
+    background: url("../../assets/images/arrow-circle-watch.svg") no-repeat;
+    background-position: 21px 0;
+
+    &:hover {
+      color: $bg-white1-color;
+      background-image: url("../../assets/images/arrow-circle-watch-white.svg");
+    }
+  }
+
+  &--donate {
+    padding-left: 36px;
+    left: 50%;
+    color: $bg-white1-color;
+    background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;
+    background-position: 8px 0;
+
+    &:hover {
+      color: $main-green-color;
+      background-image: url("../../assets/images/arrow-circle-watch-donate-green.svg");
+    }
+  }
+}
+
+.pets-in-zoo__range-values {
+  width: 21%;
+}
+
+.pets-in-zoo__range-input::-webkit-slider-thumb {
+  width: 34px;
+}
+
+.pets-in-zoo__link {
+  padding-top: 19px;
+  padding-bottom: 15px;
+}
