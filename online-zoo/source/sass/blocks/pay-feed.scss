@@ -1,0 +1,88 @@
+.pay-feed {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: $switch-grey-color;
+}
+
+.pay-feed__wrapper {
+  @include wrapper-wide;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pay-feed__title {
+  @include h2-model;
+  margin-bottom: 31px;
+}
+
+.pay-feed__description {
+  @include p-model;
+  margin-bottom: 93px;
+}
+
+.pay-feed__list {
+  @include list-reset;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 56px;
+}
+
+.pay-feed__item {
+  position: relative;
+  width: 21%;
+  padding: 138px 5% 62px 4.8%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url("../../assets/images/pay-feed-circle.svg") no-repeat;
+  }
+
+  &--card {
+    background: url("../../assets/images/pay-feed-card.svg") no-repeat 46% 68px;
+
+    &::before {
+      left: -3px;
+    }
+  }
+
+  &--zoo {
+    background: url("../../assets/images/pay-feed-zoo.svg") no-repeat center 60px;
+  }
+
+  &--panda {
+    background: url("../../assets/images/pay-feed-panda.svg") no-repeat center 66px;
+
+    &::before {
+      left: 6px;
+    }
+  }
+
+  &:not(:last-child)::after {
+    position: absolute;
+    content: "";
+    width: 44%;
+    height: 16px;
+    right: -166px;
+    top: 113px;
+    background: url("../../assets/images/pay-feed-arrow.svg") no-repeat;
+  }
+}
+
+.pay-feed__item-text {
+  @include text-options(20px, 23px, 900, $text-grey-color);
+  margin: 0;
+  text-align: center;
+}
+
+.pey-feed__link {
+  padding-top: 19px;
+  padding-bottom: 15px;
+}
