@@ -1,4 +1,14 @@
-@keyframes bounce {
+@keyframes bounce-watch {
+  0% {
+    transform: translateY(30px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-pets-in-zoo {
   0% {
     transform: translateY(50px);
   }

@@ -66,29 +66,48 @@
 
 .watch__slider-item {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  flex-wrap: wrap;
   width: 186px;
   padding-left: 23px;
   padding-right: 23px;
 
-  .watch__slider-item-description,
-  .watch__slider-item-link {
+  .watch__item-wrapper {
     display: none;
   }
 
   &--active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     width: 291px;
     min-height: 352px;
-    padding: 198px 48px 51px 46px;
+    // padding-left: 25px;
+    // padding-right: 24px;
+    // padding: 198px 48px 51px 46px;
 
-    .watch__slider-item-description,
-    .watch__slider-item-link {
-      display: block;
+    .watch__item-wrapper {
+      display: flex;
     }
   }
+
+  &:hover .watch__slider-item-img {
+    filter: brightness(50%);
+    cursor: pointer;
+  }
+
+  &:hover .watch__item-wrapper {
+    display: flex;
+    animation: bounce-watch 0.6s;
+  }
+}
+
+.watch__item-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 46px;
+  z-index: 10;
 }
 
 .watch__slider-item-img {
@@ -104,63 +123,46 @@
 
 .watch__slider-item-description {
   @include text-options(14px, 16px, 400, $bg-white1-color);
-  margin: 0;
   // position: absolute;
-  // text-align: center;
-  // top: 20px;
-  z-index: 5;
+  width: 82%;
+  margin: 0 auto;
+  margin-bottom: 13px;
+  // left: 23px;
+  // bottom: 86px;
 }
 
 .watch__slider-item-link {
   @include text-options(12px, 14px, 500, $main-green-color);
-  position: relative;
+  // position: absolute;
+  // display: inline-block;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  // bottom: 47px;
   text-transform: uppercase;
-  z-index: 5;
 
   &--watch {
+    width: 57%;
     margin-right: auto;
-    padding-left: 26px;
-
-    &::before {
-      position: absolute;
-      content: "";
-      width: 32px;
-      height: 32px;
-      top: -11px;
-      left: -4px;
-      background: url("../../assets/images/arrow-circle-watch.svg") no-repeat center;
-    }
+    padding-left: 49px;
+    background: url("../../assets/images/arrow-circle-watch.svg") no-repeat;
+    background-position: 21px 0;
 
     &:hover {
       color: $bg-white1-color;
-      // transform: scale(1.5);
-
-      &::before {
-        background-image: url("../../assets/images/arrow-circle-watch-white.svg");
-      }
+      background-image: url("../../assets/images/arrow-circle-watch-white.svg");
     }
   }
 
-
   &--donate {
+    width: 43%;
+    padding-left: 33px;
     color: $bg-white1-color;
-
-    &::before {
-      position: absolute;
-      content: "";
-      width: 32px;
-      height: 32px;
-      top: -11px;
-      left: -32px;
-      background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat center;
-    }
+    background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;
+    background-position: 8px 0;
 
     &:hover {
       color: $main-green-color;
-
-      &::before {
-        background-image: url("../../assets/images/arrow-circle-watch-donate-green.svg");
-      }
+      background-image: url("../../assets/images/arrow-circle-watch-donate-green.svg");
     }
   }
 }
