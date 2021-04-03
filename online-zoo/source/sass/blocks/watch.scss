@@ -31,16 +31,14 @@
 
 .watch__slider {
   position: absolute;
-  width: 56.2%;
-  padding-left: 5.8%;
-  min-height: 352px;
-  top: 172px;
+  width: 56.3%;
+  padding-left: 5.9%;
+  top: 174px;
   right: 0;
 }
 
 .watch__slider-list {
   position: relative;
-  padding-top: 43px;
 
   &::before {
     position: absolute;
@@ -48,8 +46,8 @@
     background: url("../../assets/images/round-circle.svg") no-repeat;
     width: 13px;
     height: 13px;
-    top: 211px;
-    left: -112px;
+    top: 209px;
+    left: -113px;
   }
 
   &::after {
@@ -57,10 +55,10 @@
     content: "";
     width: 112%;
     height: 1px;
-    top: 217px;
+    top: 215px;
     left: -107px;
     background-color: $text-white-color;
-    z-index: 0;
+    // z-index: 0;
   }
 }
 
@@ -69,34 +67,53 @@
   width: 186px;
   padding-left: 23px;
   padding-right: 23px;
+  z-index: 1;
+  // transition-duration: 1s;
 
   .watch__item-wrapper {
     display: none;
   }
 
-  &--active {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    width: 291px;
-    min-height: 352px;
-    // padding-left: 25px;
-    // padding-right: 24px;
-    // padding: 198px 48px 51px 46px;
-
-    .watch__item-wrapper {
-      display: flex;
-    }
-  }
-
   &:hover .watch__slider-item-img {
     filter: brightness(50%);
     cursor: pointer;
+    width: $width*1.55;
+  }
+
+  &:hover {
+    width: $width*1.55;
+    bottom: -29px;
   }
 
   &:hover .watch__item-wrapper {
     display: flex;
+    bottom: 118px;
     animation: bounce-watch 0.6s;
+  }
+
+  &--active {
+    width: calc(186px * 1.55);
+    bottom: 20px;
+
+    .watch__item-wrapper {
+      display: flex;
+    }
+
+    .watch__slider-item-img {
+      position: relative;
+      top: 49px;
+    }
+
+    &:hover {
+      width: $width*1.55;
+      bottom: 20px;
+    }
+
+    &:hover .watch__item-wrapper {
+      display: flex;
+      bottom: 49px;
+      animation: bounce-watch 0.6s;
+    }
   }
 }
 
@@ -106,19 +123,20 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 46px;
-  z-index: 10;
+  bottom: 72px;
+  // margin-bottom: 46px;
+  // z-index: 10;
 }
 
 .watch__slider-item-img {
   border-radius: 5px;
-  z-index: 1;
+  // z-index: 2;
 
-  &--active {
-    position: absolute;
-    top: -14px;
-    left: 23px;
-  }
+  // &--active {
+  //   position: absolute;
+  // top: -14px;
+  // left: 23px;
+  // }
 }
 
 .watch__slider-item-description {
@@ -214,4 +232,12 @@
 
 .watch__social-link {
   font-size: 0;
+
+  &:hover .watch__social-icon {
+    fill: $main-green-color;
+  }
+}
+
+.watch__social-icon {
+  fill: $text-white-color;
 }
