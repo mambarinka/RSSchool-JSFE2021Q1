@@ -39,6 +39,14 @@
   }
 }
 
+.pets-in-zoo__button-icon {
+  fill: $title-grey-dark-color;
+
+  &--left {
+    fill:#828282;
+  }
+}
+
 .pets-in-zoo__slider-list {
   width: 100%;
   overflow: hidden;

@@ -263,7 +263,7 @@
         <h2 class="pets-in-zoo__title">Pets in Zoo</h2>
         <div class=" slider pets-in-zoo__slider">
           <button class="pets-in-zoo__slider-button pets-in-zoo__slider-button--left" type="button">
-            <svg class="pets-in-zoo__button-icon" width="20" height="30">
+            <svg class="pets-in-zoo__button-icon pets-in-zoo__button-icon--left" width="20" height="30">
               <use xlink:href="#icon-arrow-left"></use>
             </svg>
           </button>
@@ -388,7 +388,6 @@
         </div>
         <a class="button pets-in-zoo__link" href="../zoos/map.html">Choose your favorite</a>
       </div>
-      </div>
     </section>
     <section class="pay-feed">
       <div class="pay-feed__wrapper">
@@ -412,7 +411,47 @@
         </ul>
         <a class="button pey-feed__link" href="../zoos/map.html">donate</a>
       </div>
-
+    </section>
+    <section class="reviews">
+      <div class="reviews__wrapper">
+        <h2 class="reviews__title">Testimonials</h2>
+        <div class="slider reviews__slider">
+          <button class="reviews__slider-button reviews__slider-button--left" type="button">
+            <svg class="reviews__button-icon" width="20" height="30">
+              <use xlink:href="#icon-arrow-left"></use>
+            </svg>
+          </button>
+          <ul class="slider__list reviews__slider-list">
+            <li class="slider__item reviews__slider-item reviews__slider-item--active">
+              <img class="reviews__item-img" src="../../assets/images/slider-reviews-sidorova.png"
+                alt="photo of Nastya Sidorova">
+              <span class="reviews__item-name">Nastya Sidorova</span>
+              <p class="reviews__slider-item-text">As a voice for wildlife, we are devastated by the impact of the 2020
+                Australian bushfires on precious species and their habitat.</p>
+            </li>
+            <li class="slider__item reviews__slider-item reviews__slider-item--active">
+              <img class="reviews__item-img" src="../../assets/images/slider-reviews-kim.png" alt="photo of Vlad Kim">
+              <span class="reviews__item-name">Vlad Kim</span>
+              <p class="reviews__slider-item-text">As a voice for wildlife, we are devastated by the impact of the 2020
+                Australian bushfires on precious species and their habitat.</p>
+            </li>
+          </ul>
+          <button class="reviews__slider-button reviews__slider-button--right" type="button">
+            <svg class="reviews__button-icon" width="20" height="30">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="range reviews__range">
+          <div class="range__values reviews__range-values">
+            <label class="range__value range__value--active" for="reviews-range">02</label>
+            <label class="range__value" for="reviews-range">08</label>
+          </div>
+          <input class="range__input reviews__range-input" id="reviews-range" type="range" min="01" max="08" step="1"
+            value="02">
+        </div>
+        <a class="button reviews__link" href="#">Leave feedback</a>
+      </div>
     </section>
   </main>
 </body>
