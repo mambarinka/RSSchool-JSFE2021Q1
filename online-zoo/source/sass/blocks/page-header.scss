@@ -4,5 +4,6 @@
 }
 
 .page-header__wrapper {
+  @include wrapper-widest;
   display: flex;
 }

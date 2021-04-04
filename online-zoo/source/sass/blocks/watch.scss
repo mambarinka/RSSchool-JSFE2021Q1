@@ -6,6 +6,7 @@
 }
 
 .watch__wrapper {
+  @include wrapper-widest;
   position: relative;
   display: flex;
   flex-direction: column;

@@ -1,0 +1,36 @@
+.tooltip {
+  position: absolute;
+  display: flex;
+  // justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 41px 13% 24px 10.2%;
+  box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
+  border-radius: 8px;
+  background-color: $text-white-color;
+}
+
+.tooltip-img {
+  margin-right: 6.1%;
+}
+
+.tooltip__description {
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltip__title {
+  @include text-options(18px, 21px, 900, $title-grey-dark-color);
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.tooltip__region,
+.tooltip__population {
+  @include text-options(14px, 16px, 400, $text-grey-color);
+  margin: 0;
+}
+
+.tooltip__region {
+  margin-bottom: 5px;
+}

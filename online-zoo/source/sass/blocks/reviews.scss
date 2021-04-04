@@ -45,6 +45,8 @@
 
 .reviews__slider-list {
   width: 100%;
+  padding-top: 11px;
+  padding-bottom: 11px;
   overflow: hidden;
 }
 
@@ -55,8 +57,8 @@
   width: calc(94.3% / 2);
   margin-left: 1.5%;
   margin-right: 1.5%;
-  padding-top: 45px;
-  padding-bottom: 95px;
+  padding-top: 35px;
+  padding-bottom: 84px;
   padding-left: 72px;
   padding-right: 67px;
   background: $text-white-color;
