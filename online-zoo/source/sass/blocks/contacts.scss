@@ -1,0 +1,53 @@
+.contacts__title {
+  @include text-options(14px, 16px, 900, $text-white-color);
+  margin: 0;
+  margin-bottom: 36px;
+  text-transform: uppercase;
+}
+
+.contacts__address,
+.contacts__hours,
+.contacts__tel,
+.contacts__email {
+  @include text-options(14px, 16px, 400, $text-white-color);
+  margin: 0;
+}
+
+.contacts__address {
+  margin-bottom: 5px;
+}
+
+.contacts__hours {
+  margin-bottom: 20px;
+}
+
+.contacts__tel {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.contacts__email {
+  display: block;
+  margin-bottom: 19px;
+}
+
+.contacts__social-list {
+  @include list-reset;
+  display: flex;
+}
+
+.contacts__social-item {
+  margin-right: 6%;
+}
+
+.contacts__social-link {
+  font-size: 0;
+
+  &:hover .contacts__social-icon {
+    fill: $main-green-color;
+  }
+}
+
+.contacts__social-icon {
+  fill: $text-white-color;
+}

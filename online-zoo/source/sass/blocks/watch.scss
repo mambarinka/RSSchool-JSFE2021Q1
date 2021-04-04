@@ -33,13 +33,16 @@
 .watch__slider {
   position: absolute;
   width: 56.3%;
+  min-height: 352px;
   padding-left: 5.9%;
-  top: 174px;
+  top: 200px;
   right: 0;
 }
 
 .watch__slider-list {
   position: relative;
+  align-items: flex-start;
+  min-height: 352px;
 
   &::before {
     position: absolute;
@@ -47,7 +50,7 @@
     background: url("../../assets/images/round-circle.svg") no-repeat;
     width: 13px;
     height: 13px;
-    top: 209px;
+    top: 183px;
     left: -113px;
   }
 
@@ -56,20 +59,23 @@
     content: "";
     width: 112%;
     height: 1px;
-    top: 215px;
+    top: 189px;
     left: -107px;
     background-color: $text-white-color;
-    // z-index: 0;
+    z-index: 0;
   }
 }
 
 .watch__slider-item {
   position: relative;
+  display: flex;
   width: 186px;
+  height: 203px;
   padding-left: 23px;
   padding-right: 23px;
+  top: 90px;
   z-index: 1;
-  // transition-duration: 1s;
+  transition: 0.2s;
 
   .watch__item-wrapper {
     display: none;
@@ -78,89 +84,83 @@
   &:hover .watch__slider-item-img {
     filter: brightness(50%);
     cursor: pointer;
-    width: $width*1.55;
+    top: 0;
+    z-index: 1;
+    transform: scale(1.75);
   }
 
   &:hover {
-    width: $width*1.55;
-    bottom: -29px;
+    top: 74px;
+    z-index: 1;
   }
 
   &:hover .watch__item-wrapper {
     display: flex;
-    bottom: 118px;
+    z-index: 2;
     animation: bounce-watch 0.6s;
+    width: 136%;
+    left: -23px;
+    bottom: -58px;
   }
 
   &--active {
     width: calc(186px * 1.55);
-    bottom: 20px;
+    margin-top: 0;
+    height: 352px;
+    top: 0;
+    z-index: 1;
 
     .watch__item-wrapper {
       display: flex;
     }
 
-    .watch__slider-item-img {
-      position: relative;
-      top: 49px;
-    }
-
     &:hover {
-      width: $width*1.55;
-      bottom: 20px;
+      top: 0;
+      transform: scale(1);
     }
 
     &:hover .watch__item-wrapper {
       display: flex;
-      bottom: 49px;
+      width: 93%;
+      left: 24px;
+      bottom: 32px;
       animation: bounce-watch 0.6s;
+    }
+
+    &:hover .watch__slider-item-img {
+      transform: scale(1);
     }
   }
 }
 
 .watch__item-wrapper {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  bottom: 72px;
-  // margin-bottom: 46px;
-  // z-index: 10;
+  bottom: 31px;
 }
 
 .watch__slider-item-img {
   border-radius: 5px;
-  // z-index: 2;
-
-  // &--active {
-  //   position: absolute;
-  // top: -14px;
-  // left: 23px;
-  // }
 }
 
 .watch__slider-item-description {
   @include text-options(14px, 16px, 400, $bg-white1-color);
-  // position: absolute;
   width: 82%;
   margin: 0 auto;
   margin-bottom: 13px;
-  // left: 23px;
-  // bottom: 86px;
 }
 
 .watch__slider-item-link {
   @include text-options(12px, 14px, 500, $main-green-color);
-  // position: absolute;
-  // display: inline-block;
   padding-top: 6px;
   padding-bottom: 6px;
-  // bottom: 47px;
   text-transform: uppercase;
 
   &--watch {
-    width: 57%;
+    width: 51%;
     margin-right: auto;
     padding-left: 49px;
     background: url("../../assets/images/arrow-circle-watch.svg") no-repeat;
@@ -173,7 +173,7 @@
   }
 
   &--donate {
-    width: 43%;
+    width: 48%;
     padding-left: 33px;
     color: $bg-white1-color;
     background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;

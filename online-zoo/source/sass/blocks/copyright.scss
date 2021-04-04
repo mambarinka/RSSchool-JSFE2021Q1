@@ -1,0 +1,11 @@
+.copyright {
+  padding-top: 25px;
+}
+
+.copyright__list {
+  @include list-reset;
+}
+
+.copyright__item-link {
+  @include text-options(12px, 14px, 400, $range-gray-color);
+}

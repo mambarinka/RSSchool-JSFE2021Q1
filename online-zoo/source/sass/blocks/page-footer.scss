@@ -1,0 +1,50 @@
+.page-footer {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: $title-grey-dark-color;
+}
+
+.page-footer__wrapper {
+  @include wrapper-widest;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.page-footer__logo {
+  margin-right: 45.5%;
+}
+
+.page-footer__nav-list {
+  position: relative;
+  width: 26.8%;
+  margin-right: 7%;
+  top: 12px;
+}
+
+.page-footer__nav-item {
+  color: $text-white-color;
+}
+
+.page-footer__button {
+  width: 275px;
+  margin-bottom: 56px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+}
+
+.page-footer__feedback {
+  width: 24.5%;
+  margin-right: 26.3%;
+  margin-bottom: 57px;
+}
+
+.page-footer__contacts {
+  width: 15%;
+  margin-right: 20%;
+}
+
+.page-footer__copyright {
+  width: 100%;
+  border-top: 0.5px solid $text-white-color;
+}

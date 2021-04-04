@@ -1,0 +1,5 @@
+.feedback__title {
+  @include text-options(20px, 23px, 900, $text-white-color);
+  margin: 0;
+  margin-bottom: 34px;
+}
