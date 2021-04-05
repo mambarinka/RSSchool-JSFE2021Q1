@@ -160,8 +160,7 @@
   text-transform: uppercase;
 
   &--watch {
-    width: 51%;
-    margin-right: auto;
+    width: 54%;
     padding-left: 49px;
     background: url("../../assets/images/arrow-circle-watch.svg") no-repeat;
     background-position: 21px 0;
@@ -173,11 +172,11 @@
   }
 
   &--donate {
-    width: 48%;
+    width: 46%;
     padding-left: 33px;
     color: $bg-white1-color;
     background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;
-    background-position: 8px 0;
+    background-position: 2px 0;
 
     &:hover {
       color: $main-green-color;
