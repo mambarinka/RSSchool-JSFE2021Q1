@@ -886,8 +886,7 @@ input:checked + .switch__slider::before {
   padding-bottom: 6px;
   text-transform: uppercase; }
   .watch__slider-item-link--watch {
-    width: 51%;
-    margin-right: auto;
+    width: 54%;
     padding-left: 49px;
     background: url("../../assets/images/arrow-circle-watch.svg") no-repeat;
     background-position: 21px 0; }
@@ -895,11 +894,11 @@ input:checked + .switch__slider::before {
       color: #ffffff;
       background-image: url("../../assets/images/arrow-circle-watch-white.svg"); }
   .watch__slider-item-link--donate {
-    width: 48%;
+    width: 46%;
     padding-left: 33px;
     color: #ffffff;
     background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;
-    background-position: 8px 0; }
+    background-position: 2px 0; }
     .watch__slider-item-link--donate:hover {
       color: #4ad7cb;
       background-image: url("../../assets/images/arrow-circle-watch-donate-green.svg"); }
