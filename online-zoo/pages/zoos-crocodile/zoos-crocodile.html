@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Zoo</title>
+  <title>Online Zoo - Panda</title>
   <link rel="preload" href="../../assets/fonts/roboto400.woff2" as="font" crossorigin="">
   <link rel="preload" href="../../assets/fonts/roboto500.woff2" as="font" crossorigin="">
   <link rel="preload" href="../../assets/fonts/roboto700.woff2" as="font" crossorigin="">
   <link rel="preload" href="../../assets/fonts/roboto900.woff2" as="font" crossorigin="">
   <link rel="preload" href="../../assets/fonts/poppins500.woff2" as="font" crossorigin="">
-  <link href="index-style.min.css" rel="stylesheet">
+  <link href="zoos-crocodile-style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -216,10 +216,10 @@
       <nav class="main-nav main-nav--closed main-nav--nojs">
         <ul class="main-nav__list">
           <li class="main-nav__item">
-            <a class="main-nav__link main-nav__link--current">About</a>
+            <a class="main-nav__link" href="../index/index.html">About</a>
           </li>
           <li class="main-nav__item">
-            <a class="main-nav__link" href="../zoos-panda/zoos-panda.html">Zoos</a>
+            <a class="main-nav__link main-nav__link--current">Zoos</a>
           </li>
           <li class="main-nav__item">
             <a class="main-nav__link" href="../map/map.html">Map</a>
@@ -236,428 +236,122 @@
         <input type="checkbox">
         <span class="switch__slider"></span>
       </label>
-      <h1 class="visually-hidden">Online zoo where you can watch and feed the animal</h1>
+      <h1 class="visually-hidden">Online zoo video: watch the video with the selected animal</h1>
     </div>
   </header>
-  <main class="page-main">
-    <section class="watch">
-      <div class="watch__wrapper">
-        <h2 class="watch__title">Watch your favorite animal online</h2>
-        <a class="button button--watch watch__link" href="../zoos-panda/zoos-panda.html">watch online</a>
-        <div class="slider watch__slider">
-          <ul class="slider__list watch__slider-list">
-            <li class="slider__item watch__slider-item">
-              <img src="../../assets/images/slider-watch-eagles.jpg" alt="photo of eagles" class="slider__item-img watch__slider-item-img">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="../zoos-eagle/zoos-eagle.html" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item watch__slider-item watch__slider-item--active">
-              <img src="../../assets/images/slider-watch-panda.jpg" alt="photo of panda" class="slider__item-img watch__slider-item-img watch__slider-item-img--active">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="../zoos-panda/zoos-panda.html" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item watch__slider-item">
-              <img src="../../assets/images/slider-watch-gorilla.jpg" alt="photo of gorilla" class="slider__item-img  watch__slider-item-img">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="../zoos-gorilla/zoos-gorilla.html" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item watch__slider-item">
-              <img src="../../assets/images/slider-watch-crocodile.jpg" alt="photo of crocodile" class="slider__item-img watch__slider-item-img">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="../zoos-crocodile/zoos-crocodile.html" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item watch__slider-item">
-              <img src="../../assets/images/slider-watch-fox.jpg" alt="photo of fox" class="slider__item-img watch__slider-item-img">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item watch__slider-item">
-              <img src="../../assets/images/slider-watch-sloth.jpg" alt="photo of sloth" class="slider__item-img watch__slider-item-img">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item watch__slider-item">
-              <img src="../../assets/images/slider-watch-elephants.jpg" alt="photo of elephants" class="slider__item-img watch__slider-item-img">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item watch__slider-item">
-              <img src="../../assets/images/slider-watch-leopard.jpg" alt="photo of leopard" class="slider__item-img watch__slider-item-img">
-              <div class="watch__item-wrapper">
-                <p class="watch__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="watch__slider-item-link watch__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="range watch__range">
-          <div class="range__values watch__range-values">
-            <label class="range__value range__value--active watch__range-value  watch__range-value--active" for="watch-range">02</label>
-            <label class="range__value watch__range-value" for="watch-range">08</label>
+  <main class="page-main page-main--zoos">
+    <div class="page-main__wrapper">
+      <aside class="sidebar">
+        <div class="sidebar__wrapper">
+          <div class=" slider sidebar__slider">
+            <button class="sidebar__slider-button sidebar__slider-button--top" type="button">
+              <svg class="sidebar__button-icon sidebar__button-icon--top" width="20" height="30">
+                <use xlink:href="#icon-arrow-left"></use>
+              </svg>
+            </button>
+            <ul class="slider__list sidebar__slider-list">
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="PANDA">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-panda.png" alt="photo of panda">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="EAGLES">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-eagles.png" alt="photo of eagles">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item sidebar__slider-item--active">
+                <a href="#" class="sidebar__item-link" title="CROCODILE">
+                  <img class="sidebar__item-img sidebar__item-img--active" src="../../assets/images/slider-sidebar-crocodile.png" alt="photo of crocodile">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="GORILLA">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-gorilla.png" alt="photo of gorilla">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="TIGER">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-eagles.png" alt="photo of tiger">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="ELEPHANTS">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-eagles.png" alt="photo of elephants">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="LION">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-crocodile.png" alt="photo of lion">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="ZEBRAS">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-gorilla.png" alt="photo of zebras">
+                </a>
+              </li>
+            </ul>
+            <button class="sidebar__slider-button sidebar__slider-button--bottom" type="button">
+              <svg class="sidebar__button-icon" width="20" height="30">
+                <use xlink:href="#icon-arrow-right"></use>
+              </svg>
+            </button>
           </div>
-          <input class="range__input watch__range-input" id="watch-range" type="range" min="01" max="08" step="1" value="02">
         </div>
-      </div>
-      <ul class="watch__social-list">
-        <li class="watch__social-item">
-          <a href="#" class="watch__social-link">Instagram
-            <svg class="watch__social-icon" width="20" height="20">
-              <use xlink:href="#icon-instagram"></use>
-            </svg>
-          </a>
-        </li>
-        <li class="watch__social-item">
-          <a href="#" class="watch__social-link">Twitter
-            <svg class="watch__social-icon" width="20" height="20">
-              <use xlink:href="#icon-twitter"></use>
-            </svg>
-          </a>
-        </li>
-        <li class="watch__social-item">
-          <a href="#" class="watch__social-link">Youtube
-            <svg class="watch__social-icon" width="20" height="20">
-              <use xlink:href="#icon-youtube"></use>
-            </svg>
-          </a>
-        </li>
-        <li class="watch__social-item">
-          <a href="#" class="watch__social-link">Vkontakte
-            <svg class="watch__social-icon" width="20" height="20">
-              <use xlink:href="#icon-vkontakte"></use>
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </section>
-    <section class="how-works">
-      <div class="how-works__wrapper">
-        <h2 class="how-works__title">How it works?</h2>
-        <p class="how-works__description">As a voice for wildlife, we are devastated by the impact of the 2020
-          Australian bushfires on precious species and their habitat, and we are determined to assist in all aspects,
-          including providing veterinary support and raising much-needed emergency funds. Zoo Online saves wildlife and
-          inspires everyone to make conservation a priority in their lives. Animals have the right to a pain-free and
-          happy life. They have equal claim to the resources of this planet, and deserve a life of dignity and
-          compassion.As a voice for wildlife, we are devastated by the impact of the 2020 Australian bushfires on
-          precious species and their habitat.</p>
-        <div class="slider how-works__slider">
-          <ul class="slider__list how-works__slider-list">
-            <li class="slider__item how-works__slider-item">
-              <img src="../../assets/images/slider-how-works-deer.jpg" alt="photo of deer" class="slider__item-img how-works__slider-item-img">
-            </li>
-            <li class="slider__item how-works__slider-item how-works__slider-item--active">
-              <img src="../../assets/images/slider-how-works-panda.jpg" alt="photo of panda" class="slider__item-img how-works__slider-item-img how-works__slider-item-img--active">
-            </li>
-            <li class="slider__item how-works__slider-item">
-              <img src="../../assets/images/slider-how-works-monkeys.jpg" alt="photo of monkeys" class="slider__item-img how-works__slider-item-img">
-            </li>
-            <li class="slider__item how-works__slider-item">
-              <img src="../../assets/images/slider-how-works-black-monkeys.jpg" alt="photo of black monkeys" class="slider__item-img how-works__slider-item-img">
-            </li>
-          </ul>
-        </div>
-        <div class="range how-works__range">
-          <div class="range__values">
-            <label class="range__value range__value--active" for="how-works-range">01</label>
-            <label class="range__value" for="how-works-range">04</label>
-          </div>
-          <input class="range__input" id="how-works-range" type="range" min="01" max="08" step="1" value="01">
-        </div>
-        <a class="button button--watch how-works__link" href="../zoos-panda/zoos-panda.html">watch online</a>
-      </div>
-    </section>
-    <section class="inspires">
-      <div class="inspires__wrapper">
-        <h2 class="visually-hidden">Section about us: what inspires us, our mission and what we believe in</h2>
-        <ul class="inspires__list">
-          <li class="inspires__list-item inspires__list-item--what">
-            <h3 class="inspires__item-title">What inspires us?</h3>
-            <p class="inspites__item-description">As a voice for wildlife, we are devastated by the impact of the 2020
-              Australian bushfires on precious species and their habitat, and we are determined to assist in all
-              aspects.</p>
+      </aside>
+      <section class="zoo-video">
+        <h2 class="zoo-video__title zoo-video__title--wide">Alligator and Spoonbill Swamp Webcam</h2>
+        <ul class="zoo-video__playlist">
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315" src="https://www.youtube-nocookie.com/embed/EnxRJii_dp8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
           </li>
-          <li class="inspires__list-item inspires__list-item--mission">
-            <h3 class="inspires__item-title">Our mission</h3>
-            <p class="inspites__item-description">Zoo Online saves wildlife and inspires everyone to make conservation a
-              priority in their lives. </p>
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315" src="https://www.youtube-nocookie.com/embed/EnxRJii_dp8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
           </li>
-          <li class="inspires__list-item inspires__list-item--believe">
-            <h3 class="inspires__item-title">What we believe in?</h3>
-            <p class="inspites__item-description">Animals have the right to a pain-free and happy life. They have equal
-              claim to the resources of this planet, and deserve a life of dignity and compassion.</p>
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315" src="https://www.youtube-nocookie.com/embed/EnxRJii_dp8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+          </li>
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315" src="https://www.youtube-nocookie.com/embed/EnxRJii_dp8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
           </li>
         </ul>
-      </div>
-    </section>
-    <section class="pets-in-zoo">
-      <div class="pets-in-zoo__wrapper">
-        <h2 class="pets-in-zoo__title">Pets in Zoo</h2>
-        <div class=" slider pets-in-zoo__slider">
-          <button class="pets-in-zoo__slider-button pets-in-zoo__slider-button--left" type="button">
-            <svg class="pets-in-zoo__button-icon pets-in-zoo__button-icon--left" width="20" height="30">
-              <use xlink:href="#icon-arrow-left"></use>
-            </svg>
-          </button>
-          <ul class="slider__list pets-in-zoo__slider-list">
-            <li class="slider__item pets-in-zoo__slider-item pets-in-zoo__slider-item--active">
-              <img class="pets-in-zoo__item-img" src="../../assets/images/slider-pets-in-zoo-panda.jpg" alt="photo of panda">
-              <div class="pets-in-zoo__item-wrapper">
-                <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="../zoos-panda/zoos-panda.html" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class=" slider__item pets-in-zoo__slider-item">
-                  <img class="pets-in-zoo__item-img" src="../../assets/images/slider-pets-in-zoo-eagles.jpg" alt="photo of eagles">
-                  <div class="pets-in-zoo__item-wrapper">
-                    <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                      is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                    <a href="../zoos-eagle/zoos-eagle.html" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                      online</a>
-                    <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-                  </div>
-            </li>
-            <li class="slider__item pets-in-zoo__slider-item">
-              <img class="pets-in-zoo__item-img" src="../../assets/images/slider-pets-in-zoo-gorilla.jpg" alt="photo of gorilla">
-              <div class="pets-in-zoo__item-wrapper">
-                <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="../zoos-gorilla/zoos-gorilla.html" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item pets-in-zoo__slider-item">
-              <img class="pets-in-zoo__item-img" src="../../assets/images/slider-pets-in-zoo-crocodile.jpg" alt="photo of crocodile">
-              <div class="pets-in-zoo__item-wrapper">
-                <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="../zoos-crocodile/zoos-crocodile.html" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item pets-in-zoo__slider-item">
-              <img class="pets-in-zoo__item-img" src="../../assets/images/slider-watch-fox.jpg" alt="photo of fox">
-              <div class="pets-in-zoo__item-wrapper">
-                <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item pets-in-zoo__slider-item">
-              <img class="pets-in-zoo__item-img" src="../../assets/images/slider-watch-sloth.jpg" alt="photo of sloth">
-              <div class="pets-in-zoo__item-wrapper">
-                <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item pets-in-zoo__slider-item">
-              <img class="pets-in-zoo__item-img" src="../../assets/images/slider-watch-elephants.jpg" alt="photo of elephants">
-              <div class="pets-in-zoo__item-wrapper">
-                <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-            <li class="slider__item pets-in-zoo__slider-item">
-              <img class="pets-in-zoo__item-img" src="../../assets/images/slider-watch-leopard.jpg" alt="photo of leopard">
-              <div class="pets-in-zoo__item-wrapper">
-                <p class="pets-in-zoo__slider-item-description">Panda’s name is Bei Bei. He
-                  is&nbsp;2&nbsp;years old. Bei Bei is from China. He loves bamboos.</p>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--watch">Watch
-                  online</a>
-                <a href="#" class="pets-in-zoo__slider-item-link pets-in-zoo__slider-item-link--donate">Donate</a>
-              </div>
-            </li>
-          </ul>
-          <button class="pets-in-zoo__slider-button pets-in-zoo__slider-button--right" type="button">
-            <svg class="pets-in-zoo__button-icon" width="20" height="30">
-              <use xlink:href="#icon-arrow-right"></use>
-            </svg>
-          </button>
-        </div>
-        <div class="range pets-in-zoo__range">
-          <div class="range__values pets-in-zoo__range-values">
-            <label class="range__value range__value--active" for="pets-in-zoo-range">01</label>
-            <label class="range__value" for="pets-in-zoo-range">08</label>
-          </div>
-          <input class="range__input pets-in-zoo__range-input" id="pets-in-zoo-range" type="range" min="01" max="08" step="1" value="01">
-        </div>
-        <a class="button pets-in-zoo__link" href="../map/map.html">Choose your favorite</a>
-      </div>
-    </section>
-    <section class="pay-feed">
-      <div class="pay-feed__wrapper">
-        <h2 class="pay-feed__title">Pay and feed</h2>
-        <p class="pay-feed__description">The opportunity to easily and naturally (but as often as possible) donate to
-          the
-          needs of animals that you like.</p>
-        <ul class="pay-feed__list">
-          <li class="pay-feed__item pay-feed__item--card">
-            <p class="pay-feed__item-text">You pay with a
-              VISA card</p>
+        <ul class="pagination-list zoo-video__pagination">
+          <li class="pagination-list__item pagination-list__item--active">
+            <button class="pagination-list__button pagination-list__button--active">
+            </button>
           </li>
-          <li class="pay-feed__item pay-feed__item--zoo">
-            <p class="pay-feed__item-text">Payment goes
-              to the Zoo</p>
+          <li class="pagination-list__item">
+            <button class="pagination-list__button">
+            </button>
           </li>
-          <li class="pay-feed__item pay-feed__item--panda">
-            <p class="pay-feed__item-text">Panda gets
-              the bamboo</p>
+          <li class="pagination-list__item">
+            <button class="pagination-list__button">
+            </button>
           </li>
         </ul>
-        <a class="button pey-feed__link" href="#">donate</a>
-      </div>
-    </section>
-    <section class="reviews">
-      <div class="reviews__wrapper">
-        <h2 class="reviews__title">Testimonials</h2>
-        <div class="slider reviews__slider">
-          <button class="reviews__slider-button reviews__slider-button--left" type="button">
-            <svg class="reviews__button-icon" width="20" height="30">
-              <use xlink:href="#icon-arrow-left"></use>
-            </svg>
-          </button>
-          <ul class="slider__list reviews__slider-list">
-            <li class="slider__item reviews__slider-item reviews__slider-item--active">
-              <img class="reviews__item-img" src="../../assets/images/slider-reviews-sidorova.png" alt="photo of Nastya Sidorova">
-              <span class="reviews__item-name">Nastya Sidorova</span>
-              <p class="reviews__slider-item-text">As a voice for wildlife, we are devastated by the impact of the 2020
-                Australian bushfires on precious species and their habitat.</p>
-            </li>
-            <li class="slider__item reviews__slider-item reviews__slider-item--active">
-              <img class="reviews__item-img" src="../../assets/images/slider-reviews-kim.png" alt="photo of Vlad Kim">
-              <span class="reviews__item-name">Vlad Kim</span>
-              <p class="reviews__slider-item-text">As a voice for wildlife, we are devastated by the impact of the 2020
-                Australian bushfires on precious species and their habitat.</p>
-            </li>
-          </ul>
-          <button class="reviews__slider-button reviews__slider-button--right" type="button">
-            <svg class="reviews__button-icon" width="20" height="30">
-              <use xlink:href="#icon-arrow-right"></use>
-            </svg>
-          </button>
-        </div>
-        <div class="range reviews__range">
-          <div class="range__values reviews__range-values">
-            <label class="range__value range__value--active" for="reviews-range">02</label>
-            <label class="range__value" for="reviews-range">08</label>
-          </div>
-          <input class="range__input reviews__range-input" id="reviews-range" type="range" min="01" max="08" step="1" value="02">
-        </div>
-        <a class="button reviews__link" href="#">Leave feedback</a>
-      </div>
-    </section>
-    <section class="map">
-      <div class="map__wrapper">
-        <h2 class="map__title">Map</h2>
-        <div class="map__img">
-          <svg class="map__img-svg" width="1200" height="497">
-            <use xlink:href="#icon-map"></use>
-          </svg>
-          <div class="map__pin-wrapper map__pin-wrapper--eagles">
-            <div class="map__pin-wrapper-img">
-              <img class="map__pin-img" src="../../assets/images/pin-eagles.png" alt="photo of eagles">
-            </div>
-            <div class="tooltip map__pin-tooltip map__pin-tooltip--eagles">
-              <img src="../../assets/images/pin-eagles-tooltip.png" alt="photo of eagle" class="tooltip-img">
-              <div class="tooltip__description">
-                <h4 class="tooltip__title">West End Bald Eagle</h4>
-                <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
-                <p class="tooltip__population"><b>Population:</b> more than 270 pairs in 2013</p>
-              </div>
-            </div>
-          </div>
-          <div class="map__pin-wrapper map__pin-wrapper--crocodile">
-            <div class="map__pin-wrapper-img">
-              <img class="map__pin-img" src="../../assets/images/pin-crocodile.png" alt="photo of crocodile">
-            </div>
-            <div class="tooltip map__pin-tooltip map__pin-tooltip--crocodile">
-              <img src="../../assets/images/pin-crocodile.png" alt="photo of crocodile" class="tooltip-img">
-              <div class="tooltip__description">
-                <h4 class="tooltip__title">West End Bald Eagle</h4>
-                <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
-                <p class="tooltip__population"><b>Population:</b> more than 270 pairs in 2013</p>
-              </div>
-            </div>
-          </div>
-          <div class="map__pin-wrapper map__pin-wrapper--gorilla">
-            <div class="map__pin-wrapper-img">
-              <img class="map__pin-img" src="../../assets/images/pin-gorilla.png" alt="photo of gorilla">
-            </div>
-            <div class="tooltip map__pin-tooltip map__pin-tooltip--gorilla">
-              <img src="../../assets/images/pin-gorilla.png" alt="photo of gorilla" class="tooltip-img">
-              <div class="tooltip__description">
-                <h4 class="tooltip__title">West End Bald Eagle</h4>
-                <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
-                <p class="tooltip__population"><b>Population:</b> more than 270 pairs in 2013</p>
-              </div>
-            </div>
-          </div>
-          <div class="map__pin-wrapper map__pin-wrapper--panda">
-            <div class="map__pin-wrapper-img">
-              <img class="map__pin-img" src="../../assets/images/pin-panda.png" alt="photo of panda">
-            </div>
-            <div class="tooltip map__pin-tooltip map__pin-tooltip--panda">
-              <img src="../../assets/images/pin-panda.png" alt="photo of panda" class="tooltip-img">
-              <div class="tooltip__description">
-                <h4 class="tooltip__title">West End Bald Eagle</h4>
-                <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
-                <p class="tooltip__population"><b>Population:</b> more than 270 pairs in 2013</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a class="button button--watch map__link" href="../zoos-panda/zoos-panda.html">watch online</a>
-      </div>
-    </section>
+      </section>
+      <section class="zoo-description">
+        <h2 class="visually-hidden">information about the animal on the video</h2>
+        <ul class="zoo-descripion__list">
+          <li class="zoo-description__item">
+            <h3 class="zoo-description__item-title">Population:</h3>
+            <p class="zoo-descripion__item-text">Roughly 1.25 million</p>
+          </li>
+          <li class="zoo-description__item">
+            <h3 class="zoo-description__item-title">Habitat:</h3>
+            <p class="zoo-descripion__item-text">Alligators can be found in slow-moving rivers, ponds, lakes and swamps.
+            </p>
+          </li>
+          <li class="zoo-description__item">
+            <h3 class="zoo-description__item-title">Diet:</h3>
+            <p class="zoo-descripion__item-text">Their diets include prey species that
+              are abundant and easily accessible. Juvenile alligators eat primarily insects, amphibians, small fish, and
+              other invertebrates. Adult alligators eat rough fish, snakes, turtles, small mammals, and birds.</p>
+          </li>
+        </ul>
+        <a class="button zoo-descripion__link" href="#">Feed</a>
+      </section>
+    </div>
   </main>
   <footer class="page-footer">
     <div class="page-footer__wrapper">
@@ -666,7 +360,7 @@
       </a>
       <ul class="main-nav__list page-footer__nav-list">
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="index.html">About</a>
+          <a class="main-nav__link page-footer__nav-item" href="../index/index.html">About</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
           <a class="main-nav__link page-footer__nav-item" href="../zoos-panda/zoos-panda.html">Zoos</a>

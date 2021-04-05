@@ -812,7 +812,7 @@ input:checked + .switch__slider::before {
             transform: scale(1.75); }
   .watch__slider-item:hover {
     top: 74px;
-    z-index: 1; }
+    z-index: 5; }
   .watch__slider-item:hover .watch__item-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1002,7 +1002,7 @@ input:checked + .switch__slider::before {
   background-color: #f2f2f2; }
 
 .inspires__wrapper {
-  max-width: 1618px;
+  max-width: 1620px;
   margin: 0 auto;
   padding-left: 209px;
   padding-right: 210px; }
@@ -1052,7 +1052,7 @@ input:checked + .switch__slider::before {
   background-color: #fbfbfb; }
 
 .pets-in-zoo__wrapper {
-  max-width: 1618px;
+  max-width: 1620px;
   margin: 0 auto;
   padding-left: 209px;
   padding-right: 210px;
@@ -1203,7 +1203,7 @@ input:checked + .switch__slider::before {
   background-color: #f2f2f2; }
 
 .pay-feed__wrapper {
-  max-width: 1618px;
+  max-width: 1620px;
   margin: 0 auto;
   padding-left: 209px;
   padding-right: 210px;
@@ -1299,7 +1299,7 @@ input:checked + .switch__slider::before {
   background-color: #fbfbfb; }
 
 .reviews__wrapper {
-  max-width: 1618px;
+  max-width: 1620px;
   margin: 0 auto;
   padding-left: 209px;
   padding-right: 210px;
@@ -1421,7 +1421,7 @@ input:checked + .switch__slider::before {
     background-color: #fbfbfb; }
 
 .map__wrapper {
-  max-width: 1618px;
+  max-width: 1620px;
   margin: 0 auto;
   padding-left: 209px;
   padding-right: 210px;
@@ -1542,7 +1542,7 @@ input:checked + .switch__slider::before {
       -ms-flex-align: start;
           align-items: flex-start;
   width: 100%;
-  padding: 41px 13% 24px 10.2%;
+  padding: 41px 12% 43px 10.2%;
   -webkit-box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
           box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
   border-radius: 8px;
@@ -1581,7 +1581,7 @@ input:checked + .switch__slider::before {
 
 .page-footer {
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 72px;
   background-color: #333333; }
 
 .page-footer__wrapper {
@@ -1792,6 +1792,9 @@ input:checked + .switch__slider::before {
 
 .contacts__social-icon {
   fill: #fefefe; }
+
+.contacts address {
+  font-style: normal; }
 
 .copyright {
   padding-top: 25px; }
