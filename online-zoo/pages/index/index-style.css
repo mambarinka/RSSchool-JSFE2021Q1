@@ -355,6 +355,9 @@ body {
   font-family: "Roboto", "Arial", sans-serif;
   background-color: #fbfbfb; }
 
+*:focus {
+  outline: none; }
+
 img {
   max-width: 100%;
   height: auto; }
@@ -445,7 +448,9 @@ input[type="radio"].visually-hidden {
 
 .page-header {
   padding: 27px 0 21px;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 4px 8px rgba(44, 101, 77, 0.08);
+          box-shadow: 0 4px 8px rgba(44, 101, 77, 0.08); }
 
 .page-header__wrapper {
   max-width: 1920px;
@@ -1411,6 +1416,9 @@ input:checked + .switch__slider::before {
   padding-top: 98px;
   padding-bottom: 100px;
   background-color: #f2f2f2; }
+  .map--map-page {
+    padding-top: 50px;
+    background-color: #fbfbfb; }
 
 .map__wrapper {
   max-width: 1618px;
@@ -1437,28 +1445,45 @@ input:checked + .switch__slider::before {
   margin-bottom: 61px; }
 
 .map__img {
-  position: relative; }
+  position: relative;
+  margin-bottom: 32px; }
+  .map__img--map-page {
+    margin-bottom: 43px; }
 
 .map__img-svg {
-  margin-bottom: 32px;
   stroke: #333333; }
 
 .map__pin-wrapper {
   position: absolute;
   width: 436px; }
   .map__pin-wrapper--eagles {
-    top: 13.4%;
+    top: 14.4%;
     left: 10.2%; }
   .map__pin-wrapper--crocodile {
-    top: 19%;
+    top: 20%;
     left: 20.5%; }
   .map__pin-wrapper--gorilla {
-    top: 35.7%;
+    top: 37.7%;
     left: 47.7%; }
   .map__pin-wrapper--panda {
-    top: 16.8%;
+    top: 17.8%;
     right: -10.9%; }
   .map__pin-wrapper:hover .map__pin-tooltip {
+    opacity: 1;
+    z-index: 100; }
+  .map__img--map-page .map__pin-wrapper--eagles {
+    top: 16.4%;
+    left: 11.2%; }
+  .map__img--map-page .map__pin-wrapper--crocodile {
+    top: 20%;
+    left: 20.5%; }
+  .map__img--map-page .map__pin-wrapper--gorilla {
+    top: 37.7%;
+    left: 47.7%; }
+  .map__img--map-page .map__pin-wrapper--panda {
+    top: 19.8%;
+    right: -11.9%; }
+  .map__img--map-page .map__pin-wrapper:hover .map__pin-tooltip {
     opacity: 1;
     z-index: 100; }
 
@@ -1477,6 +1502,8 @@ input:checked + .switch__slider::before {
   background: url("../../assets/images/pin-green.svg") no-repeat center;
   cursor: pointer; }
   .map__pin-wrapper-img:hover {
+    background-image: url("../../assets/images/pin-red.svg"); }
+  .map__pin-wrapper-img--active {
     background-image: url("../../assets/images/pin-red.svg"); }
 
 .map__pin-img {
