@@ -18,6 +18,10 @@ body {
   background-color: $bg-white2-color;
 }
 
+*:focus {
+  outline: none;
+}
+
 img {
   max-width: 100%;
   height: auto;

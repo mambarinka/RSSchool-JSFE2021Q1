@@ -4,7 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Map of Online Zoo</title>
+  <title>Online Zoo Map</title>
+  <link rel="preload" href="../../assets/fonts/roboto400.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto500.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto700.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto900.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/poppins500.woff2" as="font" crossorigin>
   <link href="map-style.min.css" rel="stylesheet">
 </head>
 
@@ -12,10 +17,240 @@
   <div style="display: none;">
     <include src="build/assets/icons/sprite.svg"></include>
   </div>
-  <header class="blue">
-    <a>
-      <img src="../../assets/images/logo-online-zoo.svg" width="59" height="42" alt="logo of Online Zoo">
-    </a>
+  <header class="page-header">
+    <div class="page-header__wrapper">
+      <a class="logo">
+        <img class="logo__image" src="../../assets/images/logo-online-zoo.svg" width="59" height="42"
+          alt="Logo of Online-zoo">
+      </a>
+      <nav class="main-nav main-nav--closed main-nav--nojs">
+        <ul class="main-nav__list">
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../index/index.html">About</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../zoos/zoos-page-panda.html">Zoos</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link main-nav__link--current">Map</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="#contact-us">Contact us</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
+          </li>
+        </ul>
+      </nav>
+      <label class="switch" tabindex="0">
+        <input type="checkbox">
+        <span class="switch__slider"></span>
+      </label>
+      <h1 class="visually-hidden">Online zoo map: choose an animal, look at it and feed it</h1>
+    </div>
+  </header>
+  <main class="page-main">
+    <section class="choose">
+      <div class="choose__wrapper">
+        <h2 class="choose__title">Choose your favorite</h2>
+        <p class="choose__description">
+          As a voice for wildlife, we are devastated by the impact of the 2020 Australian bushfires on precious species
+          and their habitat, and we are determined to assist in all aspects, including providing veterinary support and
+          raising much-needed emergency funds. Zoo Online saves wildlife and inspires everyone to make conservation a
+          priority in their lives. Animals have the right to a pain-free and happy life. They have equal claim to the
+          resources of this planet, and deserve a life of dignity and compassion.As a voice for wildlife, we are
+          devastated by the impact of the 2020 Australian bushfires on precious species and their habitat.
+        </p>
+        <div class=" slider choose__slider">
+          <button class="choose__slider-button choose__slider-button--left" type="button">
+            <svg class="choose__button-icon choose__button-icon--left" width="20" height="30">
+              <use xlink:href="#icon-arrow-left"></use>
+            </svg>
+          </button>
+          <ul class="slider__list choose__slider-list">
+            <li class="slider__item choose__slider-item">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img" src="../../assets/images/slider-choose-gorilla.png"
+                  alt="photo of gorilla">
+              </a>
+            </li>
+            <li class="slider__item choose__slider-item choose__slider-item--active">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img choose__item-img--active" src="../../assets/images/slider-choose-panda.png"
+                  alt="photo of panda">
+              </a>
+            </li>
+            <li class="slider__item choose__slider-item">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img" src="../../assets/images/slider-choose-crocodile.png"
+                  alt="photo of crocodile">
+              </a>
+            </li>
+            <li class="slider__item choose__slider-item">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img" src="../../assets/images/slider-choose-eagles.png" alt="photo of eagles">
+              </a>
+            </li>
+            <li class="slider__item choose__slider-item">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img" src="../../assets/images/slider-choose-tiger.png" alt="photo of tiger">
+              </a>
+            </li>
+            <li class="slider__item choose__slider-item">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img" src="../../assets/images/slider-choose-elephants.png"
+                  alt="photo of elephants">
+              </a>
+            </li>
+            <li class="slider__item choose__slider-item">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img" src="../../assets/images/slider-choose-leo.png" alt="photo of lion">
+              </a>
+            </li>
+            <li class="slider__item choose__slider-item">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img" src="../../assets/images/slider-choose-zebras.png" alt="photo of zebras">
+              </a>
+            </li>
+          </ul>
+          <button class="choose__slider-button choose__slider-button--right" type="button">
+            <svg class="choose__button-icon" width="20" height="30">
+              <use xlink:href="#icon-arrow-right"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="range choose__range">
+          <div class="range__values choose__range-values">
+            <label class="range__value range__value--active" for="choose-range">02</label>
+            <label class="range__value" for="choose-range">08</label>
+          </div>
+          <input class="range__input choose__range-input" id="choose-range" type="range" min="01" max="08" step="1"
+            value="02">
+        </div>
+      </div>
+    </section>
+    <section class="map map--map-page">
+      <div class="map__wrapper">
+        <h2 class="visually-hidden">Map</h2>
+        <div class="map__img map__img--map-page">
+          <svg class="map__img-svg" width="1200" height="497">
+            <use xlink:href="#icon-map"></use>
+          </svg>
+          <div class="map__pin-wrapper map__pin-wrapper--eagles">
+            <div class="map__pin-wrapper-img" title="EAGLES">
+              <img class="map__pin-img" src="../../assets/images/pin-eagles.png" alt="photo of eagles">
+            </div>
+          </div>
+          <div class="map__pin-wrapper map__pin-wrapper--crocodile">
+            <div class="map__pin-wrapper-img" title="CROCODILE">
+              <img class="map__pin-img" src="../../assets/images/pin-crocodile.png" alt="photo of crocodile">
+            </div>
+          </div>
+          <div class="map__pin-wrapper map__pin-wrapper--gorilla">
+            <div class="map__pin-wrapper-img" title="GORILLA">
+              <img class="map__pin-img" src="../../assets/images/pin-gorilla.png" alt="photo of gorilla">
+            </div>
+          </div>
+          <div class="map__pin-wrapper map__pin-wrapper--panda">
+            <div class="map__pin-wrapper-img map__pin-wrapper-img--active" title="PANDA">
+              <img class="map__pin-img" src="../../assets/images/pin-panda.png" alt="photo of panda">
+            </div>
+          </div>
+        </div>
+        <a class="button button--watch map__link" href="../zoos/zoos-page.html">watch online</a>
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer">
+    <div class="page-footer__wrapper">
+      <a class="logo page-footer__logo" href="index.html">
+        <img class="logo__image page-footer__logo-img" src="../../assets/images/logo-online-zoo-footer.svg" width="59"
+          height="42" alt="Logo of Online-zoo">
+      </a>
+      <ul class="main-nav__list page-footer__nav-list">
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item" href="index.html">About</a>
+        </li>
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item" href="../zoos/zoos-page-panda.html">Zoos</a>
+        </li>
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item" href="../map/map.html">Map</a>
+        </li>
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item"
+            href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
+        </li>
+      </ul>
+      <a class="button page-footer__button" href="#">donate for volunteers</a>
+      <section class="feedback page-footer__feedback" id="contact-us">
+        <h2 class="feedback__title">Contact us</h2>
+        <form class="form" action="#" method="get">
+          <label class="visually-hidden" for="name">Name</label>
+          <input class="form__input" id="name" type="text" name="name" placeholder="Name" required>
+          <label class="visually-hidden" for="email">Email</label>
+          <input class="form__input" type="email" name="email" id="email" placeholder="Email" required>
+          <fieldset class="form__fieldset">
+            <legend class="form__fieldset-title">Please enter your message</legend>
+            <textarea class="form__textarea" name="message" id="comment" maxlength="280" rows="5" required></textarea>
+          </fieldset>
+          <div class="form__input-wrapper">
+            <input class="visually-hidden" id="checkbox" type="checkbox" name="checkbox" required>
+            <label class="form__label" for="checkbox">I agree to the processing of Personal Data</label>
+          </div>
+          <button class="form__button-submit" type="submit">Send</button>
+        </form>
+      </section>
+      <section class="contacts page-footer__contacts">
+        <h2 class="contacts__title">ZOO Online Centre</h2>
+        <p class="contacts__address">132, Address District, Street</p>
+        <p class="contacts__hours">Open Daily 10:00 am - 5:00 pm</p>
+        <a class="contacts__tel" href="tel:(7021633433)">Т(702) 163-3433</a>
+        <a class="contacts__email" href="mailto:zoo.online@gmail.com">zoo.online@gmail.com</a>
+        <ul class="contacts__social-list">
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Instagram
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-instagram"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Twitter
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-twitter"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Vkontakte
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-vkontakte"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Youtube
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-youtube"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="copyright page-footer__copyright">
+        <h2 class="visually-hidden">Copyrights</h2>
+        <ul class="copyright__list">
+          <li class="copyright__item">
+            <a href="#" class="copyright__item-link">©Noora Sagnayeva</a>
+          </li>
+          <li class="copyright__item">
+            <a href="#" class="copyright__item-link">©RSSchool and ©Yem Digital - 2021</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </footer>
 </body>
 
 </html>
