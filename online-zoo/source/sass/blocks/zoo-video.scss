@@ -11,8 +11,12 @@
 .zoo-video__title {
   @include h2-model;
   width: 100%;
-
   margin-bottom: 42px;
+
+  &--wide {
+    position: relative;
+    width: 120%;
+  }
 }
 
 .zoo-video__playlist {
@@ -35,12 +39,6 @@
     margin-right: 3.5%;
   }
 
-  &:first-child {
-    width: 100%;
-    height: 443px;
-    margin-right: 0;
-    margin-bottom: 29px;
-  }
 
   &::after {
     position: absolute;
@@ -50,6 +48,17 @@
     top: 0;
     left: 0;
     background-color: transparent;
+  }
+
+  &:first-child {
+    width: 100%;
+    height: 443px;
+    margin-right: 0;
+    margin-bottom: 29px;
+
+    &::after {
+      display: none;
+    }
   }
 }
 
