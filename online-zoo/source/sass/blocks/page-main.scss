@@ -1,0 +1,11 @@
+.page-main {
+  &--zoos {
+    background-color: $bg-white2-color;
+  }
+}
+
+.page-main__wrapper {
+  @include wrapper-widest;
+  position: relative;
+  display: flex;
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Zoo - Panda</title>
+  <link rel="preload" href="../../assets/fonts/roboto400.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto500.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto700.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto900.woff2" as="font" crossorigin>
+  <link rel="preload" href="../../assets/fonts/poppins500.woff2" as="font" crossorigin>
+  <link href="zoos-panda-style.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div style="display: none;">
+    <include src="build/assets/icons/sprite.svg"></include>
+  </div>
+  <header class="page-header">
+    <div class="page-header__wrapper">
+      <a class="logo">
+        <img class="logo__image" src="../../assets/images/logo-online-zoo.svg" width="59" height="42"
+          alt="Logo of Online-zoo">
+      </a>
+      <nav class="main-nav main-nav--closed main-nav--nojs">
+        <ul class="main-nav__list">
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../index/index.html">About</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link main-nav__link--current">Zoos</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="../map/map.html">Map</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="#contact-us">Contact us</a>
+          </li>
+          <li class="main-nav__item">
+            <a class="main-nav__link" href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
+          </li>
+        </ul>
+      </nav>
+      <label class="switch" tabindex="0">
+        <input type="checkbox">
+        <span class="switch__slider"></span>
+      </label>
+      <h1 class="visually-hidden">Online zoo video: watch the video with the selected animal</h1>
+    </div>
+  </header>
+  <main class="page-main page-main--zoos">
+    <div class="page-main__wrapper">
+      <aside class="sidebar">
+        <div class="sidebar__wrapper">
+          <div class=" slider sidebar__slider">
+            <button class="sidebar__slider-button sidebar__slider-button--top" type="button">
+              <svg class="sidebar__button-icon sidebar__button-icon--top" width="20" height="30">
+                <use xlink:href="#icon-arrow-left"></use>
+              </svg>
+            </button>
+            <ul class="slider__list sidebar__slider-list">
+              <li class="slider__item sidebar__slider-item sidebar__slider-item--active">
+                <a href="#" class="sidebar__item-link" title="PANDA">
+                  <img class="sidebar__item-img sidebar__item-img--active"
+                    src="../../assets/images/slider-sidebar-panda.png" alt="photo of panda">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="EAGLES">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-eagles.png"
+                    alt="photo of eagles">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="CROCODILE">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-crocodile.png"
+                    alt="photo of crocodile">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="GORILLA">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-gorilla.png"
+                    alt="photo of gorilla">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="TIGER">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-eagles.png"
+                    alt="photo of tiger">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="ELEPHANTS">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-eagles.png"
+                    alt="photo of elephants">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="LION">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-crocodile.png"
+                    alt="photo of lion">
+                </a>
+              </li>
+              <li class="slider__item sidebar__slider-item">
+                <a href="#" class="sidebar__item-link" title="ZEBRAS">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-gorilla.png"
+                    alt="photo of zebras">
+                </a>
+              </li>
+            </ul>
+            <button class="sidebar__slider-button sidebar__slider-button--bottom" type="button">
+              <svg class="sidebar__button-icon" width="20" height="30">
+                <use xlink:href="#icon-arrow-right"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+      <section class="zoo-video">
+        <h2 class="zoo-video__title">The Beijing Zoo</h2>
+        <ul class="zoo-video__playlist">
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315"
+              src="https://www.youtube-nocookie.com/embed/OObOQ2GElhA?start=90" title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </li>
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315"
+              src="https://www.youtube-nocookie.com/embed/OObOQ2GElhA?start=90" title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </li>
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315"
+              src="https://www.youtube-nocookie.com/embed/OObOQ2GElhA?start=90" title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </li>
+          <li class="zoo-video__item">
+            <iframe class="zoo-video__iframe" width="560" height="315"
+              src="https://www.youtube-nocookie.com/embed/OObOQ2GElhA?start=90" title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </li>
+        </ul>
+        <ul class="pagination-list zoo-video__pagination">
+          <li class="pagination-list__item pagination-list__item--active">
+            <button class="pagination-list__button pagination-list__button--active">
+            </button>
+          </li>
+          <li class="pagination-list__item">
+            <button class="pagination-list__button">
+            </button>
+          </li>
+          <li class="pagination-list__item">
+            <button class="pagination-list__button">
+            </button>
+          </li>
+        </ul>
+      </section>
+      <section class="zoo-description">
+        <h2 class="visually-hidden">information about the animal on the video</h2>
+        <ul class="zoo-descripion__list">
+          <li class="zoo-description__item">
+            <h3 class="zoo-description__item-title">Population:</h3>
+            <p class="zoo-descripion__item-text">About 1,590 individuals</p>
+          </li>
+          <li class="zoo-description__item">
+            <h3 class="zoo-description__item-title">Habitat:</h3>
+            <p class="zoo-descripion__item-text">Temperate forests high in the mountains of southwest China</p>
+          </li>
+          <li class="zoo-description__item">
+            <h3 class="zoo-description__item-title">Diet:</h3>
+            <p class="zoo-descripion__item-text zoo-descripion__item-text--short">A panda's daily diet consists almost
+              entirely of the leaves, stems and
+              shoots of various bamboo species. Bamboo contains very little nutritional value so pandas must eat 12-38kg
+              every day to meet their energy needs.</p>
+          </li>
+        </ul>
+        <a class="button zoo-descripion__link" href="#">Feed</a>
+      </section>
+    </div>
+  </main>
+  <footer class="page-footer page-footer--zoos">
+    <div class="page-footer__wrapper">
+      <a class="logo page-footer__logo" href="../index/index.html">
+        <img class="logo__image page-footer__logo-img" src="../../assets/images/logo-online-zoo-footer.svg" width="59"
+          height="42" alt="Logo of Online-zoo">
+      </a>
+      <ul class="main-nav__list page-footer__nav-list">
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item" href="../index/index.html">About</a>
+        </li>
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item" href="zoos-panda.html">Zoos</a>
+        </li>
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item" href="../map/map.html">Map</a>
+        </li>
+        <li class="main-nav__item page-footer__nav-item">
+          <a class="main-nav__link page-footer__nav-item"
+            href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
+        </li>
+      </ul>
+      <a class="button page-footer__button" href="#">donate for volunteers</a>
+      <section class="feedback page-footer__feedback" id="contact-us">
+        <h2 class="feedback__title">Contact us</h2>
+        <form class="form" action="#" method="get">
+          <label class="visually-hidden" for="name">Name</label>
+          <input class="form__input" id="name" type="text" name="name" placeholder="Name" required>
+          <label class="visually-hidden" for="email">Email</label>
+          <input class="form__input" type="email" name="email" id="email" placeholder="Email" required>
+          <fieldset class="form__fieldset">
+            <legend class="form__fieldset-title">Please enter your message</legend>
+            <textarea class="form__textarea" name="message" id="comment" maxlength="280" rows="5" required></textarea>
+          </fieldset>
+          <div class="form__input-wrapper">
+            <input class="visually-hidden" id="checkbox" type="checkbox" name="checkbox" required>
+            <label class="form__label" for="checkbox">I agree to the processing of Personal Data</label>
+          </div>
+          <button class="form__button-submit" type="submit">Send</button>
+        </form>
+      </section>
+      <section class="contacts page-footer__contacts">
+        <h2 class="contacts__title">ZOO Online Centre</h2>
+        <p class="contacts__address">132, Address District, Street</p>
+        <p class="contacts__hours">Open Daily 10:00 am - 5:00 pm</p>
+        <a class="contacts__tel" href="tel:(7021633433)">Т(702) 163-3433</a>
+        <a class="contacts__email" href="mailto:zoo.online@gmail.com">zoo.online@gmail.com</a>
+        <ul class="contacts__social-list">
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Instagram
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-instagram"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Twitter
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-twitter"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Vkontakte
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-vkontakte"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="contacts__social-item">
+            <a href="#" class="contacts__social-link">Youtube
+              <svg class="contacts__social-icon" width="20" height="20">
+                <use xlink:href="#icon-youtube"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="copyright page-footer__copyright">
+        <h2 class="visually-hidden">Copyrights</h2>
+        <ul class="copyright__list">
+          <li class="copyright__item">
+            <a href="#" class="copyright__item-link">©Noora Sagnayeva</a>
+          </li>
+          <li class="copyright__item">
+            <a href="#" class="copyright__item-link">©RSSchool and ©Yem Digital - 2021</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </footer>
+</body>
+
+</html>

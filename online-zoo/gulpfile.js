@@ -19,7 +19,7 @@ var del = require("del");
 var ghPages = require("gh-pages");
 var path = require("path");
 
-var pages = ['index', 'map'];
+var pages = ['index', 'map', 'zoos-panda'];
 
 gulp.task("css", async function () {
   return pages.map((page) => {
@@ -39,7 +39,7 @@ gulp.task("css", async function () {
 
 gulp.task("server", async function () {
   server.init({
-    files: ["build/pages/index/index.html", "build/pages/map/map.html"],
+    files: ["build/pages/index/index.html", "build/pages/map/map.html", "build/pages/zoos-panda/zoos-panda.html"],
     server: {
       baseDir: "build",
       directory: true

@@ -1,0 +1,34 @@
+.zoo-description {
+  display: flex;
+  flex-direction: column;
+  width: 24%;
+  padding-top: 155px;
+  padding-bottom: 141px;
+}
+
+.zoo-descripion__list {
+  @include list-reset;
+  margin-bottom: 23px;
+}
+
+.zoo-description__item-title {
+  @include text-options(20px, 23px, 900, $title-grey-dark-color);
+  margin: 0;
+  margin-bottom: 9px;
+}
+
+.zoo-descripion__item-text {
+  @include text-options(14px, 16px, 400, $text-grey-color);
+  margin: 0;
+  margin-bottom: 10px;
+
+  &--short {
+    width: 93%;
+  }
+}
+
+.zoo-descripion__link {
+  width: 194px;
+  padding-top: 19px;
+  padding-bottom: 16px;
+}
