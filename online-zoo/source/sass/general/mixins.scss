@@ -1,40 +1,82 @@
 @mixin desktop() {
-  @media (min-width: 1200px) {
+  @media (min-width: 1200px)and (max-width: 1919px) {
     @content;
   }
 }
 
-// @mixin tablet() {
-//   @media (min-width: 768px) and (max-width: 1023px) {
-//     @content;
-//   }
-// }
+@mixin tablet() {
+  @media (min-width: 640px) and (max-width: 1199px) {
+    @content;
+  }
+}
 
-// @mixin mobile() {
-//   @media (max-width: 767px) {
-//     @content;
-//   }
-// }
+@mixin mobile() {
+  @media (max-width: 639px) {
+    @content;
+  }
+}
 
 @mixin wrapper-widest() {
   max-width: 1920px;
   margin: 0 auto;
-  padding-left: 152px;
-  padding-right: 149px;
+  padding-left: 150px;
+  padding-right: 150px;
+
+  @include desktop {
+    min-width: 1200px;
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+
+  @include tablet {
+    min-width: 640px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @include mobile {
+    min-width: 320px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 @mixin wrapper-wide() {
   max-width: 1620px;
   margin: 0 auto;
-  padding-left: 209px;
+  padding-left: 210px;
   padding-right: 210px;
+
+  @include desktop {
+    min-width: 900px;
+    padding-left: 77px;
+    padding-right: 77px;
+  }
+
+  @include tablet {
+    min-width: 600px;
+    padding-left: 31px;
+    padding-right: 31px;
+  }
+
+  @include mobile {
+    min-width: 300px;
+    padding-left: 14px;
+    padding-right: 140px;
+  }
 }
 
 @mixin wrapper-middle() {
-  max-width: 1199px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding-left: 204px;
+  padding-left: 205px;
   padding-right: 205px;
+
+  @include desktop {
+    min-width: 746px;
+    padding-left: 76px;
+    padding-right: 76px;
+  }
 }
 
 @mixin list-reset() {
