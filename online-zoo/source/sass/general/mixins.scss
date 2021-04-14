@@ -1,5 +1,5 @@
 @mixin desktop() {
-  @media (min-width: 1200px)and (max-width: 1919px) {
+  @media (min-width: 1200px) and (max-width: 1919px) {
     @content;
   }
 }
