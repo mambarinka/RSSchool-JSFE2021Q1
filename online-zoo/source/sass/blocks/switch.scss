@@ -4,6 +4,11 @@
   margin-left: auto;
   width: 55px;
   height: 38px;
+
+  @include tablet {
+    margin-left: 0;
+    margin-right: 6%;
+  }
 }
 
 .switch input {

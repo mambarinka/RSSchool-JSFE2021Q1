@@ -1,3 +1,11 @@
 .logo {
   margin-right: 26%;
+
+  @include desktop {
+    margin-right: 9%;
+  }
+
+  @include tablet {
+    margin-right: 68.6%;
+  }
 }

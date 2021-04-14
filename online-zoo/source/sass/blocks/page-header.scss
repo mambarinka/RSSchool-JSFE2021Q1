@@ -2,9 +2,19 @@
   padding: 27px 0 21px;
   background-color: $bg-white1-color;
   box-shadow: 0 4px 8px rgba(44, 101, 77, 0.08);
+
+  @include desktop {
+    padding: 26px 0 23px;
+  }
 }
 
 .page-header__wrapper {
   @include wrapper-widest;
   display: flex;
+
+  @include tablet {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 }
