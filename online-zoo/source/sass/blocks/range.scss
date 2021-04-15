@@ -1,7 +1,7 @@
 .range {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   margin-bottom: 32px;
 }
 
@@ -31,6 +31,10 @@
 .range__input {
   -webkit-appearance: none;
   width: 245px;
+
+  @include mobile {
+    width: 137px;
+  }
 }
 
 .range__input:focus {
