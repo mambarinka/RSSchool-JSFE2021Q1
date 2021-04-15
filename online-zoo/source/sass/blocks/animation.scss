@@ -8,6 +8,26 @@
   }
 }
 
+@keyframes bounce-watch-tablet {
+  0% {
+    transform: translateY(200px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-watch-mobile {
+  0% {
+    transform: translateY(120px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @keyframes bounce-pets-in-zoo {
   0% {
     transform: translateY(50px);
