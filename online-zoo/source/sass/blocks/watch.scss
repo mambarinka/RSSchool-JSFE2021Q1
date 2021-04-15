@@ -12,7 +12,7 @@
   }
 
   @include tablet {
-    padding-top: 121px;
+    padding-top: 120px;
     padding-bottom: 93px;
     background: url("../../assets/images/background-index-tablet.jpg") no-repeat;
     background-size: cover;
@@ -35,6 +35,10 @@
 
   @include desktop {
     margin-bottom: 103px;
+  }
+
+  @include tablet {
+    margin-bottom: 0;
   }
 }
 
@@ -76,6 +80,10 @@
 
   @include tablet {
     margin-bottom: 369px;
+  }
+
+  @include mobile {
+    margin-bottom: 331px;
   }
 }
 
@@ -440,25 +448,25 @@
   @include mobile {
     width: 19%;
     right: 23%;
-    bottom: -71px;
+    bottom: 44px;
   }
 
-  @media (min-width: 446px) and (max-width: 639px) {
-    bottom: -127px;
-  }
+  // @media (min-width: 446px) and (max-width: 639px) {
+  //   bottom: -127px;
+  // }
 
-  @media (min-width: 1013px) and (max-width: 1199px) {
-    bottom: -160px;
-  }
+  // @media (min-width: 1013px) and (max-width: 1199px) {
+  //   bottom: -160px;
+  // }
 
-  @media (min-width: 1201px) and (max-width: 1763px) {
-    bottom: -203px;
-  }
+  // @media (min-width: 1201px) and (max-width: 1763px) {
+  //   bottom: -203px;
+  // }
 
-  @media (min-width: 1764px)and (max-width: 1919px) {
-    right: 8.2%;
-    bottom: -262px;
-  }
+  // @media (min-width: 1764px)and (max-width: 1919px) {
+  //   right: 8.2%;
+  //   bottom: -262px;
+  // }
 }
 
 .watch__range-values {
@@ -519,8 +527,12 @@
   @include list-reset;
   @include wrapper-widest;
 
-  @media (min-width: 446px) and (max-width: 639px) {
-    margin-top: 56px;
+  // @media (min-width: 446px) and (max-width: 639px) {
+  //   margin-top: 56px;
+  // }
+
+  @include mobile {
+    display: none;
   }
 }
 
