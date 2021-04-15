@@ -6,6 +6,10 @@
   @include desktop {
     padding: 26px 0 23px;
   }
+
+  @include mobile {
+    padding: 25px 0 21px;
+  }
 }
 
 .page-header__wrapper {
@@ -15,6 +19,13 @@
   @include tablet {
     position: relative;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 }

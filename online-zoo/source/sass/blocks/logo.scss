@@ -8,4 +8,9 @@
   @include tablet {
     margin-right: 68.6%;
   }
+
+  @include mobile {
+    width: 26%;
+    margin-right: 0;
+  }
 }
