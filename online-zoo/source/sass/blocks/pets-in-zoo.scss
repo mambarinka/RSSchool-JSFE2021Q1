@@ -49,18 +49,21 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  // width: 1298px;
+  width: 1298px;
   margin-bottom: 24px;
 
   @include desktop {
+    width: 1005px;
     margin-bottom: 21px;
   }
 
   @include tablet {
+    width: 600px;
     margin-bottom: 31px;
   }
 
   @include mobile {
+    width: 300px;
     margin-bottom: 23px;
   }
 }
