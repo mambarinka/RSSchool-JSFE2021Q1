@@ -86,7 +86,6 @@
 
   @include desktop {
     margin-top: 1%;
-    outline: 2px solid purple;
 
     &--left {
       margin-right: 1%;
@@ -151,7 +150,6 @@
   @include desktop {
     padding-left: 10px;
     padding-right: 10px;
-    outline: 2px solid blue;
 
     &:hover .pets-in-zoo__item-wrapper {
       display: flex;
@@ -200,7 +198,6 @@
   align-items: center;
   flex-wrap: wrap;
   bottom: 46px;
-  outline: 2px solid red;
 
   @include desktop {
     bottom: 36px;
@@ -232,7 +229,6 @@
   padding-top: 6px;
   padding-bottom: 6px;
   text-transform: uppercase;
-  outline: 2px solid yellowgreen;
 
   &--watch {
     margin-right: auto;

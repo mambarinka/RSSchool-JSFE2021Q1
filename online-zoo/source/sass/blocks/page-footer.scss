@@ -81,6 +81,10 @@
 }
 
 .page-footer__nav-link {
+  @include desktop {
+    color: $text-white-color;
+  }
+
   @include tablet {
     @include text-options(16px, 19px, 600, $text-white-color);
   }
