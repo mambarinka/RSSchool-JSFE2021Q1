@@ -454,15 +454,15 @@
       <div class="map__wrapper">
         <h2 class="map__title">Map</h2>
         <div class="map__img">
-          <svg class="map__img-svg" width="1200" height="497">
-            <use xlink:href="#icon-map"></use>
+          <svg class="map__img-svg" viewBox="0 0 1200 498" width="1200" height="497" preserveAspectRatio="none">
+            <use xlink:href="#icon-map" preserveAspectRatio="none"></use>
           </svg>
           <div class="map__pin-wrapper map__pin-wrapper--eagles">
             <div class="map__pin-wrapper-img">
               <img class="map__pin-img" src="../../assets/images/pin-eagles.png" alt="photo of eagles">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--eagles">
-              <img src="../../assets/images/pin-eagles-tooltip.png" alt="photo of eagle" class="tooltip-img">
+              <img src="../../assets/images/pin-eagles-tooltip.png" width="65" height="65" alt="photo of eagle" class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -475,7 +475,7 @@
               <img class="map__pin-img" src="../../assets/images/pin-crocodile.png" alt="photo of crocodile">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--crocodile">
-              <img src="../../assets/images/pin-crocodile.png" alt="photo of crocodile" class="tooltip-img">
+              <img src="../../assets/images/pin-crocodile.png" width="65" height="65" alt="photo of crocodile" class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -488,7 +488,7 @@
               <img class="map__pin-img" src="../../assets/images/pin-gorilla.png" alt="photo of gorilla">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--gorilla">
-              <img src="../../assets/images/pin-gorilla.png" alt="photo of gorilla" class="tooltip-img">
+              <img src="../../assets/images/pin-gorilla.png" width="65" height="65" alt="photo of gorilla" class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -501,7 +501,7 @@
               <img class="map__pin-img" src="../../assets/images/pin-panda.png" alt="photo of panda">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--panda">
-              <img src="../../assets/images/pin-panda.png" alt="photo of panda" class="tooltip-img">
+              <img src="../../assets/images/pin-panda.png" width="65" height="65" alt="photo of panda" class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -522,16 +522,16 @@
       </a>
       <ul class="main-nav__list page-footer__nav-list">
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="index.html">About</a>
+          <a class="main-nav__link page-footer__nav-link" href="index.html">About</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../zoos-panda/zoos-panda.html">Zoos</a>
+          <a class="main-nav__link page-footer__nav-link" href="../zoos-panda/zoos-panda.html">Zoos</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../map/map.html">Map</a>
+          <a class="main-nav__link page-footer__nav-link" href="../map/map.html">Map</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item"
+          <a class="main-nav__link page-footer__nav-link"
             href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
         </li>
       </ul>
@@ -542,7 +542,7 @@
           <label class="visually-hidden" for="name">Name</label>
           <input class="form__input" id="name" type="text" name="name" placeholder="Name" required>
           <label class="visually-hidden" for="email">Email</label>
-          <input class="form__input" type="email" name="email" id="email" placeholder="Email" required>
+          <input class="form__input form__input--email" type="email" name="email" id="email" placeholder="Email" required>
           <fieldset class="form__fieldset">
             <legend class="form__fieldset-title">Please enter your message</legend>
             <textarea class="form__textarea" name="message" id="comment" maxlength="280" rows="5" required></textarea>

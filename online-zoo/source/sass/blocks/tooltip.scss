@@ -3,15 +3,30 @@
   display: flex;
   // justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
-  padding: 41px 12% 43px 10.2%;
+  width: 436px;
+  padding: 41px 12% 43px 66.2%;
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
   border-radius: 8px;
   background-color: $text-white-color;
+
+  @include mobile {
+    width: 238px;
+    padding: 17px 58% 20px 42.2%;
+  }
 }
 
 .tooltip-img {
-  margin-right: 6.1%;
+  margin-right: 4.1%;
+
+  @include desktop {
+    margin-right: 5.1%;
+  }
+
+  @include mobile {
+    width: 40px;
+    height: 40px;
+    margin-right: 4.1%;
+  }
 }
 
 .tooltip__description {
@@ -23,12 +38,23 @@
   @include text-options(18px, 21px, 900, $title-grey-dark-color);
   margin: 0;
   margin-bottom: 8px;
+
+  @include mobile {
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 16px;
+  }
 }
 
 .tooltip__region,
 .tooltip__population {
   @include text-options(14px, 16px, 400, $text-grey-color);
   margin: 0;
+
+  @include mobile {
+    font-size: 11px;
+    line-height: 13px;
+  }
 }
 
 .tooltip__region {
