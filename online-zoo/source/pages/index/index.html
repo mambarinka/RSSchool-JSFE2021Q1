@@ -415,8 +415,13 @@
           </button>
           <ul class="slider__list reviews__slider-list">
             <li class="slider__item reviews__slider-item reviews__slider-item--active">
-              <img class="reviews__item-img" src="../../assets/images/slider-reviews-sidorova.png"
-                alt="photo of Nastya Sidorova">
+              <picture>
+                <source media="(max-width: 320px)" srcset="../../assets/images/slider-reviews-sidorova-mobile.png">
+                <source media="(max-width: 1200px)" srcset="../../assets/images/slider-reviews-sidorova-desktop.png">
+                <img class="reviews__item-img" src="../../assets/images/slider-reviews-sidorova.png"
+                  alt="photo of Nastya Sidorova">
+              </picture>
+
               <span class="reviews__item-name">Nastya Sidorova</span>
               <p class="reviews__slider-item-text">As a voice for wildlife, we are devastated by the impact of the 2020
                 Australian bushfires on precious species and their habitat.</p>
