@@ -2,6 +2,11 @@
   padding-top: 100px;
   padding-bottom: 100px;
   background-color: $switch-grey-color;
+
+  @include mobile {
+    padding-top: 49px;
+    padding-bottom: 50px;
+  }
 }
 
 .pay-feed__wrapper {
@@ -9,16 +14,43 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include desktop {
+    @include wrapper-widest;
+  }
 }
 
 .pay-feed__title {
   @include h2-model;
   margin-bottom: 31px;
+
+  @include tablet {
+    margin-bottom: 18px;
+  }
+
+  @include mobile {
+    margin-bottom: 30px;
+    font-size: 36px;
+    line-height: 42px;
+  }
 }
 
 .pay-feed__description {
   @include p-model;
   margin-bottom: 93px;
+
+  @include desktop {
+    margin-bottom: 49px;
+  }
+
+  @include tablet {
+    width: 89%;
+    text-align: center;
+  }
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .pay-feed__list {
@@ -28,6 +60,18 @@
   align-items: center;
   width: 100%;
   margin-bottom: 56px;
+
+  @include desktop {
+    margin-bottom: 47px;
+  }
+
+  @include tablet {
+    flex-direction: column;
+  }
+
+  @include mobile {
+    margin-bottom: 39px;
+  }
 }
 
 .pay-feed__item {
@@ -74,12 +118,81 @@
     top: 113px;
     background: url("../../assets/images/pay-feed-arrow.svg") no-repeat;
   }
+
+  @include desktop {
+    width: 28%;
+    padding-top: 140px;
+
+    &:not(:last-child)::after {
+      width: 31%;
+      right: -90px;
+      background-position-x: -58px;
+    }
+  }
+
+  @include tablet {
+    width: 41%;
+
+    &:not(:last-child) {
+      margin-bottom: 96px;
+    }
+
+    &--card {
+      background-position-x: 50%;
+
+      &::before {
+        left: 0;
+      }
+    }
+
+    &--panda {
+      &::before {
+        left: 0;
+      }
+    }
+
+    &:not(:last-child)::after {
+      width: 22%;
+      right: 39%;
+      background-position-x: -54px;
+      transform: rotate(90deg);
+      bottom: -48px;
+      top: auto;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+
+    &::before {
+      left: 9%;
+    }
+
+    &:not(:last-child)::after {
+      width: 23%;
+      background-position-x: -69px;
+      bottom: -71px;
+    }
+  }
 }
 
 .pay-feed__item-text {
   @include text-options(20px, 23px, 900, $text-grey-color);
   margin: 0;
   text-align: center;
+
+  @include desktop {
+    width: 82%;
+    margin: 0 auto;
+  }
+
+  @include tablet {
+    width: 70%;
+  }
+
+  @include mobile {
+    width: 49%;
+  }
 }
 
 .pey-feed__link {
