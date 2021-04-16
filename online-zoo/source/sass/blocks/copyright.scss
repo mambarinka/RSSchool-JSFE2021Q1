@@ -1,5 +1,15 @@
 .copyright {
   padding-top: 25px;
+
+  @include desktop {
+    padding-top: 28px;
+  }
+
+  @include tablet {
+    padding-top: 26px;
+  }
+
+
 }
 
 .copyright__list {

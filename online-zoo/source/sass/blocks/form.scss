@@ -9,6 +9,10 @@
 .form__fieldset {
   width: 96%;
   background-color: transparent;
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .form__input {
@@ -18,6 +22,16 @@
   padding-bottom: 4px;
   border: none;
   border-bottom: 1px solid $range-gray-color;
+
+  @include desktop {
+    margin-bottom: 17px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    &--email {
+      margin-bottom: 23px;
+    }
+  }
 }
 
 .form__fieldset {
@@ -26,6 +40,16 @@
   padding-bottom: 4px;
   border: 1px solid $range-gray-color;
   border-radius: 3px;
+
+  @include desktop {
+    min-height: auto;
+    margin-bottom: 17px;
+  }
+
+  @include mobile {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 
 .form__fieldset-title {
@@ -60,7 +84,7 @@
     border-radius: 1px;
   }
 
-  input[type="checkbox"]:checked + &::before {
+  input[type="checkbox"]:checked+&::before {
     position: absolute;
     content: "✓";
     height: 13px;
@@ -100,5 +124,13 @@
 
   &:hover::after {
     background: url("../../assets/images/arrow-button-submit-hover.svg") no-repeat;
+  }
+
+  @include desktop {
+    margin-right: 25%;
+  }
+
+  @include mobile {
+    margin-right: 23%;
   }
 }
