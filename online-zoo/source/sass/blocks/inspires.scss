@@ -2,16 +2,37 @@
   padding-top: 101px;
   padding-bottom: 131px;
   background-color: $switch-grey-color;
+
+  @include desktop {
+    padding-bottom: 116px;
+  }
+  @include tablet {
+    padding-bottom: 100px;
+  }
+
+  @include mobile {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }
 
 .inspires__wrapper {
   @include wrapper-wide;
+
+  @include desktop {
+    @include wrapper-widest;
+  }
 }
 
 .inspires__list {
   @include list-reset;
   display: flex;
   justify-content: space-between;
+
+  @include tablet {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .inspires__list-item {
@@ -19,7 +40,7 @@
   padding-top: 95px;
 
   &:not(:last-child) {
-    margin-right: 31px;
+    margin-right: 2.4%;
   }
 
   &--what {
@@ -32,6 +53,29 @@
 
   &--believe {
     background: url("../../assets/images/inspires-believe.svg") no-repeat center top;
+  }
+
+  @include desktop {
+    &:not(:last-child) {
+      margin-right: 2.2%;
+    }
+  }
+
+  @include tablet {
+    width: 47.8%;
+
+    &:not(:last-child) {
+      margin-right: 0;
+      margin-bottom: 48px;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 29px;
+    }
   }
 }
 
