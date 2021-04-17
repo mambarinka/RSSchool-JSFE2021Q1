@@ -36,65 +36,58 @@
 @mixin wrapper-widest() {
   max-width: 1920px;
   margin: 0 auto;
-  padding-left: 150px;
-  padding-right: 150px;
+  padding-left: 7.9%;
+  padding-right: 7.9%;
 
   @include desktop {
     max-width: 1200px;
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
   }
 
   @include tablet {
     max-width: 640px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 3.1%;
+    padding-right: 3.1%;
   }
 
   @include mobile {
     max-width: 320px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 3.1%;
+    padding-right: 3.1%;
   }
 }
 
 @mixin wrapper-wide() {
   max-width: 1620px;
   margin: 0 auto;
-  padding-left: 210px;
-  padding-right: 210px;
+  padding-left: 11%;
+  padding-right: 11%;
 
   @include desktop {
     max-width: 900px;
-    padding-left: 77px;
-    padding-right: 77px;
+    padding-left: 6.4%;
+    padding-right: 6.4%;
   }
 
-  @include tablet {
-    max-width: 600px;
-    padding-left: 31px;
-    padding-right: 31px;
-  }
+  // @include tablet {
+  //   max-width: 600px;
+  //   padding-left: 31px;
+  //   padding-right: 31px;
+  // }
 
-  @include mobile {
-    max-width: 300px;
-    padding-left: 14px;
-    padding-right: 140px;
-  }
+  // @include mobile {
+  //   max-width: 300px;
+  //   padding-left: 14px;
+  //   padding-right: 140px;
+  // }
 }
 
 @mixin wrapper-middle() {
   max-width: 1200px;
   margin: 0 auto;
-  padding-left: 205px;
-  padding-right: 205px;
-
-  // @include desktop {
-  //   max-width: 746px;
-  //   margin: 0 auto;
-  //   padding-left: 76px;
-  //   padding-right: 76px;
-  // }
+  padding-left: 10.7%;
+  padding-right: 10.7%;
 }
 
 @mixin list-reset() {

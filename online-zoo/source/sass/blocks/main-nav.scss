@@ -58,6 +58,10 @@
   @include desktop {
     padding: 8px 4%;
   }
+
+  @media (min-width: 1201px) and (max-width: 1879px) {
+    padding: 8px 4%;
+  }
 }
 
 .main-nav__link {

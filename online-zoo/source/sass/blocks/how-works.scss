@@ -95,6 +95,12 @@
 }
 
 .how-works__range-input {
+  width: 31%;
+
+  @include desktop {
+    width: 33%;
+  }
+
   @include mobile {
     width: 78%;
   }

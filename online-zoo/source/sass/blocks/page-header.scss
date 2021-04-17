@@ -7,7 +7,17 @@
     padding: 26px 0 23px;
   }
 
+  @include tablet {
+    position: fixed;
+    width: 100%;
+    z-index: 15;
+  }
+
   @include mobile {
+    padding: 25px 0 21px;
+  }
+
+  @media (min-width: 321px) and (max-width: 639px) {
     padding: 25px 0 21px;
   }
 }
@@ -24,6 +34,12 @@
   }
 
   @include mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (min-width: 321px) and (max-width: 639px) {
     display: flex;
     justify-content: space-between;
     align-items: center;

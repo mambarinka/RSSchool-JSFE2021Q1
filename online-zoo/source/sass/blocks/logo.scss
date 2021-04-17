@@ -6,11 +6,19 @@
   }
 
   @include tablet {
+    width: 59px;
     margin-right: 68.6%;
   }
 
   @include mobile {
-    width: 26%;
     margin-right: 0;
   }
+
+  @media (min-width: 321px) and (max-width: 639px) {
+    margin-right: auto;
+  }
+}
+
+.logo__image {
+  width: 100%;
 }

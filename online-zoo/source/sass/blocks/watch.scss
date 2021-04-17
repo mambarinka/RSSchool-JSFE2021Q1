@@ -12,14 +12,14 @@
   }
 
   @include tablet {
-    padding-top: 120px;
+    padding-top: 215px;
     padding-bottom: 93px;
     background: url("../../assets/images/background-index-tablet.jpg") no-repeat;
     background-size: cover;
   }
 
   @include mobile {
-    padding-top: 91px;
+    padding-top: 183px;
     padding-bottom: 8px;
     background: url("../../assets/images/background-index-mobile.jpg") no-repeat;
     background-size: cover;
@@ -31,7 +31,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-left: 360px;
+  padding-left: 18.8%;
 
   @include desktop {
     margin-bottom: 103px;
@@ -39,6 +39,10 @@
 
   @include tablet {
     margin-bottom: 0;
+  }
+
+  @media (min-width: 1201px) and (max-width: 1783px) {
+    padding-left: 11.8%;
   }
 }
 
@@ -69,6 +73,25 @@
     font-size: 48px;
     line-height: 56px;
     letter-spacing: 0.1px;
+  }
+
+  @media (max-width: 445px) {
+    width: 100%;
+    margin-bottom: 16px;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: 0.1px;
+  }
+
+  @media (min-width: 641px) and (max-width: 1136px) {
+    width: 100%;
+    font-size: 64px;
+    line-height: 75px;
+    letter-spacing: 0.1px;
+  }
+
+  @media (min-width: 1201px) and (max-width: 1783px) {
+    width: 100%;
   }
 }
 
@@ -113,6 +136,10 @@
     top: 274px;
     left: 0;
   }
+
+  @media (min-width: 756px) and (max-width: 1136px) {
+    top: 247px;
+  }
 }
 
 .watch__slider-list {
@@ -127,7 +154,7 @@
     width: 13px;
     height: 13px;
     top: 183px;
-    left: -113px;
+    left: -11.6%;
   }
 
   &::after {
@@ -136,30 +163,46 @@
     width: 112%;
     height: 1px;
     top: 189px;
-    left: -107px;
+    left: -11%;
     background-color: $text-white-color;
     z-index: 0;
   }
 
   @include desktop {
     &::before {
-      left: -122px;
+      left: -20.4%;
     }
 
     &::after {
-      left: -112px;
+      left: -19%;
+    }
+  }
+
+  @include tablet {
+    &::before {
+      left: -10.5%;
+    }
+
+    &::after {
+      left: -9%;
     }
   }
 
   @include mobile {
     &::before {
       top: 93px;
-      left: -16px;
+      left: -5.2%;
     }
 
     &::after {
       top: 99px;
-      left: -7px;
+      left: -4%;
+    }
+  }
+
+  @media (min-width: 321px) and (max-width: 416px) {
+    &::before {
+      left: calc(-15.3% + 13px);
     }
   }
 }
@@ -462,9 +505,9 @@
     bottom: 44px;
   }
 
-  // @media (min-width: 446px) and (max-width: 639px) {
-  //   bottom: -127px;
-  // }
+  @media (min-width: 641px) and (max-width: 896px) {
+    width: 29.4%;
+  }
 
   // @media (min-width: 1013px) and (max-width: 1199px) {
   //   bottom: -160px;
