@@ -30,10 +30,10 @@
 
 .range__input {
   -webkit-appearance: none;
-  width: 245px;
+  width: 100%;
 
   @include mobile {
-    width: 137px;
+    width: 138px;
   }
 }
 

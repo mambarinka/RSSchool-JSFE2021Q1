@@ -415,19 +415,19 @@
           </button>
           <ul class="slider__list reviews__slider-list">
             <li class="slider__item reviews__slider-item reviews__slider-item--active">
-              <picture>
+              <picture class="reviews__item-picture" >
                 <source media="(max-width: 320px)" srcset="../../assets/images/slider-reviews-sidorova-mobile.png">
                 <source media="(max-width: 1200px)" srcset="../../assets/images/slider-reviews-sidorova-desktop.png">
                 <img class="reviews__item-img" src="../../assets/images/slider-reviews-sidorova.png"
-                  alt="photo of Nastya Sidorova">
+                  alt="photo of Nastya Sidorova" width="68" height="68">
               </picture>
-
               <span class="reviews__item-name">Nastya Sidorova</span>
               <p class="reviews__slider-item-text">As a voice for wildlife, we are devastated by the impact of the 2020
                 Australian bushfires on precious species and their habitat.</p>
             </li>
             <li class="slider__item reviews__slider-item reviews__slider-item--active">
-              <img class="reviews__item-img" src="../../assets/images/slider-reviews-kim.png" alt="photo of Vlad Kim">
+              <img class="reviews__item-img" src="../../assets/images/slider-reviews-kim.png" alt="photo of Vlad Kim"
+                width="68" height="68">
               <span class="reviews__item-name">Vlad Kim</span>
               <p class="reviews__slider-item-text">As a voice for wildlife, we are devastated by the impact of the 2020
                 Australian bushfires on precious species and their habitat.</p>
@@ -454,7 +454,7 @@
       <div class="map__wrapper">
         <h2 class="map__title">Map</h2>
         <div class="map__img">
-          <svg class="map__img-svg" viewBox="0 0 1200 498" width="1200" height="497" preserveAspectRatio="none">
+          <svg class="map__img-svg" viewBox="0 0 1200 498" width="1200" preserveAspectRatio="none">
             <use xlink:href="#icon-map" preserveAspectRatio="none"></use>
           </svg>
           <div class="map__pin-wrapper map__pin-wrapper--eagles">
@@ -462,7 +462,8 @@
               <img class="map__pin-img" src="../../assets/images/pin-eagles.png" alt="photo of eagles">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--eagles">
-              <img src="../../assets/images/pin-eagles-tooltip.png" width="65" height="65" alt="photo of eagle" class="tooltip-img">
+              <img src="../../assets/images/pin-eagles-tooltip.png" width="65" height="65" alt="photo of eagle"
+                class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -475,7 +476,8 @@
               <img class="map__pin-img" src="../../assets/images/pin-crocodile.png" alt="photo of crocodile">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--crocodile">
-              <img src="../../assets/images/pin-crocodile.png" width="65" height="65" alt="photo of crocodile" class="tooltip-img">
+              <img src="../../assets/images/pin-crocodile.png" width="65" height="65" alt="photo of crocodile"
+                class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -488,7 +490,8 @@
               <img class="map__pin-img" src="../../assets/images/pin-gorilla.png" alt="photo of gorilla">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--gorilla">
-              <img src="../../assets/images/pin-gorilla.png" width="65" height="65" alt="photo of gorilla" class="tooltip-img">
+              <img src="../../assets/images/pin-gorilla.png" width="65" height="65" alt="photo of gorilla"
+                class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -501,7 +504,8 @@
               <img class="map__pin-img" src="../../assets/images/pin-panda.png" alt="photo of panda">
             </div>
             <div class="tooltip map__pin-tooltip map__pin-tooltip--panda">
-              <img src="../../assets/images/pin-panda.png" width="65" height="65" alt="photo of panda" class="tooltip-img">
+              <img src="../../assets/images/pin-panda.png" width="65" height="65" alt="photo of panda"
+                class="tooltip-img">
               <div class="tooltip__description">
                 <h4 class="tooltip__title">West End Bald Eagle</h4>
                 <p class="tooltip__region"><b>Region:</b> on an island near Los Angeles</p>
@@ -542,7 +546,8 @@
           <label class="visually-hidden" for="name">Name</label>
           <input class="form__input" id="name" type="text" name="name" placeholder="Name" required>
           <label class="visually-hidden" for="email">Email</label>
-          <input class="form__input form__input--email" type="email" name="email" id="email" placeholder="Email" required>
+          <input class="form__input form__input--email" type="email" name="email" id="email" placeholder="Email"
+            required>
           <fieldset class="form__fieldset">
             <legend class="form__fieldset-title">Please enter your message</legend>
             <textarea class="form__textarea" name="message" id="comment" maxlength="280" rows="5" required></textarea>

@@ -293,17 +293,26 @@
     &:hover {
       width: calc(123px * 1.21);
       margin-top: 0;
+      padding-left: 5px;
+      padding-right: 5px;
       // height: calc(202px * 1.75);
 
       & .watch__item-wrapper {
+        bottom: 8px;
         animation: none;
         // animation: bounce-watch-mobile 6s;
+      }
+
+      & .watch__slider-item-img {
+        width: 100%;
       }
     }
 
     &--active {
       width: calc(123px * 1.21);
       margin-top: 0;
+      padding-left: 5px;
+      padding-right: 5px;
       // height: calc(202px * 1.75);
       top: 0;
 
@@ -436,18 +445,20 @@
   bottom: -103px;
 
   @include desktop {
-    right: 14%;
+    width: 20.4%;
+    right: 10.4%;
     bottom: -211px;
   }
 
   @include tablet {
-    right: 21.3%;
+    width: 38.5%;
+    right: 8.7%;
     bottom: -106px;
   }
 
   @include mobile {
-    width: 19%;
-    right: 23%;
+    width: 23%;
+    right: 21%;
     bottom: 44px;
   }
 
@@ -476,17 +487,17 @@
   // margin-left: 36%;
 
   @include desktop {
-    width: 33%;
+    width: 20%;
     // margin-left: 62%;
   }
 
   @include tablet {
-    width: 64%;
+    width: 21%;
     // margin-left: 114%;
   }
 
   @include mobile {
-    width: 92%;
+    width: 76%;
     // margin-left: 70%;
     margin-bottom: 0;
   }
