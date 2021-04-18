@@ -544,25 +544,38 @@
     // margin-left: 70%;
     margin-bottom: 0;
   }
+
+  @media (min-width: 321px) and (max-width: 586px) {
+    justify-content: center;
+    width: 36%;
+  }
 }
 
 .watch__range-value {
   color: $range-gray-color;
-  width: 28%;
+  width: auto;
   text-align: right;
 
   &--active {
-    width: 76%;
-    margin-right: 14%;
-    text-align: right;
+    // width: 76%;
+    // margin-right: 14%;
+    // text-align: right;
+    margin-left: 0;
     color: $text-white-color;
   }
 
-  @include mobile {
-    width: 40%;
+  // @include mobile {
+  //   width: 40%;
+
+  //   &--active {
+  //     width: 60%;
+  //   }
+  // }
+  @media (max-width: 586px) {
+    margin-left: 8%;
 
     &--active {
-      width: 60%;
+      margin-left: 0;
     }
   }
 }

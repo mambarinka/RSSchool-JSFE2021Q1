@@ -64,6 +64,9 @@
 }
 
 .how-works__slider-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -99,6 +102,10 @@
 
   @include desktop {
     width: 33%;
+  }
+
+  @include tablet {
+    width: 41%;
   }
 
   @include mobile {

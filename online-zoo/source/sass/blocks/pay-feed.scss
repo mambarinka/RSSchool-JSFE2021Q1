@@ -10,10 +10,13 @@
 }
 
 .pay-feed__wrapper {
-  @include wrapper-wide;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1620px;
+  margin: 0 auto;
+  padding-left: 10.6%;
+  padding-right: 10.6%;
 
   @include desktop {
     @include wrapper-widest;
@@ -56,7 +59,7 @@
 .pay-feed__list {
   @include list-reset;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   width: 100%;
   margin-bottom: 56px;
@@ -70,31 +73,35 @@
   }
 
   @include mobile {
-    margin-bottom: 39px;
+    margin-bottom: 36px;
   }
 }
 
 .pay-feed__item {
   position: relative;
-  width: 21%;
-  padding: 138px 5% 62px 4.8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% / 3);
+  // width: 21%;
+  padding: 140px 5% 62px 5%;
+
+  &:not(:last-child) {
+    margin-right: 18.5%;
+  }
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
+    left: 1%;
     right: 0;
     background: url("../../assets/images/pay-feed-circle.svg") no-repeat;
   }
 
   &--card {
-    background: url("../../assets/images/pay-feed-card.svg") no-repeat 46% 68px;
-
-    &::before {
-      left: -3px;
-    }
+    background: url("../../assets/images/pay-feed-card.svg") no-repeat center 68px;
   }
 
   &--zoo {
@@ -103,10 +110,6 @@
 
   &--panda {
     background: url("../../assets/images/pay-feed-panda.svg") no-repeat center 66px;
-
-    &::before {
-      left: 6px;
-    }
   }
 
   &:not(:last-child)::after {
@@ -114,7 +117,7 @@
     content: "";
     width: 44%;
     height: 16px;
-    right: -166px;
+    right: -66%;
     top: 113px;
     background: url("../../assets/images/pay-feed-arrow.svg") no-repeat;
   }
@@ -163,6 +166,7 @@
 
   @include mobile {
     width: 100%;
+    padding-top: 142px;
 
     &::before {
       left: 9%;

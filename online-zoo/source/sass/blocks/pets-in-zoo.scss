@@ -6,10 +6,13 @@
   @include mobile {
     padding-bottom: 50px;
   }
+
+  @media (min-width: 321px) and (max-width: 586px) {
+    padding-bottom: 50px;
+  }
 }
 
 .pets-in-zoo__wrapper {
-  // @include wrapper-wide;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,6 +45,12 @@
     font-size: 36px;
     line-height: 42px;
   }
+
+  @media (min-width: 321px) and (max-width: 586px) {
+    margin-bottom: 29px;
+    font-size: 36px;
+    line-height: 42px;
+  }
 }
 
 .pets-in-zoo__slider {
@@ -66,6 +75,11 @@
     max-width: 300px;
     margin-bottom: 23px;
   }
+
+  // @media (min-width: 321px) and (max-width: 586px) {
+  //   max-width: 300px;
+  //   margin-bottom: 23px;
+  // }
 }
 
 .pets-in-zoo__slider-button {
@@ -115,13 +129,10 @@
 }
 
 .pets-in-zoo__slider-item {
-  // display: flex;
-  // align-items: flex-end;
-  // flex-wrap: wrap;
   position: relative;
   width: calc(100% / 4);
-  padding-left: 17px;
-  padding-right: 14px;
+  padding-left: 1.4%;
+  padding-right: 1.2%;
   cursor: pointer;
 
   .pets-in-zoo__item-wrapper {
@@ -148,8 +159,8 @@
   }
 
   @include desktop {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 1%;
+    padding-right: 1%;
 
     &:hover .pets-in-zoo__item-wrapper {
       display: flex;
@@ -170,19 +181,37 @@
   @include tablet {
     width: calc(100% / 2.6);
     padding-left: 0;
-    padding-right: 21px;
+    padding-right: 3.5%;
 
     &--active {
       .pets-in-zoo__item-wrapper {
         padding-right: 9.2%;
       }
     }
+  }
 
-    @include mobile {
-      width: calc(100% / 1.32);
-      padding-left: 0;
-      padding-right: 17px;
-    }
+  @include mobile {
+    width: calc(100% / 1.32);
+    padding-left: 0;
+    padding-right: 6%;
+  }
+
+  @media (min-width: 321px) and (max-width: 586px) {
+    width: calc(100% / 1.45);
+    padding-left: 0;
+    padding-right: 6%;
+  }
+
+  @media (min-width: 641px) and (max-width: 923px) {
+    width: calc(100% / 2.2);
+    padding-left: 0;
+    padding-right: 6%;
+  }
+
+  @media (min-width: 924px) and (max-width: 1199px) {
+    width: calc(100% / 3.1);
+    padding-left: 0;
+    padding-right: 6%;
   }
 }
 
@@ -208,6 +237,10 @@
   }
 
   @include mobile {
+    bottom: 36px;
+  }
+
+  @media (min-width: 321px) and (max-width: 586px) {
     bottom: 36px;
   }
 }
@@ -263,6 +296,10 @@
       width: 40%;
     }
   }
+
+  @include tablet {
+    padding-left: 12%;
+  }
 }
 
 .pets-in-zoo__range {
@@ -274,6 +311,7 @@
   }
 
   @include tablet {
+    width: 41%;
     margin-bottom: 37px;
   }
 
@@ -281,9 +319,15 @@
     width: 100%;
     margin-bottom: 27px;
   }
+
+  @media (min-width: 321px) and (max-width: 586px) {
+    width: 55%;
+    margin-bottom: 27px;
+  }
 }
 
 .pets-in-zoo__range-values {
+  justify-content: center;
   width: 21%;
 
   @include desktop {
@@ -293,30 +337,50 @@
   @include mobile {
     width: 18%;
   }
+
+  @media (min-width: 321px) and (max-width: 586px) {
+    justify-content: center;
+    width: 36%;
+  }
 }
 
 .pets-in-zoo__value {
-  @include desktop {
-    width: 27%;
+  width: auto;
+  margin-left: 21%;
 
-    &--active {
-      width: 73%;
-    }
+  &--active {
+    margin-left: 0;
   }
 
-  @include tablet {
-    width: 34%;
+  // @include desktop {
+  //   width: 27%;
+
+  //   &--active {
+  //     width: 73%;
+  //   }
+  // }
+
+  // @include tablet {
+  //   width: 34%;
+
+  //   &--active {
+  //     width: 66%;
+  //   }
+  // }
+
+  // @include mobile {
+  //   width: 43%;
+
+  //   &--active {
+  //     width: 57%;
+  //   }
+  // }
+
+  @media (max-width: 586px) {
+    margin-left: 8%;
 
     &--active {
-      width: 66%;
-    }
-  }
-
-  @include mobile {
-    width: 43%;
-
-    &--active {
-      width: 57%;
+      margin-left: 0;
     }
   }
 }
@@ -333,12 +397,20 @@
   @include mobile {
     width: 82%;
   }
+
+  @media (min-width: 321px) and (max-width: 586px) {
+    width: 82%;
+  }
 }
 
 .pets-in-zoo__range-input::-webkit-slider-thumb {
   width: 34px;
 
   @include mobile {
+    width: 31px;
+  }
+
+  @media (min-width: 321px) and (max-width: 586px) {
     width: 31px;
   }
 }
