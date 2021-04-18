@@ -132,29 +132,29 @@
 
   .map__img--map-page & {
     &--eagles {
-      top: 16.4%;
-      left: 11.2%;
+      top: calc(35% - 93px);
+      left: calc(13.7% - 66px / 2);
     }
 
-    &--crocodile {
-      top: 20%;
-      left: 20.5%;
-    }
+    //   &--crocodile {
+    //     top: 20%;
+    //     left: 20.5%;
+    //   }
 
-    &--gorilla {
-      top: 37.7%;
-      left: 47.7%;
-    }
+    //   &--gorilla {
+    //     top: 37.7%;
+    //     left: 47.7%;
+    //   }
 
     &--panda {
-      top: 19.8%;
-      right: -11.9%;
+      top: calc(38.6% - 93px);
+      right: calc(21.8% - 66px / 2);
     }
 
-    &:hover .map__pin-tooltip {
-      opacity: 1;
-      z-index: 100;
-    }
+    //   &:hover .map__pin-tooltip {
+    //     opacity: 1;
+    //     z-index: 100;
+    //   }
   }
 
   @include desktop {

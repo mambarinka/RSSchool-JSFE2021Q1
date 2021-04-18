@@ -62,8 +62,13 @@
   @media (min-width: 1201px) and (max-width: 1879px) {
     padding: 8px 4%;
   }
+
   @media (min-width: 641px) and (max-width: 800px) {
     padding: 8px 2%;
+  }
+
+  @media (min-width: 2136px) {
+    padding: 8px 5.3%;
   }
 }
 

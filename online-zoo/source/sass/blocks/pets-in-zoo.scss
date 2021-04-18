@@ -352,30 +352,6 @@
     margin-left: 0;
   }
 
-  // @include desktop {
-  //   width: 27%;
-
-  //   &--active {
-  //     width: 73%;
-  //   }
-  // }
-
-  // @include tablet {
-  //   width: 34%;
-
-  //   &--active {
-  //     width: 66%;
-  //   }
-  // }
-
-  // @include mobile {
-  //   width: 43%;
-
-  //   &--active {
-  //     width: 57%;
-  //   }
-  // }
-
   @media (max-width: 586px) {
     margin-left: 8%;
 

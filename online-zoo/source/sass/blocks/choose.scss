@@ -10,6 +10,10 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+
+  @include desktop {
+    @include wrapper-widest;
+  }
 }
 
 .choose__title {
@@ -21,6 +25,10 @@
   @include p-model;
   width: 65.9%;
   margin-bottom: 50px;
+
+  @include desktop {
+    width: 88%;
+  }
 }
 
 .choose__slider {
@@ -111,11 +119,27 @@
 }
 
 .choose__range {
-  margin-right: 3%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20.5%;
+  right: 1.5%;
 }
 
 .choose__range-values {
+  justify-content: center;
   width: 21%;
+}
+
+.choose__range__value {
+  width: auto;
+  margin-left: 21%;
+
+  &--active {
+    margin-left: 0;
+  }
 }
 
 .choose__range-input::-webkit-slider-thumb {
