@@ -75,6 +75,10 @@
   @include mobile {
     margin-bottom: 36px;
   }
+
+  @media (min-width: 641px) and (max-width: 1199px) {
+    flex-direction: column;
+  }
 }
 
 .pay-feed__item {
@@ -97,7 +101,7 @@
     bottom: 0;
     left: 1%;
     right: 0;
-    background: url("../../assets/images/pay-feed-circle.svg") no-repeat;
+    background: url("../../assets/images/pay-feed-circle.svg") no-repeat center;
   }
 
   &--card {
@@ -123,8 +127,11 @@
   }
 
   @include desktop {
-    width: 28%;
     padding-top: 140px;
+
+    &:not(:last-child) {
+      margin-right: 8.5%;
+    }
 
     &:not(:last-child)::after {
       width: 31%;
@@ -135,6 +142,10 @@
 
   @include tablet {
     width: 41%;
+
+    &:not(:last-child) {
+      margin-right: 0;
+    }
 
     &:not(:last-child) {
       margin-bottom: 96px;
@@ -168,14 +179,85 @@
     width: 100%;
     padding-top: 142px;
 
-    &::before {
-      left: 9%;
-    }
-
     &:not(:last-child)::after {
       width: 23%;
       background-position-x: -69px;
       bottom: -71px;
+    }
+  }
+
+  @media (min-width: 321px) and (max-width: 639px) {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 161px;
+
+    &:not(:last-child) {
+      margin: 0;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 96px;
+    }
+  }
+
+  @media (min-width: 321px) and (max-width: 387px) {
+    &:not(:last-child)::after {
+      top: 121%;
+    }
+  }
+
+  @media (min-width: 388px) and (max-width: 639px) {
+    &:not(:last-child)::after {
+      top: 130%;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 1199px) {
+    width: 42%;
+
+    &:not(:last-child) {
+      margin-right: 0;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 96px;
+    }
+
+    &--card {
+      background-position-x: 50%;
+
+      &::before {
+        left: 0;
+      }
+    }
+
+    &--panda {
+      &::before {
+        left: 0;
+      }
+    }
+
+    &:not(:last-child)::after {
+      width: 22%;
+      right: 39%;
+      background-position-x: -67px;
+      transform: rotate(90deg);
+      bottom: -61px;
+      top: auto;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 962px) {
+    width: 51%;
+  }
+
+  @media (min-width: 1201px) and (max-width: 1486px) {
+    &:not(:last-child) {
+      margin-right: 10.5%;
+    }
+
+    &:not(:last-child)::after {
+      right: -45%;
     }
   }
 }
@@ -196,6 +278,22 @@
 
   @include mobile {
     width: 49%;
+  }
+
+  @media (min-width: 321px) and (max-width: 528px) {
+    width: 49%;
+  }
+
+  @media (min-width: 529px) and (max-width: 639px) {
+    width: 31%;
+  }
+
+  @media (min-width: 641px) and (max-width: 1199px) {
+    width: 70%;
+  }
+
+  @media (min-width: 1201px) and (max-width: 1486px) {
+    width: 45%;
   }
 }
 

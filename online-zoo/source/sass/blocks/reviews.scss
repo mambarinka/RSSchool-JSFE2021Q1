@@ -157,8 +157,13 @@
     height: 84px;
   }
 
+  @include tablet {
+    margin-right: 5%;
+  }
+
   @include mobile {
     height: auto;
+    margin-right: 0;
   }
 }
 

@@ -95,6 +95,24 @@
     width: 17%;
     margin-left: 3%;
   }
+
+  @media (min-width: 321px) and (max-width: 606px) {
+    width: 17%;
+  }
+
+  @media (min-width: 1201px) and (max-width: 1919px) {
+    width: 5.5%;
+  }
+}
+
+.how-works__range-value {
+  width: auto;
+  margin-left: 13%;
+  text-align: right;
+
+  &--active {
+    margin-left: 0;
+  }
 }
 
 .how-works__range-input {
