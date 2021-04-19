@@ -56,12 +56,11 @@
 
   @include desktop {
     max-width: 1004px;
-    margin-bottom: 35px;
+    margin-bottom: 37px;
   }
 
   @include tablet {
     justify-content: flex-start;
-    margin-bottom: 37px;
   }
 
   @include mobile {
@@ -170,10 +169,12 @@
 
 .reviews__item-img {
   margin-bottom: 12px;
+  transform: translateX(-2px);
 
   @include desktop {
     margin-right: 7px;
     margin-bottom: 18px;
+    transform: translateX(0);
   }
 
   @include tablet {
@@ -191,9 +192,11 @@
 .reviews__item-name {
   @include text-options(20px, 23px, 900, $title-grey-dark-color);
   margin-bottom: 17px;
+  transform: translateX(-2px);
 
   @include desktop {
     margin-right: 7px;
+    transform: translateX(0);
   }
 
   @include tablet {

@@ -208,11 +208,11 @@
     padding-right: 6%;
   }
 
-  @media (min-width: 924px) and (max-width: 1199px) {
-    width: calc(100% / 3.1);
-    padding-left: 0;
-    padding-right: 6%;
-  }
+  // @media (min-width: 924px) and (max-width: 1199px) {
+  //   width: calc(100% / 3.1);
+  //   padding-left: 0;
+  //   padding-right: 6%;
+  // }
 }
 
 .pets-in-zoo__item-img {
@@ -242,6 +242,14 @@
 
   @media (min-width: 321px) and (max-width: 586px) {
     bottom: 36px;
+  }
+
+  @media (min-width: 641px) and (max-width: 878px) {
+    justify-content: flex-start;
+  }
+
+  @media (min-width: 924px) and (max-width: 1104px) {
+    justify-content: flex-start;
   }
 }
 
@@ -299,6 +307,30 @@
 
   @include tablet {
     padding-left: 12%;
+  }
+
+
+  @media (min-width: 641px) and (max-width: 878px) {
+    &--watch {
+      width: 48%;
+      margin-right: 0;
+    }
+
+    &--donate {
+      width: 48%;
+    }
+  }
+
+
+  @media (min-width: 924px) and (max-width: 1104px) {
+    &--watch {
+      width: 48%;
+      margin-right: 0;
+    }
+
+    &--donate {
+      width: 48%;
+    }
   }
 }
 

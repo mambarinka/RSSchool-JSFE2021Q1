@@ -132,6 +132,8 @@
 }
 
 .how-works__range-input::-webkit-slider-thumb {
+  width: calc(100% / 4 + 19px);
+
   @include mobile {
     width: 80px;
   }

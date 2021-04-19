@@ -260,6 +260,16 @@
       right: -45%;
     }
   }
+
+  @media (min-width: 1921px) {
+    &:not(:last-child)::after {
+      width: 49%;
+    }
+
+    &::before {
+      background-size: 100%;
+    }
+  }
 }
 
 .pay-feed__item-text {
@@ -295,6 +305,8 @@
   @media (min-width: 1201px) and (max-width: 1486px) {
     width: 45%;
   }
+
+
 }
 
 .pey-feed__link {

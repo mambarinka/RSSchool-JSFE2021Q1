@@ -420,7 +420,7 @@
   &--panda {
     opacity: 0;
     top: 78px;
-    left: 0;
+    left: -200%;
   }
 
   @include desktop {
@@ -428,9 +428,9 @@
       left: 14px;
     }
 
-    &--panda {
-      left: -84px;
-    }
+    // &--panda {
+    //   left: -84px;
+    // }
   }
 
   @include tablet {
