@@ -8,4 +8,12 @@
   @include wrapper-widest;
   position: relative;
   display: flex;
+
+  @include tablet {
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    flex-wrap: wrap;
+  }
 }

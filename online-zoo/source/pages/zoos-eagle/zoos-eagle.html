@@ -46,6 +46,7 @@
         <input type="checkbox">
         <span class="switch__slider"></span>
       </label>
+      <button class="main-nav__toggle" type="button">Открыть меню</button>
       <h1 class="visually-hidden">Online zoo video: watch the video with the selected animal</h1>
     </div>
   </header>
@@ -67,9 +68,9 @@
                 </a>
               </li>
               <li class="slider__item sidebar__slider-item sidebar__slider-item--active">
-                <a href="#" class="sidebar__item-link" title="EAGLES">
-                  <img class="sidebar__item-img sidebar__item-img--active"
-                    src="../../assets/images/slider-sidebar-eagles.png" alt="photo of eagles">
+                <a href="#" class="sidebar__item-link sidebar__item-link--active" title="EAGLES">
+                  <img class="sidebar__item-img" src="../../assets/images/slider-sidebar-eagles.png"
+                    alt="photo of eagles">
                 </a>
               </li>
               <li class="slider__item sidebar__slider-item">
@@ -190,16 +191,16 @@
       </a>
       <ul class="main-nav__list page-footer__nav-list">
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../index/index.html">About</a>
+          <a class="main-nav__link page-footer__nav-link" href="../index/index.html">About</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../zoos-panda/zoos-panda.html">Zoos</a>
+          <a class="main-nav__link page-footer__nav-link" href="../zoos-panda/zoos-panda.html">Zoos</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../map/map.html">Map</a>
+          <a class="main-nav__link page-footer__nav-link" href="../map/map.html">Map</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item"
+          <a class="main-nav__link page-footer__nav-link"
             href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
         </li>
       </ul>
@@ -210,7 +211,8 @@
           <label class="visually-hidden" for="name">Name</label>
           <input class="form__input" id="name" type="text" name="name" placeholder="Name" required>
           <label class="visually-hidden" for="email">Email</label>
-          <input class="form__input" type="email" name="email" id="email" placeholder="Email" required>
+          <input class="form__input form__input--email" type="email" name="email" id="email" placeholder="Email"
+            required>
           <fieldset class="form__fieldset">
             <legend class="form__fieldset-title">Please enter your message</legend>
             <textarea class="form__textarea" name="message" id="comment" maxlength="280" rows="5" required></textarea>
@@ -274,6 +276,7 @@
       </section>
     </div>
   </footer>
+  <script src="zoos-eagle-script.js"></script>
 </body>
 
 </html>

@@ -4,17 +4,79 @@
   width: 24%;
   padding-top: 155px;
   padding-bottom: 141px;
+
+  @include desktop {
+    width: 29.5%;
+  }
+
+  @include tablet {
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 80px;
+    padding-left: 17%;
+  }
+
+  @include mobile {
+    padding-left: 28.5%;
+    padding-bottom: 61px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    padding-left: 28.5%;
+    padding-bottom: 61px;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 80px;
+    padding-left: 17%;
+  }
 }
 
 .zoo-descripion__list {
   @include list-reset;
   margin-bottom: 23px;
+
+  @include desktop {
+    margin-bottom: 5px;
+  }
+
+  @include tablet {
+    margin-bottom: 17px;
+  }
+
+  @include mobile {
+    margin-bottom: 2px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    margin-bottom: 2px;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    margin-bottom: 17px;
+  }
 }
 
 .zoo-description__item-title {
   @include text-options(20px, 23px, 900, $title-grey-dark-color);
   margin: 0;
   margin-bottom: 9px;
+
+  @include desktop {
+    margin-bottom: 7px;
+  }
+
+  @include mobile {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    font-size: 14px;
+    line-height: 16px;
+  }
 }
 
 .zoo-descripion__item-text {
@@ -25,10 +87,59 @@
   &--short {
     width: 93%;
   }
+
+  @include desktop {
+    margin-bottom: 15px;
+  }
+
+  @include tablet {
+    width: 98%;
+    margin-bottom: 12px;
+  }
+
+  @include mobile {
+    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    width: 98%;
+    margin-bottom: 12px;
+  }
 }
 
 .zoo-descripion__link {
   width: 194px;
   padding-top: 19px;
   padding-bottom: 16px;
+
+  @include desktop {
+    width: 70%;
+    padding-bottom: 13px;
+  }
+
+  @include tablet {
+    width: 37.4%;
+  }
+
+  @include mobile {
+    width: 86.4%;
+    padding-top: 17px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    width: 86.4%;
+    padding-top: 17px;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    width: 37.4%;
+  }
 }

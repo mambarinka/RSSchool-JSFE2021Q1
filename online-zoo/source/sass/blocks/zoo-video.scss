@@ -6,6 +6,41 @@
   padding-left: 12.9%;
   padding-top: 59px;
   padding-bottom: 100px;
+
+  @include desktop {
+    width: 64.3%;
+    margin-right: 2%;
+    padding-bottom: 97px;
+    padding-left: 5.5%;
+  }
+
+  @include tablet {
+    width: 100%;
+    margin-right: 0;
+    padding-top: 153px;
+    padding-bottom: 42px;
+    padding-left: 17%;
+  }
+
+  @include mobile {
+    padding-left: 28%;
+    padding-top: 127px;
+    padding-bottom: 23px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    padding-left: 28%;
+    padding-top: 127px;
+    padding-bottom: 23px;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    width: 100%;
+    margin-right: 0;
+    padding-top: 59px;
+    padding-bottom: 42px;
+    padding-left: 17%;
+  }
 }
 
 .zoo-video__title {
@@ -15,7 +50,35 @@
 
   &--wide {
     position: relative;
-    width: 120%;
+    width: 115%;
+  }
+
+  @include desktop {
+    margin-bottom: 39px;
+  }
+
+  @include tablet {
+    margin-bottom: 35px;
+    padding-left: 2%;
+  }
+
+  @include mobile {
+    padding-left: 4%;
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    padding-left: 4%;
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    margin-bottom: 35px;
+    padding-left: 2%;
   }
 }
 
@@ -25,6 +88,28 @@
   flex-wrap: wrap;
   width: 100%;
   margin-bottom: 30px;
+
+  @include desktop {
+    margin-bottom: 31px;
+  }
+
+  @include tablet {
+    margin-bottom: 28px;
+  }
+
+  @include mobile {
+    width: 96%;
+    margin-bottom: 17px;
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    width: 96%;
+    margin-bottom: 17px;
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    margin-bottom: 28px;
+  }
 }
 
 .zoo-video__item {
@@ -38,7 +123,6 @@
   &:not(:last-child) {
     margin-right: 3.5%;
   }
-
 
   &::after {
     position: absolute;
@@ -60,6 +144,79 @@
       display: none;
     }
   }
+
+  @include desktop {
+    height: 97px;
+
+    &:first-child {
+      height: 300px;
+      margin-bottom: 24px;
+    }
+  }
+
+  @include tablet {
+    height: 92px;
+
+    &:first-child {
+      height: 283px;
+      margin-bottom: 12px;
+    }
+  }
+
+  @include mobile {
+    width: 48.5%;
+    height: 59px;
+    margin-right: 2.5%;
+
+    &:not(:last-child) {
+      margin-right: 2.5%;
+    }
+
+    &:first-child {
+      height: 118px;
+      margin-bottom: 8px;
+    }
+
+    &:nth-child(3) {
+      margin-right: 0;
+    }
+
+    &:last-child {
+      display: none;
+    }
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    width: 48.5%;
+    height: 59px;
+    margin-right: 2.5%;
+
+    &:not(:last-child) {
+      margin-right: 2.5%;
+    }
+
+    &:first-child {
+      height: 118px;
+      margin-bottom: 8px;
+    }
+
+    &:nth-child(3) {
+      margin-right: 0;
+    }
+
+    &:last-child {
+      display: none;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    height: 92px;
+
+    &:first-child {
+      height: 283px;
+      margin-bottom: 12px;
+    }
+  }
 }
 
 .zoo-video__iframe {
@@ -71,4 +228,29 @@
 .zoo-video__pagination {
   width: 4.6%;
   align-self: center;
+
+  @include desktop {
+    width: 6.6%;
+    transform: translateX(-12px);
+  }
+
+  @include tablet {
+    width: 7.5%;
+    transform: translateX(0);
+  }
+
+  @include mobile {
+    width: 17%;
+    transform: translateX(-6px);
+  }
+
+  @media (min-width: 321px) and (max-width: 580px) {
+    width: 17%;
+    transform: translateX(-6px);
+  }
+
+  @media (min-width: 641px) and (max-width: 974px) {
+    width: 7.5%;
+    transform: translateX(0);
+  }
 }
