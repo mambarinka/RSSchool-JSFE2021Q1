@@ -1,33 +1,72 @@
 .choose {
   padding-top: 59px;
   background-color: $bg-white2-color;
+
+  @include tablet {
+    padding-top: 153px;
+  }
+
+  @include mobile {
+    padding-top: 127px;
+  }
 }
 
 .choose__wrapper {
-  @include wrapper-wide;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 1620px;
+  margin: 0 auto;
+  padding-left: 11.3%;
+  padding-right: 11.3%;
   overflow: hidden;
 
   @include desktop {
+    max-width: 1200px;
+    padding-left: 17%;
+    padding-right: 17%;
+  }
+
+  @include tablet {
     @include wrapper-widest;
+  }
+
+  @include mobile {
+    padding-left: 6.1%;
+    padding-right: 6.1%;
   }
 }
 
 .choose__title {
   @include h2-model;
   margin-bottom: 21px;
+
+  @include mobile {
+    margin-bottom: 10px;
+    font-size: 24px;
+    line-height: 28px;
+  }
 }
 
 .choose__description {
   @include p-model;
-  width: 65.9%;
+  width: 66%;
   margin-bottom: 50px;
 
   @include desktop {
-    width: 88%;
+    width: 100%;
+    margin-bottom: 29px;
+  }
+
+  @include tablet {
+    margin-bottom: 31px;
+  }
+
+  @include mobile {
+    margin-bottom: 40px;
+    font-size: 12px;
+    line-height: 14px;
   }
 }
 
@@ -38,9 +77,25 @@
   align-items: center;
   width: 100%;
   margin-bottom: 24px;
+
+  @include desktop {
+    margin-bottom: 19px;
+  }
+
+  @include tablet {
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+
+  @include mobile {
+    margin-bottom: 15px;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
 }
 
 .choose__slider-button {
+  padding: 0;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -58,6 +113,20 @@
   &--right {
     margin-left: 1.8%;
   }
+
+  @include desktop {
+    &--left {
+      margin-right: 3.8%;
+    }
+
+    &--right {
+      margin-left: 3.8%;
+    }
+  }
+
+  @include tablet {
+    margin: 0;
+  }
 }
 
 .choose__button-icon {
@@ -68,14 +137,18 @@
   width: 100%;
   min-height: 168px;
   overflow: hidden;
+
+  @include mobile {
+    min-height: 90px;
+  }
 }
 
 .choose__slider-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 11.8%;
-  height: 130px;
+  width: calc(100% / 8);
+  height: auto;
   transition: 0.5s;
 
   &:hover .choose__item-img {
@@ -83,7 +156,7 @@
   }
 
   &--active {
-    transform: scale(1.24);
+    transform: scale(1.15);
     border-radius: 50%;
     border-width: 3px;
     border-style: solid;
@@ -96,6 +169,46 @@
       background-image: linear-gradient(white, white), linear-gradient(to right, #df496d 0%, #07eee0 100%);
     }
   }
+
+  @include desktop {
+    width: calc(100% / 5);
+
+    &--active {
+      transform: scale(1.16);
+    }
+  }
+
+  @include tablet {
+    width: calc(100% / 4);
+
+    &--active {
+      transform: scale(1.16);
+    }
+
+    &:nth-child(3n) {
+      padding-left: 3%;
+    }
+
+    &:nth-child(4n) {
+      padding-right: 2%;
+    }
+  }
+
+  @include mobile {
+    width: calc(100% / 3);
+
+    &:nth-child(4n) {
+      padding-right: 0;
+    }
+
+    &:first-child {
+      padding-right: 6%;
+    }
+
+    &:nth-child(3n) {
+      padding-left: 6%;
+    }
+  }
 }
 
 .choose__item-link {
@@ -105,6 +218,10 @@
   border-radius: 50%;
   border: none;
   background: transparent;
+
+  &--active {
+    transform: scale(0.9);
+  }
 }
 
 .choose__item-img {
@@ -112,10 +229,6 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-
-  &--active {
-    width: 91%;
-  }
 }
 
 .choose__range {
@@ -126,14 +239,39 @@
   align-items: center;
   width: 20.5%;
   right: 1.5%;
+
+  @include desktop {
+    width: 31%;
+    margin-bottom: 0;
+    right: 0;
+  }
+
+  @include tablet {
+    width: 41%;
+    margin-bottom: 37px;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin-bottom: 27px;
+  }
 }
 
 .choose__range-values {
   justify-content: center;
   width: 21%;
+
+  @include desktop {
+    width: 24%;
+  }
+
+  @include mobile {
+    width: 18%;
+    transform: translateX(27%);
+  }
 }
 
-.choose__range__value {
+.choose__range-value {
   width: auto;
   margin-left: 21%;
 
@@ -142,6 +280,13 @@
   }
 }
 
+.choose__range-input {
+  @include mobile {
+    width: 87%;
+    transform: translateX(5%);
+  }
+}
+
 .choose__range-input::-webkit-slider-thumb {
-  width: 34px;
+  width: calc(100% / 8);
 }
