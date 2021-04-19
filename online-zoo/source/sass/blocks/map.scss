@@ -506,6 +506,12 @@
       left: -186px;
     }
   }
+
+  @media (min-width: 1276px) and (max-width: 1777px) {
+    &--eagles {
+      left: 5%;
+    }
+  }
 }
 
 .map__link {

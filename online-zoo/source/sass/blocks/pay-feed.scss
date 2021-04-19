@@ -257,7 +257,8 @@
     }
 
     &:not(:last-child)::after {
-      right: -45%;
+      width: 110px;
+      right: -43%;
     }
   }
 
@@ -303,10 +304,8 @@
   }
 
   @media (min-width: 1201px) and (max-width: 1486px) {
-    width: 45%;
+    width: 84%;
   }
-
-
 }
 
 .pey-feed__link {
