@@ -209,7 +209,7 @@
 </symbol></svg>
   </div>
   <header class="page-header">
-    <div class="page-header__wrapper">
+    <div class="page-header__wrapper page-header__wrapper--map-page">
       <a class="logo" href="../index/index.html">
         <img class="logo__image" src="../../assets/images/logo-online-zoo.svg" width="59" height="42" alt="Logo of Online-zoo">
       </a>
@@ -236,6 +236,7 @@
         <input type="checkbox">
         <span class="switch__slider"></span>
       </label>
+      <button class="main-nav__toggle" type="button">Открыть меню</button>
       <h1 class="visually-hidden">Online zoo map: choose an animal, look at it and feed it</h1>
     </div>
   </header>
@@ -264,7 +265,7 @@
               </a>
             </li>
             <li class="slider__item choose__slider-item choose__slider-item--active">
-              <a href="#" class="choose__item-link">
+              <a href="#" class="choose__item-link choose__item-link--active">
                 <img class="choose__item-img choose__item-img--active" src="../../assets/images/slider-choose-panda.png" alt="photo of panda">
               </a>
             </li>
@@ -307,18 +308,18 @@
         </div>
         <div class="range choose__range">
           <div class="range__values choose__range-values">
-            <label class="range__value range__value--active" for="choose-range">02</label>
-            <label class="range__value" for="choose-range">08</label>
+            <label class="range__value range__value--active choose__range-value choose__range-value--active" for="choose-range">02</label>
+            <label class="range__value choose__range-value" for="choose-range">08</label>
           </div>
-          <input class="range__input choose__range-input" id="choose-range" type="range" min="01" max="08" step="1" value="02">
+          <input class="range__input choose__range-input" id="choose-range" type="range" min="01" max="08" step="01" value="02">
         </div>
       </div>
     </section>
     <section class="map map--map-page">
-      <div class="map__wrapper">
+      <div class="map__wrapper map__wrapper--map-page">
         <h2 class="visually-hidden">Map</h2>
         <div class="map__img map__img--map-page">
-          <svg class="map__img-svg" width="1200" height="497">
+          <svg class="map__img-svg map__img-svg--map-page" width="1200" height="497">
             <use xlink:href="#icon-map"></use>
           </svg>
           <div class="map__pin-wrapper map__pin-wrapper--eagles">
@@ -342,7 +343,8 @@
             </div>
           </div>
         </div>
-        <a class="button button--watch map__link" href="../zoos-panda/zoos-panda.html">watch online</a>
+        <a class="button button--watch map__link map__link--map-page" href="../zoos-panda/zoos-panda.html">watch
+          online</a>
       </div>
     </section>
   </main>
@@ -353,16 +355,16 @@
       </a>
       <ul class="main-nav__list page-footer__nav-list">
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../index/index.html">About</a>
+          <a class="main-nav__link page-footer__nav-link" href="../index/index.html">About</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../zoos-panda/zoos-panda.html">Zoos</a>
+          <a class="main-nav__link page-footer__nav-link" href="../zoos-panda/zoos-panda.html">Zoos</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="../map/map.html">Map</a>
+          <a class="main-nav__link page-footer__nav-link" href="../map/map.html">Map</a>
         </li>
         <li class="main-nav__item page-footer__nav-item">
-          <a class="main-nav__link page-footer__nav-item" href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
+          <a class="main-nav__link page-footer__nav-link" href="https://www.figma.com/file/HKt5Nlx0jghQtJp6jW9q8F/zooApp">Design</a>
         </li>
       </ul>
       <a class="button page-footer__button" href="#">donate for volunteers</a>
@@ -372,7 +374,7 @@
           <label class="visually-hidden" for="name">Name</label>
           <input class="form__input" id="name" type="text" name="name" placeholder="Name" required="">
           <label class="visually-hidden" for="email">Email</label>
-          <input class="form__input" type="email" name="email" id="email" placeholder="Email" required="">
+          <input class="form__input form__input--email" type="email" name="email" id="email" placeholder="Email" required="">
           <fieldset class="form__fieldset">
             <legend class="form__fieldset-title">Please enter your message</legend>
             <textarea class="form__textarea" name="message" id="comment" maxlength="280" rows="5" required=""></textarea>
@@ -436,6 +438,7 @@
       </section>
     </div>
   </footer>
+  <script src="map-script.js"></script>
 </body>
 
 </html>
