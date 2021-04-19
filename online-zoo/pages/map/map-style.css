@@ -1684,6 +1684,9 @@ input:checked + .switch__slider::before {
     .map__pin-tooltip--panda {
       top: 32px;
       left: -186px; } }
+  @media (min-width: 1276px) and (max-width: 1777px) {
+    .map__pin-tooltip--eagles {
+      left: 5%; } }
 
 .map__link {
   padding-top: 19px;
@@ -2139,7 +2142,7 @@ input:checked + .switch__slider::before {
   line-height: 16px;
   font-weight: 400;
   color: #e0e0e0;
-  margin-bottom: 21px;
+  margin-bottom: 22px;
   padding-top: 4px;
   padding-bottom: 4px;
   border: none;
