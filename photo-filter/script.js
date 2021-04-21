@@ -40,5 +40,58 @@ function resetFilters() {
     document.documentElement.style.removeProperty(`--${input.name}`);
   });
 }
-
 buttonReset.addEventListener('click', resetFilters);
+
+// ЗАГРУЗКА КАРТИНКИ ПРИ КЛИКЕ НА NEXT
+const baseURL = 'https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images';
+const numbersOfPictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+  '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'
+];
+const hoursToTimeOfDay = {
+  morning: {
+    start: 6,
+    end: 11
+  },
+  day: {
+    start: 12,
+    end: 17
+  },
+  evening: {
+    start: 18,
+    end: 23
+  },
+  night: {
+    start: 0,
+    end: 5
+  },
+};
+let i = 0;
+
+const picture = document.querySelector('img');
+const buttonNext = document.querySelector('.btn-next');
+let date = new Date();
+let currentHour = date.getHours();
+
+let timeOfDay = Object.keys(hoursToTimeOfDay).find((key) => {
+  return currentHour >= hoursToTimeOfDay[key].start && currentHour <= hoursToTimeOfDay[key].end;
+});
+
+function viewImage(src) {
+  const img = new Image();
+  img.src = src;
+  img.onload = () => {
+    picture.src = `${src}`;
+  };
+}
+
+function getImage() {
+  const index = i % numbersOfPictures.length;
+  const imageSrc = `${baseURL}/${timeOfDay}/${numbersOfPictures[index]}.jpg`;
+  viewImage(imageSrc);
+  i++;
+  buttonNext.disabled = true;
+  setTimeout(function () {
+    buttonNext.disabled = false;
+  }, 1000);
+}
+buttonNext.addEventListener('click', getImage);
