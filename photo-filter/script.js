@@ -79,9 +79,9 @@ let timeOfDay = Object.keys(hoursToTimeOfDay).find((key) => {
 function viewImage(src) {
   const img = new Image();
   img.src = src;
-  img.onload = () => {
+  img.addEventListener(`load`, () => {
     picture.src = `${src}`;
-  };
+  });
 }
 
 function getImage() {
@@ -95,3 +95,19 @@ function getImage() {
   }, 1000);
 }
 buttonNext.addEventListener('click', getImage);
+
+// ЗАГРУЗКА КАРТИНКИ С КОМПЬЮТЕРА
+const buttonLoad = document.querySelector('.btn-load');
+const fileInput = document.querySelector('input[type="file"]');
+
+function loadPicture() {
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+
+  reader.addEventListener(`load`, () => {
+    picture.src = reader.result;
+    fileInput.value = "";
+  });
+}
+buttonLoad.addEventListener(`change`, loadPicture);
