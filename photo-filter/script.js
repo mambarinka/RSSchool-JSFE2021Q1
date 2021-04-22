@@ -17,10 +17,10 @@ function handleUpdate(event) {
       const suffix = target.dataset.sizing || '';
       document.documentElement.style.setProperty(`--${target.name}`, target.value + suffix);
       output.value = input.value;
+      drawImage();
     });
   }
 }
-
 filters.addEventListener('input', handleUpdate);
 
 
@@ -38,7 +38,9 @@ function resetFilters() {
     }
 
     document.documentElement.style.removeProperty(`--${input.name}`);
+    drawImage();
   });
+  // drawImage();
 }
 buttonReset.addEventListener('click', resetFilters);
 
@@ -81,6 +83,7 @@ function viewImage(src) {
   img.src = src;
   img.addEventListener(`load`, () => {
     picture.src = `${src}`;
+    drawImage();
   });
 }
 
@@ -93,6 +96,7 @@ function getImage() {
   setTimeout(function () {
     buttonNext.disabled = false;
   }, 1000);
+  // drawImage();
 }
 buttonNext.addEventListener('click', getImage);
 
@@ -107,7 +111,70 @@ function loadPicture() {
 
   reader.addEventListener(`load`, () => {
     picture.src = reader.result;
+    // reader.readAsDataURL(file);
     fileInput.value = "";
+    drawImage();
   });
 }
 buttonLoad.addEventListener(`change`, loadPicture);
+
+// СОХРАНЕНИЕ КАРТИНКИ НА PC 
+const canvas = document.createElement('canvas');
+const buttonSave = document.querySelector('.btn-save');
+
+function drawImage() {
+  const img = new Image();
+  img.setAttribute('crossOrigin', 'anonymous');
+  img.src = picture.src;
+  img.addEventListener(`load`, () => {
+    canvas.width = picture.naturalWidth;
+    canvas.height = picture.naturalHeight;
+    const ctx = canvas.getContext("2d");
+
+    // коэффициент для правильного расчет blur (канвас применяет blur к ориг.размеру картинки, а фильтры приложения наоборот)
+    let ratio;
+    if (img.width > img.height) {
+      ratio = img.width / picture.width;
+    } else {
+      ratio = img.height / picture.height;
+    }
+    const blur = filters.querySelector('input[name=blur]');
+    ctx.filter = window.getComputedStyle(picture).getPropertyValue('filter') + `blur(${blur.value*ratio}px)`;
+    ctx.drawImage(img, 0, 0);
+    console.log(img);
+  });
+}
+drawImage();
+
+function savePicture() {
+  const dataURL = canvas.toDataURL("image/png");
+  let link = document.createElement('a');
+  link.download = 'image.png';
+  link.href = dataURL;
+  link.click();
+  link.delete;
+}
+buttonSave.addEventListener('click', savePicture);
+
+
+// ПОЛНОЭКРАННЫЙ РЕЖИМ
+const fullscreenButton = document.querySelector('.fullscreen');
+
+function check() {
+  console.log(document.fullscreenEnabled); // доступен ли полноэкранный режим 
+  console.dir(document.fullscreenElement);
+  // возвращает эл-т, который в данный мом-т предст. в этом док. в полн. режиме
+}
+fullscreenButton.addEventListener('click', check);
+
+function toggleScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen(); // возвращает корневой элемент страницы (html) 
+    // и запросить полноэкранный режим
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+fullscreenButton.addEventListener('click', toggleScreen);
