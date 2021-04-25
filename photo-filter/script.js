@@ -131,7 +131,7 @@ function drawImage() {
     canvas.height = picture.naturalHeight;
     const ctx = canvas.getContext("2d");
 
-    // коэффициент для правильного расчет blur (канвас применяет blur к ориг.размеру картинки, а фильтры приложения наоборот)
+    // коэффициент для правильного расчет blur (канвас применяет blur к ориг.размеру картинки, а фильтры приложения наоборот)   
     let ratio;
     if (img.width > img.height) {
       ratio = img.width / picture.width;
@@ -139,7 +139,16 @@ function drawImage() {
       ratio = img.height / picture.height;
     }
     const blur = filters.querySelector('input[name=blur]');
-    ctx.filter = window.getComputedStyle(picture).getPropertyValue('filter') + `blur(${blur.value*ratio}px)`;
+    const invert = filters.querySelector('input[name=invert]');
+    const sepia = filters.querySelector('input[name=sepia]');
+    const saturate = filters.querySelector('input[name=saturate]');
+    const hue = filters.querySelector('input[name=hue]');
+    ctx.filter = `blur(${ratio * blur.value}px) 
+    invert(${invert.value}%) 
+    sepia(${sepia.value}%) 
+    saturate(${saturate.value}%) 
+    hue-rotate(${hue.value}deg)`;
+
     ctx.drawImage(img, 0, 0);
     console.log(img);
   });
