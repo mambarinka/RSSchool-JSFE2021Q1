@@ -60,7 +60,7 @@
 }
 
 .zoo-description__item-title {
-  @include text-options(20px, 23px, 900, $title-grey-dark-color);
+  @include text-options(20px, 23px, 900, var(--text-title-color));
   margin: 0;
   margin-bottom: 9px;
 
@@ -80,7 +80,7 @@
 }
 
 .zoo-descripion__item-text {
-  @include text-options(14px, 16px, 400, $text-grey-color);
+  @include text-options(14px, 16px, 400, var(--text-paragraph-color));
   margin: 0;
   margin-bottom: 10px;
 

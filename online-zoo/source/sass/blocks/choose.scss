@@ -1,6 +1,6 @@
 .choose {
   padding-top: 59px;
-  background-color: $bg-white2-color;
+  background-color: var(--bg-secondary-color);
 
   @include tablet {
     padding-top: 153px;
@@ -152,7 +152,7 @@
   transition: 0.5s;
 
   &:hover .choose__item-img {
-    filter: drop-shadow(0 5px 7px $text-grey-color);
+    filter: drop-shadow(0 5px 7px var(--text-paragraph-color));
   }
 
   &--active {

@@ -28,7 +28,7 @@
   left: 1px;
   right: 2px;
   bottom: 0;
-  background-color: $switch-grey-color;
+  background-color: var(--switch-bg-color);
   transition: 0.4s;
   border-radius: 190px;
 }
@@ -40,20 +40,21 @@
   width: 20px;
   left: 5px;
   bottom: 5px;
-  background-color: $bg-white1-color;
+  background-color: var(--switch-point-bg-color);
   border-radius: 50%;
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
   transition: 0.4s;
 }
 
 input:checked + .switch__slider {
-  background-color: $switch-grey-dark-color;
+  background-color: var(--switch-bg-color);
 }
 
 .swicth__slider:focus {
-  outline: 2px solid $switch-grey-dark-color;
+  outline: 2px solid var(--switch-bg-color);
 }
 
 input:checked + .switch__slider::before {
+  // background-color: var(--switch-point-bg-color);
   transform: translateX(26px);
 }

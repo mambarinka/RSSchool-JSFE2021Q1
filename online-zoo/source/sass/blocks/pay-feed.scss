@@ -1,7 +1,7 @@
 .pay-feed {
   padding-top: 100px;
   padding-bottom: 100px;
-  background-color: $switch-grey-color;
+  background-color: var(--switch-bg-color);
 
   @include mobile {
     padding-top: 49px;
@@ -145,9 +145,6 @@
 
     &:not(:last-child) {
       margin-right: 0;
-    }
-
-    &:not(:last-child) {
       margin-bottom: 96px;
     }
 
@@ -193,9 +190,6 @@
 
     &:not(:last-child) {
       margin: 0;
-    }
-
-    &:not(:last-child) {
       margin-bottom: 96px;
     }
   }
@@ -217,9 +211,6 @@
 
     &:not(:last-child) {
       margin-right: 0;
-    }
-
-    &:not(:last-child) {
       margin-bottom: 96px;
     }
 
@@ -274,7 +265,7 @@
 }
 
 .pay-feed__item-text {
-  @include text-options(20px, 23px, 900, $text-grey-color);
+  @include text-options(20px, 23px, 900, var(--text-paragraph-color));
   margin: 0;
   text-align: center;
 

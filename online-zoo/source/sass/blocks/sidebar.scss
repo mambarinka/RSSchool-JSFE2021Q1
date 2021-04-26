@@ -76,7 +76,7 @@
   transition: 0.5s;
 
   &:hover .sidebar__item-img {
-    filter: drop-shadow(0 -3px 7px $text-grey-color);
+    filter: drop-shadow(0 -3px 7px var(--text-paragraph-color));
   }
 
   &--active {
@@ -227,7 +227,7 @@
 .sidebar__button-icon {
   width: 23px;
   height: 23px;
-  fill: $title-grey-dark-color;
+  fill: var(--text-title-color);
   transform: rotate(90deg);
 
   &--top {

@@ -2,7 +2,7 @@
   display: inline-block;
   width: 245px;
 
-  @include text-options(18px, 21px, 900, $bg-white1-color);
+  @include text-options(18px, 21px, 900, var(--btn-text-color));
 
   text-align: center;
   vertical-align: middle;
@@ -36,7 +36,7 @@
       top: 12px;
       left: 39px;
       background: url("../../assets/images/arrow-watch.svg") no-repeat center;
-      border: 1px solid $bg-white1-color;
+      border: 1px solid var(--btn-text-color);
       border-radius: 50%;
     }
   }

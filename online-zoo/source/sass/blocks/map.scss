@@ -1,13 +1,17 @@
 .map {
   padding-top: 98px;
   padding-bottom: 100px;
-  background-color: $switch-grey-color;
+  background-color: var(--switch-bg-color);
+  --pin-width: 66px;
+  --pin-height: 93px;
 
   @include tablet {
     padding-bottom: 79px;
   }
 
   @include mobile {
+    --pin-width: 34px;
+    --pin-height: 47px;
     padding-top: 50px;
     padding-bottom: 60px;
   }
@@ -19,15 +23,21 @@
 
   &--map-page {
     padding-top: 50px;
-    background-color: $bg-white2-color;
+    background-color: var(--bg-secondary-color);
 
     @include desktop {
-      padding-top: 0;
+      padding-top: 51px;
       padding-bottom: 73px;
     }
 
     @include tablet {
+      padding-top: 0;
       padding-bottom: 0;
+    }
+
+    @include mobile {
+      padding-top: 9px;
+      padding-bottom: 60px;
     }
   }
 }
@@ -55,7 +65,7 @@
     }
 
     @include mobile {
-      height: 305px;
+      height: auto;
     }
   }
 }
@@ -65,15 +75,15 @@
   margin-bottom: 61px;
 
   @include desktop {
-    margin-bottom: 95px;
+    margin-bottom: 65px;
   }
 
   @include tablet {
-    margin-bottom: 73px;
+    margin-bottom: 54px;
   }
 
   @include mobile {
-    margin-bottom: 41px;
+    margin-bottom: 31px;
     font-size: 36px;
     line-height: 42px;
   }
@@ -87,55 +97,65 @@
 
 .map__img {
   position: relative;
-  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 37px;
+  outline: 2px solid red;
 
 
   @include desktop {
-    margin-bottom: 62px;
+    margin-bottom: 36px;
+    height: 434px;
+  }
+
+  @media (max-width: 1100px) {
+    height: auto;
   }
 
   @include tablet {
-    margin-bottom: 53px;
+    height: 289px;
+    margin-bottom: 36px;
   }
 
   @include mobile {
-    margin-bottom: 36px;
-  }
-
-  @media (min-width: 321px) and (max-width: 548px) {
-    margin-bottom: 36px;
+    height: 144px;
+    margin-bottom: 32px;
   }
 
   &--map-page {
-    margin-bottom: 43px;
+    margin-bottom: 48px;
 
     @include desktop {
-      margin-bottom: 0;
+      height: 389px;
+      margin-bottom: 61px;
+    }
+
+    @include tablet {
+      height: 289px;
+      margin-bottom: 36px;
+    }
+
+    @include mobile {
+      height: 144px;
+      margin-bottom: 37px;
     }
   }
 }
 
 .map__img-svg {
   width: 100%;
-  stroke: $title-grey-dark-color;
+  height: 100%;
+  fill: var(--stroke-map-svg);
+  stroke: var(--stroke-map-svg);
+  object-fit: cover;
+  outline: 2px solid green;
+}
 
-  @include desktop {
-    width: 100%;
-    transform: scaleY(1.16);
-  }
-
-  &--map-page {
-    @include desktop {
-      transform: scaleY(1.16) translateY(-3px);
-    }
-
-    @include tablet {
-      transform: scaleY(1.16) translateY(-91px);
-    }
-
-    @include mobile {
-      transform: scaleY(1.16) translateY(-144px);
-    }
+.map__img-svg-path {
+  &--active {
+    fill: var(--stroke-map-svg-active);
+    stroke: var(--stroke-map-svg);
   }
 }
 
@@ -143,239 +163,55 @@
   position: absolute;
 
   &--eagles {
-    top: calc(33% - 93px);
-    left: calc(13.2% - 66px / 2);
+    top: calc(33% - var(--pin-height));
+    left: calc(13.2% - var(--pin-width) / 2);
   }
 
   &--crocodile {
-    top: calc(39% - 93px);
-    left: calc(23.3% - 66px / 2);
+    top: calc(39% - var(--pin-height));
+    left: calc(23.3% - var(--pin-width) / 2);
   }
 
   &--gorilla {
-    top: calc(56.2% - 93px);
-    left: calc(50.5% - 66px / 2);
+    top: calc(56.2% - var(--pin-height));
+    left: calc(50.5% - var(--pin-width) / 2);
   }
 
   &--panda {
-    top: calc(36% - 93px);
-    right: calc(22.5% - 66px / 2);
+    top: calc(36% - var(--pin-height));
+    right: calc(22.5% - var(--pin-width) / 2);
   }
 
   &:hover .map__pin-tooltip {
     opacity: 1;
     z-index: 100;
   }
+}
 
-  @include desktop {
-    &--eagles {
-      top: calc(31% - 93px);
-    }
+.map__pin-wrapper-img {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: var(--pin-width);
+  height: var(--pin-height);
+  background: url("../../assets/images/pin-green.svg") no-repeat center;
+  cursor: pointer;
 
-    &--crocodile {
-      top: calc(34% - 93px);
-    }
-
-    &--panda {
-      top: calc(34% - 93px);
-      right: calc(23.5% - 66px / 2);
-    }
+  &:hover {
+    background-image: url("../../assets/images/pin-red.svg");
   }
 
-  @include tablet {
-    &--eagles {
-      left: calc(14.5% - 66px / 2);
-    }
+  &--active {
+    background-image: url("../../assets/images/pin-red.svg");
   }
 
   @include mobile {
-    &--eagles {
-      top: calc(29% - 47px);
-      left: calc(14.5% - 34px / 2);
-    }
-
-    &--crocodile {
-      top: calc(36% - 47px);
-      left: calc(23.5% - 34px / 2);
-    }
-
-    &--gorilla {
-      top: calc(56.2% - 47px);
-      left: calc(50% - 34px / 2);
-    }
-
-    &--panda {
-      top: calc(34% - 47px);
-      right: calc(22.5% - 34px / 2);
-    }
-  }
-
-  @media (min-width: 321px) and (max-width: 548px) {
-    &--eagles {
-      top: calc(62% - 93px);
-      left: calc(19.5% - 66px / 2);
-    }
-
-    &--crocodile {
-      top: calc(68% - 93px);
-      left: calc(28.5% - 66px / 2);
-    }
-
-    &--gorilla {
-      top: calc(85.2% - 93px);
-      left: calc(55.5% - 66px / 2);
-    }
-
-    &--panda {
-      top: calc(66% - 93px);
-      right: calc(27.5% - 66px / 2);
-    }
-  }
-
-
-  .map__img--map-page & {
-    &--eagles {
-      top: calc(35% - 93px);
-      left: calc(13.7% - 66px / 2);
-    }
-
-    &--panda {
-      top: calc(38.6% - 93px);
-      right: calc(21.8% - 66px / 2);
-    }
-
-    @include desktop {
-      &--eagles {
-        top: calc(36.2% - 83px);
-        left: calc(13.4% - 59px / 2);
-      }
-
-      &--crocodile {
-        top: calc(38.5% - 83px);
-        left: calc(23.3% - 59px / 2);
-      }
-
-      &--gorilla {
-        top: calc(54.1% - 83px);
-        left: calc(50.4% - 59px / 2);
-      }
-
-      &--panda {
-        top: calc(38.8% - 83px);
-        right: calc(23.5% - 59px / 2);
-      }
-    }
-
-    @include tablet {
-      &--eagles {
-        top: calc(19.3% - 93px);
-        left: calc(14.5% - 66px / 2);
-      }
-
-      &--crocodile {
-        top: calc(21.2% - 93px);
-        left: calc(22.8% - 66px / 2);
-      }
-
-      &--gorilla {
-        top: calc(31.7% - 93px);
-        left: calc(50.4% - 66px / 2);
-      }
-
-      &--panda {
-        top: calc(20.5% - 93px);
-        right: calc(23.4% - 66px / 2);
-      }
-    }
-
-    @include mobile {
-      &--eagles {
-        top: calc(11.6% - 47px);
-        left: calc(14% - 34px / 2);
-      }
-
-      &--crocodile {
-        top: calc(13.3% - 47px);
-        left: calc(23.5% - 34px / 2);
-      }
-
-      &--gorilla {
-        top: calc(18.2% - 47px);
-        left: calc(50.2% - 34px / 2);
-      }
-
-      &--panda {
-        top: calc(13% - 47px);
-        right: calc(22.5% - 34px / 2);
-      }
-    }
-  }
-
-  .map__pin-wrapper-img {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 66px;
-    height: 93px;
-    background: url("../../assets/images/pin-green.svg") no-repeat center;
-    cursor: pointer;
-
-    &:hover {
-      background-image: url("../../assets/images/pin-red.svg");
-    }
-
-    &--active {
-      background-image: url("../../assets/images/pin-red.svg");
-    }
-
-    @include mobile {
-      width: 34px;
-      height: 47px;
-      background-size: 34px 47px;
-    }
-
-    @media (min-width: 321px) and (max-width: 548px) {
-      width: 34px;
-      height: 47px;
-      background-size: 34px 47px;
-    }
-
-    .map__img--map-page & {
-      @include desktop {
-        width: 59px;
-        height: 83px;
-        background-size: 59px 83px;
-      }
-
-      @include tablet {
-        width: 66px;
-        height: 93px;
-        background-size: 66px 93px;
-      }
-
-      @include mobile {
-        width: 34px;
-        height: 47px;
-        background-size: 34px 47px;
-      }
-    }
+    background-size: 34px 47px;
   }
 }
 
 .map__pin-img {
   margin-top: 16px;
-
-  @include mobile {
-    width: 22px;
-    height: 22px;
-    margin-top: 7px;
-  }
-
-  @media (min-width: 321px) and (max-width: 548px) {
-    width: 22px;
-    height: 22px;
-    margin-top: 7px;
-  }
 
   .map__img--map-page & {
     @include desktop {
@@ -401,6 +237,7 @@
   z-index: 1;
 
   &--eagles {
+    opacity: 0;
     top: 78px;
     left: -403px;
   }
@@ -427,10 +264,6 @@
     &--eagles {
       left: 14px;
     }
-
-    // &--panda {
-    //   left: -84px;
-    // }
   }
 
   @include tablet {
@@ -517,18 +350,4 @@
 .map__link {
   padding-top: 19px;
   padding-bottom: 15px;
-
-  &--map-page {
-    @include desktop {
-      transform: translateY(-27px);
-    }
-
-    @include tablet {
-      transform: translateY(-178px);
-    }
-
-    @include mobile {
-      transform: translateY(-311px);
-    }
-  }
 }

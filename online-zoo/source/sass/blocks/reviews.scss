@@ -1,7 +1,7 @@
 .reviews {
   padding-top: 100px;
   padding-bottom: 100px;
-  background-color: $bg-white2-color;
+  background-color: var(--bg-secondary-color);
 
   @include mobile {
     padding-top: 50px;
@@ -90,7 +90,7 @@
 }
 
 .reviews__button-icon {
-  fill: $title-grey-dark-color;
+  fill: var(--text-title-color);
 }
 
 .reviews__slider-list {
@@ -120,7 +120,7 @@
   padding-bottom: 103px;
   padding-left: 72px;
   padding-right: 67px;
-  background: $text-white-color;
+  background: var(--bg-third-color);
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.1);
   border-radius: 5px;
 
@@ -190,7 +190,7 @@
 }
 
 .reviews__item-name {
-  @include text-options(20px, 23px, 900, $title-grey-dark-color);
+  @include text-options(20px, 23px, 900, var(--text-title-color));
   margin-bottom: 17px;
   transform: translateX(-2px);
 
@@ -213,7 +213,7 @@
 }
 
 .reviews__slider-item-text {
-  @include text-options(14px, 16px, 400, $text-grey-color);
+  @include text-options(14px, 16px, 400, var(--text-paragraph-color));
   margin: 0;
 }
 

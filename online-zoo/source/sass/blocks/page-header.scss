@@ -1,6 +1,6 @@
 .page-header {
   padding: 27px 0 21px;
-  background-color: $bg-white1-color;
+  background-color: var(--bg-color);
   box-shadow: 0 4px 8px rgba(44, 101, 77, 0.08);
 
   @include desktop {

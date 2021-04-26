@@ -16,7 +16,7 @@ body {
 
   font-family: $font-main;
 
-  background-color: $bg-white2-color;
+  background-color: var(--bg-secondary-color);
 }
 
 *:focus {

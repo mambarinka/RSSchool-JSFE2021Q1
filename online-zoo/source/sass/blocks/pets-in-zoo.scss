@@ -1,7 +1,7 @@
 .pets-in-zoo {
   padding-top: 100px;
   padding-bottom: 100px;
-  background-color: $bg-white2-color;
+  background-color: var(--bg-secondary-color);
 
   @include mobile {
     padding-bottom: 50px;
@@ -116,7 +116,7 @@
 }
 
 .pets-in-zoo__button-icon {
-  fill: $title-grey-dark-color;
+  fill: var(--text-title-color);
 
   &--left {
     fill: #828282;
@@ -254,7 +254,7 @@
 }
 
 .pets-in-zoo__slider-item-description {
-  @include text-options(14px, 16px, 400, $bg-white1-color);
+  @include text-options(14px, 16px, 400, var(--btn-text-color));
   width: 77%;
   margin: 0;
 
@@ -278,14 +278,14 @@
     background-position: 0 0;
 
     &:hover {
-      color: $bg-white1-color;
+      color: --bg-color;
       background-image: url("../../assets/images/arrow-circle-watch-white.svg");
     }
   }
 
   &--donate {
     padding-left: 26px;
-    color: $bg-white1-color;
+    color: --bg-color;
     background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;
     background-position: 0 0;
 

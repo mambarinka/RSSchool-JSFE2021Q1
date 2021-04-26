@@ -1,28 +1,51 @@
 $font-main: "Roboto", "Arial", sans-serif;
 $font-popup: "Poppins", "Helvetica", sans-serif;
 
-$bg-white1-color: #ffffff;
-$bg-white2-color: #fbfbfb;
-// $bg-grey-color: #f2f2f2;
-$title-grey-dark-color: #333333;
-$text-grey-dark-color: #444444;
-$text-grey-color: #4f4f4f;
+
+// цвета, которые не поменяются при переключении тем
 $text-white-color: #fefefe;
+$bg-footer-color: #333333;
 $input-white-color: #e0e0e0;
-$switch-grey-color: #f2f2f2;
-// $title-color: #111111;
-// $subtitle-color: #222222;
+$range-gray-color: #bdbdbd;
 $main-green-color: #4ad7cb;
 $gradien-first-color: #4bd8b5;
 $gradien-second-color: #49d6df;
 
-$range-gray-color: #bdbdbd;
+// $bg-white1-color: #ffffff;
+// $bg-white2-color: #fbfbfb;
+// $title-grey-dark-color: #333333;
+// $text-grey-dark-color: #444444;
+// $text-grey-color: #4f4f4f;
+// $text-white-color: #fefefe;
+// $input-white-color: #e0e0e0;
+// $switch-grey-color: #f2f2f2;
+// $main-green-color: #4ad7cb;
+// $gradien-first-color: #4bd8b5;
+// $gradien-second-color: #49d6df;
+// $range-gray-color: #bdbdbd;
 
-// $minor-green-color: #5eaa2f;
-// $border-table-color: #cdcdcd;
+.light-theme {
+  --bg-color: #ffffff;
+  --bg-secondary-color: #fbfbfb;
+  --bg-third-color: #fefefe;
+  --btn-text-color: #ffffff;
+  --switch-bg-color: #f2f2f2;
+  --switch-point-bg-color: #ffffff;
+  --text-title-color: #333333;
+  --text-paragraph-color: #4f4f4f;
+  --stroke-map-svg: #333333;
+  --stroke-map-svg-active: #dadada;
+}
 
-
-// темная тема
-$switch-grey-dark-color: #4f4f4f;
-
-$width: 186px;
+.dark-theme {
+  --bg-color: #333333;
+  --bg-secondary-color: #333333;
+  --bg-third-color: #3b3b3b;
+  --btn-text-color: #ffffff;
+  --switch-bg-color: #4f4f4f;
+  --switch-point-bg-color: #1b1b1b;
+  --text-title-color: #fefefe;
+  --text-paragraph-color: #f2f2f2;
+  --stroke-map-svg: #e1e1e1;
+  --stroke-map-svg-active: #333333;
+}

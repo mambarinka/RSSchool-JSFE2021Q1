@@ -18,7 +18,7 @@
   @include text-options(14px, 20px, 900, $range-gray-color);
 
   &--active {
-    @include text-options(24px, 28px, 900, $title-grey-dark-color);
+    @include text-options(24px, 28px, 900, var(--text-title-color));
     position: relative;
 
     &::after {
@@ -52,7 +52,7 @@
 .range__input::-webkit-slider-thumb {
   height: 10px;
   width: 62px;
-  background: $title-grey-dark-color;
+  background: var(--text-title-color);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -3px;

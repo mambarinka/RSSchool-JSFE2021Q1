@@ -399,7 +399,7 @@
 }
 
 .watch__slider-item-description {
-  @include text-options(14px, 16px, 400, $bg-white1-color);
+  @include text-options(14px, 16px, 400, var(--btn-text-color));
   width: 82%;
   margin: 0 auto;
 
@@ -432,7 +432,7 @@
     background-position: 21px 0;
 
     &:hover {
-      color: $bg-white1-color;
+      color: var(--btn-text-color);
       background-image: url("../../assets/images/arrow-circle-watch-white.svg");
     }
   }
@@ -441,7 +441,7 @@
     width: 40%;
     margin-top: 13px;
     padding-left: 28px;
-    color: $bg-white1-color;
+    color: var(--btn-text-color);
     background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;
     background-position: 2px 0;
 

@@ -7,7 +7,7 @@
   padding: 41px 12% 43px 66.2%;
   box-shadow: 2px 4px 15px rgba(6, 12, 70, 0.15);
   border-radius: 8px;
-  background-color: $text-white-color;
+  background-color: var(--bg-secondary-color);
 
   @include mobile {
     width: 238px;
@@ -46,7 +46,7 @@
 }
 
 .tooltip__title {
-  @include text-options(18px, 21px, 900, $title-grey-dark-color);
+  @include text-options(18px, 21px, 900, var(--text-title-color));
   margin: 0;
   margin-bottom: 8px;
 
@@ -65,7 +65,7 @@
 
 .tooltip__region,
 .tooltip__population {
-  @include text-options(14px, 16px, 400, $text-grey-color);
+  @include text-options(14px, 16px, 400, var(--text-paragraph-color));
   margin: 0;
 
   @include mobile {

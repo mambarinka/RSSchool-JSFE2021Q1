@@ -1,11 +1,12 @@
 .inspires {
   padding-top: 101px;
   padding-bottom: 131px;
-  background-color: $switch-grey-color;
+  background-color: var(--switch-bg-color);
 
   @include desktop {
     padding-bottom: 116px;
   }
+
   @include tablet {
     padding-bottom: 100px;
   }
@@ -80,7 +81,7 @@
 }
 
 .inspires__item-title {
-  @include text-options(20px, 23px, 900, $title-grey-dark-color);
+  @include text-options(20px, 23px, 900, var(--text-title-color));
   margin: 0;
   margin-bottom: 16px;
   text-align: center;

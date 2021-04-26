@@ -1,7 +1,7 @@
 .how-works {
   padding-top: 99px;
   padding-bottom: 100px;
-  background-color: $bg-white2-color;
+  background-color: var(--bg-secondary-color);
 
   @include tablet {
     padding-bottom: 69px;
