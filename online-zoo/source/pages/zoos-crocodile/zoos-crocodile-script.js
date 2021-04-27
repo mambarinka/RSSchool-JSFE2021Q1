@@ -21,14 +21,25 @@ navToggle.addEventListener('click', function () {
 // ПЕРЕКЛЮЧЕНИЕ ТЕМЫ
 const switchBtn = document.querySelector('.switch__slider');
 const body = document.querySelector('body');
+const logo = body.querySelector('.logo__image');
+
+if (!localStorage.theme) {
+  localStorage.theme = 'light-theme';
+}
+
+document.body.className = localStorage.theme;
 
 function changeTheme() {
   if (body.classList.contains('light-theme')) {
     body.classList.remove('light-theme');
     body.classList.add('dark-theme');
+    logo.src = "../../assets/images/logo-online-zoo-footer.svg";
+    localStorage.theme = document.body.className || 'dark-theme';
   } else {
     body.classList.remove('dark-theme');
     body.classList.add('light-theme');
+    logo.src = "../../assets/images/logo-online-zoo.svg";
+    localStorage.theme = document.body.className || 'light-theme';
   }
 }
 
