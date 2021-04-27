@@ -64,6 +64,28 @@ itemSliderWatch.forEach(slide => {
   slide.addEventListener('click', clickSlide);
 });
 
+// ПРИВЯЗКА ПОЛОСЫ ПРОГРЕССА К СЛАЙДЕРУ
+
+const rangeInput = document.querySelector('.watch__range-input');
+
+function rangeValue() {
+  let newValue = rangeInput.value;
+  let target = document.querySelector('.watch__range-value');
+  target.innerHTML = `0${newValue}`;
+  let numberActiveSlide = Array.from(itemSliderWatch).indexOf(activeSlide) + 1;
+  lengthMove = -(newValue - numberActiveSlide) * widthWatchSlide;
+  console.log(lengthMove);
+
+  itemSliderWatch.forEach((slide, i) => {
+    removeActiveСlass(slide, 'watch__slider-item--active');
+  });
+  itemSliderWatch[newValue - 1].classList.add('watch__slider-item--active');
+  sliderWatch.style.transitionDuration = `1000ms`;
+  sliderWatch.style.transform = `translateX(${lengthMove}px)`;
+}
+
+rangeInput.addEventListener("input", rangeValue);
+
 // БУРГЕР
 const navMain = document.querySelector('.main-nav');
 const navToggle = document.querySelector('.main-nav__toggle');
