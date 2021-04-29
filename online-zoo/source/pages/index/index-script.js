@@ -1,19 +1,9 @@
 'use strict';
 
-// СЛАЙДЕР WATCH
-const sliderWatch = document.querySelector('.watch__slider-list');
-const itemSliderWatch = sliderWatch.querySelectorAll('.watch__slider-item');
-const activeSlide = document.querySelector('.watch__slider-item--active');
-let widthWatchSlide = 186;
 let lengthMove = 0;
-
-// const coordsX = (element) => {
-//   return element.getBoundingClientRect().x;
-// };
-
-// const coordsY = (element) => {
-//   return element.getBoundingClientRect().y;
-// };
+let numberSlide;
+let newRangeValue;
+let isClickOnSlide = false;
 
 function addActiveClass(element, adClass) {
   element.classList.add(adClass);
@@ -23,68 +13,74 @@ function removeActiveСlass(element, adClass) {
   element.classList.remove(adClass);
 }
 
-// function onSlide(evt) {
-//   const slide = evt.currentTarget;
-//   if (slide.classList.contains('watch__slider-item')) {
-//     activeSlide.classList.remove('watch__slider-item--active');
-//     if (slide.classList.contains('watch__slider-item--active')) {
-//       slide.classList.remove('watch__slider-item--active');
-//     }
-//   }
-// }
+function moveSlide(slides, targetSlide, activeSlide, widthSlide, sliderList) {
+  let numberActiveSlide = Array.from(slides).indexOf(activeSlide) + 1;
 
-// // function outSlide() {
-// //   activeSlide.classList.add('watch__slider-item--active');
-// // }
+  if (targetSlide) {
+    numberSlide = Array.from(slides).indexOf(targetSlide) + 1;
+    lengthMove = -(numberSlide - numberActiveSlide) * widthSlide;
+  } else {
+    lengthMove = -(newRangeValue - numberActiveSlide) * widthSlideWatch;
+  }
 
-// itemSliderWatch.forEach(slide => {
-//   slide.addEventListener('mouseover', onSlide);
-//   // slide.addEventListener('mouseout', outSlide);
-// });
+  sliderList.style.transitionDuration = `1000ms`;
+  sliderList.style.transform = `translateX(${lengthMove}px)`;
+  return numberSlide;
+}
 
-function clickSlide(evt, elem, index) {
+function changeRangeLabel(input, label) {
+  if (!isClickOnSlide) {
+    newRangeValue = input.value;
+    label.innerHTML = `0${newRangeValue}`;
+    return newRangeValue;
+  } else {
+    input.value = numberSlide;
+    label.innerHTML = `0${numberSlide}`;
+    return;
+  }
+}
+
+// СЛАЙДЕР WATCH
+const sliderWatch = document.querySelector('.watch__slider-list');
+const itemSliderWatch = sliderWatch.querySelectorAll('.watch__slider-item');
+const activeSlideWatch = document.querySelector('.watch__slider-item--active');
+const rangeInputWatch = document.querySelector('.watch__range-input');
+const rangeLabelWatch = document.querySelector('.watch__range-value');
+let widthSlideWatch = 186;
+
+function onClickSlideWatch(evt) {
   const slide = evt.currentTarget;
-  console.log(`index: ${index}`);
-  console.dir(evt);
   if (slide.classList.contains('watch__slider-item')) {
-    let numberSlide = Array.from(itemSliderWatch).indexOf(slide) + 1;
-    let numberActiveSlide = Array.from(itemSliderWatch).indexOf(activeSlide) + 1;
-    lengthMove = -(numberSlide - numberActiveSlide) * widthWatchSlide;
+    isClickOnSlide = true;
+
+    moveSlide(itemSliderWatch, slide, activeSlideWatch, widthSlideWatch, sliderWatch);
+    changeRangeLabel(rangeInputWatch, rangeLabelWatch);
+
     itemSliderWatch.forEach((slide, i) => {
       removeActiveСlass(slide, 'watch__slider-item--active');
     });
-    slide.classList.add('watch__slider-item--active');
-    sliderWatch.style.transitionDuration = `1000ms`;
-    sliderWatch.style.transform = `translateX(${lengthMove}px)`;
-
+    addActiveClass(slide, 'watch__slider-item--active');
+  } else {
+    isClickOnSlide = false;
   }
 }
 
 itemSliderWatch.forEach(slide => {
-  slide.addEventListener('click', clickSlide);
+  slide.addEventListener('click', onClickSlideWatch);
 });
 
-// ПРИВЯЗКА ПОЛОСЫ ПРОГРЕССА К СЛАЙДЕРУ
+function onClickRangeWatch() {
+  isClickOnSlide = false;
+  moveSlide(itemSliderWatch, null, activeSlideWatch, widthSlideWatch, sliderWatch);
+  changeRangeLabel(rangeInputWatch, rangeLabelWatch);
 
-const rangeInput = document.querySelector('.watch__range-input');
-
-function rangeValue() {
-  let newValue = rangeInput.value;
-  let target = document.querySelector('.watch__range-value');
-  target.innerHTML = `0${newValue}`;
-  let numberActiveSlide = Array.from(itemSliderWatch).indexOf(activeSlide) + 1;
-  lengthMove = -(newValue - numberActiveSlide) * widthWatchSlide;
-  console.log(lengthMove);
-
-  itemSliderWatch.forEach((slide, i) => {
+  itemSliderWatch.forEach((slide) => {
     removeActiveСlass(slide, 'watch__slider-item--active');
   });
-  itemSliderWatch[newValue - 1].classList.add('watch__slider-item--active');
-  sliderWatch.style.transitionDuration = `1000ms`;
-  sliderWatch.style.transform = `translateX(${lengthMove}px)`;
+  addActiveClass(itemSliderWatch[newRangeValue - 1], 'watch__slider-item--active');
 }
 
-rangeInput.addEventListener("input", rangeValue);
+rangeInputWatch.addEventListener("input", onClickRangeWatch);
 
 // БУРГЕР
 const navMain = document.querySelector('.main-nav');
