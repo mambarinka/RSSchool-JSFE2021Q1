@@ -28,6 +28,7 @@ if (!localStorage.theme) {
 }
 
 document.body.className = localStorage.theme;
+logo.src = localStorage.logo;
 
 function changeTheme() {
   if (body.classList.contains('light-theme')) {
@@ -35,11 +36,13 @@ function changeTheme() {
     body.classList.add('dark-theme');
     logo.src = "../../assets/images/logo-online-zoo-footer.svg";
     localStorage.theme = document.body.className || 'dark-theme';
+    localStorage.logo = logo.src || '../../assets/images/logo-online-zoo-footer.svg';
   } else {
     body.classList.remove('dark-theme');
     body.classList.add('light-theme');
     logo.src = "../../assets/images/logo-online-zoo.svg";
     localStorage.theme = document.body.className || 'light-theme';
+    localStorage.logo = logo.src || '../../assets/images/logo-online-zoo.svg';
   }
 }
 

@@ -13,14 +13,16 @@ function removeActiveСlass(element, adClass) {
   element.classList.remove(adClass);
 }
 
-function moveSlide(slides, targetSlide, activeSlide, widthSlide, sliderList) {
+function moveSlide(slides, targetSlide, activeSlide, widthSlide, sliderList, input) {
   let numberActiveSlide = Array.from(slides).indexOf(activeSlide) + 1;
 
   if (targetSlide) {
     numberSlide = Array.from(slides).indexOf(targetSlide) + 1;
     lengthMove = -(numberSlide - numberActiveSlide) * widthSlide;
   } else {
+    newRangeValue = input.value;
     lengthMove = -(newRangeValue - numberActiveSlide) * widthSlideWatch;
+    console.log(`lengthMove(${lengthMove} = -(newRangeValue(${newRangeValue}) - numberActiveSlide(${numberActiveSlide})) * widthSlideWatch(${widthSlideWatch})`);
   }
 
   sliderList.style.transitionDuration = `1000ms`;
@@ -46,14 +48,16 @@ const itemSliderWatch = sliderWatch.querySelectorAll('.watch__slider-item');
 const activeSlideWatch = document.querySelector('.watch__slider-item--active');
 const rangeInputWatch = document.querySelector('.watch__range-input');
 const rangeLabelWatch = document.querySelector('.watch__range-value');
-let widthSlideWatch = 186;
+let widthSlideWatch = itemSliderWatch[0].offsetWidth;
+console.log(widthSlideWatch);
+// let widthSlideWatch = 186;
 
 function onClickSlideWatch(evt) {
   const slide = evt.currentTarget;
   if (slide.classList.contains('watch__slider-item')) {
     isClickOnSlide = true;
 
-    moveSlide(itemSliderWatch, slide, activeSlideWatch, widthSlideWatch, sliderWatch);
+    moveSlide(itemSliderWatch, slide, activeSlideWatch, widthSlideWatch, sliderWatch, null);
     changeRangeLabel(rangeInputWatch, rangeLabelWatch);
 
     itemSliderWatch.forEach((slide, i) => {
@@ -71,7 +75,7 @@ itemSliderWatch.forEach(slide => {
 
 function onClickRangeWatch() {
   isClickOnSlide = false;
-  moveSlide(itemSliderWatch, null, activeSlideWatch, widthSlideWatch, sliderWatch);
+  moveSlide(itemSliderWatch, null, activeSlideWatch, widthSlideWatch, sliderWatch, rangeInputWatch);
   changeRangeLabel(rangeInputWatch, rangeLabelWatch);
 
   itemSliderWatch.forEach((slide) => {
@@ -110,6 +114,7 @@ if (!localStorage.theme) {
 }
 
 document.body.className = localStorage.theme;
+logo.src = localStorage.logo;
 
 function changeTheme() {
   if (body.classList.contains('light-theme')) {
@@ -117,11 +122,13 @@ function changeTheme() {
     body.classList.add('dark-theme');
     logo.src = "../../assets/images/logo-online-zoo-footer.svg";
     localStorage.theme = document.body.className || 'dark-theme';
+    localStorage.logo = logo.src || '../../assets/images/logo-online-zoo-footer.svg';
   } else {
     body.classList.remove('dark-theme');
     body.classList.add('light-theme');
     logo.src = "../../assets/images/logo-online-zoo.svg";
     localStorage.theme = document.body.className || 'light-theme';
+    localStorage.logo = logo.src || '../../assets/images/logo-online-zoo.svg';
   }
 }
 

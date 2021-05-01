@@ -117,6 +117,7 @@
 .watch__slider {
   position: absolute;
   width: 56.3%;
+  min-height: 352px;
   padding-left: 5.9%;
   top: 200px;
   right: 0;
@@ -150,11 +151,10 @@
   display: flex;
   align-items: center;
   position: absolute;
-  width: 81%;
+  width: 100%;
   height: 13px;
   top: 183px;
-  left: 0;
-  // outline: 2px solid red;
+  right: 0;
   z-index: 0;
 
   &::after {
@@ -162,112 +162,39 @@
     content: "";
     width: 99%;
     height: 1px;
-    // left: 40px;
-    // outline: 2px solid red;
 
     background-color: $text-white-color;
   }
 }
 
 .watch__slider-dots-item {
-  // position: absolute;
   top: 2px;
-  // width: calc(100% / 4);
-  // width: 120px;
+  width: 17%;
   height: 13px;
   background: url("../../assets/images/round-circle.svg") no-repeat center left;
 
   &:first-child {
-    width: 23%;
+    width: 19%;
   }
 
   &:nth-child(2),
   &:nth-child(3) {
-    width: 27%;
-  }
-
-  &:nth-child(4) {
-    width: 21%;
-  }
-
-  &:last-child {
-    width: 13px;
+    width: 22.6%;
   }
 }
 
 .watch__slider-list {
-  // opacity: 0;
   position: relative;
-  align-items: flex-start;
-
-  // &::before {
-  //   position: absolute;
-  //   content: "";
-  //   background: url("../../assets/images/round-circle.svg") no-repeat;
-  //   width: 13px;
-  //   height: 13px;
-  //   top: 183px;
-  //   left: -11.6%;
-  // }
-
-  // &::after {
-  //   position: absolute;
-  //   content: "";
-  //   width: 112%;
-  //   height: 1px;
-  //   top: 189px;
-  //   left: -11%;
-  //   background-color: $text-white-color;
-  //   z-index: 0;
-  // }
-
-  // @include desktop {
-  //   &::before {
-  //     left: -20.4%;
-  //   }
-
-  //   &::after {
-  //     left: -19%;
-  //   }
-  // }
-
-  // @include tablet {
-  //   &::before {
-  //     left: -10.5%;
-  //   }
-
-  //   &::after {
-  //     left: -9%;
-  //   }
-  // }
-
-  // @include mobile {
-  //   &::before {
-  //     top: 93px;
-  //     left: -5.2%;
-  //   }
-
-  //   &::after {
-  //     top: 99px;
-  //     left: -4%;
-  //   }
-  // }
-
-  // @media (min-width: 321px) and (max-width: 416px) {
-  //   &::before {
-  //     left: calc(-15.3% + 13px);
-  //   }
-  // }
+  align-items: center;
 }
 
 .watch__slider-item {
   position: relative;
   display: flex;
   justify-content: center;
-  width: 186px;
-  padding-left: 23px;
-  padding-right: 23px;
-  top: 90px;
+  width: 19.2%;
+  padding-left: 2.2%;
+  padding-right: 2.2%;
   z-index: 1;
   transition: 0.1s;
   transition-timing-function: linear;
@@ -277,33 +204,32 @@
   }
 
   &:hover {
-    width: calc(186px * 1.55);
+    width: calc(19.2% * 1.55);
     margin-top: 0;
     top: 0;
 
     & .watch__item-wrapper {
       display: flex;
-      padding-left: 8%;
-      padding-right: 8%;
+      padding-left: 16%;
+      padding-right: 16%;
       animation: bounce-watch 0.6s;
     }
 
     & .watch__slider-item-img {
-      width: calc(186px * 1.55);
       filter: brightness(50%);
       cursor: pointer;
     }
   }
 
   &--active {
-    width: calc(186px * 1.55);
+    width: calc(19.2% * 1.55);
     margin-top: 0;
     top: 0;
 
     .watch__item-wrapper {
       display: flex;
-      padding-left: 8%;
-      padding-right: 8%;
+      padding-left: 16%;
+      padding-right: 16%;
     }
   }
 
@@ -412,7 +338,7 @@
 .watch__item-wrapper {
   position: absolute;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   bottom: 27px;
@@ -437,7 +363,7 @@
 
 .watch__slider-item-description {
   @include text-options(14px, 16px, 400, var(--btn-text-color));
-  width: 82%;
+  width: 100%;
   margin: 0 auto;
 
   @include desktop {
@@ -462,11 +388,10 @@
   text-transform: uppercase;
 
   &--watch {
-    width: 56%;
     margin-top: 13px;
-    padding-left: 49px;
+    margin-right: auto;
+    padding-left: 13%;
     background: url("../../assets/images/arrow-circle-watch.svg") no-repeat;
-    background-position: 21px 0;
 
     &:hover {
       color: var(--btn-text-color);
@@ -475,12 +400,10 @@
   }
 
   &--donate {
-    width: 40%;
     margin-top: 13px;
-    padding-left: 28px;
+    padding-left: 13%;
     color: var(--btn-text-color);
     background: url("../../assets/images/arrow-circle-watch-donate.svg") no-repeat;
-    background-position: 2px 0;
 
     &:hover {
       color: $main-green-color;
@@ -515,6 +438,10 @@
       padding-left: 27px;
       background-position: 0;
     }
+  }
+
+  @media (min-width: 1201px) and (max-width: 1861px) {
+    padding-left: 24%;
   }
 }
 
