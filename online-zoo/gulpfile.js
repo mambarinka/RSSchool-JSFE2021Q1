@@ -60,6 +60,7 @@ gulp.task("server", async function () {
   gulp.watch("source/pages/**/*.html", gulp.series("html", "refresh"));
   gulp.watch("source/pages/**/*.js", gulp.series("js", "refresh"));
   gulp.watch("source/assets/images/*.{png,jpg,svg}", gulp.series("images", "refresh"));
+  gulp.watch("source/assets/images/slider-pets-in-zoo-new/*.{png,jpg,svg}", gulp.series("images", "refresh"));
 });
 
 gulp.task("refresh", async function (done) {
