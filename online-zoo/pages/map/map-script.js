@@ -177,23 +177,28 @@ function isSlideVisible() {
   itemsSliderChoose.forEach((slide, i) => {
     if (slide.classList.contains('choose__slider-item--active')) {
       indexActive = i;
-      widthActiveSlide = slide.offsetWidth;
+      widthActiveSlide = slide.getBoundingClientRect().width;
+      // widthActiveSlide = slide.offsetWidth;
     }
   });
 
   if (viewPortWidth <= 1200) {
     if (itemsSliderChoose[indexActive].getBoundingClientRect().left > sliderChoose.getBoundingClientRect().left &&
       itemsSliderChoose[indexActive].getBoundingClientRect().right > sliderChoose.getBoundingClientRect().right) {
-      if (indexActive > 4) {
-        let number = indexActive - 4;
-        sliderChoose.scrollBy(number * widthActiveSlide, 0);
+      console.log('элемент не входит справа');
+      if (indexActive > 4 && indexActive < 8) {
+        if (direction === 'left') {
+          sliderChoose.scrollBy(3 * widthActiveSlide, 0);
+        } else if (direction === 'right') {
+          sliderChoose.scrollBy(widthActiveSlide, 0);
+        }
         return;
       }
     } else if (itemsSliderChoose[indexActive].getBoundingClientRect().left < sliderChoose.getBoundingClientRect().left &&
       itemsSliderChoose[indexActive].getBoundingClientRect().right < sliderChoose.getBoundingClientRect().right) {
+      console.log('элемент не входит слева');
       if (indexActive < 4) {
-        let number = indexActive + 1;
-        sliderChoose.scrollBy(-number * widthActiveSlide, 0);
+        sliderChoose.scrollBy(-3 * widthActiveSlide, 0);
         return;
       }
     } else {
@@ -212,8 +217,7 @@ let pinDataAnimal;
 let indexActivePin;
 
 function addPinActive(indexActive) {
-  let slideDataAnimal = itemsSliderChoose[indexActive].dataset.animal; //panda
-  console.log(slideDataAnimal);
+  let slideDataAnimal = itemsSliderChoose[indexActive].dataset.animal;
   if (slideDataAnimal) {
     mapPins.forEach((pin, index) => {
       removeActiveСlass(pin, 'map__pin-wrapper-img--active');

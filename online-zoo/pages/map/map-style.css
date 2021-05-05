@@ -342,7 +342,6 @@ template {
   --bg-color: #ffffff;
   --bg-secondary-color: #fbfbfb;
   --bg-third-color: #fbfbfb;
-  --bg-third-color: #fefefe;
   --btn-text-color: #ffffff;
   --switch-bg-color: #f2f2f2;
   --switch-point-bg-color: #ffffff;
@@ -355,7 +354,6 @@ template {
   --bg-color: #333333;
   --bg-secondary-color: #333333;
   --bg-third-color: #4f4f4f;
-  --bg-third-color: #3b3b3b;
   --btn-text-color: #ffffff;
   --switch-bg-color: #4f4f4f;
   --switch-point-bg-color: #1b1b1b;
@@ -461,6 +459,8 @@ input[type="radio"].visually-hidden {
     .page-header {
       padding: 25px 0 21px; } }
   .page-header--map-page {
+    margin-bottom: 11px; }
+  .page-header--zoos {
     margin-bottom: 11px; }
 
 .page-header__wrapper {
@@ -1049,7 +1049,8 @@ input:checked + .switch__slider::before {
     .choose__wrapper {
       max-width: 1200px;
       padding-left: 17%;
-      padding-right: 17%; } }
+      padding-right: 17%;
+      padding-bottom: 3px; } }
   @media (max-width: 640px) {
     .choose__wrapper {
       max-width: 1920px;
@@ -1129,7 +1130,7 @@ input:checked + .switch__slider::before {
   margin-bottom: 24px; }
   @media (max-width: 1200px) {
     .choose__slider {
-      margin-bottom: 27px; } }
+      margin-bottom: 21px; } }
   @media (max-width: 640px) {
     .choose__slider {
       padding-left: 1%;
@@ -1152,6 +1153,8 @@ input:checked + .switch__slider::before {
             transform: scale(1.2);
     -webkit-filter: drop-shadow(0 0 8px #4ad7cb);
             filter: drop-shadow(0 0 8px #4ad7cb); }
+  .choose__slider-button--left {
+    margin-right: 1.8%; }
   .choose__slider-button--right {
     margin-left: 1.8%; }
   @media (max-width: 640px) {
@@ -1169,7 +1172,7 @@ input:checked + .switch__slider::before {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding-left: 2%;
+  padding-left: 0;
   padding-right: 0;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1337,7 +1340,7 @@ input:checked + .switch__slider::before {
     @media (max-width: 1200px) {
       .map--map-page {
         padding-top: 51px;
-        padding-bottom: 73px; } }
+        padding-bottom: 101px; } }
     @media (max-width: 640px) {
       .map--map-page {
         padding-top: 0;
@@ -1475,7 +1478,7 @@ input:checked + .switch__slider::before {
     @media (max-width: 1200px) {
       .map__img--map-page {
         height: 389px;
-        margin-bottom: 61px; } }
+        margin-bottom: 32px; } }
     @media (max-width: 640px) {
       .map__img--map-page {
         height: 289px;

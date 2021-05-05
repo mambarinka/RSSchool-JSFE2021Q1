@@ -342,7 +342,6 @@ template {
   --bg-color: #ffffff;
   --bg-secondary-color: #fbfbfb;
   --bg-third-color: #fbfbfb;
-  --bg-third-color: #fefefe;
   --btn-text-color: #ffffff;
   --switch-bg-color: #f2f2f2;
   --switch-point-bg-color: #ffffff;
@@ -355,7 +354,6 @@ template {
   --bg-color: #333333;
   --bg-secondary-color: #333333;
   --bg-third-color: #4f4f4f;
-  --bg-third-color: #3b3b3b;
   --btn-text-color: #ffffff;
   --switch-bg-color: #4f4f4f;
   --switch-point-bg-color: #1b1b1b;
@@ -497,6 +495,8 @@ input[type="radio"].visually-hidden {
     .page-header {
       padding: 25px 0 21px; } }
   .page-header--map-page {
+    margin-bottom: 11px; }
+  .page-header--zoos {
     margin-bottom: 11px; }
 
 .page-header__wrapper {
@@ -1152,7 +1152,7 @@ input:checked + .switch__slider::before {
   width: 61.7%;
   margin-right: 1.8%;
   padding-left: 12.9%;
-  padding-top: 59px;
+  padding-top: 46px;
   padding-bottom: 100px; }
   @media (max-width: 1200px) {
     .zoo-video {
@@ -1429,7 +1429,7 @@ input:checked + .switch__slider::before {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 24%;
-  padding-top: 155px;
+  padding-top: 144px;
   padding-bottom: 141px; }
   @media (max-width: 1200px) {
     .zoo-description {
