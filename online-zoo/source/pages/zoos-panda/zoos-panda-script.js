@@ -47,3 +47,44 @@ function changeTheme() {
 }
 
 switchBtn.addEventListener('click', changeTheme);
+
+// ЗАМЕНА ВИДЕО
+const videoPlaylist = document.querySelector('.zoo-video__playlist');
+const mainVideo = document.querySelector('.zoo-video__main-iframe');
+const videoItems = videoPlaylist.querySelectorAll('.zoo-video__item');
+const videoItemsIframes = videoPlaylist.querySelectorAll('.zoo-video__iframe');
+let video;
+let linkVideo;
+let linkMainVideo = mainVideo.src;
+
+function switchVideo(evt) {
+  linkMainVideo = mainVideo.src;
+  mainVideo.src = evt.target.children[0].attributes[3].value;
+  evt.target.children[0].attributes[3].value = linkMainVideo;
+}
+
+videoItems.forEach(video => {
+  video.addEventListener('click', switchVideo);
+});
+
+// ПРИВЯЗКА ТОЧЕК К СЛАЙДЕРУ
+const dotsBtnsContainer = document.querySelector('.zoo-video__pagination');
+const dotsBtns = document.querySelectorAll('.pagination-list__button');
+
+function onClickDotBtn(evt) {
+  if (evt.target.classList.contains('pagination-list__button')) {
+    dotsBtns.forEach(dot => {
+      dot.classList.remove('pagination-list__button--active');
+    });
+
+    let move = -videoPlaylist.getBoundingClientRect().width * evt.target.dataset.index;
+    videoItems.forEach(video => {
+      video.style.transitionDuration = `1000ms`;
+      video.style.transform = `translateX(${move}px)`;
+    });
+
+    evt.target.classList.add('pagination-list__button--active');
+  }
+}
+
+dotsBtnsContainer.addEventListener('click', onClickDotBtn);
