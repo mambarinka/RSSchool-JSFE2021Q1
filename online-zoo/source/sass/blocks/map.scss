@@ -23,7 +23,7 @@
 
   &--map-page {
     padding-top: 50px;
-    background-color: var(--bg-secondary-color);
+    background-color: var(--bg-third-color);
 
     @include desktop {
       padding-top: 51px;
@@ -101,7 +101,6 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 37px;
-  outline: 2px solid red;
 
 
   @include desktop {
@@ -149,7 +148,6 @@
   fill: var(--stroke-map-svg);
   stroke: var(--stroke-map-svg);
   object-fit: cover;
-  outline: 2px solid green;
 }
 
 .map__img-svg-path {
@@ -196,6 +194,7 @@
   height: var(--pin-height);
   background: url("../../assets/images/pin-green.svg") no-repeat center;
   cursor: pointer;
+  transition: 0.5s;
 
   &:hover {
     background-image: url("../../assets/images/pin-red.svg");

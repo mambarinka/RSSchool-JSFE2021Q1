@@ -60,8 +60,6 @@ function removeActiveСlass(element, adClass) {
   element.classList.remove(adClass);
 }
 
-
-
 // СЛАЙДЕР WATCH
 const sliderWatch = document.querySelector('.watch__slider-list');
 const itemsSliderWatch = sliderWatch.querySelectorAll('.watch__slider-item');

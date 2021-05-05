@@ -17,7 +17,7 @@
   <div style="display: none;">
     <include src="build/assets/icons/sprite.svg"></include>
   </div>
-  <header class="page-header">
+  <header class="page-header page-header--map-page">
     <div class="page-header__wrapper page-header__wrapper--map-page">
       <a class="logo" href="../index/index.html">
         <img class="logo__image" src="../../assets/images/logo-online-zoo.svg" width="59" height="42"
@@ -69,25 +69,25 @@
             </svg>
           </button>
           <ul class="slider__list choose__slider-list">
-            <li class="slider__item choose__slider-item">
+            <li class="slider__item choose__slider-item" data-animal="gorilla">
               <a href="#" class="choose__item-link">
                 <img class="choose__item-img" src="../../assets/images/slider-choose-gorilla.png"
                   alt="photo of gorilla">
               </a>
             </li>
-            <li class="slider__item choose__slider-item choose__slider-item--active">
-              <a href="#" class="choose__item-link choose__item-link--active">
-                <img class="choose__item-img choose__item-img--active" src="../../assets/images/slider-choose-panda.png"
-                  alt="photo of panda">
+            <li class="slider__item choose__slider-item choose__slider-item--active" data-animal="panda">
+              <a href="#" class="choose__item-link">
+                <img class="choose__item-img choose__item-img--panda" width="108" height="108"
+                  src="../../assets/images/slider-choose-panda.png" alt="photo of panda">
               </a>
             </li>
-            <li class="slider__item choose__slider-item">
+            <li class="slider__item choose__slider-item" data-animal="crocodile">
               <a href="#" class="choose__item-link">
                 <img class="choose__item-img" src="../../assets/images/slider-choose-crocodile.png"
                   alt="photo of crocodile">
               </a>
             </li>
-            <li class="slider__item choose__slider-item">
+            <li class="slider__item choose__slider-item" data-animal="eagle">
               <a href="#" class="choose__item-link">
                 <img class="choose__item-img" src="../../assets/images/slider-choose-eagles.png" alt="photo of eagles">
               </a>
@@ -135,26 +135,27 @@
       <div class="map__wrapper map__wrapper--map-page">
         <h2 class="visually-hidden">Map</h2>
         <div class="map__img map__img--map-page">
-          <svg class="map__img-svg map__img-svg--map-page" viewBox="0 0 1200 498" width="1200" height="497" preserveAspectRatio="none">
+          <svg class="map__img-svg map__img-svg--map-page" viewBox="0 0 1200 498" width="1200" height="497"
+            preserveAspectRatio="none">
             <use xlink:href="#icon-map"></use>
           </svg>
           <div class="map__pin-wrapper map__pin-wrapper--eagles">
-            <div class="map__pin-wrapper-img" title="EAGLES">
+            <div class="map__pin-wrapper-img" data-animal="eagle" title="EAGLES">
               <img class="map__pin-img" src="../../assets/images/pin-eagles.png" alt="photo of eagles">
             </div>
           </div>
           <div class="map__pin-wrapper map__pin-wrapper--crocodile">
-            <div class="map__pin-wrapper-img" title="CROCODILE">
+            <div class="map__pin-wrapper-img" data-animal="crocodile" title="CROCODILE">
               <img class="map__pin-img" src="../../assets/images/pin-crocodile.png" alt="photo of crocodile">
             </div>
           </div>
           <div class="map__pin-wrapper map__pin-wrapper--gorilla">
-            <div class="map__pin-wrapper-img" title="GORILLA">
+            <div class="map__pin-wrapper-img" data-animal="gorilla" title="GORILLA">
               <img class="map__pin-img" src="../../assets/images/pin-gorilla.png" alt="photo of gorilla">
             </div>
           </div>
           <div class="map__pin-wrapper map__pin-wrapper--panda">
-            <div class="map__pin-wrapper-img map__pin-wrapper-img--active" title="PANDA">
+            <div class="map__pin-wrapper-img" data-animal="panda" title="PANDA">
               <img class="map__pin-img" src="../../assets/images/pin-panda.png" alt="photo of panda">
             </div>
           </div>
