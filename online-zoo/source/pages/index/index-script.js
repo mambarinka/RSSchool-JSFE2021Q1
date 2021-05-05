@@ -66,7 +66,7 @@ const itemsSliderWatch = sliderWatch.querySelectorAll('.watch__slider-item');
 const activeSlideWatch = document.querySelector('.watch__slider-item--active');
 const rangeInputWatch = document.querySelector('.watch__range-input');
 const rangeLabelWatch = document.querySelector('.watch__range-value');
-let widthSlideWatch = itemsSliderWatch[0].offsetWidth;
+let widthSlideWatch = itemsSliderWatch[0].getBoundingClientRect().width;
 let lengthMove = 0;
 
 function moveSlideWatch(slides, targetSlide, activeSlide, widthSlide, sliderList, input) {
@@ -77,8 +77,8 @@ function moveSlideWatch(slides, targetSlide, activeSlide, widthSlide, sliderList
     lengthMove = -(numberSlide - numberActiveSlide) * widthSlide;
   } else {
     newRangeValue = input.value;
+    console.log(widthSlideWatch);
     lengthMove = -(newRangeValue - numberActiveSlide) * widthSlideWatch;
-    console.log(`lengthMove(${lengthMove} = -(newRangeValue(${newRangeValue}) - numberActiveSlide(${numberActiveSlide})) * widthSlideWatch(${widthSlideWatch})`);
   }
 
   sliderList.style.transitionDuration = `1000ms`;
@@ -237,7 +237,6 @@ function onClickSlideBtnPetsInZoo(evt) {
     isClickOnBtn = false;
   }
 
-  // console.log(isClickOnBtn);
   moveSlidePetInZoo(itemsSliderPetsInZoo, now);
   changeRangeLabePetsInZoo(rangeInputPetsInZoo, rangeLabelPetInZoo, now);
 }
@@ -248,7 +247,6 @@ btnsSliderPetsInZoo.forEach(button => {
 
 function onClickRangePetInZoo(evt) {
   isClickOnBtn = false;
-  // console.log(isClickOnBtn);
   now = evt.currentTarget.value - 1;
   moveSlidePetInZoo(itemsSliderPetsInZoo, now);
   changeRangeLabePetsInZoo(rangeInputPetsInZoo, rangeLabelPetInZoo);

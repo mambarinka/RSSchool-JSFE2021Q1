@@ -26,6 +26,7 @@
     max-width: 1200px;
     padding-left: 17%;
     padding-right: 17%;
+    padding-bottom: 3px;
   }
 
   @include tablet {
@@ -80,7 +81,7 @@
   margin-bottom: 24px;
 
   @include desktop {
-    margin-bottom: 27px;
+    margin-bottom: 21px;
   }
 
   @include tablet {
@@ -107,23 +108,13 @@
     filter: drop-shadow(0 0 8px $main-green-color);
   }
 
-  // &--left {
-  //   margin-right: 1.8%;
-  // }
+  &--left {
+    margin-right: 1.8%;
+  }
 
   &--right {
     margin-left: 1.8%;
   }
-
-  // @include desktop {
-  //   &--left {
-  //     margin-right: 3.8%;
-  //   }
-
-  //   &--right {
-  //     margin-left: 3.8%;
-  //   }
-  // }
 
   @include tablet {
     margin: 0;
@@ -139,7 +130,7 @@
   align-items: center;
   width: 100%;
   // min-height: 160px;
-  padding-left: 2%;
+  padding-left: 0;
   padding-right: 0;
   padding-top: 10px;
   padding-bottom: 10px;
