@@ -24,7 +24,8 @@ const body = document.querySelector('body');
 const logo = body.querySelector('.logo__image');
 
 if (!localStorage.theme) {
-  localStorage.theme = 'light-theme';
+  localStorage.theme = document.body.className || 'light-theme';
+  localStorage.logo = logo.src || '../../assets/images/logo-online-zoo.svg';
 }
 
 document.body.className = localStorage.theme;
