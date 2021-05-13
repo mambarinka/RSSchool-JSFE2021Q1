@@ -1,0 +1,28 @@
+@mixin list-reset() {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin h1-model() {
+  margin: 0;
+  color: $main-text-color;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+@mixin p-model() {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+@mixin text-options($size, $height, $weight, $color) {
+  font-size: $size;
+  line-height: $height;
+  font-weight: $weight;
+  color: $color;
+}
