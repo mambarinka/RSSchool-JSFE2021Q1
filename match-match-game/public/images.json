@@ -1,8 +1,39 @@
-[{
-  "category": "unsorted",
-  "images": [
-    "elephant.png",
-    "penguin.png",
-    "tiger.png"
-  ]
-}]
+[
+  {
+    "category": "animals",
+    "images": [
+      "elephant.png",
+      "penguin.png",
+      "tiger.png",
+      "bird.jpg",
+      "cat.jpg",
+      "cheetach.jpg",
+      "chicken.jpg",
+      "cow.jpg",
+      "duck.jpg",
+      "eagle.png",
+      "egret.jpg",
+      "flamingo.jpg",
+      "fox.jpg",
+      "horse.jpg",
+      "jaguar.jpg",
+      "koala.jpg",
+      "lion.png",
+      "mammal.jpg",
+      "owl.jpg",
+      "panda.jpg",
+      "pig.jpg",
+      "pigeon.jpg",
+      "rabbit.jpg",
+      "reptile.jpg",
+      "rhino.jpg",
+      "sheep.jpg",
+      "squirrel.jpg",
+      "swan.jpg",
+      "tirtle.jpg",
+      "toucan.jpg",
+      "wolf.png",
+      "zebra.jpg"
+    ]
+  }
+]
