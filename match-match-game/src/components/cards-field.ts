@@ -1,10 +1,13 @@
 import { BaseComponent } from './base-component';
 import { Card } from './card';
+// import { Timer } from './timer';
 
-const SHOW_TIME = 1; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
+const SHOW_TIME = 10; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
 
 export class CardsField extends BaseComponent {
   readonly wrapper: HTMLElement;
+
+  private timer?: HTMLElement;
 
   private cards: Card[] = [];
 
@@ -14,11 +17,17 @@ export class CardsField extends BaseComponent {
     this.wrapper = document.createElement(div);
     this.wrapper.classList.add(...styles);
     this.wrapper.append(this.element);
+    // this.element.append(this.timer);
   }
 
   clear() {
     this.cards = [];
     this.element.innerHTML = '';
+  }
+
+  addTimer(timer: HTMLElement) {
+    this.timer = timer;
+    this.wrapper.append(this.timer);
   }
 
   addCards(cards: Card[]) {

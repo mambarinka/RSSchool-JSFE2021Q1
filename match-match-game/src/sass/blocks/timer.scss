@@ -1,0 +1,10 @@
+.timer {
+  @include text-options(30px, 36px, 500, $second-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: -1;
+  width: 255px;
+  height: 65px;
+  background-color: $bg-color1;
+}

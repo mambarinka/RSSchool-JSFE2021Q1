@@ -2,11 +2,14 @@ import { delay } from '../shared/delay';
 import { BaseComponent } from './base-component';
 import { Card } from './card';
 import { CardsField } from './cards-field';
+import { Timer } from './timer';
 
-const FLIP_DELAY = 3000;
+const FLIP_DELAY = 1000;
 
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
+
+  private readonly timer: Timer;
 
   private activeCard?: Card;
 
@@ -16,6 +19,7 @@ export class Game extends BaseComponent {
     super('main', ['page-main']);
     this.cardsField = new CardsField('div', ['cards-field__wrapper']);
     this.element.append(this.cardsField.wrapper);
+    this.timer = new Timer();
   }
 
   newGame(images: string[]) {
@@ -30,6 +34,7 @@ export class Game extends BaseComponent {
       card.element.addEventListener('click', () => this.cardHandler(card));
     });
 
+    this.cardsField.addTimer(this.timer.element);
     this.cardsField.addCards(cards);
   }
 
@@ -38,8 +43,8 @@ export class Game extends BaseComponent {
     console.log(this.isAnimation);
     if (this.isAnimation) return;
     if (!card.isFlipped) return; // если она будет отображаться к нам лицом, то никак не реагируем
-
     this.isAnimation = true;
+
     await card.flipToFront();
 
     if (!this.activeCard) {
