@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const  {CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const devServer = (isDev) => !isDev ? {} : {
   devServer: {
@@ -15,6 +16,15 @@ const devServer = (isDev) => !isDev ? {} : {
 };
 
 const esLintPlugin = (isDev) => isDev ? [] : [ new ESLintPlugin({ extensions: ['ts', 'js'] }) ];
+const imageMinPlugin = (isDev) => isDev ? [] : [new ImageminPlugin({
+  imageminOptions: {
+      plugins: [
+          ['webp', { quality: 50 }],
+          ['mozjpeg', { quality: 10 }],
+          ['pngquant', { quality: [0.9, 0.95]}],
+      ]
+  }
+})];
 
 module.exports = ({development}) => ({
   mode: development ? 'development' : 'production',
@@ -63,6 +73,7 @@ module.exports = ({development}) => ({
       // title: 'Settings'
       template: './src/index.html'
     }),
+    ...imageMinPlugin(development),
     new CopyPlugin({
       patterns: [
         { from: 'public' },
