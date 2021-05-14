@@ -1,4 +1,5 @@
 import './style.scss';
+import './assets/images/logo.svg';
 import { App } from './app';
 
 window.onload = () => {

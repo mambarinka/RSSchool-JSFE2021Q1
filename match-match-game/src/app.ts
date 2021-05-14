@@ -1,17 +1,25 @@
 // import { Card } from './components/card/card';
 import { Footer } from './components/footer';
 import { Game } from './components/game';
+import { Header } from './components/header';
 import { ImageCategoryModel } from './models/image-category-model';
 
 export class App {
+  private readonly header: Header;
 
   private readonly game: Game;
+
   private readonly footer: Footer;
 
   constructor(private readonly rootElement: HTMLElement) {
+    this.header = new Header();
     this.game = new Game(); // страница Game, здесб же добавить 2 другие страницы, + подключить роутинг ( и в зависимости от роута менял бы отображение -какой класс выводить на экран)
     this.footer = new Footer();
-    this.rootElement.append(this.game.element, this.footer.element);
+    this.rootElement.append(
+      this.header.element,
+      this.game.element,
+      this.footer.element
+    );
   }
 
   async start() {

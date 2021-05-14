@@ -1,0 +1,12 @@
+.page-header {
+  display: flex;
+  min-height: 6vh;
+  background-color: $main-color;
+}
+
+.page-header__wrapper {
+  @include wrapper;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
