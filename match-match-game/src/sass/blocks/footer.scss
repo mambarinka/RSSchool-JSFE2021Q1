@@ -1,7 +1,7 @@
 .footer {
-  min-height: 10vh;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  min-height: 3vh;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   border-top: 1px solid;
   border-image-slice: 1;
@@ -9,17 +9,15 @@
 }
 
 .footer__wrapper {
-  padding: 0 15px;
+  @include wrapper;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
 .footer__link {
-  @include text-options (21px, 50px, 500, $main-text-color);
+  @include text-options(21px, 50px, 500, $second-text-color);
   transition: 0.3s;
 
   &--github {
@@ -45,7 +43,7 @@
 }
 
 .footer__link-year {
-  @include text-options (21px, 50px, 500, $main-text-color);
+  @include text-options(21px, 50px, 500, $second-text-color);
   position: absolute;
   bottom: -10px;
   right: -10px;

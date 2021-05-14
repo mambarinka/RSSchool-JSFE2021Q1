@@ -1,0 +1,55 @@
+.main-nav {
+  display: flex;
+  align-self: stretch;
+  width: 300px;
+  background-color: $main-color;
+}
+
+.main-nav__list {
+  @include list-reset();
+  display: flex;
+  width: 100%;
+}
+
+.main-nav__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% / 3);
+  text-align: center;
+}
+
+.main-nav__link {
+  @include text-options(12px, 15px, 400, $bg-color1);
+  width: 100%;
+  height: 100%;
+  padding-top: 44px;
+  background-position: center 10px;
+  background-repeat: no-repeat;
+
+  &--about {
+    background-image: url("./assets/images/mark-question.svg");
+  }
+
+  &--score {
+    background-image: url("./assets/images/mark-star.svg");
+  }
+
+  &--settings {
+    background-image: url("./assets/images/mark-setting.svg");
+  }
+
+  &--current {
+    background-color: #1e88e5;
+  }
+
+  &:hover {
+    background-color: #1e88e5;
+  }
+}
+
+.main-nav__toggle {
+  margin-left: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

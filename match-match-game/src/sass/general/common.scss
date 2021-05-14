@@ -10,6 +10,7 @@ html {
 }
 
 body {
+  @include text-options(12px, 15px, 400, $bg-color1);
   min-width: 320px;
   margin: 0;
   padding: 0;
