@@ -5,6 +5,7 @@ const  {CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const imageminMozjpeg = require('imagemin-mozjpeg');
 
 const devServer = (isDev) => !isDev ? {} : {
   devServer: {
@@ -16,15 +17,15 @@ const devServer = (isDev) => !isDev ? {} : {
 };
 
 const esLintPlugin = (isDev) => isDev ? [] : [ new ESLintPlugin({ extensions: ['ts', 'js'] }) ];
-const imageMinPlugin = (isDev) => isDev ? [] : [new ImageminPlugin({
-  imageminOptions: {
-      plugins: [
-          ['webp', { quality: 50 }],
-          ['mozjpeg', { quality: 10 }],
-          ['pngquant', { quality: [0.9, 0.95]}],
-      ]
-  }
-})];
+// const imageMinPlugin = (isDev) => isDev ? [] : [new ImageminPlugin({
+//   imageminOptions: {
+//       plugins: [
+//           ['webp', { quality: 50 }],
+//           ['mozjpeg', { quality: 10 }],
+//           ['pngquant', { quality: [0.9, 0.95]}],
+//       ]
+//   }
+// })];
 
 module.exports = ({development}) => ({
   mode: development ? 'development' : 'production',
@@ -55,6 +56,9 @@ module.exports = ({development}) => ({
       {
         test: /\.(woff(2)?|eot|ttf|otf)$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]'
+      },
       },
       {
         test: /\.css$/i,
@@ -73,13 +77,22 @@ module.exports = ({development}) => ({
       // title: 'Settings'
       template: './src/index.html'
     }),
-    ...imageMinPlugin(development),
+    // ...imageMinPlugin(development),
     new CopyPlugin({
       patterns: [
         { from: 'public' },
       ],
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    new ImageminPlugin({
+      plugins: [
+        imageminMozjpeg({
+          maxFileSize: 244,
+          quality: 50,
+          progressive: true
+        })
+      ]
+    })
   ],
   resolve: {
     extensions: ['.ts', '.js'],

@@ -1,5 +1,5 @@
 @import "./sass/general/normalize.scss";
-// @import "./sass/general/fonts.scss";
+@import "./sass/general/fonts.scss";
 @import "./sass/general/variables.scss";
 @import "./sass/general/mixins.scss";
 @import "./sass/general/common.scss";
@@ -8,6 +8,7 @@
 @import "./sass/blocks/main-nav.scss";
 @import "./sass/blocks/logo.scss";
 @import "./sass/blocks/page-main.scss";
+@import "./sass/blocks/how-to-play.scss";
 @import "./sass/blocks/timer.scss";
 @import "./sass/blocks/cards-field.scss";
 @import "./sass/blocks/card.scss";

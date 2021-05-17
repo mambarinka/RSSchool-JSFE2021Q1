@@ -1,22 +1,23 @@
-import { BaseComponent } from './base-component';
+import { BaseComponent } from '../shared/base-component';
 import { Card } from './card';
 // import { Timer } from './timer';
 
-const SHOW_TIME = 10; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
+const SHOW_TIME = 1; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
 
 export class CardsField extends BaseComponent {
-  readonly wrapper: HTMLElement;
+  // readonly wrapper: HTMLElement;
 
-  private timer?: HTMLElement;
+  // private timer?: HTMLElement;
 
   private cards: Card[] = [];
 
-  constructor(div: keyof HTMLElementTagNameMap = 'div', styles: string[] = []) {
+  constructor() {
     super('div', ['cards-field']);
 
-    this.wrapper = document.createElement(div);
-    this.wrapper.classList.add(...styles);
-    this.wrapper.append(this.element);
+    // this.wrapper = document.createElement(div);
+    // this.wrapper.classList.add(...styles);
+    // this.wrapper.append(this.element);
+    // console.log(`this.element: ${this.element}`);
     // this.element.append(this.timer);
   }
 
@@ -25,14 +26,18 @@ export class CardsField extends BaseComponent {
     this.element.innerHTML = '';
   }
 
-  addTimer(timer: HTMLElement) {
-    this.timer = timer;
-    this.wrapper.append(this.timer);
-  }
+  // addTimer(timer: HTMLElement) {
+  //   this.timer = timer;
+  //   this.element.append(this.timer);
+  // }
 
   addCards(cards: Card[]) {
     this.cards = cards;
-    this.cards.forEach((card) => this.element.append(card.element));
+    console.log(this.element);
+    this.cards.forEach((card) => {
+      // console.log(card.element);
+      this.element.append(card.element);
+    });
     setTimeout(() => {
       this.cards.forEach((card) => card.flipToBack());
     }, SHOW_TIME * 1000);

@@ -1,13 +1,17 @@
 import { delay } from '../shared/delay';
-import { BaseComponent } from './base-component';
+import { BaseComponent } from '../shared/base-component';
 import { Card } from './card';
 import { CardsField } from './cards-field';
 import { Timer } from './timer';
+// import { CardsFieldWrapper } from './cards-field-wrapper';
+// import { RootElement } from '../app/app.api';
 
 const FLIP_DELAY = 1000;
 
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
+
+  readonly wrapper: HTMLElement;
 
   private readonly timer: Timer;
 
@@ -15,11 +19,20 @@ export class Game extends BaseComponent {
 
   private isAnimation = false;
 
-  constructor() {
+  constructor(div: keyof HTMLElementTagNameMap = 'div') {
     super('main', ['page-main']);
-    this.cardsField = new CardsField('div', ['cards-field__wrapper']);
-    this.element.append(this.cardsField.wrapper);
+
+    this.wrapper = document.createElement(div);
+    this.wrapper.classList.add('cards-field__wrapper');
+    this.element.append(this.wrapper);
+
+    // this.wrapper = new CardsFieldWrapper();
+
+    this.cardsField = new CardsField();
     this.timer = new Timer();
+    this.wrapper.append(this.timer.element);
+    this.wrapper.append(this.cardsField.element);
+    // this.wrapper.addTimer(this.timer.element);
   }
 
   newGame(images: string[]) {
@@ -34,8 +47,7 @@ export class Game extends BaseComponent {
       card.element.addEventListener('click', () => this.cardHandler(card));
     });
 
-    this.cardsField.addTimer(this.timer.element);
-    this.cardsField.addCards(cards);
+    return this.cardsField.addCards(cards);
   }
 
   private async cardHandler(card: Card) {

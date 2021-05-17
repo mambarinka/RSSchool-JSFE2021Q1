@@ -1,35 +1,37 @@
-import { BaseComponent } from './base-component';
+import { BaseComponent } from '../shared/base-component';
+import { ButtonMain } from './button-main';
+import { Logo } from './logo';
+import { Navigation } from './navigation';
 
 export class Header extends BaseComponent {
-  constructor() {
+  readonly wrapper: HTMLElement;
+
+  private readonly logo: Logo;
+
+  private readonly navigation: Navigation;
+
+  private readonly button: ButtonMain;
+
+  constructor(div: keyof HTMLElementTagNameMap = 'div') {
     super('header', ['page-header']);
 
-    this.element.innerHTML = `
-    <div class="page-header__wrapper">
-    <a class="logo">
-      <img
-        class="logo__image"
-        src="assets/images/logo.svg"
-        width="80"
-        height="39"
-        alt="Logo of Match-Match-Game"
-      />
-    </a>
-    <nav class="main-nav">
-      <ul class="main-nav__list">
-        <li class="main-nav__item">
-          <a class="main-nav__link main-nav__link--current main-nav__link--about" href="/about-game">About Game</a>
-        </li>
-        <li class="main-nav__item">
-          <a class="main-nav__link main-nav__link--score" href="/best-score">Best Score</a>
-        </li>
-        <li class="main-nav__item">
-          <a class="main-nav__link main-nav__link--settings" href="/game-settings">Game Settings</a>
-        </li>
-      </ul>
-    </nav>
-    <button class="main-nav__toggle button" type="button">register new player</button>
-  </div>
-    `;
+    this.wrapper = document.createElement(div);
+    this.wrapper.classList.add('page-header__wrapper');
+    this.element.append(this.wrapper);
+
+    this.logo = new Logo();
+    this.wrapper.append(this.logo.element);
+
+    this.navigation = new Navigation();
+    this.wrapper.append(this.navigation.element);
+
+    this.button = new ButtonMain();
+    this.wrapper.append(this.button.element);
+
+    // this.button.addEventListener('click', () => this.buttonHandler());
   }
+
+  // buttonHandler() {
+
+  // }
 }
