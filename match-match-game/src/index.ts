@@ -7,6 +7,7 @@ import './assets/images/logo.svg';
 import { App } from './app/app';
 
 window.onload = () => {
-  new App(document.body).render();
-  new App(document.body).start();
+  const application = new App(document.body);
+  application.render();
+  application.start();
 };

@@ -1,10 +1,10 @@
 import { BaseComponent } from '../shared/base-component';
 
-export class ButtonMain extends BaseComponent {
+export class ButtonCancel extends BaseComponent {
   constructor() {
-    super('button', ['main-nav__toggle', 'button']);
+    super('button', ['form__btn-cancel', 'button']);
     this.element.textContent = `
-    register new player
+    cancel
       `;
 
     (<HTMLButtonElement>this.element).type = `button`;

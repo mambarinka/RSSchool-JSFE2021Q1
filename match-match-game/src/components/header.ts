@@ -4,6 +4,10 @@ import { Logo } from './logo';
 import { Navigation } from './navigation';
 
 export class Header extends BaseComponent {
+  isGameOpen = false;
+
+  isRegistrationOpen = false;
+
   readonly wrapper: HTMLElement;
 
   private readonly logo: Logo;
@@ -11,6 +15,10 @@ export class Header extends BaseComponent {
   private readonly navigation: Navigation;
 
   private readonly button: ButtonMain;
+
+  // private readonly howToPlay: HowToPlay;
+
+  // private readonly game: Game;
 
   constructor(div: keyof HTMLElementTagNameMap = 'div') {
     super('header', ['page-header']);
@@ -28,10 +36,27 @@ export class Header extends BaseComponent {
     this.button = new ButtonMain();
     this.wrapper.append(this.button.element);
 
-    // this.button.addEventListener('click', () => this.buttonHandler());
+    // this.howToPlay = new HowToPlay();
+    // console.log(this.howToPlay.element);
+    // this.game = new Game();
+
+    this.button.element.addEventListener('click', () => this.buttonHandler());
   }
 
-  // buttonHandler() {
+  buttonHandler() {
+    const gameElement = document.querySelector('.cards-field__wrapper');
+    const registrationElement = document.querySelector('.registration');
+    const howToPlayElement = document.querySelector('.how-to-play__wrapper');
 
-  // }
+    // if (condition) {
+
+    // } else {
+
+    // }
+
+    if (this.isGameOpen) return;
+    // gameElement?.classList.toggle('hide');
+    howToPlayElement?.classList.toggle('hide');
+    registrationElement?.classList.toggle('hide');
+  }
 }

@@ -11,27 +11,21 @@ const FLIP_DELAY = 1000;
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
 
-  readonly wrapper: HTMLElement;
-
   private readonly timer: Timer;
 
   private activeCard?: Card;
 
   private isAnimation = false;
 
-  constructor(div: keyof HTMLElementTagNameMap = 'div') {
-    super('main', ['page-main']);
-
-    this.wrapper = document.createElement(div);
-    this.wrapper.classList.add('cards-field__wrapper');
-    this.element.append(this.wrapper);
+  constructor() {
+    super('div', ['cards-field__wrapper', 'hide']);
 
     // this.wrapper = new CardsFieldWrapper();
 
     this.cardsField = new CardsField();
     this.timer = new Timer();
-    this.wrapper.append(this.timer.element);
-    this.wrapper.append(this.cardsField.element);
+    this.element.append(this.timer.element);
+    this.element.append(this.cardsField.element);
     // this.wrapper.addTimer(this.timer.element);
   }
 

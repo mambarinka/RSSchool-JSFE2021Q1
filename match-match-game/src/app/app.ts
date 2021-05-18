@@ -7,7 +7,7 @@ export class App implements Component {
 
   private readonly aboutGame: AboutGame;
 
-  constructor(private readonly rootElement: RootElement) {
+  constructor(private readonly rootElement: HTMLElement) {
     this.aboutGame = new AboutGame(this.rootElement);
     this.game = new Game(); // страница Game, здесб же добавить 2 другие страницы, + подключить роутинг ( и в зависимости от роута менял бы отображение -какой класс выводить на экран)
     // this.footer = new Footer();
