@@ -6,7 +6,6 @@ import { FormRegistrationList } from './form-registration-list';
 import { FormRegistrationTitle } from './form-registration-title';
 
 export class FormRegistration extends BaseComponent {
-
   readonly title: FormRegistrationTitle;
 
   readonly formList: FormRegistrationList;

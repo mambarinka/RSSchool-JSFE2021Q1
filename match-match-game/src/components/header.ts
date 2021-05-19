@@ -46,7 +46,9 @@ export class Header extends BaseComponent {
   buttonHandler() {
     const gameElement = document.querySelector('.cards-field__wrapper');
     const registrationElement = document.querySelector('.registration');
+
     const howToPlayElement = document.querySelector('.how-to-play__wrapper');
+    const bestScoreElement = document.querySelector('.best-score__wrapper');
 
     // if (condition) {
 
@@ -55,8 +57,11 @@ export class Header extends BaseComponent {
     // }
 
     if (this.isGameOpen) return;
-    // gameElement?.classList.toggle('hide');
-    howToPlayElement?.classList.toggle('hide');
-    registrationElement?.classList.toggle('hide');
+    gameElement?.classList.toggle('hide');
+
+    // howToPlayElement?.classList.toggle('hide');
+    bestScoreElement?.classList.toggle('hide');
+
+    // registrationElement?.classList.toggle('hide');
   }
 }

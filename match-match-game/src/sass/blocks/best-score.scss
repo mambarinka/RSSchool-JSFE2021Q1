@@ -1,0 +1,48 @@
+.best-score__wrapper {
+  @include wrapper();
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 80%;
+  min-height: 100%;
+  padding: 48px 56px;
+  background-color: $bg-color2;
+}
+
+.best-score__title {
+  @include h1-model();
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.best-score__list {
+  @include list-reset;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  top: 100px;
+}
+
+.best-score__item {
+  display: flex;
+}
+
+.best-score__data-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.best-score__name-user {
+  @include text-options(14px, 21px, 500, $main-text-color);
+}
+
+.best-score__email-user {
+  @include text-options(12px, 15px, 400, $second-text-color);
+}
+
+.best-score__result {
+  @include text-options(14px, 24px, 500, #2196f3);
+  margin-left: auto;
+}

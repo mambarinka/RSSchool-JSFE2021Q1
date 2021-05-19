@@ -1,3 +1,50 @@
+import { AboutGame } from "../app/pages/page-about-game";
+import { BestScore } from "../app/pages/page-best-score";
+import { BaseComponent } from "../shared/base-component";
+
+export class Route {
+  private currentRouteName: string = '';
+
+  private currentRoute: { name: string, component: BaseComponent } = { name: 'default', component: new AboutGame() };
+
+  private readonly routing: { name: string, component: BaseComponent }[] = [{
+    name: "about",
+    component: new AboutGame()
+  },
+  {
+    name: "score",
+    component: new BestScore()
+  },
+  {
+    name: "settings",
+    component: new AboutGame()
+  }
+  ];
+
+  // private readonly defaultRoute: { name: string, component: BaseComponent } = {
+  //   name: "default",
+  //   component: new AboutGame()
+  // };
+
+  private currentRoutePage: BaseComponent = this.currentRoute.component;
+
+  constructor() {
+  }
+
+  getCurrentRoute(): BaseComponent {
+    this.currentRouteName = window.location.hash.slice(2);
+    console.log(this.currentRoute);
+    this.currentRoute = this.routing.find((p) => {
+      return p.name === this.currentRouteName;
+    });
+    this.currentRoutePage = this.currentRoute?.component;
+
+    console.log(`this.currentRoute: ${this.currentRoute} `);
+    console.log(`this.currentRoutePage: ${this.currentRoutePage} `);
+    return this.currentRoutePage;
+  }
+}
+
 // /**
 //  * @typedef IRoute
 //  * @property {string} name
@@ -21,8 +68,8 @@
 //  * @type {Array<IRoute>}
 //  */
 // const routing = [{
-//   name: "test",
-//   component: () => {
+//   "name": "test",
+//   "component": () => {
 //     container.innerHTML = `test`;
 //   }
 // },
@@ -48,8 +95,9 @@
 // const defaultRoute = {
 //   "name": "default",
 //   "component": () => {
-//     container.innerHTML = `default`;
+//     container.innerHTML = `default `;
 //   }
 // };
 
 // window.onpopstate();
+// console.log('hi');

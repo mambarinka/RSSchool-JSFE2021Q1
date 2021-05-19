@@ -10,8 +10,7 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const devServer = (isDev) => !isDev ? {} : {
   devServer: {
     open: true,
-    hot: true,
-    port: 8080,
+    port: 27017,
     contentBase: path.join(__dirname, 'public'),
   },
 };
@@ -47,7 +46,7 @@ module.exports = ({development}) => ({
         exclude: /node_modules/,
       },
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg|webp)$/i,
         type: 'asset/resource',
         generator: {
           filename: 'assets/images/[name][ext]'
@@ -84,15 +83,15 @@ module.exports = ({development}) => ({
       ],
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-    new ImageminPlugin({
-      plugins: [
-        imageminMozjpeg({
-          maxFileSize: 244,
-          quality: 50,
-          progressive: true
-        })
-      ]
-    })
+    // new ImageminPlugin({
+    //   plugins: [
+    //     imageminMozjpeg({
+    //       maxFileSize: 244,
+    //       quality: 50,
+    //       progressive: true
+    //     })
+    //   ]
+    // })
   ],
   resolve: {
     extensions: ['.ts', '.js'],
