@@ -5,15 +5,11 @@ import { AboutGame } from './pages/page-about-game';
 import { PageMain } from '../components/page-main';
 import { Registration } from '../components/registration';
 import { Component, ImageCategoryModel } from './app.api';
-// import { PageAboutGame } from './pages/page-about-game';
 import { BestScore } from './pages/page-best-score';
 import { Route } from '../components/routing';
+import { Settings } from './pages/page-settings';
 
 export class App implements Component {
-  // private readonly aboutGame: PageAboutGame;
-
-  // private readonly bestScore: PageBestScore;
-
   private readonly header: Header;
 
   private readonly pageMain: PageMain;
@@ -21,6 +17,8 @@ export class App implements Component {
   private readonly aboutGame: AboutGame;
 
   private readonly bestScore: BestScore;
+
+  private readonly settings: Settings;
 
   private readonly game: Game;
 
@@ -42,6 +40,7 @@ export class App implements Component {
 
     this.aboutGame = new AboutGame();
     this.bestScore = new BestScore();
+    this.settings = new Settings();
 
     this.game = new Game();
     this.registration = new Registration();
@@ -52,8 +51,8 @@ export class App implements Component {
   render(): HTMLElement {
 
         window.onpopstate = () => {
+          // console.log(`this.currentRoute.getCurrentRoute(): ${this.currentRoute.getCurrentRoute()}`);
           console.log(`this.currentRoute.getCurrentRoute(): ${this.currentRoute.getCurrentRoute()}`);
-          // console.log(`this.currentRoute.getCurrentRoute().element: ${this.currentRoute.element}`);
         }
 
     this.rootElement?.append(
@@ -66,7 +65,9 @@ export class App implements Component {
 
       // this.aboutGame.element,
       // this.bestScore.element,
-      this.currentRoute.getCurrentRoute(),
+      this.settings.element,
+      // this.currentRoute.getCurrentRoute(),
+
       this.game.element,
       this.registration.element
     );

@@ -1,11 +1,12 @@
 import { AboutGame } from "../app/pages/page-about-game";
 import { BestScore } from "../app/pages/page-best-score";
+import { Settings } from "../app/pages/page-settings";
 import { BaseComponent } from "../shared/base-component";
 
 export class Route {
   private currentRouteName: string = '';
 
-  private currentRoute: { name: string, component: BaseComponent } = { name: 'default', component: new AboutGame() };
+  private currentRoute?: { name: string, component: BaseComponent } = { name: "default", component: new AboutGame() };
 
   private readonly routing: { name: string, component: BaseComponent }[] = [{
     name: "about",
@@ -17,30 +18,42 @@ export class Route {
   },
   {
     name: "settings",
-    component: new AboutGame()
+    component: new Settings()
   }
   ];
 
-  // private readonly defaultRoute: { name: string, component: BaseComponent } = {
-  //   name: "default",
-  //   component: new AboutGame()
-  // };
+  private readonly defaultRoute: { name: string, component: BaseComponent } = {
+    name: "default",
+    component: new AboutGame()
+  };
 
-  private currentRoutePage: BaseComponent = this.currentRoute.component;
+  private currentRoutePage?: BaseComponent = this.currentRoute?.component;
 
   constructor() {
+
   }
 
-  getCurrentRoute(): BaseComponent {
+  getCurrentRoute(): BaseComponent | undefined {
     this.currentRouteName = window.location.hash.slice(2);
-    console.log(this.currentRoute);
+
+
     this.currentRoute = this.routing.find((p) => {
+
+      if (p.name !== this.currentRouteName) {
+       return this.defaultRoute;
+      }
+
       return p.name === this.currentRouteName;
     });
+
+
     this.currentRoutePage = this.currentRoute?.component;
 
+    console.log(`window.location.hash: ${window.location.hash}`);
+    console.log(`this.currentRouteName: ${this.currentRouteName}`);
     console.log(`this.currentRoute: ${this.currentRoute} `);
     console.log(`this.currentRoutePage: ${this.currentRoutePage} `);
+
     return this.currentRoutePage;
   }
 }

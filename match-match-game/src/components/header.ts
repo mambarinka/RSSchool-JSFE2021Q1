@@ -49,6 +49,7 @@ export class Header extends BaseComponent {
 
     const howToPlayElement = document.querySelector('.how-to-play__wrapper');
     const bestScoreElement = document.querySelector('.best-score__wrapper');
+    const settingsElement = document.querySelector('.settings__wrapper');
 
     // if (condition) {
 
@@ -60,7 +61,8 @@ export class Header extends BaseComponent {
     gameElement?.classList.toggle('hide');
 
     // howToPlayElement?.classList.toggle('hide');
-    bestScoreElement?.classList.toggle('hide');
+    // bestScoreElement?.classList.toggle('hide');
+    settingsElement?.classList.toggle('hide');
 
     // registrationElement?.classList.toggle('hide');
   }

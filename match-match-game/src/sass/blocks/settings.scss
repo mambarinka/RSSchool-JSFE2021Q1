@@ -1,0 +1,32 @@
+.settings__wrapper {
+  @include wrapper();
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 80%;
+  padding: 48px 56px;
+  background-color: $bg-color2;
+}
+
+.settings__title {
+  @include h1-model();
+  width: 100%;
+}
+
+.settings__label {
+  @include text-options(14px, 21px, 400, $second-text-color);
+  width: 150px;
+}
+
+.settings__select {
+  width: 70px;
+  margin-bottom: 40px;
+  background-color: $bg-color2;
+  border: none;
+}
+
+.settings__option {
+  @include text-options(14px, 21px, 400, $second-text-color);
+  border: none;
+}
