@@ -8,6 +8,10 @@ export class Navigation extends BaseComponent {
 
   private readonly menuTextContent: string[];
 
+  private currentRouteName: string = '';
+
+  private currentNavItem: Element | null = document.body;
+
   constructor(ul: keyof HTMLElementTagNameMap = 'ul') {
     super('nav', ['main-nav']);
 
@@ -19,6 +23,8 @@ export class Navigation extends BaseComponent {
     this.menuItem = ['about', 'score', 'settings'];
     this.menuTextContent = ['About Game', 'Best Score', 'Game Settings'];
 
+    this.currentRouteName = window.location.hash.slice(2);
+
     for (let i = 0; i < 3; i++) {
       const navItem: NavItem = new NavItem(
         'a',
@@ -26,6 +32,12 @@ export class Navigation extends BaseComponent {
         this.menuTextContent[i]
       );
       this.list.append(navItem.element);
+
+      if (navItem.link.className === `main-nav__link main-nav__link--${this.currentRouteName}`) {
+        console.log(navItem.link);
+        navItem.link.classList.add('main-nav__link--current');
+      }
     }
+
   }
 }
