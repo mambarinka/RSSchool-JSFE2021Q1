@@ -27,6 +27,7 @@ export class App implements Component {
   private readonly footer: Footer;
 
   private readonly currentRoute: Route;
+  public currentRouteElement: HTMLElement;
 
   constructor(private readonly rootElement: HTMLElement) {
     // this.aboutGame = new PageAboutGame(this.rootElement);
@@ -46,33 +47,33 @@ export class App implements Component {
     this.registration = new Registration();
 
     this.currentRoute = new Route();
+
+    this.currentRouteElement = this.currentRoute.getCurrentRoute();
+    // console.log(this.currentRouteElement );
   }
 
   render(): HTMLElement {
-
-        window.onpopstate = () => {
-          // console.log(`this.currentRoute.getCurrentRoute(): ${this.currentRoute.getCurrentRoute()}`);
-          console.log(`this.currentRoute.getCurrentRoute(): ${this.currentRoute.getCurrentRoute()}`);
-        }
-
     this.rootElement?.append(
       this.header.element,
       this.pageMain.element,
       this.footer.element
     );
-
     this.pageMain.element.append(
-
-      // this.aboutGame.element,
-      // this.bestScore.element,
-      this.settings.element,
-      // this.currentRoute.getCurrentRoute(),
-
+      this.currentRouteElement,
       this.game.element,
       this.registration.element
     );
+    window.onpopstate = () => {
+      this.pageMain.element.innerHTML = '';
+      this.currentRouteElement = this.currentRoute.getCurrentRoute();
+      this.pageMain.element.append(
+        this.currentRouteElement,
+        this.game.element,
+        this.registration.element
+      );
+    }
 
-    return this.rootElement;
+    return this.currentRouteElement;
   }
 
   // start(): Promise<void> {

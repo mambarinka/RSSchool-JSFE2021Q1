@@ -24,8 +24,10 @@ export class Game extends BaseComponent {
 
     this.cardsField = new CardsField();
     this.timer = new Timer();
-    this.element.append(this.timer.element);
-    this.element.append(this.cardsField.element);
+    this.element.append(
+      this.timer.element,
+      this.cardsField.element
+    );
     // this.wrapper.addTimer(this.timer.element);
   }
 

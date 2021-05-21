@@ -19,7 +19,6 @@ export class CardsField extends BaseComponent {
 
   addCards(cards: Card[]) {
     this.cards = cards;
-    console.log(this.element);
     this.cards.forEach((card) => {
       // console.log(card.element);
       this.element.append(card.element);

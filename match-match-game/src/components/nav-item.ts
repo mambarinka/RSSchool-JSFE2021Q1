@@ -1,7 +1,7 @@
 import { BaseComponent } from '../shared/base-component';
 
 export class NavItem extends BaseComponent {
-  readonly link: HTMLElement;
+  public readonly link: HTMLElement;
 
   constructor(
     a: keyof HTMLElementTagNameMap = 'a',
