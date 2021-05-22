@@ -10,7 +10,7 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const devServer = (isDev) => !isDev ? {} : {
   devServer: {
     open: true,
-    port: 27017,
+    port: 8080,
     contentBase: path.join(__dirname, 'public'),
   },
 };

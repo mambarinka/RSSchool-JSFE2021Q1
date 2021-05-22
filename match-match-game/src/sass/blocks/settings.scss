@@ -6,7 +6,8 @@
   align-items: flex-start;
   width: 80%;
   padding: 48px 56px;
-  background-color: $bg-color2;
+  background-color: $bg-color1;
+  box-shadow: 0 6px 5px rgba(0, 0, 0, 0.24), 0 9px 18px rgba(0, 0, 0, 0.18);
 }
 
 .settings__title {
@@ -16,13 +17,14 @@
 
 .settings__label {
   @include text-options(14px, 21px, 400, $second-text-color);
-  width: 150px;
+  width: 185px;
 }
 
 .settings__select {
-  width: 70px;
+  @include text-options(14px, 21px, 400, $main-color);
+  width: 100px;
   margin-bottom: 40px;
-  background-color: $bg-color2;
+  background-color: $bg-color1;
   border: none;
 }
 

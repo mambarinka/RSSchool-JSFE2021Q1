@@ -3,10 +3,9 @@ import { ButtonCancel } from './button-cancel';
 import { ButtonSubmit } from './button-submit';
 import { FormAvatar } from './form-avatar';
 import { FormRegistrationList } from './form-registration-list';
-import { FormRegistrationTitle } from './form-registration-title';
 
 export class FormRegistration extends BaseComponent {
-  readonly title: FormRegistrationTitle;
+  readonly title: HTMLElement;
 
   readonly formList: FormRegistrationList;
 
@@ -16,17 +15,22 @@ export class FormRegistration extends BaseComponent {
 
   readonly buttonCancel: ButtonCancel;
 
-  constructor() {
+  constructor(title: keyof HTMLElementTagNameMap = 'h2') {
     super('form', ['form']);
 
-    this.title = new FormRegistrationTitle();
+    this.title = document.createElement(title);
+    this.title.classList.add('form__title');
+    this.title.textContent = `
+    Registr new Player
+      `;
+
     this.formList = new FormRegistrationList();
     this.formAvatar = new FormAvatar();
     this.buttonSubmit = new ButtonSubmit();
     this.buttonCancel = new ButtonCancel();
 
     this.element.append(
-      this.title.element,
+      this.title,
       this.formList.element,
       this.formAvatar.element,
       this.buttonSubmit.element,

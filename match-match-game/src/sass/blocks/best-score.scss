@@ -21,17 +21,25 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   top: 100px;
 }
 
 .best-score__item {
   display: flex;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.best-score__item-avatar {
+  margin-right: 16px;
 }
 
 .best-score__data-user {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .best-score__name-user {
@@ -44,5 +52,11 @@
 
 .best-score__result {
   @include text-options(14px, 24px, 500, #2196f3);
+  align-self: center;
   margin-left: auto;
+
+  &::before {
+    @include text-options(14px, 21px, 500, $main-text-color);
+    content: "Score: ";
+  }
 }
