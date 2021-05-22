@@ -1,12 +1,11 @@
-import { BaseComponent } from '../shared/base-component';
+import { BaseComponentButton } from '../shared/base-component-button';
 
-export class ButtonSubmit extends BaseComponent {
+export class ButtonSubmit extends BaseComponentButton {
   constructor() {
-    super('button', ['form__btn-submit', 'button']);
-    this.element.textContent = `
+    super(['form__btn-submit', 'button']);
+    this.button.textContent = `
     Add user
       `;
-
-    (<HTMLButtonElement>this.element).type = `submit`;
+    this.button.type = 'submit';
   }
 }

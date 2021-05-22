@@ -1,9 +1,8 @@
 export class BaseComponentButton {
-  readonly button: HTMLElement;
+  readonly button: HTMLButtonElement;
 
-  constructor(tag: keyof HTMLElementTagNameMap = 'button', styles: string[] = [], type = 'button') {
-    this.button = document.createElement(tag);
+  constructor(styles: string[] = []) {
+    this.button = document.createElement('button');
     this.button.classList.add(...styles);
   }
-
 }

@@ -1,12 +1,11 @@
-import { BaseComponent } from '../shared/base-component';
+import { BaseComponentButton } from '../shared/base-component-button';
 
-export class ButtonMain extends BaseComponent {
+export class ButtonMain extends BaseComponentButton {
   constructor() {
-    super('button', ['main-nav__toggle', 'button']);
-    this.element.textContent = `
+    super(['main-nav__toggle', 'button']);
+    this.button.textContent = `
     register new player
       `;
-
-    (<HTMLButtonElement>this.element).type = `button`;
+      this.button.type = 'button';
   }
 }

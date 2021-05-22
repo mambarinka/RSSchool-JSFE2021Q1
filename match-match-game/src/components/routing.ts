@@ -24,7 +24,7 @@ export class Route {
   ];
 
   private readonly defaultRoute: { name: string, component: BaseComponent } = {
-    name: "default",
+    name: "about",
     component: new AboutGame()
   };
 
@@ -57,6 +57,7 @@ export class Route {
       this.currentRouteElement = this.currentRoute.component.element;
     } else {
       this.currentRouteElement = this.defaultRoute.component.element;
+      window.location.hash = `#/about`;
     }
     return this.currentRouteElement;
   }

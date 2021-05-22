@@ -14,7 +14,7 @@ export class Registration extends BaseComponent {
     this.formRegistration = new FormRegistration();
     this.element.append(
       this.overlay,
-      this.formRegistration.element
+      this.formRegistration.form
     );
 
     this.overlay.addEventListener('click', () => this.overlayHandler(this.element));

@@ -1,24 +1,15 @@
 import { Footer } from '../components/footer';
 import { Game } from '../components/game';
 import { Header } from '../components/header';
-import { AboutGame } from './pages/page-about-game';
 import { PageMain } from '../components/page-main';
 import { Registration } from '../components/registration';
 import { Component, ImageCategoryModel } from './app.api';
-import { BestScore } from './pages/page-best-score';
 import { Route } from '../components/routing';
-import { Settings } from './pages/page-settings';
 
 export class App implements Component {
   private readonly header: Header;
 
   private readonly pageMain: PageMain;
-
-  private readonly aboutGame: AboutGame;
-
-  private readonly bestScore: BestScore;
-
-  private readonly settings: Settings;
 
   private readonly game: Game;
 
@@ -30,18 +21,9 @@ export class App implements Component {
   public currentRouteElement: HTMLElement;
 
   constructor(private readonly rootElement: HTMLElement) {
-    // this.aboutGame = new PageAboutGame(this.rootElement);
-    // this.bestScore = new PageBestScore(this.rootElement);
-
-    // this.game = new Game(); // страница Game, здесб же добавить 2 другие страницы, + подключить роутинг ( и в зависимости от роута менял бы отображение -какой класс выводить на экран)
-
     this.header = new Header();
     this.pageMain = new PageMain();
     this.footer = new Footer();
-
-    this.aboutGame = new AboutGame();
-    this.bestScore = new BestScore();
-    this.settings = new Settings();
 
     this.game = new Game();
     this.registration = new Registration();
@@ -49,7 +31,6 @@ export class App implements Component {
     this.currentRoute = new Route();
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    // console.log(this.currentRouteElement );
   }
 
   render(): HTMLElement {

@@ -1,10 +1,9 @@
-import { BaseComponent } from '../shared/base-component';
+import { BaseComponentImage } from '../shared/base-component-image';
 
-export class FormAvatar extends BaseComponent {
+export class FormAvatar extends BaseComponentImage {
   constructor() {
-    super('img', ['form__user-img']);
-
-    (<HTMLImageElement>this.element).src = `./assets/images/user-img.svg`;
-    (<HTMLImageElement>this.element).alt = `avatar of user`;
+    super(['form__user-img']);
+    this.image.src = `./assets/images/user-img.svg`;
+    this.image.alt = `avatar of user`;
   }
 }

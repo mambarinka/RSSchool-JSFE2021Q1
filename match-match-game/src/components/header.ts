@@ -29,22 +29,24 @@ export class Header extends BaseComponent {
 
     this.wrapper = document.createElement(div);
     this.wrapper.classList.add('page-header__wrapper');
+
     this.logo = new Logo();
     this.navigation = new Navigation();
     this.button = new ButtonMain();
     this.currentRoute = new Route();
+
     this.element.append(this.wrapper);
 
     this.wrapper.append(
       this.logo.element,
       this.navigation.element,
-      this.button.element
+      this.button.button
     );
 
     // this.game = new Game();
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
 
-    this.button.element.addEventListener('click', () => this.buttonHandler());
+    this.button.button.addEventListener('click', () => this.buttonHandler());
   }
 
   buttonHandler() {
