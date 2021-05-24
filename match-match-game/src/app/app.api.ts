@@ -14,3 +14,9 @@ export interface CounterService {
   increment(): void;
   // subscribeOnCounter(callback: Function): number;
 }
+
+export interface User {
+  firstName: string,
+  lastName: string,
+  email: string
+}

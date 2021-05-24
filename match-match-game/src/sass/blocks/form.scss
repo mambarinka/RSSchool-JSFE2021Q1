@@ -74,6 +74,19 @@
   &::placeholder {
     @include text-options(16px, 24px, 400, $main-text-color);
   }
+
+  &--file {
+    position: absolute;
+    width: 139px;
+    bottom: -34px;
+    left: 32px;
+    cursor: pointer;
+  }
+}
+
+.form__user-img-wrapper {
+  position: relative;
+  display: flex;
 }
 
 .form__user-img {
