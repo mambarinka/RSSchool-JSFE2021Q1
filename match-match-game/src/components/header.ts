@@ -18,6 +18,7 @@ export class Header extends BaseComponent {
   private readonly button: ButtonMain;
 
   private readonly currentRoute: Route;
+
   public currentRouteElement: HTMLElement;
 
   // private readonly howToPlay: HowToPlay;
@@ -49,19 +50,18 @@ export class Header extends BaseComponent {
     this.button.button.addEventListener('click', () => this.buttonHandler());
   }
 
-  buttonHandler() {
+  buttonHandler(): void {
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
     window.onpopstate = () => {
       this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    }
+    };
 
-    const gameElement = document.querySelector('.cards-field__wrapper');
+    // const gameElement = document.querySelector('.cards-field__wrapper');
     const registrationElement = document.querySelector('.registration');
 
     if (this.isGameOpen) return;
-    // gameElement?.classList.toggle('hide');
-
     this.currentRouteElement.classList.toggle('hide');
+    // gameElement?.classList.toggle('hide');
 
     registrationElement?.classList.toggle('hide');
   }

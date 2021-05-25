@@ -12,15 +12,14 @@ export class Registration extends BaseComponent {
     this.overlay = document.createElement(div);
     this.overlay.classList.add('registration__overlay');
     this.formRegistration = new FormRegistration();
-    this.element.append(
-      this.overlay,
-      this.formRegistration.form
-    );
+    this.element.append(this.overlay, this.formRegistration.form);
 
-    this.overlay.addEventListener('click', () => this.overlayHandler(this.element));
+    this.overlay.addEventListener('click', () =>
+      this.overlayHandler(this.element)
+    );
   }
 
-  overlayHandler(element: HTMLElement) {
+  overlayHandler(element: HTMLElement): void {
     this.element.classList.add('hide');
   }
 }

@@ -48,8 +48,8 @@ export class FormRegistration extends BaseComponentForm {
     this.form.enctype = 'multipart/form-data';
     this.form.autocomplete = 'off';
 
-
     this.formList = new FormRegistrationList();
+    this.formAvatar = new FormAvatar();
 
     this.names = ['first-name', 'last-name', 'e-mail'];
     this.textContents = ['First Name', 'Last Name', ' E-mail'];
@@ -58,8 +58,17 @@ export class FormRegistration extends BaseComponentForm {
 
     for (let i = 0; i < 3; i++) {
       const formItem: FormRegistrationItem = new FormRegistrationItem();
-      const formLabel: FormLabel = new FormLabel(this.names[i], this.textContents[i]);
-      const formInput: FormInput = new FormInput(this.names[i], this.types[i], this.placeHolders[i], formItem);
+      const formLabel: FormLabel = new FormLabel(
+        this.names[i],
+        this.textContents[i]
+      );
+      const formInput: FormInput = new FormInput(
+        this.names[i],
+        this.types[i],
+        this.placeHolders[i],
+        formItem,
+        this.formAvatar
+      );
       this.arrayInputsHandler.push(formInput.inputNameHandler(formItem));
       this.arrayInputs.push(formInput);
       formItem.element.append(formLabel.label, formInput.input);
@@ -68,13 +77,22 @@ export class FormRegistration extends BaseComponentForm {
     }
 
     this.wrapperAvatar = new BaseComponent('div', ['form__user-img-wrapper']);
-    this.inputFile = new FormInput('file', 'file', '', new FormRegistrationItem());
+    this.inputFile = new FormInput(
+      'file',
+      'file',
+      '',
+      new FormRegistrationItem(),
+      this.formAvatar
+    );
     this.arrayInputs.push(this.inputFile);
     this.inputFile.input.classList.add('form__item-input--file');
     this.inputFile.input.required = false;
     this.inputFile.input.accept = 'image/png, image/jpeg';
-    this.formAvatar = new FormAvatar();
-    this.wrapperAvatar.element.append(this.inputFile.input, this.formAvatar.image);
+
+    this.wrapperAvatar.element.append(
+      this.inputFile.input,
+      this.formAvatar.image
+    );
 
     this.buttonSubmit = new ButtonSubmit();
     this.buttonCancel = new ButtonCancel();
@@ -87,8 +105,7 @@ export class FormRegistration extends BaseComponentForm {
       this.buttonCancel.button
     );
 
-    this.form.addEventListener('submit', (evt) =>
-      this.formSubmitHandler(evt));
+    this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
   }
 
   // checkValidInput(inputsHandlers: boolean[]): boolean {
@@ -96,7 +113,7 @@ export class FormRegistration extends BaseComponentForm {
   //   return isNotValidate;
   // }
 
-  formSubmitHandler(evt: Event) {
+  formSubmitHandler(evt: Event): void {
     // if (this.checkValidInput(this.arrayInputsHandler)) {
     //   console.log('переданы не валидные значения');
     //   evt.preventDefault();
@@ -105,10 +122,9 @@ export class FormRegistration extends BaseComponentForm {
     this.getUserObject();
   }
 
-  getUserObject() {
-    let userObject: User = {firstName: '', lastName: '', email: ''};
+  getUserObject(): User {
+    const userObject: User = { firstName: '', lastName: '', email: '' };
     this.arrayInputs.forEach((input) => {
-      console.log(input.input.value);
       if (input.input.name === 'first-name') {
         userObject.firstName = input.input.value;
       } else if (input.input.name === 'last-name') {
@@ -117,7 +133,6 @@ export class FormRegistration extends BaseComponentForm {
         userObject.email = input.input.value;
       }
     });
-    console.log(userObject);
 
     return userObject;
   }

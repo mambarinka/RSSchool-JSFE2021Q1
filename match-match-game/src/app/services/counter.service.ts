@@ -9,7 +9,6 @@ export class CounterServiceImplementation implements CounterService {
 
   increment(): void {
     this.counter++;
-    console.log(this.counter);
   }
 
   // subscribeOnCounter(callback: Function): number {

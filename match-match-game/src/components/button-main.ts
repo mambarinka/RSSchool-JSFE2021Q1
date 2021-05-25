@@ -6,6 +6,6 @@ export class ButtonMain extends BaseComponentButton {
     this.button.textContent = `
     register new player
       `;
-      this.button.type = 'button';
+    this.button.type = 'button';
   }
 }

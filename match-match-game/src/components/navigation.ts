@@ -9,7 +9,7 @@ export class Navigation extends BaseComponent {
 
   private readonly menuTextContent: string[];
 
-  private currentRouteName: string = '';
+  private currentRouteName = '';
 
   private currentNavItem: Element | null = document.body;
 
@@ -27,14 +27,19 @@ export class Navigation extends BaseComponent {
     this.currentRouteName = window.location.hash.slice(2);
     for (let i = 0; i < 3; i++) {
       const navItem: NavItem = new NavItem();
-      const navLink: NavLink = new NavLink(this.menuItem[i], this.menuTextContent[i]);
+      const navLink: NavLink = new NavLink(
+        this.menuItem[i],
+        this.menuTextContent[i]
+      );
 
       navItem.element.append(navLink.link);
 
       this.list.append(navItem.element);
 
-      if (navLink.link.className === `main-nav__link main-nav__link--${this.currentRouteName}`) {
-
+      if (
+        navLink.link.className ===
+        `main-nav__link main-nav__link--${this.currentRouteName}`
+      ) {
         navLink.link.classList.add('main-nav__link--current');
       }
     }

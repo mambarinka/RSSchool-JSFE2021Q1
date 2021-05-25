@@ -7,18 +7,18 @@ export class BaseComponent {
   }
 }
 
-export class Control {
-  readonly node: HTMLElement;
+// export class Control {
+//   readonly node: HTMLElement;
 
-  constructor(parentNode: HTMLElement,tagName = 'div', styles: string[] = [],  content = '') {
-    const element = document.createElement(tagName);
-    element.classList.add(...styles);
-    element.textContent = content;
+//   constructor(parentNode: HTMLElement, tagName = 'div', styles: string[] = [], content = '') {
+//     const element = document.createElement(tagName);
+//     element.classList.add(...styles);
+//     element.textContent = content;
 
-    if (parentNode !== undefined) {
-      parentNode && parentNode.append(element);
-    }
+//     if (parentNode !== undefined) {
+//       parentNode && parentNode.append(element);
+//     }
 
-    this.node = element;
-  }
-}
+//     this.node = element;
+//   }
+// }

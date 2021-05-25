@@ -18,6 +18,7 @@ export class App implements Component {
   private readonly footer: Footer;
 
   private readonly currentRoute: Route;
+
   public currentRouteElement: HTMLElement;
 
   constructor(private readonly rootElement: HTMLElement) {
@@ -52,7 +53,7 @@ export class App implements Component {
         this.game.element,
         this.registration.element
       );
-    }
+    };
 
     return this.currentRouteElement;
   }
@@ -65,7 +66,9 @@ export class App implements Component {
     const res = await fetch('./images.json');
     const categories: ImageCategoryModel[] = await res.json();
     const cat = categories[0];
-    const images = cat.images.map((name) => `${cat.category}/${name}`); //  здесь можно будет вывести вывод списка категорий и селектом выбрать какую категорию выбрать перед запуском игры
+    const images = cat.images.map((name) => `${cat.category}/${name}`);
+    //  здесь можно будет вывести вывод списка категорий и селектом выбрать
+    //  какую категорию выбрать перед запуском игры
 
     // const counterService = new CounterServiceImplementation();
     // counterService.increment();

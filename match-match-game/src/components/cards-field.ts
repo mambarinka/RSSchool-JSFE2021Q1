@@ -5,19 +5,18 @@ import { Card } from './card';
 const SHOW_TIME = 1; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
 
 export class CardsField extends BaseComponent {
-
   private cards: Card[] = [];
 
   constructor() {
     super('div', ['cards-field']);
   }
 
-  clear() {
+  clear(): void {
     this.cards = [];
     this.element.innerHTML = '';
   }
 
-  addCards(cards: Card[]) {
+  addCards(cards: Card[]): void {
     this.cards = cards;
     this.cards.forEach((card) => {
       // console.log(card.element);

@@ -24,14 +24,11 @@ export class Game extends BaseComponent {
 
     this.cardsField = new CardsField();
     this.timer = new Timer();
-    this.element.append(
-      this.timer.element,
-      this.cardsField.element
-    );
+    this.element.append(this.timer.element, this.cardsField.element);
     // this.wrapper.addTimer(this.timer.element);
   }
 
-  newGame(images: string[]) {
+  newGame(images: string[]): void {
     // здесь добавить таймер, который стартует при старте новой игры, здесь же добавить метод финиш, подчет очков
     this.cardsField.clear();
     const cards = images
@@ -48,7 +45,6 @@ export class Game extends BaseComponent {
 
   private async cardHandler(card: Card) {
     // async автоматом возвращает промис
-    console.log(this.isAnimation);
     if (this.isAnimation) return;
     if (!card.isFlipped) return; // если она будет отображаться к нам лицом, то никак не реагируем
     this.isAnimation = true;
@@ -74,6 +70,7 @@ export class Game extends BaseComponent {
     // если совпадают то красим в зеленый
     // }
     this.activeCard = undefined; //  обнулить активную карту
-    this.isAnimation = false; // для того, чтобы нельзя было , кликать много раз мышкой и переворачивать несколько карт одновременно
+    this.isAnimation = false; // для того, чтобы нельзя было ,
+    //  кликать много раз мышкой и переворачивать несколько карт одновременно
   }
 }

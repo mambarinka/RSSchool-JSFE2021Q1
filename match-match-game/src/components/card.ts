@@ -16,12 +16,12 @@ export class Card extends BaseComponent {
     `;
   }
 
-  flipToBack() {
+  flipToBack(): void {
     this.isFlipped = true;
     this.element.classList.add(FLIP_CLASS);
   }
 
-  flipToFront() {
+  flipToFront(): void {
     this.isFlipped = false;
     this.element.classList.remove(FLIP_CLASS);
   }

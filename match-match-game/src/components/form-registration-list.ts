@@ -1,7 +1,4 @@
 import { BaseComponent } from '../shared/base-component';
-import { FormInput } from './form-input';
-import { FormLabel } from './form-label';
-import { FormRegistrationItem } from './form-registration-item';
 
 export class FormRegistrationList extends BaseComponent {
   // private readonly names: string[];
@@ -19,8 +16,6 @@ export class FormRegistrationList extends BaseComponent {
     // this.textContents = ['First Name', 'Last Name', ' E-mail'];
     // this.types = ['text', 'text', 'email'];
     // this.placeHolders = ['Jessie', 'Doe', 'Jessie.Doe@gmail.com'];
-
-
 
     // for (let i = 0; i < 3; i++) {
     //   const formItem: FormRegistrationItem = new FormRegistrationItem();
