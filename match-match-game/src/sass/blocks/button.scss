@@ -1,7 +1,9 @@
 .button {
   display: inline-block;
-  width: 245px;
+  // width: 245px;
   margin: 0;
+  padding-right: 12px;
+  padding-left: 12px;
 
   @include text-options(14px, 16px, 500, $main-color);
 

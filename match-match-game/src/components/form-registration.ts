@@ -8,32 +8,22 @@ import { FormInput } from './form-input';
 import { FormLabel } from './form-label';
 import { FormRegistrationItem } from './form-registration-item';
 import { FormRegistrationList } from './form-registration-list';
+import { Registration } from './registration';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
-
+  // readonly registration: Registration;
   readonly formList: FormRegistrationList;
-
   readonly formAvatar: FormAvatar;
-
   readonly inputFile: FormInput;
-
   readonly wrapperAvatar: BaseComponent;
-
   readonly buttonSubmit: ButtonSubmit;
-
   readonly buttonCancel: ButtonCancel;
-
   private readonly names: string[];
-
   private readonly types: string[];
-
   private readonly textContents: string[];
-
   private readonly placeHolders: string[];
-
-  private readonly arrayInputsHandler: Array<boolean> = [];
-
+  // private readonly arrayInputsHandler: Array<boolean> = [];
   private readonly arrayInputs: Array<FormInput> = [];
 
   constructor(title: keyof HTMLElementTagNameMap = 'h2') {
@@ -50,6 +40,8 @@ export class FormRegistration extends BaseComponentForm {
 
     this.formList = new FormRegistrationList();
     this.formAvatar = new FormAvatar();
+    // this.registration = new Registration();
+    // console.log(this.registration);
 
     this.names = ['first-name', 'last-name', 'e-mail'];
     this.textContents = ['First Name', 'Last Name', ' E-mail'];
@@ -69,7 +61,7 @@ export class FormRegistration extends BaseComponentForm {
         formItem,
         this.formAvatar
       );
-      this.arrayInputsHandler.push(formInput.inputNameHandler(formItem));
+      // this.arrayInputsHandler.push(formInput.inputNameHandler(formItem));
       this.arrayInputs.push(formInput);
       formItem.element.append(formLabel.label, formInput.input);
       this.formList.element.append(formItem.element);
@@ -108,22 +100,32 @@ export class FormRegistration extends BaseComponentForm {
     this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
   }
 
-  // checkValidInput(inputsHandlers: boolean[]): boolean {
-  //   let isNotValidate: boolean = inputsHandlers.includes(true);
-  //   return isNotValidate;
-  // }
+  checkValidInput(inputsHandlers: boolean[]): boolean {
+    let isValidate: boolean = inputsHandlers.includes(true);
+    return isValidate;
+  }
 
   formSubmitHandler(evt: Event): void {
+    // console.log(this.arrayInputsHandler);
     // if (this.checkValidInput(this.arrayInputsHandler)) {
-    //   console.log('переданы не валидные значения');
-    //   evt.preventDefault();
     // }
+
+    const buttonSwitch = document.querySelector('.main-nav__toggle');
+    if (buttonSwitch !== null) {
+      buttonSwitch.textContent = 'Start Game';
+    }
+    const registrationPage = document.querySelector('.registration');
+    if (registrationPage !== null) {
+      registrationPage.classList.add('hide');
+    }
+    // this.registration.element.classList.add('hide');
+
     evt.preventDefault();
     this.getUserObject();
   }
 
   getUserObject(): User {
-    const userObject: User = { firstName: '', lastName: '', email: '' };
+    const userObject: User = { firstName: '', lastName: '', email: '', avatar: '' };
     this.arrayInputs.forEach((input) => {
       if (input.input.name === 'first-name') {
         userObject.firstName = input.input.value;
@@ -131,9 +133,11 @@ export class FormRegistration extends BaseComponentForm {
         userObject.lastName = input.input.value;
       } else if (input.input.name === 'e-mail') {
         userObject.email = input.input.value;
+      } else if (input.input.name === 'file') {
+        userObject.avatar = input.input.value;
       }
     });
-
+    console.log(userObject);
     return userObject;
   }
 }

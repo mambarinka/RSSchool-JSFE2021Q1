@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: flex-start;
   width: 639px;
   height: 460px;
@@ -24,8 +25,7 @@
   @include list-reset;
   display: flex;
   flex-direction: column;
-  width: 328px;
-  margin-right: 38px;
+  width: 49%;
   margin-bottom: 82px;
 }
 
@@ -79,7 +79,6 @@
     position: absolute;
     width: 139px;
     bottom: -34px;
-    left: 32px;
     cursor: pointer;
   }
 }
@@ -87,10 +86,13 @@
 .form__user-img-wrapper {
   position: relative;
   display: flex;
+  justify-content: center;
+  width: 50%;
+  min-height: 227px;
 }
 
 .form__user-img {
-  width: 198px;
+  max-height: 227px;
 }
 
 .form__btn-submit {

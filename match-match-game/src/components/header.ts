@@ -10,20 +10,11 @@ export class Header extends BaseComponent {
   isRegistrationOpen = false;
 
   readonly wrapper: HTMLElement;
-
   private readonly logo: Logo;
-
   private readonly navigation: Navigation;
-
   private readonly button: ButtonMain;
-
   private readonly currentRoute: Route;
-
   public currentRouteElement: HTMLElement;
-
-  // private readonly howToPlay: HowToPlay;
-
-  // private readonly game: Game;
 
   constructor(div: keyof HTMLElementTagNameMap = 'div') {
     super('header', ['page-header']);
@@ -44,7 +35,6 @@ export class Header extends BaseComponent {
       this.button.button
     );
 
-    // this.game = new Game();
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
 
     this.button.button.addEventListener('click', () => this.buttonHandler());
@@ -56,13 +46,18 @@ export class Header extends BaseComponent {
       this.currentRouteElement = this.currentRoute.getCurrentRoute();
     };
 
-    // const gameElement = document.querySelector('.cards-field__wrapper');
+    const gameElement = document.querySelector('.cards-field__wrapper');
     const registrationElement = document.querySelector('.registration');
 
-    if (this.isGameOpen) return;
-    this.currentRouteElement.classList.toggle('hide');
-    // gameElement?.classList.toggle('hide');
+    // if (this.isGameOpen) return;
+    const buttonText = document.querySelector('.main-nav__toggle')?.textContent;
+    const childPageMain = document.querySelector('.page-main > div');
 
     registrationElement?.classList.toggle('hide');
+    if (buttonText === 'Start Game') {
+      childPageMain?.classList.toggle('hide');
+      gameElement?.classList.toggle('hide');
+      registrationElement?.classList.toggle('hide');
+    }
   }
 }

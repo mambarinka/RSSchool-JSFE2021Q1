@@ -20,6 +20,6 @@ export class Registration extends BaseComponent {
   }
 
   overlayHandler(element: HTMLElement): void {
-    this.element.classList.add('hide');
+    element.classList.add('hide');
   }
 }
