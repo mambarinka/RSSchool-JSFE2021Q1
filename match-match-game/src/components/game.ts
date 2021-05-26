@@ -36,10 +36,11 @@ export class Game extends BaseComponent {
       .map((url) => new Card(url))
       .sort(() => Math.random() - 0.5);
 
-    cards.forEach((card) => {
-      card.element.addEventListener('click', () => this.cardHandler(card));
-    });
-
+    // cards.forEach((card) => {
+    //   // card.element.addEventListener('click', () => this.cardHandler(card));
+    //   card.onClick = () => this.cardHandler(card);
+    // });
+    this.cardsField.onCardClick = (card) => this.cardHandler(card);
     return this.cardsField.addCards(cards);
   }
 

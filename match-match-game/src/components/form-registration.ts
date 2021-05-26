@@ -1,4 +1,5 @@
 import { User } from '../app/app.api';
+import { IndexedDB } from '../app/services/indexedDB';
 import { BaseComponent } from '../shared/base-component';
 import { BaseComponentForm } from '../shared/base-component-form';
 import { ButtonCancel } from './button-cancel';
@@ -8,7 +9,6 @@ import { FormInput } from './form-input';
 import { FormLabel } from './form-label';
 import { FormRegistrationItem } from './form-registration-item';
 import { FormRegistrationList } from './form-registration-list';
-import { Registration } from './registration';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
@@ -25,6 +25,9 @@ export class FormRegistration extends BaseComponentForm {
   private readonly placeHolders: string[];
   // private readonly arrayInputsHandler: Array<boolean> = [];
   private readonly arrayInputs: Array<FormInput> = [];
+  // private indexedDB: IndexedDB | null;
+  // private indexedDB: IndexedDB | null;
+  public IDB: IndexedDB = new IndexedDB;
 
   constructor(title: keyof HTMLElementTagNameMap = 'h2') {
     super(['form']);
@@ -98,6 +101,9 @@ export class FormRegistration extends BaseComponentForm {
     );
 
     this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
+
+    this.IDB.init('mambarinka');
+    // indexedDB = new IndexedDB();
   }
 
   checkValidInput(inputsHandlers: boolean[]): boolean {
@@ -106,10 +112,6 @@ export class FormRegistration extends BaseComponentForm {
   }
 
   formSubmitHandler(evt: Event): void {
-    // console.log(this.arrayInputsHandler);
-    // if (this.checkValidInput(this.arrayInputsHandler)) {
-    // }
-
     const buttonSwitch = document.querySelector('.main-nav__toggle');
     if (buttonSwitch !== null) {
       buttonSwitch.textContent = 'Start Game';
@@ -118,14 +120,13 @@ export class FormRegistration extends BaseComponentForm {
     if (registrationPage !== null) {
       registrationPage.classList.add('hide');
     }
-    // this.registration.element.classList.add('hide');
 
     evt.preventDefault();
-    this.getUserObject();
+    this.IDB.write(this.getUserObject());
   }
 
   getUserObject(): User {
-    const userObject: User = { firstName: '', lastName: '', email: '', avatar: '' };
+    const userObject: User = { firstName: '', lastName: '', email: '', avatar: '', bestScore: 0 };
     this.arrayInputs.forEach((input) => {
       if (input.input.name === 'first-name') {
         userObject.firstName = input.input.value;

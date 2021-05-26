@@ -20,5 +20,5 @@ export interface User {
   lastName: string;
   email: string;
   avatar: string;
-  // bestScore: number
+  bestScore: number
 }
