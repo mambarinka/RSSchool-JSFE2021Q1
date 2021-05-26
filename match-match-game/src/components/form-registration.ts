@@ -101,9 +101,10 @@ export class FormRegistration extends BaseComponentForm {
     );
 
     this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
+    this.buttonCancel.button.addEventListener('click', () => this.formCancelHandler());
 
     this.IDB.init('mambarinka');
-    // indexedDB = new IndexedDB();
+
   }
 
   checkValidInput(inputsHandlers: boolean[]): boolean {
@@ -140,5 +141,9 @@ export class FormRegistration extends BaseComponentForm {
     });
     console.log(userObject);
     return userObject;
+  }
+
+  formCancelHandler() {
+    this.form.reset();
   }
 }

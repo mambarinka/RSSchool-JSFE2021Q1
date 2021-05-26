@@ -30,11 +30,12 @@ export class FormInput extends BaseComponentInput {
     this.imageAvatar = imageAvatar;
 
     if (this.input.name === 'first-name' || this.input.name === 'last-name') {
+      this.input.maxLength = 30;
       this.input.addEventListener('change', () =>
         this.inputNameHandler(this.formItem)
       );
     } else if (this.input.name === 'e-mail') {
-      this.input.maxLength = 64;
+      this.input.maxLength = 30;
       this.input.addEventListener('change', () =>
         this.inputEmailHandler(this.formItem)
       );
