@@ -10,20 +10,24 @@ import { Timer } from './timer';
 
 export class Header extends BaseComponent {
   // isGameOpen = false;
-
-  isRegistrationOpen = false;
+  // isGameStop = false;
+  // isRegistrationOpen = false;
 
   readonly wrapper: HTMLElement;
   private readonly logo: Logo;
   private readonly navigation: Navigation;
-  private readonly buttonMain: ButtonMain;
-  private readonly currentRoute: Route;
+  buttonMain: ButtonMain;
+  // private readonly currentRoute: Route;
   public currentRouteElement: HTMLElement;
-  private timer: Timer;
+  // private timer: Timer;
   private game: Game;
   private registration: Registration;
+  public isRegistrationOpen: boolean;
+  public isGameOpen: boolean;
+  public timer: Timer;
+  // private currentRoute: Route;
 
-  constructor(div: keyof HTMLElementTagNameMap = 'div') {
+  constructor(div: keyof HTMLElementTagNameMap = 'div', currentRoute: Route, game: Game, registration: Registration, isRegistrationOpen: boolean, isGameOpen: boolean, timer: Timer) {
     super('header', ['page-header']);
 
     this.wrapper = document.createElement(div);
@@ -32,11 +36,11 @@ export class Header extends BaseComponent {
     this.logo = new Logo();
     this.navigation = new Navigation();
     this.buttonMain = new ButtonMain();
-    this.currentRoute = new Route();
-    this.timer = new Timer;
+    // this.currentRoute = new Route();
+    // this.timer = new Timer();
 
-    this.game = new Game();
-    this.registration = new Registration();
+    // this.game = new Game();
+    // this.registration = new Registration();
 
     this.element.append(this.wrapper);
 
@@ -46,55 +50,46 @@ export class Header extends BaseComponent {
       this.buttonMain.button
     );
 
-    this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    this.buttonMain.button.addEventListener('click', () => this.buttonHandler());
+    this.game = game;
+    this.isGameOpen = isGameOpen;
+    this.registration = registration;
+    this.isRegistrationOpen = isRegistrationOpen;
+    this.timer = timer;
+
+    this.currentRouteElement = currentRoute.getCurrentRoute();
+    this.buttonMain.button.addEventListener('click', () => this.buttonHandler(this.buttonMain.button));
   }
 
-  buttonHandler(): void {
-    // this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    // window.onpopstate = () => {
-    //   this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    // };
-
-    // const gameElement = document.querySelector('.cards-field__wrapper');
-    // const registrationElement = document.querySelector('.registration');
-
+  buttonHandler(toggle: HTMLButtonElement): void {
     // if (this.isGameOpen) return;
-    const buttonText = this.buttonMain.button.textContent;
-    // const buttonText = document.querySelector('.main-nav__toggle')?.textContent;
-    // const childPageMain = document.querySelector('.page-main > div');
+    // let buttonText = toggle.textContent;
 
-    // registrationElement?.classList.toggle('hide');
+    // console.log('isGameOpen: ' + this.isGameOpen);
+    // console.log('isGameStop: ' + this.isGameStop);
+    console.log('isRegistrationOpen: ' + this.isRegistrationOpen);
 
-    // console.log(this.buttonMain.button);
-    console.log(this.currentRouteElement);
-    this.currentRouteElement.innerHTML='fsfsfs';
-    // console.log(this.registration.element);
-    // console.log(this.game.element);
-    this.currentRouteElement.classList.toggle('hide');
-    console.log(this.currentRouteElement);
-    // this.registration.element.classList.toggle('hide');
-    // this.currentRouteElement.classList.toggle('hide');
-    // if (buttonText === 'Start Game') {
-    //   childPageMain?.classList.toggle('hide');
-    // }
-    if (buttonText === 'register new player') {
-      // registrationElement?.classList.toggle('hide');
+    // this.isRegistrationOpen = true;
+    if (!this.isRegistrationOpen) {
+      console.log('регистрация открывается');
+      // this.currentRouteElement.classList.toggle('hide');
       this.registration.element.classList.toggle('hide');
+      this.isRegistrationOpen = true;
+      // this.isGameOpen = true;
+    } else if (!this.isGameOpen) {
+      console.log('игра начинается');
       this.currentRouteElement.classList.toggle('hide');
-    } else if (buttonText === 'Start Game') {
-      // gameElement?.classList.toggle('hide');
+      // this.registration.element.classList.toggle('hide');
       this.game.element.classList.toggle('hide');
-      // registrationElement?.classList.toggle('hide');
-      this.registration.element.classList.toggle('hide');
-      this.currentRouteElement.classList.toggle('hide');
       this.timer.isGameOpen = true;
       this.startGame();
-    } else if (buttonText === 'stop game') {
-      this.timer.isGameOpen = false;
-      this.stopGame();
-      this.game.element.classList.toggle('hide');
-      this.currentRouteElement.classList.toggle('hide');
+      this.isGameOpen = false;
+      // this.isGameStop = true;
+      // } else if (!this.isRegistrationOpen && !this.isGameOpen && this.isGameStop) {
+      //   console.log('игра заканчивается');
+      //   this.timer.isGameOpen = false;
+      //   this.stopGame();
+      //   this.game.element.classList.toggle('hide');
+      //   this.currentRouteElement.classList.toggle('hide');
     }
   }
 

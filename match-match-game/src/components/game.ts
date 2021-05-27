@@ -10,18 +10,33 @@ const FLIP_DELAY = 1000;
 
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
-  private readonly timer: Timer;
+  // private readonly timer: Timer;
   private activeCard?: Card;
   private isAnimation = false;
+  isGameOpen: boolean;
+  timer: Timer;
 
-  constructor() {
+  constructor(isGameOpen: boolean, timer: Timer) {
     super('div', ['cards-field__wrapper', 'hide']);
 
     // this.wrapper = new CardsFieldWrapper();
 
     this.cardsField = new CardsField();
-    this.timer = new Timer();
+    // this.timer = new Timer();
+    this.timer = timer;
     this.element.append(this.timer.element, this.cardsField.element);
+
+    this.isGameOpen = isGameOpen;
+    if (this.element.classList.contains('hide')) {
+      console.log('игра скрыта');
+      isGameOpen = false;
+      console.log('isGameOpen31: ' + isGameOpen);
+    } else {
+      console.log('игра открыта');
+      isGameOpen = true;
+    }
+
+    this.timer = timer;
     // this.wrapper.addTimer(this.timer.element);
   }
 

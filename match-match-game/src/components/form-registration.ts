@@ -112,6 +112,23 @@ export class FormRegistration extends BaseComponentForm {
     return isValidate;
   }
 
+  // formSubmitHandler(evt: Event): Promise<void> {
+  //   return new Promise((resolve) => {
+  //     const buttonSwitch = document.querySelector('.main-nav__toggle');
+  //     if (buttonSwitch !== null) {
+  //       buttonSwitch.textContent = 'Start Game';
+  //     }
+  //     const registrationPage = document.querySelector('.registration');
+  //     if (registrationPage !== null) {
+  //       registrationPage.classList.add('hide');
+  //     }
+  //     console.log('привет из формы');
+  //     evt.preventDefault();
+  //     this.IDB.write(this.getUserObject());
+  //   })
+  // }
+
+
   formSubmitHandler(evt: Event): void {
     const buttonSwitch = document.querySelector('.main-nav__toggle');
     if (buttonSwitch !== null) {
@@ -122,6 +139,7 @@ export class FormRegistration extends BaseComponentForm {
       registrationPage.classList.add('hide');
     }
 
+    console.log('привет из формы');
     evt.preventDefault();
     this.IDB.write(this.getUserObject());
   }

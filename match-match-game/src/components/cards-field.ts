@@ -2,7 +2,7 @@ import { BaseComponent } from '../shared/base-component';
 import { Card } from './card';
 // import { Timer } from './timer';
 
-const SHOW_TIME = 300; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
+const SHOW_TIME = 5; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
 
 export class CardsField extends BaseComponent {
   private cards: Card[] = [];

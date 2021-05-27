@@ -1,5 +1,5 @@
 export class BaseComponentButton {
-  readonly button: HTMLButtonElement;
+  button: HTMLButtonElement;
 
   constructor(styles: string[] = []) {
     this.button = document.createElement('button');

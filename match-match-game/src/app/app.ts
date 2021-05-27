@@ -5,6 +5,7 @@ import { PageMain } from '../components/page-main';
 import { Registration } from '../components/registration';
 import { Component, ImageCategoryModel } from './app.api';
 import { Route } from '../components/routing';
+import { Timer } from '../components/timer';
 
 export class App implements Component {
   private readonly header: Header;
@@ -14,16 +15,19 @@ export class App implements Component {
   private readonly footer: Footer;
   private readonly currentRoute: Route;
   public currentRouteElement: HTMLElement;
+  public isRegistrationOpen: boolean = false;
+  public isGameOpen: boolean = false;
+  public timer: Timer = new Timer();
 
   constructor(private readonly rootElement: HTMLElement) {
-    this.header = new Header();
     this.pageMain = new PageMain();
     this.footer = new Footer();
 
-    this.game = new Game();
-    this.registration = new Registration();
+    this.game = new Game(this.isGameOpen, this.timer);
 
     this.currentRoute = new Route();
+    this.registration = new Registration('div', this.isRegistrationOpen);
+    this.header = new Header('div',  this.currentRoute, this.game,  this.registration, this.isRegistrationOpen, this.isGameOpen, this.timer);
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
   }
@@ -40,7 +44,6 @@ export class App implements Component {
       this.registration.element
     );
 
-    this.currentRouteElement.innerHTML='';
     window.onpopstate = () => {
       this.pageMain.element.innerHTML = '';
       this.currentRouteElement = this.currentRoute.getCurrentRoute();
