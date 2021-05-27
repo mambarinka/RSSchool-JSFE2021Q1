@@ -39,6 +39,8 @@ export class App implements Component {
       this.game.element,
       this.registration.element
     );
+
+    this.currentRouteElement.innerHTML='';
     window.onpopstate = () => {
       this.pageMain.element.innerHTML = '';
       this.currentRouteElement = this.currentRoute.getCurrentRoute();

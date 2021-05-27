@@ -103,7 +103,7 @@ export class FormRegistration extends BaseComponentForm {
     this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
     this.buttonCancel.button.addEventListener('click', () => this.formCancelHandler());
 
-    this.IDB.init('mambarinka');
+    // this.IDB.init('mambarinka');
 
   }
 

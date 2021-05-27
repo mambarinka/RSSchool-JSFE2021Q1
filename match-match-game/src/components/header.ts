@@ -34,6 +34,7 @@ export class Header extends BaseComponent {
     this.buttonMain = new ButtonMain();
     this.currentRoute = new Route();
     this.timer = new Timer;
+
     this.game = new Game();
     this.registration = new Registration();
 
@@ -46,7 +47,6 @@ export class Header extends BaseComponent {
     );
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    console.log(this.currentRouteElement);
     this.buttonMain.button.addEventListener('click', () => this.buttonHandler());
   }
 
@@ -60,18 +60,21 @@ export class Header extends BaseComponent {
     // const registrationElement = document.querySelector('.registration');
 
     // if (this.isGameOpen) return;
-    const buttonText = document.querySelector('.main-nav__toggle')?.textContent;
+    const buttonText = this.buttonMain.button.textContent;
+    // const buttonText = document.querySelector('.main-nav__toggle')?.textContent;
     // const childPageMain = document.querySelector('.page-main > div');
 
     // registrationElement?.classList.toggle('hide');
 
-
-    console.log(this.registration.element);
-
-
-    // this.registration.element.classList.toggle('hide');
+    // console.log(this.buttonMain.button);
+    console.log(this.currentRouteElement);
+    this.currentRouteElement.innerHTML='fsfsfs';
+    // console.log(this.registration.element);
+    // console.log(this.game.element);
     this.currentRouteElement.classList.toggle('hide');
     console.log(this.currentRouteElement);
+    // this.registration.element.classList.toggle('hide');
+    // this.currentRouteElement.classList.toggle('hide');
     // if (buttonText === 'Start Game') {
     //   childPageMain?.classList.toggle('hide');
     // }

@@ -20,6 +20,10 @@ export class IndexedDB {
       users.createIndex('avatar', 'avatar');
       users.createIndex('best-score', 'bestScore');
       // this.db = database;
+
+      let settings = this.db.createObjectStore('Settings', { keyPath: 'id', autoIncrement: true });
+      settings.createIndex('cards-type', 'cardsType');
+      settings.createIndex('difficulty', 'difficulty');
     }
 
     openRequest.onsuccess = () => {
@@ -38,7 +42,6 @@ export class IndexedDB {
       let users = tx.objectStore('Users');
 
       let addUser = users.add(userObject);
-      // let addUser = users.add({ firstName: 'Anna', lastName: 'Tekunova', email: 'mambarinka@mail.ru', bestScore: '100', id: 1 });
 
       tx.oncomplete = () => {
         console.log('complete', addUser.result);
