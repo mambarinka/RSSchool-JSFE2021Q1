@@ -10,11 +10,8 @@ const FLIP_DELAY = 1000;
 
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
-
   private readonly timer: Timer;
-
   private activeCard?: Card;
-
   private isAnimation = false;
 
   constructor() {
@@ -41,6 +38,8 @@ export class Game extends BaseComponent {
     //   card.onClick = () => this.cardHandler(card);
     // });
     this.cardsField.onCardClick = (card) => this.cardHandler(card);
+    this.timer.startTimer();
+    console.log('this.timer.isGameOpen' + this.timer.isGameOpen);
     return this.cardsField.addCards(cards);
   }
 

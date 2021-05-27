@@ -1,7 +1,7 @@
 import { BaseComponentButton } from '../shared/base-component-button';
 
 export class ButtonCancel extends BaseComponentButton {
-  onClick: () => void = () => { };
+  // onClick: () => void = () => { };
   constructor() {
     super(['form__btn-cancel', 'button']);
     this.button.textContent = `
@@ -9,8 +9,8 @@ export class ButtonCancel extends BaseComponentButton {
       `;
     this.button.type = 'button';
 
-    this.button.onclick = () => {
-      this.onClick();
-    }
+    // this.button.onclick = () => {
+    //   this.onClick();
+    // }
   }
 }

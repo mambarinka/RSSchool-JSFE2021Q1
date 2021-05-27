@@ -8,17 +8,11 @@ import { Route } from '../components/routing';
 
 export class App implements Component {
   private readonly header: Header;
-
   private readonly pageMain: PageMain;
-
   private readonly game: Game;
-
   private readonly registration: Registration;
-
   private readonly footer: Footer;
-
   private readonly currentRoute: Route;
-
   public currentRouteElement: HTMLElement;
 
   constructor(private readonly rootElement: HTMLElement) {
@@ -62,19 +56,19 @@ export class App implements Component {
   //   return this.aboutGame.start();
   // }
 
-  async start(): Promise<void> {
-    const res = await fetch('./images.json');
-    const categories: ImageCategoryModel[] = await res.json();
-    const cat = categories[0];
-    const images = cat.images.map((name) => `${cat.category}/${name}`);
-    //  здесь можно будет вывести вывод списка категорий и селектом выбрать
-    //  какую категорию выбрать перед запуском игры
+  // async start(): Promise<void> {
+  //   const res = await fetch('./images.json');
+  //   const categories: ImageCategoryModel[] = await res.json();
+  //   const cat = categories[0];
+  //   const images = cat.images.map((name) => `${cat.category}/${name}`);
+  //   //  здесь можно будет вывести вывод списка категорий и селектом выбрать
+  //   //  какую категорию выбрать перед запуском игры
 
-    // const counterService = new CounterServiceImplementation();
-    // counterService.increment();
-    // counterService.subscribeOnCounter((counter: number) => console.log(counter))
-    // console.log(this.game);
-    // console.log(images);
-    return this.game.newGame(images);
-  }
+  //   // const counterService = new CounterServiceImplementation();
+  //   // counterService.increment();
+  //   // counterService.subscribeOnCounter((counter: number) => console.log(counter))
+  //   // console.log(this.game);
+  //   // console.log(images);
+  //   return this.game.newGame(images);
+  // }
 }
