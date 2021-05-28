@@ -1,116 +1,62 @@
+import { BestScoreItem } from '../../components/best-score-item';
+import { BestScoreList } from '../../components/best-score-list';
+import { BestScoreTitle } from '../../components/best-score-title';
 import { BaseComponent } from '../../shared/base-component';
-import { User } from '../app.api';
-import { IndexedDB } from '../services/indexedDB';
+import db from '../app';
+export default db;
 
 export class BestScore extends BaseComponent {
-  public IDB: IndexedDB = new IndexedDB();
-  arrayDefaultUsers: Array<User> = [{
-    firstName: '',
-    lastName: '',
-    email: '',
-    avatar: '',
-    bestScore: 666
-  }];
+  title: BestScoreTitle = new BestScoreTitle();
+  list: BestScoreList = new BestScoreList();
 
   constructor() {
-
-    // constructor(firstName:'', lastName: '', email: '', srcAvatar: '', bestScore: 0) {
     super('div', ['best-score__wrapper']);
-    this.IDB.init('mambarinka').then(() => {
-      this.IDB.readAll('Users').then(arr => {
-        this.arrayDefaultUsers.push(arr[0]);
-        return this.arrayDefaultUsers;
-        // console.log(this.arrayDefaultUsers[1].avatar);
+
+    db.init('mambarinka').then(() => {
+      db.readAll('Users').then(arr => {
+        for (let i = 0; i < arr.length; i++) {
+          //   this.element.innerHTML = `
+          // <h1 class="best-score__title">Best players</h1>
+          //   <ul class="best-score__list">
+          //     <li class="best-score__item">
+          //       <img src="${arr[0].avatar}" alt="avatar user" class="best-score__item-avatar">
+          //       <div class="best-score__data-user">
+          //         <span class="best-score__name-user">${arr[0].firstName} ${arr[0].lastName}</span>
+          //         <span class="best-score__email-user">${arr[0].email}</span>
+          //       </div>
+          //       <output class="best-score__result" name="Score: ">${arr[0].bestScore}</output>
+          //     </li>
+          //     <li class="best-score__item">
+          //       <img src="${arr[1].avatar}" alt="avatar user" class="best-score__item-avatar">
+          //       <div class="best-score__data-user">
+          //         <span class="best-score__name-user">${arr[1].firstName} ${arr[1].lastName}</span>
+          //         <span class="best-score__email-user">${arr[1].email}</span>
+          //       </div>
+          //       <output class="best-score__result" name="Score: ">${arr[1].bestScore}</output>
+          //     </li>
+          //     <li class="best-score__item">
+          //       <img src="${arr[2].avatar}" alt="avatar user" class="best-score__item-avatar">
+          //       <div class="best-score__data-user">
+          //         <span class="best-score__name-user">${arr[2].firstName} ${arr[2].lastName}</span>
+          //         <span class="best-score__email-user">${arr[2].email}</span>
+          //       </div>
+          //       <output class="best-score__result" name="Score: ">${arr[2].bestScore}</output>
+          //     </li>
+          //     <li class="best-score__item">
+          //       <img src="${arr[3].avatar}" alt="avatar user" class="best-score__item-avatar">
+          //       <div class="best-score__data-user">
+          //         <span class="best-score__name-user">${arr[3].firstName} ${arr[3].lastName}</span>
+          //         <span class="best-score__email-user">${arr[3].email}</span>
+          //       </div>
+          //       <output class="best-score__result" name="Score: ">${arr[3].bestScore}</output>
+          //     </li>
+          //   </ul>
+          //   `;
+          const item: BestScoreItem = new BestScoreItem(arr[i].avatar, arr[i].firstName, arr[i].lastName, arr[i].email, arr[i].bestScore);
+          this.list.element.append(item.element)
+          this.element.append(this.title.element, this.list.element)
+        }
       })
     })
-    console.log(this.arrayDefaultUsers);
-    console.log(this.arrayDefaultUsers);
-    this.element.innerHTML = `
-    <h1 class="best-score__title">Best players</h1>
-      <ul class="best-score__list">
-        <li class="best-score__item">
-          <img src="${this.arrayDefaultUsers[0].avatar}" alt="avatar user" class="best-score__item-avatar">
-          <div class="best-score__data-user">
-            <span class="best-score__name-user">${this.arrayDefaultUsers[0].firstName} ${this.arrayDefaultUsers[0].lastName}</span>
-            <span class="best-score__email-user">${this.arrayDefaultUsers[0].email}</span>
-          </div>
-          <output class="best-score__result" name="Score: ">${this.arrayDefaultUsers[0].bestScore}</output>
-        </li>
-      </ul>
-      `;
-
-    // this.IDB = IDB;
-
-    // const defaultUsers: Array<User> = [
-    //   {
-    //     firstName: 'Nicci',
-    //     lastName: 'Troiani',
-    //     email: 'nicci@gmail.com',
-    //     avatar: './assets/images/best-score-avatar1.png',
-    //     bestScore: 456,
-    //   },
-    //   {
-    //     firstName: 'George',
-    //     lastName: 'Fields',
-    //     email: 'jack@gmail.com',
-    //     avatar: './assets/images/best-score-avatar2.png',
-    //     bestScore: 358,
-    //   },
-    //   {
-    //     firstName: 'Jones',
-    //     lastName: 'Dermot',
-    //     email: 'dermot@gamil.com',
-    //     avatar: './assets/images/best-score-avatar3.png',
-    //     bestScore: 211,
-    //   },
-    //   {
-    //     firstName: 'Jane',
-    //     lastName: 'Doe',
-    //     email: 'jane.doe@gmail.com',
-    //     avatar: './assets/images/best-score-avatar4.png',
-    //     bestScore: 169,
-    //   }
-    // ];
-    // defaultUsers.forEach(defaultUser => {
-    //   console.log(defaultUser);
-    //   // this.IDB.write(defaultUser);
-    // });
   }
-
-  // setDefaultUsers() {
-  //   const defaultUsers: Array<User> = [
-  //     {
-  //       firstName: 'Nicci',
-  //       lastName: 'Troiani',
-  //       email: 'nicci@gmail.com',
-  //       avatar: './assets/images/best-score-avatar1.png',
-  //       bestScore: 456,
-  //     },
-  //     {
-  //       firstName: 'George',
-  //       lastName: 'Fields',
-  //       email: 'jack@gmail.com',
-  //       avatar: './assets/images/best-score-avatar2.png',
-  //       bestScore: 358,
-  //     },
-  //     {
-  //       firstName: 'Jones',
-  //       lastName: 'Dermot',
-  //       email: 'dermot@gamil.com',
-  //       avatar: './assets/images/best-score-avatar3.png',
-  //       bestScore: 211,
-  //     },
-  //     {
-  //       firstName: 'Jane',
-  //       lastName: 'Doe',
-  //       email: 'jane.doe@gmail.com',
-  //       avatar: './assets/images/best-score-avatar4.png',
-  //       bestScore: 169,
-  //     }
-  //   ];
-  //   defaultUsers.forEach(defaultUser => {
-  //     console.log(defaultUser);
-  //     this.IDB.write(defaultUser);
-  //   });
-  // }
 }

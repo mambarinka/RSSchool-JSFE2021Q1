@@ -36,6 +36,7 @@ export class IndexedDB {
   ];
 
   init(databaseName: string): Promise<IDBDatabase> {
+    console.log(this.defaultUsers);
     return new Promise((resolve, reject) => {
       const IDB = window.indexedDB;
       const openRequest = IDB.open(databaseName);
@@ -150,30 +151,22 @@ export class IndexedDB {
   }
 
   // readAll(objectStore: string): Array<User> {
-  readAll(objectStore: string): Promise<any> {
+  readAll(objectStore: string): Promise<Array<User>> {
     return new Promise((resolve, reject) => {
-      // let result: Array<User> = [];
       // console.log(`метод readAll start    ${this.db}`);
       if (this.db !== null) {
         const tx = this.db.transaction(objectStore, 'readwrite');
         const users = tx.objectStore(objectStore);
         const getUsers = users.getAll();
 
-        console.log(getUsers);
-
         tx.oncomplete = () => {
-          // console.log(getUsers.result);
-          // result = getUsers.result;
           resolve(getUsers.result);
-          // return getUsers.result;
         };
 
         tx.onerror = () => {
           console.log('error', getUsers.error);
         };
       }
-
-      // return result;
     })
   }
 

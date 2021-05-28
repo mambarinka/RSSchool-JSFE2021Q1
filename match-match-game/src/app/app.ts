@@ -9,6 +9,9 @@ import { Timer } from '../components/timer';
 import { HeaderAvatar } from '../components/header-avatar';
 import { IndexedDB } from './services/indexedDB';
 import { BestScore } from './pages/page-best-score';
+const db = new IndexedDB();
+export default db;
+
 
 export class App implements Component {
   private readonly header: Header;
@@ -23,7 +26,7 @@ export class App implements Component {
   public isGameOpen = false;
   public timer: Timer = new Timer();
   public headerAvatar: HeaderAvatar = new HeaderAvatar();
-  public IDB: IndexedDB = new IndexedDB();
+  // public IDB: IndexedDB = new IndexedDB();
   // public firstName: string;
   // public lastName: string;
   // public email: string;
@@ -50,7 +53,8 @@ export class App implements Component {
       'div',
       this.isRegistrationOpen,
       this.headerAvatar,
-      this.IDB
+      db
+      // this.IDB
     );
     this.header = new Header(
       'div',
@@ -64,23 +68,12 @@ export class App implements Component {
     );
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
-
-    this.IDB.init('mambarinka').then(() => {
-      this.IDB.readAll('Users').then(arr => {
-        // console.log(arr);
-        // console.log('this.arrayDefaultUsers: ' + this.arrayDefaultUsers);
-        // let lol = this.arrayDefaultUsers.push(arr);
-        // console.log('lol: ' + lol);
-
-        console.log(arr);
-        let a = this.arrayDefaultUsers.push(arr);
-        console.log(arr[0]);
-        // setTimeout(() => {
-        //   this.arrayDefaultUsers = this.IDB.readAll('Users');
-        //   console.log('this.arrayDefaultUsers' + this.arrayDefaultUsers);
-        // }, 5000);
-      })
-    })
+    // db.init('mambarinka');
+    // this.IDB.init('mambarinka').then(() => {
+    //   this.IDB.readAll('Users').then(arr => {
+    //     this.arrayDefaultUsers.push(arr);
+    //   })
+    // })
   }
 
   render(): HTMLElement {
@@ -105,9 +98,9 @@ export class App implements Component {
       );
     };
 
-    this.IDB.readAll('Users').then(arr => {
-      console.log(arr);
-    });
+    // this.IDB.readAll('Users').then(arr => {
+    //   console.log(arr);
+    // });
 
     return this.currentRouteElement;
   }
