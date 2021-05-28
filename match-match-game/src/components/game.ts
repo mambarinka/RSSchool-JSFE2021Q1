@@ -10,10 +10,14 @@ const FLIP_DELAY = 1000;
 
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
+
   // private readonly timer: Timer;
   private activeCard?: Card;
+
   private isAnimation = false;
+
   isGameOpen: boolean;
+
   timer: Timer;
 
   constructor(isGameOpen: boolean, timer: Timer) {
@@ -29,11 +33,11 @@ export class Game extends BaseComponent {
     this.isGameOpen = isGameOpen;
     if (this.element.classList.contains('hide')) {
       console.log('игра скрыта');
-      isGameOpen = false;
-      console.log('isGameOpen31: ' + isGameOpen);
+      this.isGameOpen = false;
+      console.log(`isGameOpen31: ${isGameOpen}`);
     } else {
       console.log('игра открыта');
-      isGameOpen = true;
+      this.isGameOpen = true;
     }
 
     this.timer = timer;
@@ -54,7 +58,7 @@ export class Game extends BaseComponent {
     // });
     this.cardsField.onCardClick = (card) => this.cardHandler(card);
     this.timer.startTimer();
-    console.log('this.timer.isGameOpen' + this.timer.isGameOpen);
+    console.log(`this.timer.isGameOpen${this.timer.isGameOpen}`);
     return this.cardsField.addCards(cards);
   }
 

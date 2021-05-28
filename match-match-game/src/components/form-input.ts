@@ -7,6 +7,7 @@ export class FormInput extends BaseComponentInput {
   private isValidate = true;
 
   private imageAvatar: FormAvatar;
+
   private headerAvatar: HeaderAvatar;
 
   // private defaultAvatar: string = this.imageAvatar.image.src;
@@ -62,8 +63,8 @@ export class FormInput extends BaseComponentInput {
       formItem.element.classList.add('not-validity');
       this.input.setCustomValidity(
         'First name and last name cant contain these characters: ~ ! @ # $ % * +() _ — + = | : ; " ' +
-        '`' +
-        '< > , . ? / ^'
+          '`' +
+          '< > , . ? / ^'
       );
       this.isValidate = false;
     } else {
@@ -99,7 +100,11 @@ export class FormInput extends BaseComponentInput {
     return this.isValidate;
   }
 
-  inputFileHandler(input: HTMLInputElement, image: FormAvatar, imageHeader: HeaderAvatar): void {
+  inputFileHandler = (
+    input: HTMLInputElement,
+    image: FormAvatar,
+    imageHeader: HeaderAvatar
+  ): void => {
     const FILE_TYPES = [`gif`, `jpg`, `jpeg`, `png`];
     if (input.files !== null) {
       const file: File = input.files[0];
@@ -119,7 +124,7 @@ export class FormInput extends BaseComponentInput {
         reader.readAsDataURL(file);
       }
     }
-  }
+  };
 
   // inputFileHandler(input: HTMLInputElement, image: HTMLImageElement) {
   //   console.log(input);

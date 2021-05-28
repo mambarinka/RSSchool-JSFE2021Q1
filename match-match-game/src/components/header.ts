@@ -15,21 +15,40 @@ export class Header extends BaseComponent {
   // isRegistrationOpen = false;
 
   readonly wrapper: HTMLElement;
+
   private readonly logo: Logo;
+
   private readonly navigation: Navigation;
+
   buttonMain: ButtonMain;
+
   // private readonly currentRoute: Route;
   public currentRouteElement: HTMLElement;
+
   // private timer: Timer;
   private game: Game;
+
   private registration: Registration;
+
   public isRegistrationOpen: boolean;
+
   public isGameOpen: boolean;
+
   public timer: Timer;
+
   headerAvatar: HeaderAvatar;
   // private currentRoute: Route;
 
-  constructor(div: keyof HTMLElementTagNameMap = 'div', currentRoute: Route, game: Game, registration: Registration, isRegistrationOpen: boolean, isGameOpen: boolean, timer: Timer, headerAvatar: HeaderAvatar) {
+  constructor(
+    div: keyof HTMLElementTagNameMap = 'div',
+    currentRoute: Route,
+    game: Game,
+    registration: Registration,
+    isRegistrationOpen: boolean,
+    isGameOpen: boolean,
+    timer: Timer,
+    headerAvatar: HeaderAvatar
+  ) {
     super('header', ['page-header']);
 
     this.wrapper = document.createElement(div);
@@ -62,7 +81,9 @@ export class Header extends BaseComponent {
     this.timer = timer;
 
     this.currentRouteElement = currentRoute.getCurrentRoute();
-    this.buttonMain.button.addEventListener('click', () => this.buttonHandler(this.buttonMain.button));
+    this.buttonMain.button.addEventListener('click', () =>
+      this.buttonHandler(this.buttonMain.button)
+    );
   }
 
   buttonHandler(toggle: HTMLButtonElement): void {
@@ -71,7 +92,7 @@ export class Header extends BaseComponent {
 
     // console.log('isGameOpen: ' + this.isGameOpen);
     // console.log('isGameStop: ' + this.isGameStop);
-    console.log('isRegistrationOpen: ' + this.isRegistrationOpen);
+    console.log(`isRegistrationOpen: ${this.isRegistrationOpen}`);
 
     // this.isRegistrationOpen = true;
     if (!this.isRegistrationOpen) {

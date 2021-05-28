@@ -13,25 +13,40 @@ import { HeaderAvatar } from './header-avatar';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
+
   // readonly registration: Registration;
   readonly formList: FormRegistrationList;
+
   readonly formAvatar: FormAvatar;
+
   // readonly headerAvatar: HeaderAvatar;
   readonly inputFile: FormInput;
+
   readonly wrapperAvatar: BaseComponent;
+
   readonly buttonSubmit: ButtonSubmit;
+
   readonly buttonCancel: ButtonCancel;
+
   private readonly names: string[];
+
   private readonly types: string[];
+
   private readonly textContents: string[];
+
   private readonly placeHolders: string[];
+
   // private readonly arrayInputsHandler: Array<boolean> = [];
   private readonly arrayInputs: Array<FormInput> = [];
-  // private indexedDB: IndexedDB | null;
-  // private indexedDB: IndexedDB | null;
-  public IDB: IndexedDB = new IndexedDB;
 
-  constructor(title: keyof HTMLElementTagNameMap = 'h2', headerAvatar: HeaderAvatar) {
+  // private indexedDB: IndexedDB | null;
+  // private indexedDB: IndexedDB | null;
+  public IDB: IndexedDB = new IndexedDB();
+
+  constructor(
+    title: keyof HTMLElementTagNameMap = 'h2',
+    headerAvatar: HeaderAvatar
+  ) {
     super(['form']);
 
     this.title = document.createElement(title);
@@ -106,16 +121,17 @@ export class FormRegistration extends BaseComponentForm {
     );
 
     this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
-    this.buttonCancel.button.addEventListener('click', () => this.formCancelHandler());
+    this.buttonCancel.button.addEventListener('click', () =>
+      this.formCancelHandler()
+    );
 
     // this.IDB.init('mambarinka');
-
   }
 
-  checkValidInput(inputsHandlers: boolean[]): boolean {
-    let isValidate: boolean = inputsHandlers.includes(true);
+  checkValidInput = (inputsHandlers: boolean[]): boolean => {
+    const isValidate: boolean = inputsHandlers.includes(true);
     return isValidate;
-  }
+  };
 
   // formSubmitHandler(evt: Event): Promise<void> {
   //   return new Promise((resolve) => {
@@ -133,7 +149,6 @@ export class FormRegistration extends BaseComponentForm {
   //   })
   // }
 
-
   formSubmitHandler(evt: Event): void {
     const buttonSwitch = document.querySelector('.main-nav__toggle');
     if (buttonSwitch !== null) {
@@ -150,7 +165,13 @@ export class FormRegistration extends BaseComponentForm {
   }
 
   getUserObject(): User {
-    const userObject: User = { firstName: '', lastName: '', email: '', avatar: '', bestScore: 0 };
+    const userObject: User = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      avatar: '',
+      bestScore: 0,
+    };
     this.arrayInputs.forEach((input) => {
       if (input.input.name === 'first-name') {
         userObject.firstName = input.input.value;

@@ -4,11 +4,18 @@ import { HeaderAvatar } from './header-avatar';
 
 export class Registration extends BaseComponent {
   readonly overlay: HTMLElement;
+
   readonly formRegistration: FormRegistration;
+
   isRegistrationOpen: boolean;
+
   headerAvatar: HeaderAvatar;
 
-  constructor(div: keyof HTMLElementTagNameMap = 'div', isRegistrationOpen: boolean, headerAvatar: HeaderAvatar) {
+  constructor(
+    div: keyof HTMLElementTagNameMap = 'div',
+    isRegistrationOpen: boolean,
+    headerAvatar: HeaderAvatar
+  ) {
     super('div', ['registration', 'hide']);
 
     this.overlay = document.createElement(div);
@@ -23,15 +30,15 @@ export class Registration extends BaseComponent {
     this.isRegistrationOpen = isRegistrationOpen;
     if (this.element.classList.contains('hide')) {
       console.log('регистрация скрыта');
-      isRegistrationOpen = false;
-      console.log('isRegistrationOpen24: ' + isRegistrationOpen);
+      this.isRegistrationOpen = false;
+      console.log(`isRegistrationOpen24: ${isRegistrationOpen}`);
     } else {
       console.log('регистрация открыта');
-      isRegistrationOpen = true;
+      this.isRegistrationOpen = true;
     }
   }
 
-  overlayHandler(element: HTMLElement): void {
+  overlayHandler = (element: HTMLElement): void => {
     element.classList.add('hide');
-  }
+  };
 }

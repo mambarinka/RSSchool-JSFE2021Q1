@@ -10,15 +10,25 @@ import { HeaderAvatar } from '../components/header-avatar';
 
 export class App implements Component {
   private readonly header: Header;
+
   private readonly pageMain: PageMain;
+
   private readonly game: Game;
+
   private readonly registration: Registration;
+
   private readonly footer: Footer;
+
   private readonly currentRoute: Route;
+
   public currentRouteElement: HTMLElement;
-  public isRegistrationOpen: boolean = false;
-  public isGameOpen: boolean = false;
+
+  public isRegistrationOpen = false;
+
+  public isGameOpen = false;
+
   public timer: Timer = new Timer();
+
   public headerAvatar: HeaderAvatar = new HeaderAvatar();
 
   constructor(private readonly rootElement: HTMLElement) {
@@ -28,8 +38,21 @@ export class App implements Component {
     this.game = new Game(this.isGameOpen, this.timer);
 
     this.currentRoute = new Route();
-    this.registration = new Registration('div', this.isRegistrationOpen, this.headerAvatar);
-    this.header = new Header('div', this.currentRoute, this.game, this.registration, this.isRegistrationOpen, this.isGameOpen, this.timer, this.headerAvatar);
+    this.registration = new Registration(
+      'div',
+      this.isRegistrationOpen,
+      this.headerAvatar
+    );
+    this.header = new Header(
+      'div',
+      this.currentRoute,
+      this.game,
+      this.registration,
+      this.isRegistrationOpen,
+      this.isGameOpen,
+      this.timer,
+      this.headerAvatar
+    );
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
   }

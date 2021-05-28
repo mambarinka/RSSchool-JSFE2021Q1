@@ -4,7 +4,8 @@ const FLIP_CLASS = 'flipped';
 
 export class Card extends BaseComponent {
   isFlipped = false;
-  onClick: () => void = () => { };
+
+  onClick: () => void = () => {};
 
   constructor(readonly image: string) {
     super('div', ['card-container']);
@@ -18,7 +19,7 @@ export class Card extends BaseComponent {
 
     this.element.onclick = () => {
       this.onClick();
-    }
+    };
   }
 
   flipToBack(): void {
