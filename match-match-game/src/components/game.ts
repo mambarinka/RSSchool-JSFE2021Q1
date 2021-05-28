@@ -32,11 +32,11 @@ export class Game extends BaseComponent {
 
     this.isGameOpen = isGameOpen;
     if (this.element.classList.contains('hide')) {
-      console.log('игра скрыта');
+      // console.log('игра скрыта');
       this.isGameOpen = false;
-      console.log(`isGameOpen31: ${isGameOpen}`);
+      // console.log(`isGameOpen31: ${isGameOpen}`);
     } else {
-      console.log('игра открыта');
+      // console.log('игра открыта');
       this.isGameOpen = true;
     }
 
@@ -58,7 +58,7 @@ export class Game extends BaseComponent {
     // });
     this.cardsField.onCardClick = (card) => this.cardHandler(card);
     this.timer.startTimer();
-    console.log(`this.timer.isGameOpen${this.timer.isGameOpen}`);
+    // console.log(`this.timer.isGameOpen${this.timer.isGameOpen}`);
     return this.cardsField.addCards(cards);
   }
 

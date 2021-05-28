@@ -13,7 +13,6 @@ export class Header extends BaseComponent {
   // isGameOpen = false;
   // isGameStop = false;
   // isRegistrationOpen = false;
-
   readonly wrapper: HTMLElement;
 
   private readonly logo: Logo;
@@ -92,17 +91,17 @@ export class Header extends BaseComponent {
 
     // console.log('isGameOpen: ' + this.isGameOpen);
     // console.log('isGameStop: ' + this.isGameStop);
-    console.log(`isRegistrationOpen: ${this.isRegistrationOpen}`);
+    // console.log(`isRegistrationOpen: ${this.isRegistrationOpen}`);
 
     // this.isRegistrationOpen = true;
     if (!this.isRegistrationOpen) {
-      console.log('регистрация открывается');
+      // console.log('регистрация открывается');
       // this.currentRouteElement.classList.toggle('hide');
       this.registration.element.classList.toggle('hide');
       this.isRegistrationOpen = true;
       // this.isGameOpen = true;
     } else if (!this.isGameOpen) {
-      console.log('игра начинается');
+      // console.log('игра начинается');
       this.currentRouteElement.classList.toggle('hide');
       // this.registration.element.classList.toggle('hide');
       this.game.element.classList.toggle('hide');

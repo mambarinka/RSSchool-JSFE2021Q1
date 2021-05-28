@@ -41,11 +41,12 @@ export class FormRegistration extends BaseComponentForm {
 
   // private indexedDB: IndexedDB | null;
   // private indexedDB: IndexedDB | null;
-  public IDB: IndexedDB = new IndexedDB();
+  public IDB: IndexedDB;
 
   constructor(
     title: keyof HTMLElementTagNameMap = 'h2',
-    headerAvatar: HeaderAvatar
+    headerAvatar: HeaderAvatar,
+    IDB: IndexedDB
   ) {
     super(['form']);
 
@@ -60,6 +61,7 @@ export class FormRegistration extends BaseComponentForm {
 
     this.formList = new FormRegistrationList();
     this.formAvatar = new FormAvatar();
+    this.IDB = IDB;
     // this.headerAvatar = new HeaderAvatar();
     // this.registration = new Registration();
     // console.log(this.registration);
@@ -159,7 +161,7 @@ export class FormRegistration extends BaseComponentForm {
       registrationPage.classList.add('hide');
     }
 
-    console.log('привет из формы');
+    // console.log('привет из формы');
     evt.preventDefault();
     this.IDB.write(this.getUserObject());
   }
@@ -183,7 +185,7 @@ export class FormRegistration extends BaseComponentForm {
         userObject.avatar = input.input.value;
       }
     });
-    console.log(userObject);
+    // console.log(userObject);
     return userObject;
   }
 

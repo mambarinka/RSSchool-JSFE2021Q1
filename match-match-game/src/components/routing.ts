@@ -1,11 +1,13 @@
 import { AboutGame } from '../app/pages/page-about-game';
 import { BestScore } from '../app/pages/page-best-score';
 import { Settings } from '../app/pages/page-settings';
+import { IndexedDB } from '../app/services/indexedDB';
 import { BaseComponent } from '../shared/base-component';
 import { NavItem } from './nav-item';
 
 export class Route {
   private currentRouteName = '';
+  // public IDB: IndexedDB = new IndexedDB();
 
   private currentRoute?: { name: string; component: BaseComponent } = {
     name: 'default',
@@ -37,10 +39,15 @@ export class Route {
   private navItem: BaseComponent;
 
   private currentNavItem: Element | null = document.body;
+  // private readonly pageBestScore: BestScore;
 
   constructor() {
     this.currentRouteElement = this.defaultRoute.component.element;
     this.navItem = new NavItem();
+    // this.pageBestScore = new BestScore(this.firstName, this.lastName, this.email, this.srcAvatar, this.bestScore, this.IDB);
+    // console.log(this.pageBestScore.element);
+    // console.log(this.pageBestScore.setDefaultUsers());
+    // this.pageBestScore.setDefaultUsers();
   }
 
   getCurrentRoute(): HTMLElement {
