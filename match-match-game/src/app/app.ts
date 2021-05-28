@@ -6,6 +6,7 @@ import { Registration } from '../components/registration';
 import { Component, ImageCategoryModel } from './app.api';
 import { Route } from '../components/routing';
 import { Timer } from '../components/timer';
+import { HeaderAvatar } from '../components/header-avatar';
 
 export class App implements Component {
   private readonly header: Header;
@@ -18,6 +19,7 @@ export class App implements Component {
   public isRegistrationOpen: boolean = false;
   public isGameOpen: boolean = false;
   public timer: Timer = new Timer();
+  public headerAvatar: HeaderAvatar = new HeaderAvatar();
 
   constructor(private readonly rootElement: HTMLElement) {
     this.pageMain = new PageMain();
@@ -26,8 +28,8 @@ export class App implements Component {
     this.game = new Game(this.isGameOpen, this.timer);
 
     this.currentRoute = new Route();
-    this.registration = new Registration('div', this.isRegistrationOpen);
-    this.header = new Header('div',  this.currentRoute, this.game,  this.registration, this.isRegistrationOpen, this.isGameOpen, this.timer);
+    this.registration = new Registration('div', this.isRegistrationOpen, this.headerAvatar);
+    this.header = new Header('div', this.currentRoute, this.game, this.registration, this.isRegistrationOpen, this.isGameOpen, this.timer, this.headerAvatar);
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
   }

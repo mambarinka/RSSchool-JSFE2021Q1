@@ -1,13 +1,15 @@
 import { BaseComponentInput } from '../shared/base-component-input';
 import { FormAvatar } from './form-avatar';
 import { FormRegistrationItem } from './form-registration-item';
+import { HeaderAvatar } from './header-avatar';
 
 export class FormInput extends BaseComponentInput {
   private isValidate = true;
 
-  private imageAvatar: FormAvatar = new FormAvatar();
+  private imageAvatar: FormAvatar;
+  private headerAvatar: HeaderAvatar;
 
-  private defaultAvatar: string = this.imageAvatar.image.src;
+  // private defaultAvatar: string = this.imageAvatar.image.src;
 
   private formItem: FormRegistrationItem;
 
@@ -16,7 +18,8 @@ export class FormInput extends BaseComponentInput {
     type = '',
     placeholder = '',
     formItem: FormRegistrationItem,
-    imageAvatar: FormAvatar
+    imageAvatar: FormAvatar,
+    headerAvatar: HeaderAvatar
   ) {
     super(['form__item-input']);
 
@@ -28,6 +31,7 @@ export class FormInput extends BaseComponentInput {
 
     this.formItem = formItem;
     this.imageAvatar = imageAvatar;
+    this.headerAvatar = headerAvatar;
 
     if (this.input.name === 'first-name' || this.input.name === 'last-name') {
       this.input.maxLength = 30;
@@ -41,7 +45,7 @@ export class FormInput extends BaseComponentInput {
       );
     } else if (this.input.name === 'file') {
       this.input.addEventListener('change', () =>
-        this.inputFileHandler(this.input, this.imageAvatar)
+        this.inputFileHandler(this.input, this.imageAvatar, this.headerAvatar)
       );
     }
   }
@@ -95,10 +99,9 @@ export class FormInput extends BaseComponentInput {
     return this.isValidate;
   }
 
-  inputFileHandler(input: HTMLInputElement, image: FormAvatar): void {
+  inputFileHandler(input: HTMLInputElement, image: FormAvatar, imageHeader: HeaderAvatar): void {
     const FILE_TYPES = [`gif`, `jpg`, `jpeg`, `png`];
     if (input.files !== null) {
-      // console.log(input.files[0]);
       const file: File = input.files[0];
       const fileName = file.name.toLowerCase();
 
@@ -109,8 +112,8 @@ export class FormInput extends BaseComponentInput {
         reader.addEventListener(`load`, () => {
           if (reader.result !== null) {
             image.image.src = reader.result as string;
+            imageHeader.image.src = reader.result as string;
           }
-          // console.log(reader.result);
         });
 
         reader.readAsDataURL(file);
@@ -148,7 +151,7 @@ export class FormInput extends BaseComponentInput {
 
   clearAvatarPreview(): void {
     if (this.imageAvatar) {
-      this.imageAvatar.image.src = this.defaultAvatar;
+      this.imageAvatar.image.src = `./assets/images/user-img.svg`;
     }
   }
 }

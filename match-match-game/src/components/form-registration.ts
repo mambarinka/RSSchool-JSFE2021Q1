@@ -9,12 +9,14 @@ import { FormInput } from './form-input';
 import { FormLabel } from './form-label';
 import { FormRegistrationItem } from './form-registration-item';
 import { FormRegistrationList } from './form-registration-list';
+import { HeaderAvatar } from './header-avatar';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
   // readonly registration: Registration;
   readonly formList: FormRegistrationList;
   readonly formAvatar: FormAvatar;
+  // readonly headerAvatar: HeaderAvatar;
   readonly inputFile: FormInput;
   readonly wrapperAvatar: BaseComponent;
   readonly buttonSubmit: ButtonSubmit;
@@ -29,7 +31,7 @@ export class FormRegistration extends BaseComponentForm {
   // private indexedDB: IndexedDB | null;
   public IDB: IndexedDB = new IndexedDB;
 
-  constructor(title: keyof HTMLElementTagNameMap = 'h2') {
+  constructor(title: keyof HTMLElementTagNameMap = 'h2', headerAvatar: HeaderAvatar) {
     super(['form']);
 
     this.title = document.createElement(title);
@@ -43,6 +45,7 @@ export class FormRegistration extends BaseComponentForm {
 
     this.formList = new FormRegistrationList();
     this.formAvatar = new FormAvatar();
+    // this.headerAvatar = new HeaderAvatar();
     // this.registration = new Registration();
     // console.log(this.registration);
 
@@ -62,7 +65,8 @@ export class FormRegistration extends BaseComponentForm {
         this.types[i],
         this.placeHolders[i],
         formItem,
-        this.formAvatar
+        this.formAvatar,
+        headerAvatar
       );
       // this.arrayInputsHandler.push(formInput.inputNameHandler(formItem));
       this.arrayInputs.push(formInput);
@@ -77,7 +81,8 @@ export class FormRegistration extends BaseComponentForm {
       'file',
       '',
       new FormRegistrationItem(),
-      this.formAvatar
+      this.formAvatar,
+      headerAvatar
     );
     this.arrayInputs.push(this.inputFile);
     this.inputFile.input.classList.add('form__item-input--file');

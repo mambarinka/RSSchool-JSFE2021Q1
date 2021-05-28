@@ -2,6 +2,7 @@ import { ImageCategoryModel } from '../app/app.api';
 import { BaseComponent } from '../shared/base-component';
 import { ButtonMain } from './button-main';
 import { Game } from './game';
+import { HeaderAvatar } from './header-avatar';
 import { Logo } from './logo';
 import { Navigation } from './navigation';
 import { Registration } from './registration';
@@ -25,9 +26,10 @@ export class Header extends BaseComponent {
   public isRegistrationOpen: boolean;
   public isGameOpen: boolean;
   public timer: Timer;
+  headerAvatar: HeaderAvatar;
   // private currentRoute: Route;
 
-  constructor(div: keyof HTMLElementTagNameMap = 'div', currentRoute: Route, game: Game, registration: Registration, isRegistrationOpen: boolean, isGameOpen: boolean, timer: Timer) {
+  constructor(div: keyof HTMLElementTagNameMap = 'div', currentRoute: Route, game: Game, registration: Registration, isRegistrationOpen: boolean, isGameOpen: boolean, timer: Timer, headerAvatar: HeaderAvatar) {
     super('header', ['page-header']);
 
     this.wrapper = document.createElement(div);
@@ -36,6 +38,8 @@ export class Header extends BaseComponent {
     this.logo = new Logo();
     this.navigation = new Navigation();
     this.buttonMain = new ButtonMain();
+    this.headerAvatar = headerAvatar;
+    // this.headerAvatar = new HeaderAvatar();
     // this.currentRoute = new Route();
     // this.timer = new Timer();
 
@@ -47,7 +51,8 @@ export class Header extends BaseComponent {
     this.wrapper.append(
       this.logo.element,
       this.navigation.element,
-      this.buttonMain.button
+      this.buttonMain.button,
+      this.headerAvatar.image
     );
 
     this.game = game;

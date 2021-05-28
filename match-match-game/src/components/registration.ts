@@ -1,17 +1,20 @@
 import { BaseComponent } from '../shared/base-component';
 import { FormRegistration } from './form-registration';
+import { HeaderAvatar } from './header-avatar';
 
 export class Registration extends BaseComponent {
   readonly overlay: HTMLElement;
   readonly formRegistration: FormRegistration;
   isRegistrationOpen: boolean;
+  headerAvatar: HeaderAvatar;
 
-  constructor(div: keyof HTMLElementTagNameMap = 'div', isRegistrationOpen: boolean) {
+  constructor(div: keyof HTMLElementTagNameMap = 'div', isRegistrationOpen: boolean, headerAvatar: HeaderAvatar) {
     super('div', ['registration', 'hide']);
 
     this.overlay = document.createElement(div);
     this.overlay.classList.add('registration__overlay');
-    this.formRegistration = new FormRegistration();
+    this.headerAvatar = headerAvatar;
+    this.formRegistration = new FormRegistration('h2', this.headerAvatar);
     this.element.append(this.overlay, this.formRegistration.form);
 
     this.overlay.addEventListener('click', () =>
