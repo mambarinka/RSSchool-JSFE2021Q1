@@ -35,49 +35,97 @@ export class IndexedDB {
     },
   ];
 
-  init(databaseName: string) {
-    const IDB = window.indexedDB;
-    const openRequest = IDB.open(databaseName);
+  init(databaseName: string): Promise<IDBDatabase> {
+    return new Promise((resolve, reject) => {
+      const IDB = window.indexedDB;
+      const openRequest = IDB.open(databaseName);
 
-    openRequest.onupgradeneeded = () => {
-      this.db = openRequest.result;
-      const users = this.db.createObjectStore('Users', {
-        keyPath: 'id',
-        autoIncrement: true,
-      });
-      users.createIndex('first-name', 'firstName');
-      users.createIndex('last-name', 'lastName');
-      users.createIndex('e-mail', 'email');
-      users.createIndex('avatar', 'avatar');
-      users.createIndex('best-score', 'bestScore');
-      // this.db = database;
-      this.defaultUsers.forEach((defaultUser) => {
-        // console.log(defaultUser);
+      openRequest.onupgradeneeded = () => {
+        this.db = openRequest.result;
+        const users = this.db.createObjectStore('Users', {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+        users.createIndex('first-name', 'firstName');
+        users.createIndex('last-name', 'lastName');
+        users.createIndex('e-mail', 'email');
+        users.createIndex('avatar', 'avatar');
+        users.createIndex('best-score', 'bestScore');
+        // this.db = database;
+        this.defaultUsers.forEach((defaultUser) => {
+          // console.log(defaultUser);
 
-        users.add(defaultUser);
-      });
+          users.add(defaultUser);
+        });
 
-      const settings = this.db.createObjectStore('Settings', {
-        keyPath: 'id',
-        autoIncrement: true,
-      });
-      settings.createIndex('cards-type', 'cardsType');
-      settings.createIndex('difficulty', 'difficulty');
-    };
+        const settings = this.db.createObjectStore('Settings', {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+        settings.createIndex('cards-type', 'cardsType');
+        settings.createIndex('difficulty', 'difficulty');
+      };
 
-    openRequest.onsuccess = () => {
-      // console.log(
-      //   'событие onsucess сработало после завершения onupgradeneeded в Init()'
-      // );
-      this.db = openRequest.result;
-      // console.log(this.db);
-    };
+      openRequest.onsuccess = () => {
+        // console.log(
+        //   'событие onsucess сработало после завершения onupgradeneeded в Init()'
+        // );
+        this.db = openRequest.result;
+        resolve(this.db);
+        // console.log(this.db);
+      };
 
-    openRequest.onerror = () => {
-      alert(`error opening database ${openRequest.error}`);
-    };
+      openRequest.onerror = () => {
+        alert(`error opening database ${openRequest.error}`);
+      };
+    })
+
     // console.log(this.db);
   }
+
+  // init(databaseName: string) {
+  //   const IDB = window.indexedDB;
+  //   const openRequest = IDB.open(databaseName);
+
+  //   openRequest.onupgradeneeded = () => {
+  //     this.db = openRequest.result;
+  //     const users = this.db.createObjectStore('Users', {
+  //       keyPath: 'id',
+  //       autoIncrement: true,
+  //     });
+  //     users.createIndex('first-name', 'firstName');
+  //     users.createIndex('last-name', 'lastName');
+  //     users.createIndex('e-mail', 'email');
+  //     users.createIndex('avatar', 'avatar');
+  //     users.createIndex('best-score', 'bestScore');
+  //     // this.db = database;
+  //     this.defaultUsers.forEach((defaultUser) => {
+  //       // console.log(defaultUser);
+
+  //       users.add(defaultUser);
+  //     });
+
+  //     const settings = this.db.createObjectStore('Settings', {
+  //       keyPath: 'id',
+  //       autoIncrement: true,
+  //     });
+  //     settings.createIndex('cards-type', 'cardsType');
+  //     settings.createIndex('difficulty', 'difficulty');
+  //   };
+
+  //   openRequest.onsuccess = () => {
+  //     // console.log(
+  //     //   'событие onsucess сработало после завершения onupgradeneeded в Init()'
+  //     // );
+  //     this.db = openRequest.result;
+  //     // console.log(this.db);
+  //   };
+
+  //   openRequest.onerror = () => {
+  //     alert(`error opening database ${openRequest.error}`);
+  //   };
+  //   // console.log(this.db);
+  // }
 
   write(userObject: User) {
     // транзакция на запись
@@ -88,71 +136,72 @@ export class IndexedDB {
       const addUser = users.add(userObject);
 
       tx.oncomplete = () => {
-        // console.log('complete', addUser.result);
+        console.log('complete', addUser.result);
       };
 
       tx.onerror = () => {
-        // console.log('error', addUser.error);
+        console.log('error', addUser.error);
       };
 
       tx.onabort = () => {
-        // console.log('abort');
+        console.log('abort');
       };
     }
   }
 
-  readAll(): Promise<void> {
+  // readAll(objectStore: string): Array<User> {
+  readAll(objectStore: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      console.log(`метод readAll start    ${this.db}`);
+      // let result: Array<User> = [];
+      // console.log(`метод readAll start    ${this.db}`);
       if (this.db !== null) {
-        const tx = this.db.transaction('Users', 'readwrite');
-        const users = tx.objectStore('Users');
+        const tx = this.db.transaction(objectStore, 'readwrite');
+        const users = tx.objectStore(objectStore);
         const getUsers = users.getAll();
 
         console.log(getUsers);
 
         tx.oncomplete = () => {
-          console.log(getUsers.result);
-          return resolve(getUsers.result);
+          // console.log(getUsers.result);
+          // result = getUsers.result;
+          resolve(getUsers.result);
           // return getUsers.result;
         };
+
+        tx.onerror = () => {
+          console.log('error', getUsers.error);
+        };
       }
+
+      // return result;
     })
-
-    // tx.oncomplete = () => {
-    //   console.log(getUsers.result);
-    // };
-    // console.log(getUsers.result);
-    // console.log(getUsers);
-
-  // return [];
-}
-
-readFiltered() {
-  if (this.db !== null) {
-    const tx = this.db.transaction('Users', 'readonly');
-    const users = tx.objectStore('Users');
-    // console.log(users);
-    const getUsersFiltered = users
-      .index('best-score')
-      .openCursor(null, 'prev'); // сортировка значений по email
-
-    // console.log(users.index('best-score').openCursor(null, 'next'));
-
-    const resultBestScore: Array<any> = []; // туда скидывать при итерациях value
-    getUsersFiltered.onsuccess = () => {
-      const cursor = getUsersFiltered.result;
-      if (cursor) {
-        // console.log(cursor.value);
-        if (cursor.value.email[0] === 'a') {
-          resultBestScore.push(cursor.value);
-        }
-        cursor?.continue();
-      }
-    };
-    tx.oncomplete = () => {
-      // console.log(resultBestScore);
-    };
   }
-}
+
+  readFiltered() {
+    if (this.db !== null) {
+      const tx = this.db.transaction('Users', 'readonly');
+      const users = tx.objectStore('Users');
+      // console.log(users);
+      const getUsersFiltered = users
+        .index('best-score')
+        .openCursor(null, 'next'); // сортировка значений по email
+
+      // console.log(users.index('best-score').openCursor(null, 'next'));
+
+      const resultBestScore: Array<any> = []; // туда скидывать при итерациях value
+      getUsersFiltered.onsuccess = () => {
+        const cursor = getUsersFiltered.result;
+        if (cursor) {
+          // console.log(cursor.value);
+          if (cursor.value.email[0] === 'a') {
+            resultBestScore.push(cursor.value);
+          }
+          cursor?.continue();
+        }
+      };
+      tx.oncomplete = () => {
+        console.log(resultBestScore);
+      };
+    }
+  }
 }

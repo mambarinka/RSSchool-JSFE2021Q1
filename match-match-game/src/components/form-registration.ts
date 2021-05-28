@@ -13,32 +13,20 @@ import { HeaderAvatar } from './header-avatar';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
-
   // readonly registration: Registration;
   readonly formList: FormRegistrationList;
-
   readonly formAvatar: FormAvatar;
-
   // readonly headerAvatar: HeaderAvatar;
   readonly inputFile: FormInput;
-
   readonly wrapperAvatar: BaseComponent;
-
   readonly buttonSubmit: ButtonSubmit;
-
   readonly buttonCancel: ButtonCancel;
-
   private readonly names: string[];
-
   private readonly types: string[];
-
   private readonly textContents: string[];
-
   private readonly placeHolders: string[];
-
   // private readonly arrayInputsHandler: Array<boolean> = [];
   private readonly arrayInputs: Array<FormInput> = [];
-
   // private indexedDB: IndexedDB | null;
   // private indexedDB: IndexedDB | null;
   public IDB: IndexedDB;
@@ -161,7 +149,6 @@ export class FormRegistration extends BaseComponentForm {
       registrationPage.classList.add('hide');
     }
 
-    // console.log('привет из формы');
     evt.preventDefault();
     this.IDB.write(this.getUserObject());
   }

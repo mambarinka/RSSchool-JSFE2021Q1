@@ -3,47 +3,41 @@ import { User } from '../app.api';
 import { IndexedDB } from '../services/indexedDB';
 
 export class BestScore extends BaseComponent {
-  // IDB: IndexedDB;
+  public IDB: IndexedDB = new IndexedDB();
+  arrayDefaultUsers: Array<User> = [{
+    firstName: '',
+    lastName: '',
+    email: '',
+    avatar: '',
+    bestScore: 666
+  }];
+
   constructor() {
+
     // constructor(firstName:'', lastName: '', email: '', srcAvatar: '', bestScore: 0) {
     super('div', ['best-score__wrapper']);
-    // this.element.innerHTML = `
-    // <h1 class="best-score__title">Best players</h1>
-    //   <ul class="best-score__list">
-    //     <li class="best-score__item">
-    //       <img src="${srcAvatar}" alt="avatar user" class="best-score__item-avatar">
-    //       <div class="best-score__data-user">
-    //         <span class="best-score__name-user">${firstName} ${lastName}</span>
-    //         <span class="best-score__email-user">${email}</span>
-    //       </div>
-    //       <output class="best-score__result" name="Score: ">${bestScore}</output>
-    //     </li>
-    //     <li class="best-score__item">
-    //       <img src="${srcAvatar}" alt="avatar user" class="best-score__item-avatar">
-    //       <div class="best-score__data-user">
-    //         <span class="best-score__name-user">${firstName} ${lastName}</span>
-    //         <span class="best-score__email-user">${email}</span>
-    //       </div>
-    //       <output class="best-score__result" name="Score: ">${bestScore}</output>
-    //     </li>
-    //     <li class="best-score__item">
-    //       <img src="${srcAvatar}" alt="avatar user" class="best-score__item-avatar">
-    //       <div class="best-score__data-user">
-    //         <span class="best-score__name-user">${firstName} ${lastName}</span>
-    //         <span class="best-score__email-user">${email}</span>
-    //       </div>
-    //       <output class="best-score__result" name="Score: ">${bestScore}</output>
-    //     </li>
-    //     <li class="best-score__item">
-    //       <img src="${srcAvatar}" alt="avatar user" class="best-score__item-avatar">
-    //       <div class="best-score__data-user">
-    //         <span class="best-score__name-user">${firstName} ${lastName}</span>
-    //         <span class="best-score__email-user">${email}</span>
-    //       </div>
-    //       <output class="best-score__result" name="Score: ">${bestScore}</output>
-    //     </li>
-    //   </ul>
-    //   `;
+    this.IDB.init('mambarinka').then(() => {
+      this.IDB.readAll('Users').then(arr => {
+        this.arrayDefaultUsers.push(arr[0]);
+        return this.arrayDefaultUsers;
+        // console.log(this.arrayDefaultUsers[1].avatar);
+      })
+    })
+    console.log(this.arrayDefaultUsers);
+    console.log(this.arrayDefaultUsers);
+    this.element.innerHTML = `
+    <h1 class="best-score__title">Best players</h1>
+      <ul class="best-score__list">
+        <li class="best-score__item">
+          <img src="${this.arrayDefaultUsers[0].avatar}" alt="avatar user" class="best-score__item-avatar">
+          <div class="best-score__data-user">
+            <span class="best-score__name-user">${this.arrayDefaultUsers[0].firstName} ${this.arrayDefaultUsers[0].lastName}</span>
+            <span class="best-score__email-user">${this.arrayDefaultUsers[0].email}</span>
+          </div>
+          <output class="best-score__result" name="Score: ">${this.arrayDefaultUsers[0].bestScore}</output>
+        </li>
+      </ul>
+      `;
 
     // this.IDB = IDB;
 

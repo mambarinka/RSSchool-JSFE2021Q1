@@ -12,36 +12,30 @@ import { BestScore } from './pages/page-best-score';
 
 export class App implements Component {
   private readonly header: Header;
-
   private readonly pageMain: PageMain;
-
   private readonly game: Game;
-
   private readonly registration: Registration;
-
   private readonly pageBestScore: BestScore;
-
   private readonly footer: Footer;
-
   private readonly currentRoute: Route;
-
   public currentRouteElement: HTMLElement;
-
   public isRegistrationOpen = false;
-
   public isGameOpen = false;
-
   public timer: Timer = new Timer();
-
   public headerAvatar: HeaderAvatar = new HeaderAvatar();
-
   public IDB: IndexedDB = new IndexedDB();
   // public firstName: string;
   // public lastName: string;
   // public email: string;
   // public srcAvatar: string;
   // public bestScore: number;
-  arrayDefaultUsers : Array<User> = [];
+  arrayDefaultUsers: Array<User> = [{
+    firstName: '',
+    lastName: '',
+    email: '',
+    avatar: '',
+    bestScore: 666
+  }];
 
   constructor(private readonly rootElement: HTMLElement) {
     this.pageMain = new PageMain();
@@ -71,15 +65,23 @@ export class App implements Component {
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
 
-    this.IDB.init('mambarinka');
+    this.IDB.init('mambarinka').then(() => {
+      this.IDB.readAll('Users').then(arr => {
+        // console.log(arr);
+        // console.log('this.arrayDefaultUsers: ' + this.arrayDefaultUsers);
+        // let lol = this.arrayDefaultUsers.push(arr);
+        // console.log('lol: ' + lol);
 
-
-    setTimeout(() => {
-      console.log(this.IDB.readAll());
-    }, 3000);
+        console.log(arr);
+        let a = this.arrayDefaultUsers.push(arr);
+        console.log(arr[0]);
+        // setTimeout(() => {
+        //   this.arrayDefaultUsers = this.IDB.readAll('Users');
+        //   console.log('this.arrayDefaultUsers' + this.arrayDefaultUsers);
+        // }, 5000);
+      })
+    })
   }
-
-
 
   render(): HTMLElement {
     this.rootElement?.append(
@@ -102,6 +104,10 @@ export class App implements Component {
         this.registration.element
       );
     };
+
+    this.IDB.readAll('Users').then(arr => {
+      console.log(arr);
+    });
 
     return this.currentRouteElement;
   }
