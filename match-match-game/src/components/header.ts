@@ -98,8 +98,8 @@ export class Header extends BaseComponent {
     } else if (textContentButtonMain === buttonTextContents.startGame) {
       // } else if (!this.isGameOpen) {
 
-      this.currentRouteElement.classList.toggle('hide');
       this.game.element.classList.toggle('hide');
+      this.currentRouteElement.classList.toggle('hide');
       this.timer.isGameOpen = true;
       this.startGame();
       // this.isGameOpen = false;
@@ -118,38 +118,56 @@ export class Header extends BaseComponent {
   }
 
   async startGame(): Promise<void> {
+
     const res = await fetch('./images.json');
     const categories: ImageCategoryModel[] = await res.json();
 
     db.init('mambarinka').then(() => {
       db.readAll('Settings').then(arr => {
+
         let cat: ImageCategoryModel;
-        if (arr[arr.length - 1].gameCardsType === 'animals') {
+        let cardsType = arr[arr.length - 1].gameCardsType;
+
+        if (cardsType === 'animals') {
           cat = categories[0];
-        } else if (arr[arr.length - 1].gameCardsType === 'cars') {
+        } else if (cardsType === 'cars') {
           cat = categories[1];
         } else {
           cat = categories[0];
         }
+
         const images = cat.images.map((name) => `${cat.category}/${name}`);
 
+
         let imagesLength: number;
-        if (arr[arr.length - 1].gameDifficultyType === '4x4') {
-          console.log('4[4');
+        let difficultyType = arr[arr.length - 1].gameDifficultyType;
+
+        if (difficultyType === '4x4') {
           imagesLength = 8;
-        } else if (arr[arr.length - 1].gameDifficultyType === '6x6') {
-          console.log('6[6');
+        } else if (difficultyType === '6x6') {
           imagesLength = 18;
-        } else if (arr[arr.length - 1].gameDifficultyType === '8x8') {
-          console.log('8[8');
+        } else if (difficultyType === '8x8') {
           imagesLength = 32;
         } else {
-          console.log('ничего');
           imagesLength = 8;
         }
-        console.log('imagesLength ' + imagesLength);
+
         buttonMain.button.textContent = 'stop game';
-        return this.game.newGame(images, imagesLength);
+        this.game.newGame(images, imagesLength);
+
+        const cards: Array<HTMLElement> = Array.from(document.querySelectorAll('.card-container'));
+
+        Array.from(cards).forEach((card: HTMLElement) => {
+          let ratio: number;
+          difficultyType === '4x4' ?
+            ratio = 5 :
+            difficultyType === '6x6' ?
+              ratio = 7 :
+              difficultyType === '8x8' ?
+                ratio = 10 : ratio = 5;
+
+          card.setAttribute("style", `width: calc(100% / ${ratio}); height: calc(100% / ${ratio})`);
+        })
       })
     })
   }
