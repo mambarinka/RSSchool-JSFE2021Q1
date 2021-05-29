@@ -3,52 +3,41 @@ import { BaseComponent } from '../shared/base-component';
 import { Card } from './card';
 import { CardsField } from './cards-field';
 import { Timer } from './timer';
-// import { CardsFieldWrapper } from './cards-field-wrapper';
-// import { RootElement } from '../app/app.api';
 
 const FLIP_DELAY = 1000;
 
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
-
-  // private readonly timer: Timer;
   private activeCard?: Card;
-
   private isAnimation = false;
-
   isGameOpen: boolean;
-
   timer: Timer;
 
   constructor(isGameOpen: boolean, timer: Timer) {
     super('div', ['cards-field__wrapper', 'hide']);
 
-    // this.wrapper = new CardsFieldWrapper();
-
     this.cardsField = new CardsField();
-    // this.timer = new Timer();
     this.timer = timer;
     this.element.append(this.timer.element, this.cardsField.element);
 
     this.isGameOpen = isGameOpen;
     if (this.element.classList.contains('hide')) {
-      // console.log('игра скрыта');
       this.isGameOpen = false;
-      // console.log(`isGameOpen31: ${isGameOpen}`);
     } else {
-      // console.log('игра открыта');
       this.isGameOpen = true;
     }
 
     this.timer = timer;
-    // this.wrapper.addTimer(this.timer.element);
   }
 
-  newGame(images: string[]): void {
+  newGame(images: string[], imagesLength: number): void {
     // здесь добавить таймер, который стартует при старте новой игры, здесь же добавить метод финиш, подчет очков
     this.cardsField.clear();
-    const cards = images
-      .concat(images)
+    console.log(images);
+    let newImages = images.slice(0, imagesLength);
+    console.log(newImages);
+    const cards = newImages
+      .concat(newImages)
       .map((url) => new Card(url))
       .sort(() => Math.random() - 0.5);
 
@@ -58,7 +47,6 @@ export class Game extends BaseComponent {
     // });
     this.cardsField.onCardClick = (card) => this.cardHandler(card);
     this.timer.startTimer();
-    // console.log(`this.timer.isGameOpen${this.timer.isGameOpen}`);
     return this.cardsField.addCards(cards);
   }
 

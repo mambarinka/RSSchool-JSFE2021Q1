@@ -6,7 +6,6 @@ const SHOW_TIME = 5; // через столько секунд все карто
 
 export class CardsField extends BaseComponent {
   private cards: Card[] = [];
-
   onCardClick: ((card: Card) => void) | null = null;
 
   constructor() {
@@ -21,7 +20,6 @@ export class CardsField extends BaseComponent {
   addCards(cards: Card[]): void {
     this.cards = cards;
     this.cards.forEach((card) => {
-      // console.log(card.element);
       this.element.append(card.element);
       card.onClick = () => {
         if (this.onCardClick) {

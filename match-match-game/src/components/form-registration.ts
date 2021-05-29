@@ -4,12 +4,14 @@ import { PageBestScore } from '../app/pages/page-best-score';
 import { BaseComponent } from '../shared/base-component';
 import { BaseComponentForm } from '../shared/base-component-form';
 import { ButtonCancel } from './button-cancel';
+// import { ButtonMain } from './button-main';
 import { ButtonSubmit } from './button-submit';
 import { FormAvatar } from './form-avatar';
 import { FormInput } from './form-input';
 import { FormLabel } from './form-label';
 import { FormRegistrationItem } from './form-registration-item';
 import { FormRegistrationList } from './form-registration-list';
+import buttonMain from './header';
 import { HeaderAvatar } from './header-avatar';
 
 export class FormRegistration extends BaseComponentForm {
@@ -114,10 +116,12 @@ export class FormRegistration extends BaseComponentForm {
   };
 
   formSubmitHandler(evt: Event): void {
-    const buttonSwitch = document.querySelector('.main-nav__toggle');
-    if (buttonSwitch !== null) {
-      buttonSwitch.textContent = 'Start Game';
-    }
+    // const buttonSwitch = document.querySelector('.main-nav__toggle');
+    // if (buttonSwitch !== null) {
+      // buttonSwitch.textContent = 'Start Game';
+    // }
+
+    buttonMain.button.textContent = 'Start Game';
     const registrationPage = document.querySelector('.registration');
     if (registrationPage !== null) {
       registrationPage.classList.add('hide');

@@ -1,3 +1,4 @@
+import db from '../app/app';
 import { ImageCategoryModel } from '../app/app.api';
 import { BaseComponent } from '../shared/base-component';
 import { ButtonMain } from './button-main';
@@ -8,33 +9,25 @@ import { Navigation } from './navigation';
 import { Registration } from './registration';
 import { Route } from './routing';
 import { Timer } from './timer';
+const buttonMain = new ButtonMain();
+export default buttonMain;
 
 export class Header extends BaseComponent {
   // isGameOpen = false;
   // isGameStop = false;
   // isRegistrationOpen = false;
   readonly wrapper: HTMLElement;
-
   private readonly logo: Logo;
-
   private readonly navigation: Navigation;
-
-  buttonMain: ButtonMain;
-
+  // buttonMain: ButtonMain;
   // private readonly currentRoute: Route;
   public currentRouteElement: HTMLElement;
-
   // private timer: Timer;
   private game: Game;
-
   private registration: Registration;
-
   public isRegistrationOpen: boolean;
-
   public isGameOpen: boolean;
-
   public timer: Timer;
-
   headerAvatar: HeaderAvatar;
   // private currentRoute: Route;
 
@@ -55,7 +48,7 @@ export class Header extends BaseComponent {
 
     this.logo = new Logo();
     this.navigation = new Navigation();
-    this.buttonMain = new ButtonMain();
+    // this.buttonMain = new ButtonMain();
     this.headerAvatar = headerAvatar;
     // this.headerAvatar = new HeaderAvatar();
     // this.currentRoute = new Route();
@@ -69,7 +62,8 @@ export class Header extends BaseComponent {
     this.wrapper.append(
       this.logo.element,
       this.navigation.element,
-      this.buttonMain.button,
+      // this.buttonMain.button,
+      buttonMain.button,
       this.headerAvatar.image
     );
 
@@ -80,62 +74,88 @@ export class Header extends BaseComponent {
     this.timer = timer;
 
     this.currentRouteElement = currentRoute.getCurrentRoute();
-    this.buttonMain.button.addEventListener('click', () =>
-      this.buttonHandler(this.buttonMain.button)
+    buttonMain.button.addEventListener('click', () =>
+      this.buttonHandler(buttonMain)
     );
   }
 
-  buttonHandler(toggle: HTMLButtonElement): void {
+  buttonHandler(toggle: ButtonMain): void {
+
+    const buttonTextContents = {
+      registration: 'register new player',
+      startGame: 'start game',
+      stopGame: 'stop game'
+    }
+
+    const textContentButtonMain = toggle.button.innerText.toLowerCase();
+
     // if (this.isGameOpen) return;
-    // let buttonText = toggle.textContent;
-
-    // console.log('isGameOpen: ' + this.isGameOpen);
-    // console.log('isGameStop: ' + this.isGameStop);
-    // console.log(`isRegistrationOpen: ${this.isRegistrationOpen}`);
-
-    // this.isRegistrationOpen = true;
-    if (!this.isRegistrationOpen) {
-      // console.log('регистрация открывается');
-      // this.currentRouteElement.classList.toggle('hide');
+    // if (!this.isRegistrationOpen) {
+    if (textContentButtonMain === buttonTextContents.registration) {
       this.registration.element.classList.toggle('hide');
       this.isRegistrationOpen = true;
       // this.isGameOpen = true;
-    } else if (!this.isGameOpen) {
-      // console.log('игра начинается');
+    } else if (textContentButtonMain === buttonTextContents.startGame) {
+      // } else if (!this.isGameOpen) {
+
       this.currentRouteElement.classList.toggle('hide');
-      // this.registration.element.classList.toggle('hide');
       this.game.element.classList.toggle('hide');
       this.timer.isGameOpen = true;
       this.startGame();
-      this.isGameOpen = false;
+      // this.isGameOpen = false;
       // this.isGameStop = true;
-      // } else if (!this.isRegistrationOpen && !this.isGameOpen && this.isGameStop) {
-      //   console.log('игра заканчивается');
+    } else if (textContentButtonMain === buttonTextContents.stopGame) {
       //   this.timer.isGameOpen = false;
-      //   this.stopGame();
-      //   this.game.element.classList.toggle('hide');
-      //   this.currentRouteElement.classList.toggle('hide');
+      this.stopGame();
+      this.game.element.classList.toggle('hide');
+
+      if (document.querySelector('.how-to-play__wrapper')) {
+        document.querySelector('.how-to-play__wrapper')?.classList.toggle('hide');
+      } else {
+        this.currentRouteElement.classList.toggle('hide');
+      }
     }
   }
 
   async startGame(): Promise<void> {
     const res = await fetch('./images.json');
     const categories: ImageCategoryModel[] = await res.json();
-    const cat = categories[0];
-    const images = cat.images.map((name) => `${cat.category}/${name}`);
-    this.buttonMain.button.textContent = 'stop game';
-    //  здесь можно будет вывести вывод списка категорий и селектом выбрать
-    //  какую категорию выбрать перед запуском игры
 
-    // const counterService = new CounterServiceImplementation();
-    // counterService.increment();
-    // counterService.subscribeOnCounter((counter: number) => console.log(counter))
-    // console.log(this.game);
-    // console.log(images);
-    return this.game.newGame(images);
+    db.init('mambarinka').then(() => {
+      db.readAll('Settings').then(arr => {
+        let cat: ImageCategoryModel;
+        if (arr[arr.length - 1].gameCardsType === 'animals') {
+          cat = categories[0];
+        } else if (arr[arr.length - 1].gameCardsType === 'cars') {
+          cat = categories[1];
+        } else {
+          cat = categories[0];
+        }
+        const images = cat.images.map((name) => `${cat.category}/${name}`);
+
+        let imagesLength: number;
+        if (arr[arr.length - 1].gameDifficultyType === '4x4') {
+          console.log('4[4');
+          imagesLength = 8;
+        } else if (arr[arr.length - 1].gameDifficultyType === '6x6') {
+          console.log('6[6');
+          imagesLength = 18;
+        } else if (arr[arr.length - 1].gameDifficultyType === '8x8') {
+          console.log('8[8');
+          imagesLength = 32;
+        } else {
+          console.log('ничего');
+          imagesLength = 8;
+        }
+        console.log('imagesLength ' + imagesLength);
+        buttonMain.button.textContent = 'stop game';
+        return this.game.newGame(images, imagesLength);
+      })
+    })
   }
 
-  async stopGame(): Promise<void> {
+  stopGame() {
     this.timer.stopTimer();
+    buttonMain.button.textContent = 'start game';
   }
 }
