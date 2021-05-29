@@ -22,3 +22,9 @@ export interface User {
   bestScore: number;
   // id?: IDBValidKey
 }
+
+export interface Settings {
+  gameCardsType: string;
+  gameDifficultyType: string;
+  // id?: IDBValidKey
+}

@@ -1,7 +1,6 @@
-import { AboutGame } from '../app/pages/page-about-game';
-import { BestScore } from '../app/pages/page-best-score';
-import { Settings } from '../app/pages/page-settings';
-import { IndexedDB } from '../app/services/indexedDB';
+import { PageAboutGame } from '../app/pages/page-about-game';
+import { PageBestScore } from '../app/pages/page-best-score';
+import { PageSettings } from '../app/pages/page-settings';
 import { BaseComponent } from '../shared/base-component';
 import { NavItem } from './nav-item';
 
@@ -11,27 +10,27 @@ export class Route {
 
   private currentRoute?: { name: string; component: BaseComponent } = {
     name: 'default',
-    component: new AboutGame(),
+    component: new PageAboutGame(),
   };
 
   private readonly routing: { name: string; component: BaseComponent }[] = [
     {
       name: 'about',
-      component: new AboutGame(),
+      component: new PageAboutGame(),
     },
     {
       name: 'score',
-      component: new BestScore(),
+      component: new PageBestScore(),
     },
     {
       name: 'settings',
-      component: new Settings(),
+      component: new PageSettings(),
     },
   ];
 
   private readonly defaultRoute: { name: string; component: BaseComponent } = {
     name: 'about',
-    component: new AboutGame(),
+    component: new PageAboutGame(),
   };
 
   public currentRouteElement: HTMLElement;

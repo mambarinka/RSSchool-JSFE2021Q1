@@ -63,6 +63,8 @@
 
 .form__item-label {
   @include text-options(12px, 16px, 400, $second-text-color);
+  width: 136px;
+  margin-right: 30px;
 }
 
 .form__item-input {
@@ -87,6 +89,7 @@
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 50%;
   min-height: 227px;
 }

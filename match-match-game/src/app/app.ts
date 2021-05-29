@@ -3,12 +3,11 @@ import { Game } from '../components/game';
 import { Header } from '../components/header';
 import { PageMain } from '../components/page-main';
 import { Registration } from '../components/registration';
-import { Component, ImageCategoryModel, User } from './app.api';
+import { Component } from './app.api';
 import { Route } from '../components/routing';
 import { Timer } from '../components/timer';
 import { HeaderAvatar } from '../components/header-avatar';
 import { IndexedDB } from './services/indexedDB';
-import { BestScore } from './pages/page-best-score';
 const db = new IndexedDB();
 export default db;
 
@@ -18,7 +17,7 @@ export class App implements Component {
   private readonly pageMain: PageMain;
   private readonly game: Game;
   private readonly registration: Registration;
-  private readonly pageBestScore: BestScore;
+  // private readonly pageBestScore: BestScore;
   private readonly footer: Footer;
   private readonly currentRoute: Route;
   public currentRouteElement: HTMLElement;
@@ -26,35 +25,18 @@ export class App implements Component {
   public isGameOpen = false;
   public timer: Timer = new Timer();
   public headerAvatar: HeaderAvatar = new HeaderAvatar();
-  // public IDB: IndexedDB = new IndexedDB();
-  // public firstName: string;
-  // public lastName: string;
-  // public email: string;
-  // public srcAvatar: string;
-  // public bestScore: number;
-  arrayDefaultUsers: Array<User> = [{
-    firstName: '',
-    lastName: '',
-    email: '',
-    avatar: '',
-    bestScore: 666
-  }];
 
   constructor(private readonly rootElement: HTMLElement) {
     this.pageMain = new PageMain();
     this.footer = new Footer();
-    this.pageBestScore = new BestScore();
 
-    // this.pageBestScore.setDefaultUsers();
     this.game = new Game(this.isGameOpen, this.timer);
 
     this.currentRoute = new Route();
     this.registration = new Registration(
       'div',
       this.isRegistrationOpen,
-      this.headerAvatar,
-      db
-      // this.IDB
+      this.headerAvatar
     );
     this.header = new Header(
       'div',
@@ -68,12 +50,7 @@ export class App implements Component {
     );
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    // db.init('mambarinka');
-    // this.IDB.init('mambarinka').then(() => {
-    //   this.IDB.readAll('Users').then(arr => {
-    //     this.arrayDefaultUsers.push(arr);
-    //   })
-    // })
+    db.init('mambarinka');
   }
 
   render(): HTMLElement {

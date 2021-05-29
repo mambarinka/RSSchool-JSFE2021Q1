@@ -1,4 +1,4 @@
-import { User } from '../app.api';
+import { Settings, User } from '../app.api';
 
 export class IndexedDB {
   // private openRequest: IDBOpenDBRequest;
@@ -35,14 +35,20 @@ export class IndexedDB {
     },
   ];
 
+  defaultSettings: Settings = {
+    gameCardsType: 'animals',
+    gameDifficultyType: '4x4'
+  }
+
   init(databaseName: string): Promise<IDBDatabase> {
-    console.log(this.defaultUsers);
+    // console.log(this.defaultUsers);
     return new Promise((resolve, reject) => {
       const IDB = window.indexedDB;
       const openRequest = IDB.open(databaseName);
 
       openRequest.onupgradeneeded = () => {
         this.db = openRequest.result;
+
         const users = this.db.createObjectStore('Users', {
           keyPath: 'id',
           autoIncrement: true,
@@ -54,8 +60,6 @@ export class IndexedDB {
         users.createIndex('best-score', 'bestScore');
         // this.db = database;
         this.defaultUsers.forEach((defaultUser) => {
-          // console.log(defaultUser);
-
           users.add(defaultUser);
         });
 
@@ -63,8 +67,9 @@ export class IndexedDB {
           keyPath: 'id',
           autoIncrement: true,
         });
-        settings.createIndex('cards-type', 'cardsType');
-        settings.createIndex('difficulty', 'difficulty');
+        settings.createIndex('game-cards-type', 'gameCardsType');
+        settings.createIndex('game-difficulty-type', 'gameDifficultyType');
+        settings.add(this.defaultSettings);
       };
 
       openRequest.onsuccess = () => {
@@ -128,20 +133,20 @@ export class IndexedDB {
   //   // console.log(this.db);
   // }
 
-  write(userObject: User) {
+  write(Object: User | Settings, ObjectStoreName: string) {
     // транзакция на запись
     if (this.db !== null) {
-      const tx = this.db.transaction('Users', 'readwrite');
-      const users = tx.objectStore('Users');
+      const tx = this.db.transaction(ObjectStoreName, 'readwrite');
+      const users = tx.objectStore(ObjectStoreName);
 
-      const addUser = users.add(userObject);
+      const addObject = users.add(Object);
 
       tx.oncomplete = () => {
-        console.log('complete', addUser.result);
+        console.log('complete', addObject.result);
       };
 
       tx.onerror = () => {
-        console.log('error', addUser.error);
+        console.log('error', addObject.error);
       };
 
       tx.onabort = () => {
@@ -151,20 +156,20 @@ export class IndexedDB {
   }
 
   // readAll(objectStore: string): Array<User> {
-  readAll(objectStore: string): Promise<Array<User>> {
+  readAll(objectStore: string): Promise<Array<any>> {
     return new Promise((resolve, reject) => {
-      // console.log(`метод readAll start    ${this.db}`);
+      console.log(`метод readAll start    ${this.db}`);
       if (this.db !== null) {
         const tx = this.db.transaction(objectStore, 'readwrite');
-        const users = tx.objectStore(objectStore);
-        const getUsers = users.getAll();
+        const objects = tx.objectStore(objectStore);
+        const getObjects = objects.getAll();
 
         tx.oncomplete = () => {
-          resolve(getUsers.result);
+          resolve(getObjects.result);
         };
 
         tx.onerror = () => {
-          console.log('error', getUsers.error);
+          console.log('error', getObjects.error);
         };
       }
     })

@@ -55,10 +55,11 @@ export class FormInput extends BaseComponentInput {
     // const regex = /^[а-яА-ЯёЁa-zA-Z0-9-\s+]+$/;
     // const regex = /^[^(~ ! @ # $ % * () _ — + = | : ; " ' ` < > , . ? / ^)]+$/gi;
     const regex = /^[^~!@#$%*()_—+=|:;"'`<>,.?/^]+$/gi;
+    const regexInteger = /^\d+$/;
     // const regex =
     //   /^[^\~\!\@\#\$\%\*\(\)\_\—\+\=\|\:\;\"\'\`\<\>\,\.\?\/\^]+$/gi;
 
-    if (!regex.test(this.input.value)) {
+    if (!regex.test(this.input.value) || regexInteger.test(this.input.value)) {
       formItem.element.classList.remove('validity');
       formItem.element.classList.add('not-validity');
       this.input.setCustomValidity(

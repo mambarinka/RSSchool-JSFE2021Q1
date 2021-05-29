@@ -1,6 +1,6 @@
 import { BaseComponent } from '../../shared/base-component';
 
-export class AboutGame extends BaseComponent {
+export class PageAboutGame extends BaseComponent {
   constructor() {
     super('div', ['how-to-play__wrapper']);
     this.element.innerHTML = `

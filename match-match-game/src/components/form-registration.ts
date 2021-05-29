@@ -1,5 +1,6 @@
+import db from '../app/app';
 import { User } from '../app/app.api';
-import { IndexedDB } from '../app/services/indexedDB';
+import { PageBestScore } from '../app/pages/page-best-score';
 import { BaseComponent } from '../shared/base-component';
 import { BaseComponentForm } from '../shared/base-component-form';
 import { ButtonCancel } from './button-cancel';
@@ -13,10 +14,8 @@ import { HeaderAvatar } from './header-avatar';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
-  // readonly registration: Registration;
   readonly formList: FormRegistrationList;
   readonly formAvatar: FormAvatar;
-  // readonly headerAvatar: HeaderAvatar;
   readonly inputFile: FormInput;
   readonly wrapperAvatar: BaseComponent;
   readonly buttonSubmit: ButtonSubmit;
@@ -25,16 +24,12 @@ export class FormRegistration extends BaseComponentForm {
   private readonly types: string[];
   private readonly textContents: string[];
   private readonly placeHolders: string[];
-  // private readonly arrayInputsHandler: Array<boolean> = [];
   private readonly arrayInputs: Array<FormInput> = [];
-  // private indexedDB: IndexedDB | null;
-  // private indexedDB: IndexedDB | null;
-  public IDB: IndexedDB;
+  pageBestScore?: PageBestScore;
 
   constructor(
     title: keyof HTMLElementTagNameMap = 'h2',
-    headerAvatar: HeaderAvatar,
-    IDB: IndexedDB
+    headerAvatar: HeaderAvatar
   ) {
     super(['form']);
 
@@ -49,10 +44,6 @@ export class FormRegistration extends BaseComponentForm {
 
     this.formList = new FormRegistrationList();
     this.formAvatar = new FormAvatar();
-    this.IDB = IDB;
-    // this.headerAvatar = new HeaderAvatar();
-    // this.registration = new Registration();
-    // console.log(this.registration);
 
     this.names = ['first-name', 'last-name', 'e-mail'];
     this.textContents = ['First Name', 'Last Name', ' E-mail'];
@@ -73,7 +64,6 @@ export class FormRegistration extends BaseComponentForm {
         this.formAvatar,
         headerAvatar
       );
-      // this.arrayInputsHandler.push(formInput.inputNameHandler(formItem));
       this.arrayInputs.push(formInput);
       formItem.element.append(formLabel.label, formInput.input);
       this.formList.element.append(formItem.element);
@@ -115,29 +105,13 @@ export class FormRegistration extends BaseComponentForm {
       this.formCancelHandler()
     );
 
-    // this.IDB.init('mambarinka');
+    this.pageBestScore = new PageBestScore();
   }
 
   checkValidInput = (inputsHandlers: boolean[]): boolean => {
     const isValidate: boolean = inputsHandlers.includes(true);
     return isValidate;
   };
-
-  // formSubmitHandler(evt: Event): Promise<void> {
-  //   return new Promise((resolve) => {
-  //     const buttonSwitch = document.querySelector('.main-nav__toggle');
-  //     if (buttonSwitch !== null) {
-  //       buttonSwitch.textContent = 'Start Game';
-  //     }
-  //     const registrationPage = document.querySelector('.registration');
-  //     if (registrationPage !== null) {
-  //       registrationPage.classList.add('hide');
-  //     }
-  //     console.log('привет из формы');
-  //     evt.preventDefault();
-  //     this.IDB.write(this.getUserObject());
-  //   })
-  // }
 
   formSubmitHandler(evt: Event): void {
     const buttonSwitch = document.querySelector('.main-nav__toggle');
@@ -150,7 +124,11 @@ export class FormRegistration extends BaseComponentForm {
     }
 
     evt.preventDefault();
-    this.IDB.write(this.getUserObject());
+    db.write(this.getUserObject(), 'Users');
+
+    if (this.pageBestScore) {
+      this.pageBestScore.getcontent();
+    }
   }
 
   getUserObject(): User {
@@ -169,10 +147,11 @@ export class FormRegistration extends BaseComponentForm {
       } else if (input.input.name === 'e-mail') {
         userObject.email = input.input.value;
       } else if (input.input.name === 'file') {
-        userObject.avatar = input.input.value;
+        // userObject.avatar = input.input.value;
+        userObject.avatar = this.formAvatar.image.src;
       }
     });
-    // console.log(userObject);
+    console.log(userObject);
     return userObject;
   }
 
