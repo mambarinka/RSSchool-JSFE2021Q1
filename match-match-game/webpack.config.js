@@ -86,8 +86,8 @@ module.exports = ({development}) => ({
     // new ImageminPlugin({
     //   plugins: [
     //     imageminMozjpeg({
-    //       maxFileSize: 244,
-    //       quality: 50,
+    //       // maxFileSize: 244,
+    //       quality: 25,
     //       progressive: true
     //     })
     //   ]
