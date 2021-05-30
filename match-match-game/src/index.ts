@@ -9,9 +9,12 @@ import './assets/images/best-score-avatar2.png';
 import './assets/images/best-score-avatar3.png';
 import './assets/images/best-score-avatar4.png';
 import { App } from './app/app';
+import { db } from './app/services/indexedDB';
+import { User } from './app/app.api';
 
 window.onload = () => {
   const application = new App(document.body);
   application.render();
-  // application.start();
+  db.init('mambarinka');
+  // db.getCurrentUser('Users');
 };

@@ -4,6 +4,9 @@ import { Card } from './card';
 import { CardsField } from './cards-field';
 import { Timer } from './timer';
 import { Congratulation } from './congratulation';
+import { db } from '../app/services/indexedDB';
+import { User } from '../app/app.api';
+import { num } from '../app/pages/page-best-score';
 
 const FLIP_DELAY = 1000;
 
@@ -40,6 +43,7 @@ export class Game extends BaseComponent {
   }
 
   newGame(images: string[], imagesLength: number): void {
+
     // здесь добавить таймер, который стартует при старте новой игры, здесь же добавить метод финиш, подчет очков
     this.cardsField.clear();
     const newImages = images.slice(0, imagesLength);
@@ -91,8 +95,10 @@ export class Game extends BaseComponent {
       this.timer.stopTimer();
       this.congratulation = new Congratulation('div', this.timer.element.textContent);
       this.element.append(this.congratulation.wrapper);
+      console.log(num);
+      db.getCurrentUser('Users', num);
     }
-
+    // db.getCurrentUser('Users'); // УДАЛИТЬ
     this.activeCard.element.classList.remove('error');
     card.element.classList.remove('error');
     this.activeCard = undefined;

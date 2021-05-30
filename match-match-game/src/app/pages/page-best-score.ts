@@ -6,7 +6,7 @@ import { User } from '../app.api';
 import { db } from '../services/indexedDB';
 // import { db } from '../app';
 // import db from '../app';
-
+export let num = 0;
 export class PageBestScore extends BaseComponent {
   title: BestScoreTitle = new BestScoreTitle();
 
@@ -22,6 +22,7 @@ export class PageBestScore extends BaseComponent {
     db.init('mambarinka').then(() => {
       db.readAll<User>('Users').then(() => {
         db.readFiltered<User>('Users').then((resultBestScore) => {
+          num =resultBestScore.length;
           for (let i = 0; i < resultBestScore.length; i++) {
             if (i === 10) {
               break;

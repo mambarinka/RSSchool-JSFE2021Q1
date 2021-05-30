@@ -150,7 +150,7 @@ export class FormRegistration extends BaseComponentForm {
       this.pageBestScore.getcontent();
     }
     // this.pageBestScore?.getUsersFiltered();
-
+    // db.getCurrentUser('Users'); //удалить!!
   }
 
   getUserObject(): User {
@@ -180,3 +180,5 @@ export class FormRegistration extends BaseComponentForm {
     this.form.reset();
   }
 }
+
+const currentUserObject = this

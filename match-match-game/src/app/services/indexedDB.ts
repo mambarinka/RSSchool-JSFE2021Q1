@@ -3,35 +3,35 @@ import { Settings, User } from '../app.api';
 export class IndexedDB {
   // private openRequest: IDBOpenDBRequest;
   public db: IDBDatabase | null = null;
-
+  numberUsers: IDBValidKey = 0;
   defaultUsers: Array<User> = [
     {
       firstName: 'Nicci',
       lastName: 'Troiani',
       email: 'nicci@gmail.com',
       avatar: './assets/images/best-score-avatar1.png',
-      bestScore: 456,
+      bestScore: 11,
     },
     {
       firstName: 'George',
       lastName: 'Fields',
       email: 'jack@gmail.com',
       avatar: './assets/images/best-score-avatar2.png',
-      bestScore: 358,
+      bestScore: 22,
     },
     {
       firstName: 'Jones',
       lastName: 'Dermot',
       email: 'dermot@gamil.com',
       avatar: './assets/images/best-score-avatar3.png',
-      bestScore: 211,
+      bestScore: 33,
     },
     {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane.doe@gmail.com',
       avatar: './assets/images/best-score-avatar4.png',
-      bestScore: 169,
+      bestScore: 44,
     },
   ];
 
@@ -58,8 +58,8 @@ export class IndexedDB {
         });
         // users.createIndex('last-name', 'lastName', { unique: true });
         // users.createIndex('e-mail', 'email', { unique: true });
-        users.createIndex('avatar', 'avatar', { unique: false });
-        users.createIndex('best-score', 'bestScore', { unique: false });
+        users.createIndex('avatar', 'avatar');
+        users.createIndex('best-score', 'bestScore');
         // this.db = database;
         this.defaultUsers.forEach((defaultUser) => {
           users.add(defaultUser);
@@ -87,53 +87,7 @@ export class IndexedDB {
         console.log(`error opening database ${openRequest.error}`);
       };
     });
-
-    // console.log(this.db);
   }
-
-  // init(databaseName: string) {
-  //   const IDB = window.indexedDB;
-  //   const openRequest = IDB.open(databaseName);
-
-  //   openRequest.onupgradeneeded = () => {
-  //     this.db = openRequest.result;
-  //     const users = this.db.createObjectStore('Users', {
-  //       keyPath: 'id',
-  //       autoIncrement: true,
-  //     });
-  //     users.createIndex('first-name', 'firstName');
-  //     users.createIndex('last-name', 'lastName');
-  //     users.createIndex('e-mail', 'email');
-  //     users.createIndex('avatar', 'avatar');
-  //     users.createIndex('best-score', 'bestScore');
-  //     // this.db = database;
-  //     this.defaultUsers.forEach((defaultUser) => {
-  //       // console.log(defaultUser);
-
-  //       users.add(defaultUser);
-  //     });
-
-  //     const settings = this.db.createObjectStore('Settings', {
-  //       keyPath: 'id',
-  //       autoIncrement: true,
-  //     });
-  //     settings.createIndex('cards-type', 'cardsType');
-  //     settings.createIndex('difficulty', 'difficulty');
-  //   };
-
-  //   openRequest.onsuccess = () => {
-  //     // console.log(
-  //     //   'событие onsucess сработало после завершения onupgradeneeded в Init()'
-  //     // );
-  //     this.db = openRequest.result;
-  //     // console.log(this.db);
-  //   };
-
-  //   openRequest.onerror = () => {
-  //     alert(`error opening database ${openRequest.error}`);
-  //   };
-  //   // console.log(this.db);
-  // }
 
   write(Object: User | Settings, ObjectStoreName: string) {
     // транзакция на запись
@@ -144,6 +98,7 @@ export class IndexedDB {
       const addObject = objects.add(Object);
 
       tx.oncomplete = () => {
+        this.numberUsers = addObject.result;
         console.log('complete', addObject.result);
       };
 
@@ -184,7 +139,7 @@ export class IndexedDB {
         // console.log(users);
         const getUsersFiltered = users
           .index('best-score')
-          .openCursor(null, 'next'); // сортировка значений по email
+          .openCursor(null, 'prev'); // сортировка значений по email
 
         console.log(users.index('best-score'));
 
@@ -194,7 +149,7 @@ export class IndexedDB {
           if (cursor) {
             // console.log(cursor.value);
             // if (cursor.value.email[0] === 'a') {
-              resultBestScore.push(cursor.value);
+            resultBestScore.push(cursor.value);
             // }
             // let currentValue: RecordType = cursor.value;
             // let nextValue: RecordType = cursor.value;
@@ -212,6 +167,38 @@ export class IndexedDB {
       }
     });
   }
+
+  getCurrentUser(ObjectStoreName: string, index: number) {
+    if (this.db !== null) {
+      const tx = this.db.transaction(ObjectStoreName, 'readwrite');
+      const objects = tx.objectStore(ObjectStoreName);
+      console.log(objects.get);
+      let currentObject = objects.getAll();
+      console.log(currentObject);
+      // console.log(objects.getAll());
+      // console.dir(objects.getAllKeys);
+      // console.dir(objects.index);
+      // console.dir(objects.keyPath);
+      // console.dir(objects.openCursor);
+      // console.dir(objects.openKeyCursor);
+      // console.dir(objects.count);
+      // const addObject = objects.add(Object);
+
+      tx.oncomplete = () => {
+        console.log('complete111', currentObject.result[index-1]);
+      };
+
+      // tx.onerror = () => {
+      //   console.log('error', addObject.error);
+      // };
+
+      // tx.onabort = () => {
+      //   console.log('abort');
+      // };
+    }
+  }
 }
+
+
 
 export const db = new IndexedDB();

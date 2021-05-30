@@ -63,7 +63,7 @@ export class App implements Component {
     );
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
-    db.init('mambarinka');
+
   }
 
   render(): HTMLElement {
