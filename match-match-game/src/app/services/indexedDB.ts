@@ -37,8 +37,8 @@ export class IndexedDB {
 
   defaultSettings: Settings = {
     gameCardsType: 'animals',
-    gameDifficultyType: '4x4'
-  }
+    gameDifficultyType: '4x4',
+  };
 
   init(databaseName: string): Promise<IDBDatabase> {
     // console.log(this.defaultUsers);
@@ -82,9 +82,9 @@ export class IndexedDB {
       };
 
       openRequest.onerror = () => {
-        alert(`error opening database ${openRequest.error}`);
+        console.log(`error opening database ${openRequest.error}`);
       };
-    })
+    });
 
     // console.log(this.db);
   }
@@ -133,7 +133,7 @@ export class IndexedDB {
   //   // console.log(this.db);
   // }
 
-  write(Object: User | Settings, ObjectStoreName: string) {
+  write(Object: User | Settings, ObjectStoreName: string): void {
     // транзакция на запись
     if (this.db !== null) {
       const tx = this.db.transaction(ObjectStoreName, 'readwrite');
@@ -158,7 +158,6 @@ export class IndexedDB {
   // readAll(objectStore: string): Array<User> {
   readAll(objectStore: string): Promise<Array<any>> {
     return new Promise((resolve, reject) => {
-      console.log(`метод readAll start    ${this.db}`);
       if (this.db !== null) {
         const tx = this.db.transaction(objectStore, 'readwrite');
         const objects = tx.objectStore(objectStore);
@@ -172,10 +171,10 @@ export class IndexedDB {
           console.log('error', getObjects.error);
         };
       }
-    })
+    });
   }
 
-  readFiltered() {
+  readFiltered(): void {
     if (this.db !== null) {
       const tx = this.db.transaction('Users', 'readonly');
       const users = tx.objectStore('Users');
@@ -203,3 +202,5 @@ export class IndexedDB {
     }
   }
 }
+
+export const db = new IndexedDB();

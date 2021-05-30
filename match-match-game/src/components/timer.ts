@@ -9,7 +9,7 @@ export class Timer extends BaseComponent {
     super('div', ['timer']);
   }
 
-  startTimer() {
+  startTimer(): void {
     if (this.isGameOpen) {
       let time = 3600;
       this.timer = setInterval(() => {
@@ -23,14 +23,14 @@ export class Timer extends BaseComponent {
     }
   }
 
-  stopTimer() {
+  stopTimer(): void {
     clearInterval(this.timer);
   }
 
-  getZero = (number: number) => {
-    if (number >= 0 && number < 10) {
-      return `0${number}`;
+  getZero = (minOrSec: number): number | string => {
+    if (minOrSec >= 0 && minOrSec < 10) {
+      return `0${minOrSec}`;
     }
-    return number;
+    return minOrSec;
   };
 }

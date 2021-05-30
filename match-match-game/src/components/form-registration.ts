@@ -1,9 +1,12 @@
-import db from '../app/app';
+// import { db } from '../app/app';
+// import db from '../app/app';
 import { User } from '../app/app.api';
 import { PageBestScore } from '../app/pages/page-best-score';
+import { db } from '../app/services/indexedDB';
 import { BaseComponent } from '../shared/base-component';
 import { BaseComponentForm } from '../shared/base-component-form';
 import { ButtonCancel } from './button-cancel';
+import { buttonMain } from './button-main';
 // import { ButtonMain } from './button-main';
 import { ButtonSubmit } from './button-submit';
 import { FormAvatar } from './form-avatar';
@@ -11,22 +14,35 @@ import { FormInput } from './form-input';
 import { FormLabel } from './form-label';
 import { FormRegistrationItem } from './form-registration-item';
 import { FormRegistrationList } from './form-registration-list';
-import buttonMain from './header';
+// import { buttonMain } from './header';
+// import buttonMain from './header';
 import { HeaderAvatar } from './header-avatar';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
+
   readonly formList: FormRegistrationList;
+
   readonly formAvatar: FormAvatar;
+
   readonly inputFile: FormInput;
+
   readonly wrapperAvatar: BaseComponent;
+
   readonly buttonSubmit: ButtonSubmit;
+
   readonly buttonCancel: ButtonCancel;
+
   private readonly names: string[];
+
   private readonly types: string[];
+
   private readonly textContents: string[];
+
   private readonly placeHolders: string[];
+
   private readonly arrayInputs: Array<FormInput> = [];
+
   pageBestScore?: PageBestScore;
 
   constructor(
@@ -118,7 +134,7 @@ export class FormRegistration extends BaseComponentForm {
   formSubmitHandler(evt: Event): void {
     // const buttonSwitch = document.querySelector('.main-nav__toggle');
     // if (buttonSwitch !== null) {
-      // buttonSwitch.textContent = 'Start Game';
+    // buttonSwitch.textContent = 'Start Game';
     // }
 
     buttonMain.button.textContent = 'Start Game';
@@ -155,11 +171,10 @@ export class FormRegistration extends BaseComponentForm {
         userObject.avatar = this.formAvatar.image.src;
       }
     });
-    console.log(userObject);
     return userObject;
   }
 
-  formCancelHandler() {
+  formCancelHandler(): void {
     this.form.reset();
   }
 }

@@ -8,9 +8,13 @@ const FLIP_DELAY = 1000;
 
 export class Game extends BaseComponent {
   private readonly cardsField: CardsField;
+
   private activeCard?: Card;
+
   private isAnimation = false;
+
   isGameOpen: boolean;
+
   timer: Timer;
 
   constructor(isGameOpen: boolean, timer: Timer) {
@@ -33,9 +37,7 @@ export class Game extends BaseComponent {
   newGame(images: string[], imagesLength: number): void {
     // здесь добавить таймер, который стартует при старте новой игры, здесь же добавить метод финиш, подчет очков
     this.cardsField.clear();
-    console.log(images);
-    let newImages = images.slice(0, imagesLength);
-    console.log(newImages);
+    const newImages = images.slice(0, imagesLength);
     const cards = newImages
       .concat(newImages)
       .map((url) => new Card(url))

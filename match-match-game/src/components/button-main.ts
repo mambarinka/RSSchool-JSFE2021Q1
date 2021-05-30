@@ -9,3 +9,5 @@ export class ButtonMain extends BaseComponentButton {
     this.button.type = 'button';
   }
 }
+
+export const buttonMain = new ButtonMain();

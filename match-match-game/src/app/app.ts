@@ -7,23 +7,36 @@ import { Component } from './app.api';
 import { Route } from '../components/routing';
 import { Timer } from '../components/timer';
 import { HeaderAvatar } from '../components/header-avatar';
-import { IndexedDB } from './services/indexedDB';
-const db = new IndexedDB();
-export default db;
+import { db } from './services/indexedDB';
+// import { IndexedDB } from './services/indexedDB';
 
+// const db = new IndexedDB();
+// export default db;
+
+// export const db = new IndexedDB();
 
 export class App implements Component {
   private readonly header: Header;
+
   private readonly pageMain: PageMain;
+
   private readonly game: Game;
+
   private readonly registration: Registration;
+
   // private readonly pageBestScore: BestScore;
   private readonly footer: Footer;
+
   private readonly currentRoute: Route;
+
   public currentRouteElement: HTMLElement;
+
   public isRegistrationOpen = false;
+
   public isGameOpen = false;
+
   public timer: Timer = new Timer();
+
   public headerAvatar: HeaderAvatar = new HeaderAvatar();
 
   constructor(private readonly rootElement: HTMLElement) {

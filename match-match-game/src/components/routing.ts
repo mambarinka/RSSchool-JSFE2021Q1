@@ -43,10 +43,6 @@ export class Route {
   constructor() {
     this.currentRouteElement = this.defaultRoute.component.element;
     this.navItem = new NavItem();
-    // this.pageBestScore = new BestScore(this.firstName, this.lastName, this.email, this.srcAvatar, this.bestScore, this.IDB);
-    // console.log(this.pageBestScore.element);
-    // console.log(this.pageBestScore.setDefaultUsers());
-    // this.pageBestScore.setDefaultUsers();
   }
 
   getCurrentRoute(): HTMLElement {

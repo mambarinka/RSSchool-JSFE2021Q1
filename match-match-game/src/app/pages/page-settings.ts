@@ -3,22 +3,30 @@ import { SettingsOption } from '../../components/settings-option';
 import { SettingsSelect } from '../../components/settings-select';
 import { SettingsTitle } from '../../components/settings-title';
 import { BaseComponent } from '../../shared/base-component';
-import db from '../app';
+// import { db } from '../app';
+// import db from '../app';
 import { Settings } from '../app.api';
+import { db } from '../services/indexedDB';
 
 export class PageSettings extends BaseComponent {
   private readonly cardsTypes: string[];
+
   private readonly gameTypes: string[];
+
   titleSettingsCards: SettingsTitle;
+
   titleSettingsGame: SettingsTitle;
+
   labelSettingsCards: SettingsLabel;
+
   labelSettingsGame: SettingsLabel;
+
   selectSettingsCards: SettingsSelect;
+
   selectSettingsGame: SettingsSelect;
 
   constructor() {
     super('div', ['settings__wrapper']);
-
 
     this.cardsTypes = ['', 'animals', 'cars'];
     this.gameTypes = ['', '4x4', '6x6', '8x8'];
@@ -36,12 +44,16 @@ export class PageSettings extends BaseComponent {
     this.selectSettingsGame = new SettingsSelect('game');
 
     for (let i = 0; i < this.cardsTypes.length; i++) {
-      const optionSettingsCards: SettingsOption = new SettingsOption(this.cardsTypes[i]);
+      const optionSettingsCards: SettingsOption = new SettingsOption(
+        this.cardsTypes[i]
+      );
       this.selectSettingsCards.select.append(optionSettingsCards.option);
     }
 
     for (let i = 0; i < this.gameTypes.length; i++) {
-      const optionSettingsGame: SettingsOption = new SettingsOption(this.gameTypes[i]);
+      const optionSettingsGame: SettingsOption = new SettingsOption(
+        this.gameTypes[i]
+      );
       this.selectSettingsGame.select.append(optionSettingsGame.option);
     }
 
@@ -52,17 +64,19 @@ export class PageSettings extends BaseComponent {
       this.titleSettingsGame.element,
       this.labelSettingsGame.label,
       this.selectSettingsGame.select
-    )
+    );
 
-    this.selectSettingsCards.select.addEventListener('change', () => this.selectHandler());
-    this.selectSettingsGame.select.addEventListener('change', () => this.selectHandler());
-
+    this.selectSettingsCards.select.addEventListener('change', () =>
+      this.selectHandler()
+    );
+    this.selectSettingsGame.select.addEventListener('change', () =>
+      this.selectHandler()
+    );
 
     //  db.init('mambarinka').then(() => {
     //   db.readAll('Settings').then(arr => {
     //     this.selectSettingsCards.select.value = arr[0].gameCardsType;
     //     this.selectSettingsGame.select.value = arr[0].gameDifficultyType;
-
 
     //   //   arr[0].gameCardsType;
     //   //  arr[0].gameDifficultyType;
@@ -71,15 +85,15 @@ export class PageSettings extends BaseComponent {
     // })
   }
 
-  selectHandler() {
+  selectHandler(): void {
     db.write(this.getSettingsObject(), 'Settings');
   }
 
   getSettingsObject(): Settings {
     const settingsObject: Settings = {
       gameCardsType: '',
-      gameDifficultyType: ''
-    }
+      gameDifficultyType: '',
+    };
     settingsObject.gameCardsType = this.selectSettingsCards.select.value;
     settingsObject.gameDifficultyType = this.selectSettingsGame.select.value;
 
