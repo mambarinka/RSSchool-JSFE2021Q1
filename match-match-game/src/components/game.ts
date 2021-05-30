@@ -3,6 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { Card } from './card';
 import { CardsField } from './cards-field';
 import { Timer } from './timer';
+import { Congratulation } from './congratulation';
 
 const FLIP_DELAY = 1000;
 
@@ -16,6 +17,10 @@ export class Game extends BaseComponent {
   isGameOpen: boolean;
 
   timer: Timer;
+
+  successfulTry = 0;
+  errorTry = 0;
+  congratulation?: Congratulation;
 
   constructor(isGameOpen: boolean, timer: Timer) {
     super('div', ['cards-field__wrapper', 'hide']);
@@ -67,19 +72,39 @@ export class Game extends BaseComponent {
     }
 
     if (this.activeCard.image !== card.image) {
-      // для подсветки красным карточки добавляем метод, н-р
-      // this.activeCard.showError();
-      // card.showError();
-      // await delay(FLIP_DELAY);
-      // потом надо удалить этот обработчик
+      this.activeCard.element.classList.add('error');
+      card.element.classList.add('error');
       await delay(FLIP_DELAY);
-      await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]); //  будут переворачиваться одновременно
+      await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]);
+      this.errorTry++;
+    } else {
+      this.activeCard.element.classList.add('ok');
+      card.element.classList.add('ok');
+      this.successfulTry++;
     }
-    //  else {
-    // если совпадают то красим в зеленый
-    // }
-    this.activeCard = undefined; //  обнулить активную карту
-    this.isAnimation = false; // для того, чтобы нельзя было ,
-    //  кликать много раз мышкой и переворачивать несколько карт одновременно
+
+    const cardsLength = Array.from(document.querySelectorAll('.card-container')).length;
+    let openCardsLength = Array.from(document.querySelectorAll('.ok')).length;
+    if (cardsLength === openCardsLength) {
+      console.log('все карточки закончились');
+      this.getScore();
+      this.timer.stopTimer();
+      this.congratulation = new Congratulation('div', this.timer.element.textContent);
+      this.element.append(this.congratulation.wrapper);
+    }
+
+    this.activeCard.element.classList.remove('error');
+    card.element.classList.remove('error');
+    this.activeCard = undefined;
+    this.isAnimation = false;
+  }
+
+  getScore(): number {
+    console.log(this.successfulTry);
+    console.log(this.errorTry);
+    let fulltime = this.timer.getTime();
+    let score = (this.successfulTry - this.errorTry) * 100 - fulltime * 10;
+    console.log(score);
+    return score < 0 ? 0 : score;
   }
 }

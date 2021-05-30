@@ -1,0 +1,26 @@
+.congratulation {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px;
+  height: 112px;
+  padding: 15px;
+  top: calc(50% - 112px / 2);
+  left: calc(50% - 360px / 2);
+  background-color: $bg-color1;
+  border: 5px outset $main-color;
+}
+
+.congratulation__text {
+  @include text-options(14px, 20px, 500, $second-text-color);
+  width: 328px;
+  margin-bottom: 10px;
+}
+
+.congratulation__button {
+  width: 55px;
+  padding: 8px;
+  color: $bg-color1;
+  background-color: $main-color;
+}
