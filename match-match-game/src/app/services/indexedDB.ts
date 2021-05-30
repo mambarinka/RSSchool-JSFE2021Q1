@@ -53,11 +53,13 @@ export class IndexedDB {
           keyPath: 'id',
           autoIncrement: true,
         });
-        users.createIndex('first-name', 'firstName');
-        users.createIndex('last-name', 'lastName');
-        users.createIndex('e-mail', 'email');
-        users.createIndex('avatar', 'avatar');
-        users.createIndex('best-score', 'bestScore');
+        users.createIndex('name-email', ['firstName', 'lastName', 'email'], {
+          unique: true,
+        });
+        // users.createIndex('last-name', 'lastName', { unique: true });
+        // users.createIndex('e-mail', 'email', { unique: true });
+        users.createIndex('avatar', 'avatar', { unique: false });
+        users.createIndex('best-score', 'bestScore', { unique: false });
         // this.db = database;
         this.defaultUsers.forEach((defaultUser) => {
           users.add(defaultUser);
@@ -133,13 +135,13 @@ export class IndexedDB {
   //   // console.log(this.db);
   // }
 
-  write(Object: User | Settings, ObjectStoreName: string): void {
+  write(Object: User | Settings, ObjectStoreName: string) {
     // транзакция на запись
     if (this.db !== null) {
       const tx = this.db.transaction(ObjectStoreName, 'readwrite');
-      const users = tx.objectStore(ObjectStoreName);
+      const objects = tx.objectStore(ObjectStoreName);
 
-      const addObject = users.add(Object);
+      const addObject = objects.add(Object);
 
       tx.oncomplete = () => {
         console.log('complete', addObject.result);
@@ -156,7 +158,7 @@ export class IndexedDB {
   }
 
   // readAll(objectStore: string): Array<User> {
-  readAll(objectStore: string): Promise<Array<any>> {
+  readAll<RecordType>(objectStore: string): Promise<Array<RecordType>> {
     return new Promise((resolve, reject) => {
       if (this.db !== null) {
         const tx = this.db.transaction(objectStore, 'readwrite');
@@ -168,38 +170,47 @@ export class IndexedDB {
         };
 
         tx.onerror = () => {
-          console.log('error', getObjects.error);
+          reject(getObjects.error);
         };
       }
     });
   }
 
-  readFiltered(): void {
-    if (this.db !== null) {
-      const tx = this.db.transaction('Users', 'readonly');
-      const users = tx.objectStore('Users');
-      // console.log(users);
-      const getUsersFiltered = users
-        .index('best-score')
-        .openCursor(null, 'next'); // сортировка значений по email
+  readFiltered<RecordType>(objectStore: string/* , sorter: (item: RecordType, itemNext: RecordType) => boolean */): Promise<Array<RecordType>> {
+    return new Promise((resolve, reject) => {
+      if (this.db !== null) {
+        const tx = this.db.transaction(objectStore, 'readonly');
+        const users = tx.objectStore(objectStore);
+        // console.log(users);
+        const getUsersFiltered = users
+          .index('best-score')
+          .openCursor(null, 'next'); // сортировка значений по email
 
-      // console.log(users.index('best-score').openCursor(null, 'next'));
+        console.log(users.index('best-score'));
 
-      const resultBestScore: Array<any> = []; // туда скидывать при итерациях value
-      getUsersFiltered.onsuccess = () => {
-        const cursor = getUsersFiltered.result;
-        if (cursor) {
-          // console.log(cursor.value);
-          if (cursor.value.email[0] === 'a') {
-            resultBestScore.push(cursor.value);
+        const resultBestScore: Array<any> = []; // туда скидывать при итерациях value
+        getUsersFiltered.onsuccess = () => {
+          const cursor = getUsersFiltered.result;
+          if (cursor) {
+            // console.log(cursor.value);
+            // if (cursor.value.email[0] === 'a') {
+              resultBestScore.push(cursor.value);
+            // }
+            // let currentValue: RecordType = cursor.value;
+            // let nextValue: RecordType = cursor.value;
+            // if (sorter(currentValue, nextValue)) {
+            //   resultBestScore.push(currentValue);
+            // }
+            // console.log(resultBestScore);
+            cursor?.continue();
           }
-          cursor?.continue();
-        }
-      };
-      tx.oncomplete = () => {
-        console.log(resultBestScore);
-      };
-    }
+        };
+        tx.oncomplete = () => {
+          // console.log(resultBestScore);
+          resolve(resultBestScore);
+        };
+      }
+    });
   }
 }
 

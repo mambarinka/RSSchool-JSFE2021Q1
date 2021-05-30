@@ -119,7 +119,7 @@ export class FormRegistration extends BaseComponentForm {
     );
 
     this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
-    this.buttonCancel.button.addEventListener('click', () =>
+    this.buttonCancel.button.addEventListener('click', async () =>
       this.formCancelHandler()
     );
 
@@ -149,6 +149,8 @@ export class FormRegistration extends BaseComponentForm {
     if (this.pageBestScore) {
       this.pageBestScore.getcontent();
     }
+    // this.pageBestScore?.getUsersFiltered();
+
   }
 
   getUserObject(): User {

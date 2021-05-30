@@ -54,7 +54,7 @@ export class FormInput extends BaseComponentInput {
   inputNameHandler(formItem: FormRegistrationItem): boolean {
     // const regex = /^[а-яА-ЯёЁa-zA-Z0-9-\s+]+$/;
     // const regex = /^[^(~ ! @ # $ % * () _ — + = | : ; " ' ` < > , . ? / ^)]+$/gi;
-    const regex = /^[^~!@#$%*()_—+=|:;"'`<>,.?/^]+$/gi;
+    const regex = /^[^~!@#$%*()_—+=|:;"'`<>,.?/^]+$/gi; // /^[^0-9][^(~!@#$%*&()_—+=|:;"'`<>,.?\\/\\^\s)]{1,30}$/;
     const regexInteger = /^\d+$/;
     // const regex =
     //   /^[^\~\!\@\#\$\%\*\(\)\_\—\+\=\|\:\;\"\'\`\<\>\,\.\?\/\^]+$/gi;
