@@ -16,5 +16,14 @@ window.onload = () => {
   const application = new App(document.body);
   application.render();
   db.init('mambarinka');
-  // db.getCurrentUser('Users');
+  // db.init('mambarinka').then(() => {
+  //   db.getCurrentUser<User>('Users').then((currentObject) => {
+  //     console.log(currentObject);
+  //     currentObject.bestScore = 1000000;
+
+  //     console.log(currentObject.id);
+
+  //     db.writeCurrentUser('Users', currentObject);
+  //   });
+  // });
 };

@@ -20,7 +20,7 @@ export interface User {
   email: string;
   avatar: string;
   bestScore: number;
-  // id?: IDBValidKey
+  id?: IDBValidKey;
 }
 
 export interface Settings {

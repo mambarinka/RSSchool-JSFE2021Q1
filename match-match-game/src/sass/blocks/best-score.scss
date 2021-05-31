@@ -7,6 +7,7 @@
   width: 80%;
   min-height: 100%;
   padding: 48px 56px;
+  padding-top: 18px;
   background-color: $bg-color2;
 }
 
@@ -22,12 +23,12 @@
   display: flex;
   flex-direction: column;
   width: 90%;
-  top: 100px;
+  top: 64px;
 }
 
 .best-score__item {
   display: flex;
-  margin-bottom: 18px;
+  margin-bottom: 5px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }

@@ -6,7 +6,7 @@ import { Timer } from './timer';
 import { Congratulation } from './congratulation';
 import { db } from '../app/services/indexedDB';
 import { User } from '../app/app.api';
-import { num } from '../app/pages/page-best-score';
+import { PageBestScore } from '../app/pages/page-best-score';
 
 const FLIP_DELAY = 1000;
 
@@ -22,8 +22,14 @@ export class Game extends BaseComponent {
   timer: Timer;
 
   successfulTry = 0;
+
   errorTry = 0;
+
   congratulation?: Congratulation;
+
+  pageBestScore?: PageBestScore;
+
+  cardsLength?: number;
 
   constructor(isGameOpen: boolean, timer: Timer) {
     super('div', ['cards-field__wrapper', 'hide']);
@@ -40,10 +46,10 @@ export class Game extends BaseComponent {
     }
 
     this.timer = timer;
+    this.pageBestScore = new PageBestScore();
   }
 
   newGame(images: string[], imagesLength: number): void {
-
     // здесь добавить таймер, который стартует при старте новой игры, здесь же добавить метод финиш, подчет очков
     this.cardsField.clear();
     const newImages = images.slice(0, imagesLength);
@@ -87,16 +93,32 @@ export class Game extends BaseComponent {
       this.successfulTry++;
     }
 
-    const cardsLength = Array.from(document.querySelectorAll('.card-container')).length;
-    let openCardsLength = Array.from(document.querySelectorAll('.ok')).length;
-    if (cardsLength === openCardsLength) {
-      console.log('все карточки закончились');
+    this.cardsLength = Array.from(
+      document.querySelectorAll('.card-container')
+    ).length;
+    const openCardsLength = Array.from(document.querySelectorAll('.ok')).length;
+    if (this.cardsLength === openCardsLength) {
+      // console.log('все карточки закончились');
       this.getScore();
       this.timer.stopTimer();
-      this.congratulation = new Congratulation('div', this.timer.element.textContent);
+      this.congratulation = new Congratulation(
+        'div',
+        this.timer.element.textContent,
+        this.element
+      );
       this.element.append(this.congratulation.wrapper);
-      console.log(num);
-      db.getCurrentUser('Users', num);
+      db.init('mambarinka').then(() => {
+        db.getCurrentUser<User>('Users').then((currentObject) => {
+          // console.log(currentObject);
+          console.log('количество очков', this.getScore());
+          currentObject.bestScore = this.getScore();
+          // console.log(currentObject.id);
+          db.writeCurrentUser('Users', currentObject);
+          if (this.pageBestScore) {
+            this.pageBestScore.getcontent();
+          }
+        });
+      });
     }
     // db.getCurrentUser('Users'); // УДАЛИТЬ
     this.activeCard.element.classList.remove('error');
@@ -106,11 +128,22 @@ export class Game extends BaseComponent {
   }
 
   getScore(): number {
-    console.log(this.successfulTry);
-    console.log(this.errorTry);
-    let fulltime = this.timer.getTime();
-    let score = (this.successfulTry - this.errorTry) * 100 - fulltime * 10;
-    console.log(score);
+    // console.log(this.cardsLength);
+    let ratio = 1;
+    if (this.cardsLength === 16) {
+      ratio = 4;
+    } else if (this.cardsLength === 36) {
+      ratio = 6;
+    } else if (this.cardsLength === 64) {
+      ratio = 8;
+    }
+    // console.log(this.successfulTry);
+    // console.log(this.errorTry);
+    const fulltime = this.timer.getTime();
+    const score =
+      ((this.successfulTry - this.errorTry) * 100 - fulltime * 10) * ratio;
+    // let score = (this.successfulTry - this.errorTry) * 100000 - fulltime * 10;//ВРЕМЕННО
+    // console.log(score);
     return score < 0 ? 0 : score;
   }
 }

@@ -1,11 +1,14 @@
 import { BaseComponent } from '../shared/base-component';
 
 export class Timer extends BaseComponent {
-  private timer: NodeJS.Timeout = setInterval(() => { }, 1000);
+  private timer: NodeJS.Timeout = setInterval(() => {}, 1000);
 
   public isGameOpen = false;
-  min: number = 0;
-  sec: number = 0;
+
+  min = 0;
+
+  sec = 0;
+
   constructor() {
     super('div', ['timer']);
   }

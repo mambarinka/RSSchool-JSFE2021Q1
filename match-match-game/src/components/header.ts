@@ -76,8 +76,7 @@ export class Header extends BaseComponent {
     buttonMain.button.addEventListener('click', () => {
       this.buttonHandler(buttonMain);
       this.currentRouteElement = currentRoute.getCurrentRoute();
-    }
-    );
+    });
 
     // console.log(this.currentRouteElement);
   }
@@ -98,7 +97,7 @@ export class Header extends BaseComponent {
       // this.currentRouteElement = currentRoute.getCurrentRoute();
       // console.log(this.currentRouteElement);
       this.currentRouteElement.classList.toggle('hide');
-      console.log(this.currentRouteElement);
+      // console.log(this.currentRouteElement);
 
       this.game.element.classList.toggle('hide');
 

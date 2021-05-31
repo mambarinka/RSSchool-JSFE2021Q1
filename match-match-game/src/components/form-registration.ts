@@ -2,6 +2,7 @@
 // import db from '../app/app';
 import { User } from '../app/app.api';
 import { PageBestScore } from '../app/pages/page-best-score';
+import { uuid } from '../app/services/generatorKeys';
 import { db } from '../app/services/indexedDB';
 import { BaseComponent } from '../shared/base-component';
 import { BaseComponentForm } from '../shared/base-component-form';
@@ -142,9 +143,10 @@ export class FormRegistration extends BaseComponentForm {
     if (registrationPage !== null) {
       registrationPage.classList.add('hide');
     }
-
+    // console.log(this.getUserObject());
     evt.preventDefault();
     db.write(this.getUserObject(), 'Users');
+    db.writeCurrentUser('Users', this.getUserObject());
 
     if (this.pageBestScore) {
       this.pageBestScore.getcontent();
@@ -160,6 +162,7 @@ export class FormRegistration extends BaseComponentForm {
       email: '',
       avatar: '',
       bestScore: 0,
+      id: uuid(),
     };
     this.arrayInputs.forEach((input) => {
       if (input.input.name === 'first-name') {
@@ -180,5 +183,3 @@ export class FormRegistration extends BaseComponentForm {
     this.form.reset();
   }
 }
-
-const currentUserObject = this

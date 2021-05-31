@@ -1,9 +1,13 @@
 import { Settings, User } from '../app.api';
+import { uuid } from './generatorKeys';
 
+let number1: IDBRequest<number>;
 export class IndexedDB {
   // private openRequest: IDBOpenDBRequest;
   public db: IDBDatabase | null = null;
+
   numberUsers: IDBValidKey = 0;
+
   defaultUsers: Array<User> = [
     {
       firstName: 'Nicci',
@@ -11,6 +15,7 @@ export class IndexedDB {
       email: 'nicci@gmail.com',
       avatar: './assets/images/best-score-avatar1.png',
       bestScore: 11,
+      id: uuid(),
     },
     {
       firstName: 'George',
@@ -18,6 +23,7 @@ export class IndexedDB {
       email: 'jack@gmail.com',
       avatar: './assets/images/best-score-avatar2.png',
       bestScore: 22,
+      id: uuid(),
     },
     {
       firstName: 'Jones',
@@ -25,6 +31,7 @@ export class IndexedDB {
       email: 'dermot@gamil.com',
       avatar: './assets/images/best-score-avatar3.png',
       bestScore: 33,
+      id: uuid(),
     },
     {
       firstName: 'Jane',
@@ -32,6 +39,7 @@ export class IndexedDB {
       email: 'jane.doe@gmail.com',
       avatar: './assets/images/best-score-avatar4.png',
       bestScore: 44,
+      id: uuid(),
     },
   ];
 
@@ -51,18 +59,19 @@ export class IndexedDB {
 
         const users = this.db.createObjectStore('Users', {
           keyPath: 'id',
-          autoIncrement: true,
+          // autoIncrement: true,
         });
         users.createIndex('name-email', ['firstName', 'lastName', 'email'], {
           unique: true,
         });
+        // users.createIndex('first-name', 'firstName', { unique: true });
         // users.createIndex('last-name', 'lastName', { unique: true });
         // users.createIndex('e-mail', 'email', { unique: true });
-        users.createIndex('avatar', 'avatar');
-        users.createIndex('best-score', 'bestScore');
+        users.createIndex('avatar', 'avatar', { unique: false });
+        users.createIndex('best-score', 'bestScore', { unique: false });
         // this.db = database;
         this.defaultUsers.forEach((defaultUser) => {
-          users.add(defaultUser);
+          users.put(defaultUser);
         });
 
         const settings = this.db.createObjectStore('Settings', {
@@ -71,7 +80,7 @@ export class IndexedDB {
         });
         settings.createIndex('game-cards-type', 'gameCardsType');
         settings.createIndex('game-difficulty-type', 'gameDifficultyType');
-        settings.add(this.defaultSettings);
+        settings.put(this.defaultSettings);
       };
 
       openRequest.onsuccess = () => {
@@ -95,7 +104,7 @@ export class IndexedDB {
       const tx = this.db.transaction(ObjectStoreName, 'readwrite');
       const objects = tx.objectStore(ObjectStoreName);
 
-      const addObject = objects.add(Object);
+      const addObject = objects.put(Object);
 
       tx.oncomplete = () => {
         this.numberUsers = addObject.result;
@@ -119,7 +128,8 @@ export class IndexedDB {
         const tx = this.db.transaction(objectStore, 'readwrite');
         const objects = tx.objectStore(objectStore);
         const getObjects = objects.getAll();
-
+        number1 = objects.count();
+        // console.log(number1);
         tx.oncomplete = () => {
           resolve(getObjects.result);
         };
@@ -131,7 +141,9 @@ export class IndexedDB {
     });
   }
 
-  readFiltered<RecordType>(objectStore: string/* , sorter: (item: RecordType, itemNext: RecordType) => boolean */): Promise<Array<RecordType>> {
+  readFiltered<RecordType>(
+    objectStore: string /* , sorter: (item: RecordType, itemNext: RecordType) => boolean */
+  ): Promise<Array<RecordType>> {
     return new Promise((resolve, reject) => {
       if (this.db !== null) {
         const tx = this.db.transaction(objectStore, 'readonly');
@@ -141,7 +153,7 @@ export class IndexedDB {
           .index('best-score')
           .openCursor(null, 'prev'); // сортировка значений по email
 
-        console.log(users.index('best-score'));
+        // console.log(users.index('best-score'));
 
         const resultBestScore: Array<any> = []; // туда скидывать при итерациях value
         getUsersFiltered.onsuccess = () => {
@@ -168,37 +180,69 @@ export class IndexedDB {
     });
   }
 
-  getCurrentUser(ObjectStoreName: string, index: number) {
+  getCurrentUser<RecordType>(ObjectStoreName: string): Promise<RecordType> {
+    return new Promise((resolve) => {
+      // console.log('begin');
+      // console.log(this.db);
+      if (this.db !== null) {
+        const tx = this.db.transaction(ObjectStoreName, 'readwrite');
+        const objects = tx.objectStore(ObjectStoreName);
+        const currentObject = objects.getAll();
+        // console.log(this.numberUsers);
+        const foo = objects.get(this.numberUsers);
+        // console.log(objects);
+        // console.log('foo', foo);
+        // var count = objects.count();
+        // let lol: number = this.numberUsers as number;
+        // console.log(lol);
+        // count.onsuccess = function () {
+        //   // console.log(count.result);
+        //   return count.result;
+        // }
+        tx.oncomplete = () => {
+          // console.dir(currentObject)
+          // console.dir(currentObject.result)
+          resolve(foo.result);
+          // resolve(objects.get(this.numberUsers).result);
+          // resolve(currentObject.result[lol]);
+        };
+      }
+    });
+  }
+
+  writeCurrentUser(ObjectStoreName: string, currentObject: User) {
     if (this.db !== null) {
       const tx = this.db.transaction(ObjectStoreName, 'readwrite');
       const objects = tx.objectStore(ObjectStoreName);
-      console.log(objects.get);
-      let currentObject = objects.getAll();
-      console.log(currentObject);
-      // console.log(objects.getAll());
-      // console.dir(objects.getAllKeys);
-      // console.dir(objects.index);
-      // console.dir(objects.keyPath);
-      // console.dir(objects.openCursor);
-      // console.dir(objects.openKeyCursor);
-      // console.dir(objects.count);
-      // const addObject = objects.add(Object);
+      const addObject = objects.put(currentObject);
 
       tx.oncomplete = () => {
-        console.log('complete111', currentObject.result[index-1]);
+        // console.log('запись нового обьекта');
+        this.numberUsers = addObject.result;
       };
 
-      // tx.onerror = () => {
-      //   console.log('error', addObject.error);
-      // };
-
-      // tx.onabort = () => {
-      //   console.log('abort');
-      // };
+      tx.onerror = () => {
+        console.log('error', addObject.error);
+      };
     }
   }
+
+  // getNumberObjectInStore(): number {
+  //   const tx = window.indexedDB.open('Users').result.transaction('Users', 'readwrite');
+  //   const objects = tx.objectStore('Users');
+  //   var count = objects.count();
+
+  //   count.onsuccess = function () {
+  //     console.log('count.result ', count.result);
+  //     // return count.result;
+  //   }
+
+  //   count.onerror = () => {
+  //     console.log('error', count.error);
+  //   };
+  //   // return count.result;
+  //   console.log(count.result);
+  //   return count.result;
+  // }
 }
-
-
-
 export const db = new IndexedDB();

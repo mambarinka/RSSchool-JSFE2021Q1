@@ -3,7 +3,7 @@ import { Game } from '../components/game';
 import { Header } from '../components/header';
 import { PageMain } from '../components/page-main';
 import { Registration } from '../components/registration';
-import { Component } from './app.api';
+import { Component, User } from './app.api';
 import { Route } from '../components/routing';
 import { Timer } from '../components/timer';
 import { HeaderAvatar } from '../components/header-avatar';
@@ -63,7 +63,6 @@ export class App implements Component {
     );
 
     this.currentRouteElement = this.currentRoute.getCurrentRoute();
-
   }
 
   render(): HTMLElement {
