@@ -10,8 +10,6 @@ export class FormInput extends BaseComponentInput {
 
   private headerAvatar: HeaderAvatar;
 
-  // private defaultAvatar: string = this.imageAvatar.image.src;
-
   private formItem: FormRegistrationItem;
 
   constructor(
@@ -52,12 +50,8 @@ export class FormInput extends BaseComponentInput {
   }
 
   inputNameHandler(formItem: FormRegistrationItem): boolean {
-    // const regex = /^[а-яА-ЯёЁa-zA-Z0-9-\s+]+$/;
-    // const regex = /^[^(~ ! @ # $ % * () _ — + = | : ; " ' ` < > , . ? / ^)]+$/gi;
-    const regex = /^[^~!@#$%*()_—+=|:;"'`<>,.?/^]+$/gi; // /^[^0-9][^(~!@#$%*&()_—+=|:;"'`<>,.?\\/\\^\s)]{1,30}$/;
+    const regex = /^[^~!@#$%*()_—+=|:;"'`<>,.?/^]+$/gi;
     const regexInteger = /^\d+$/;
-    // const regex =
-    //   /^[^\~\!\@\#\$\%\*\(\)\_\—\+\=\|\:\;\"\'\`\<\>\,\.\?\/\^]+$/gi;
 
     if (!regex.test(this.input.value) || regexInteger.test(this.input.value)) {
       formItem.element.classList.remove('validity');
@@ -126,34 +120,6 @@ export class FormInput extends BaseComponentInput {
       }
     }
   };
-
-  // inputFileHandler(input: HTMLInputElement, image: HTMLImageElement) {
-  //   console.log(input);
-  //   console.log(image);
-  //   const FILE_TYPES = [`gif`, `jpg`, `jpeg`, `png`];
-  //   if (input.files !== null) {
-  //     // console.log(input.files[0]);
-  //     const file: File = input.files[0];
-  //     const fileName = file.name.toLowerCase();
-
-  //     let matches = FILE_TYPES.some(function (it) {
-  //       return fileName.endsWith(it);
-  //     });
-  //     if (matches) {
-  //       let reader = new FileReader();
-
-  //       reader.addEventListener(`load`, () => {
-  //         if (reader.result !== null) {
-  //            image.src = reader.result as string;
-  //         }
-  //         console.log(reader);
-  //         // console.log(reader.result);
-  //       });
-
-  //       reader.readAsDataURL(file);
-  //     }
-  //   }
-  // }
 
   clearAvatarPreview(): void {
     if (this.imageAvatar) {

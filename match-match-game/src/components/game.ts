@@ -50,7 +50,6 @@ export class Game extends BaseComponent {
   }
 
   newGame(images: string[], imagesLength: number): void {
-    // здесь добавить таймер, который стартует при старте новой игры, здесь же добавить метод финиш, подчет очков
     this.cardsField.clear();
     const newImages = images.slice(0, imagesLength);
     const cards = newImages
@@ -58,17 +57,12 @@ export class Game extends BaseComponent {
       .map((url) => new Card(url))
       .sort(() => Math.random() - 0.5);
 
-    // cards.forEach((card) => {
-    //   // card.element.addEventListener('click', () => this.cardHandler(card));
-    //   card.onClick = () => this.cardHandler(card);
-    // });
     this.cardsField.onCardClick = (card) => this.cardHandler(card);
     this.timer.startTimer();
     return this.cardsField.addCards(cards);
   }
 
   private async cardHandler(card: Card) {
-    // async автоматом возвращает промис
     if (this.isAnimation) return;
     if (!card.isFlipped) return; // если она будет отображаться к нам лицом, то никак не реагируем
     this.isAnimation = true;
@@ -98,7 +92,6 @@ export class Game extends BaseComponent {
     ).length;
     const openCardsLength = Array.from(document.querySelectorAll('.ok')).length;
     if (this.cardsLength === openCardsLength) {
-      // console.log('все карточки закончились');
       this.getScore();
       this.timer.stopTimer();
       this.congratulation = new Congratulation(
@@ -120,7 +113,6 @@ export class Game extends BaseComponent {
         });
       });
     }
-    // db.getCurrentUser('Users'); // УДАЛИТЬ
     this.activeCard.element.classList.remove('error');
     card.element.classList.remove('error');
     this.activeCard = undefined;
@@ -128,7 +120,6 @@ export class Game extends BaseComponent {
   }
 
   getScore(): number {
-    // console.log(this.cardsLength);
     let ratio = 1;
     if (this.cardsLength === 16) {
       ratio = 4;
@@ -137,13 +128,10 @@ export class Game extends BaseComponent {
     } else if (this.cardsLength === 64) {
       ratio = 8;
     }
-    // console.log(this.successfulTry);
-    // console.log(this.errorTry);
     const fulltime = this.timer.getTime();
     const score =
       ((this.successfulTry - this.errorTry) * 100 - fulltime * 10) * ratio;
-    // let score = (this.successfulTry - this.errorTry) * 100000 - fulltime * 10;//ВРЕМЕННО
-    // console.log(score);
+
     return score < 0 ? 0 : score;
   }
 }

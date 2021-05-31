@@ -66,19 +66,17 @@ export class Header extends BaseComponent {
     this.timer = timer;
 
     this.currentRouteElement = currentRoute.getCurrentRoute();
-    // const navLinks = document.querySelectorAll('.main-nav__link');
-    // navLinks.forEach((navLink) => {
-    //   navLink.addEventListener('click', () => {
-    //     this.currentRouteElement = currentRoute.getCurrentRoute();
-    //   });
-    // });
 
     buttonMain.button.addEventListener('click', () => {
       this.buttonHandler(buttonMain);
-      this.currentRouteElement = currentRoute.getCurrentRoute();
     });
+    this.navigation.element.onclick = (evt: Event) => {
+      const navItem = evt.target as HTMLElement;
 
-    // console.log(this.currentRouteElement);
+      if (navItem?.classList.contains('main-nav__link')) {
+        this.currentRouteElement = currentRoute.getCurrentRoute();
+      }
+    };
   }
 
   buttonHandler(toggle: ButtonMain): void {
@@ -92,12 +90,8 @@ export class Header extends BaseComponent {
 
     if (textContentButtonMain === buttonTextContents.registration) {
       this.registration.element.classList.toggle('hide');
-      this.isRegistrationOpen = true;
     } else if (textContentButtonMain === buttonTextContents.startGame) {
-      // this.currentRouteElement = currentRoute.getCurrentRoute();
-      // console.log(this.currentRouteElement);
-      this.currentRouteElement.classList.toggle('hide');
-      // console.log(this.currentRouteElement);
+      this.currentRouteElement.classList.add('hide');
 
       this.game.element.classList.toggle('hide');
 

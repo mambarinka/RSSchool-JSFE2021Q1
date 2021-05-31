@@ -22,7 +22,6 @@ export class Congratulation extends BaseComponent {
     this.button = new ButtonCongratulation();
     this.wrapper.append(this.element, this.button.button);
     this.currentRoute = new Route();
-    // this.currentRouteElement = this.currentRoute.getCurrentRoute();
 
     this.button.button.addEventListener('click', () =>
       this.buttonHandler(this.wrapper, rootPage)
@@ -30,7 +29,6 @@ export class Congratulation extends BaseComponent {
   }
 
   buttonHandler = (element: HTMLElement, rootPage: HTMLElement): void => {
-    // this.currentRoute.getCurrentRoute();
     document.querySelector('.best-score__wrapper')?.classList.remove('hide');
     element.classList.add('hide');
     rootPage.classList.add('hide');

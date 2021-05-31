@@ -6,7 +6,6 @@ import { NavItem } from './nav-item';
 
 export class Route {
   private currentRouteName = '';
-  // public IDB: IndexedDB = new IndexedDB();
 
   private currentRoute?: { name: string; component: BaseComponent } = {
     name: 'default',
@@ -38,7 +37,6 @@ export class Route {
   private navItem: BaseComponent;
 
   private currentNavItem: Element | null = document.body;
-  // private readonly pageBestScore: BestScore;
 
   constructor() {
     this.currentRouteElement = this.defaultRoute.component.element;
@@ -52,7 +50,6 @@ export class Route {
     });
 
     this.currentRouteName = window.location.hash.slice(2);
-
     this.currentNavItem = document.querySelector(
       `.main-nav__link--${this.currentRouteName}`
     );

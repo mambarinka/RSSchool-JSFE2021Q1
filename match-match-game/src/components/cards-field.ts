@@ -1,6 +1,5 @@
 import { BaseComponent } from '../shared/base-component';
 import { Card } from './card';
-// import { Timer } from './timer';
 
 const SHOW_TIME = 30; // через столько секунд все карточки будут перевернуты в обратную сторону (начало игры)
 

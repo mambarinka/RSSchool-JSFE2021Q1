@@ -1,5 +1,3 @@
-// import { db } from '../app/app';
-// import db from '../app/app';
 import { User } from '../app/app.api';
 import { PageBestScore } from '../app/pages/page-best-score';
 import { uuid } from '../app/services/generatorKeys';
@@ -8,16 +6,14 @@ import { BaseComponent } from '../shared/base-component';
 import { BaseComponentForm } from '../shared/base-component-form';
 import { ButtonCancel } from './button-cancel';
 import { buttonMain } from './button-main';
-// import { ButtonMain } from './button-main';
 import { ButtonSubmit } from './button-submit';
 import { FormAvatar } from './form-avatar';
 import { FormInput } from './form-input';
 import { FormLabel } from './form-label';
 import { FormRegistrationItem } from './form-registration-item';
 import { FormRegistrationList } from './form-registration-list';
-// import { buttonMain } from './header';
-// import buttonMain from './header';
 import { HeaderAvatar } from './header-avatar';
+import { Route } from './routing';
 
 export class FormRegistration extends BaseComponentForm {
   readonly title: HTMLElement;
@@ -44,11 +40,14 @@ export class FormRegistration extends BaseComponentForm {
 
   private readonly arrayInputs: Array<FormInput> = [];
 
+  public currentRouteElement: HTMLElement;
+
   pageBestScore?: PageBestScore;
 
   constructor(
     title: keyof HTMLElementTagNameMap = 'h2',
-    headerAvatar: HeaderAvatar
+    headerAvatar: HeaderAvatar,
+    currentRoute: Route
   ) {
     super(['form']);
 
@@ -119,12 +118,16 @@ export class FormRegistration extends BaseComponentForm {
       this.buttonCancel.button
     );
 
-    this.form.addEventListener('submit', (evt) => this.formSubmitHandler(evt));
-    this.buttonCancel.button.addEventListener('click', async () =>
-      this.formCancelHandler()
-    );
+    this.form.addEventListener('submit', (evt) => {
+      this.formSubmitHandler(evt);
+    });
+    this.buttonCancel.button.addEventListener('click', async () => {
+      this.formCancelHandler();
+      currentRoute.getCurrentRoute();
+    });
 
     this.pageBestScore = new PageBestScore();
+    this.currentRouteElement = currentRoute.getCurrentRoute();
   }
 
   checkValidInput = (inputsHandlers: boolean[]): boolean => {
@@ -133,26 +136,18 @@ export class FormRegistration extends BaseComponentForm {
   };
 
   formSubmitHandler(evt: Event): void {
-    // const buttonSwitch = document.querySelector('.main-nav__toggle');
-    // if (buttonSwitch !== null) {
-    // buttonSwitch.textContent = 'Start Game';
-    // }
-
     buttonMain.button.textContent = 'Start Game';
     const registrationPage = document.querySelector('.registration');
     if (registrationPage !== null) {
       registrationPage.classList.add('hide');
     }
-    // console.log(this.getUserObject());
+
     evt.preventDefault();
     db.write(this.getUserObject(), 'Users');
-    db.writeCurrentUser('Users', this.getUserObject());
 
     if (this.pageBestScore) {
-      this.pageBestScore.getcontent();
+      this.pageBestScore?.getcontent();
     }
-    // this.pageBestScore?.getUsersFiltered();
-    // db.getCurrentUser('Users'); //удалить!!
   }
 
   getUserObject(): User {
@@ -172,7 +167,6 @@ export class FormRegistration extends BaseComponentForm {
       } else if (input.input.name === 'e-mail') {
         userObject.email = input.input.value;
       } else if (input.input.name === 'file') {
-        // userObject.avatar = input.input.value;
         userObject.avatar = this.formAvatar.image.src;
       }
     });

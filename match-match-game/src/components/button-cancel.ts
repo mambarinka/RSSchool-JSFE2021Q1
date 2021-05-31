@@ -8,9 +8,5 @@ export class ButtonCancel extends BaseComponentButton {
     cancel
       `;
     this.button.type = 'button';
-
-    // this.button.onclick = () => {
-    //   this.onClick();
-    // }
   }
 }
