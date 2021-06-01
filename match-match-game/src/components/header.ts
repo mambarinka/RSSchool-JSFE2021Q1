@@ -17,7 +17,7 @@ export class Header extends BaseComponent {
 
   private readonly navigation: Navigation;
 
-  public currentRouteElement: HTMLElement;
+  public currentRouteEl: Route;
 
   private game: Game;
 
@@ -65,21 +65,17 @@ export class Header extends BaseComponent {
     this.isRegistrationOpen = isRegistrationOpen;
     this.timer = timer;
 
-    this.currentRouteElement = currentRoute.getCurrentRoute();
+    this.currentRouteEl = currentRoute;
 
     buttonMain.button.addEventListener('click', () => {
       this.buttonHandler(buttonMain);
     });
-    this.navigation.element.onclick = (evt: Event) => {
-      const navItem = evt.target as HTMLElement;
 
-      if (navItem?.classList.contains('main-nav__link')) {
-        this.currentRouteElement = currentRoute.getCurrentRoute();
-      }
-    };
   }
 
   buttonHandler(toggle: ButtonMain): void {
+    const currenRout = this.currentRouteEl.getCurrentRoute();
+
     const buttonTextContents = {
       registration: 'register new player',
       startGame: 'start game',
@@ -91,25 +87,16 @@ export class Header extends BaseComponent {
     if (textContentButtonMain === buttonTextContents.registration) {
       this.registration.element.classList.toggle('hide');
     } else if (textContentButtonMain === buttonTextContents.startGame) {
-      this.currentRouteElement.classList.add('hide');
+      currenRout.classList.add('hide');
 
       this.game.element.classList.toggle('hide');
 
       this.timer.isGameOpen = true;
       this.startGame();
-
-      const navLinks = document.querySelectorAll('.main-nav__link');
-      navLinks.forEach((navLink) => {
-        navLink.addEventListener('click', () => {
-          this.stopGame();
-          this.game.element.classList.toggle('hide');
-          this.currentRouteElement.classList.toggle('hide');
-        });
-      });
     } else if (textContentButtonMain === buttonTextContents.stopGame) {
       this.stopGame();
       this.game.element.classList.toggle('hide');
-      this.currentRouteElement.classList.toggle('hide');
+      currenRout.classList.toggle('hide');
     }
   }
 

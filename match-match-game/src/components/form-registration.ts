@@ -40,14 +40,14 @@ export class FormRegistration extends BaseComponentForm {
 
   private readonly arrayInputs: Array<FormInput> = [];
 
-  public currentRouteElement: HTMLElement;
+  // public currentRouteElement: HTMLElement;
 
   pageBestScore?: PageBestScore;
 
   constructor(
     title: keyof HTMLElementTagNameMap = 'h2',
     headerAvatar: HeaderAvatar,
-    currentRoute: Route
+    /* currentRoute: Route */
   ) {
     super(['form']);
 
@@ -123,11 +123,11 @@ export class FormRegistration extends BaseComponentForm {
     });
     this.buttonCancel.button.addEventListener('click', async () => {
       this.formCancelHandler();
-      currentRoute.getCurrentRoute();
+      // currentRoute.getCurrentRoute();
     });
 
     this.pageBestScore = new PageBestScore();
-    this.currentRouteElement = currentRoute.getCurrentRoute();
+    // this.currentRouteElement = currentRoute.getCurrentRoute();
   }
 
   checkValidInput = (inputsHandlers: boolean[]): boolean => {

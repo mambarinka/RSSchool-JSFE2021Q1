@@ -15,8 +15,8 @@ export class Registration extends BaseComponent {
   constructor(
     div: keyof HTMLElementTagNameMap = 'div',
     isRegistrationOpen: boolean,
-    headerAvatar: HeaderAvatar,
-    currentRoute: Route
+    headerAvatar: HeaderAvatar
+    /* currentRoute: Route */
   ) {
     super('div', ['registration', 'hide']);
 
@@ -26,7 +26,7 @@ export class Registration extends BaseComponent {
     this.formRegistration = new FormRegistration(
       'h2',
       this.headerAvatar,
-      currentRoute
+      // currentRoute
     );
     this.element.append(this.overlay, this.formRegistration.form);
 

@@ -41,8 +41,8 @@ export class App implements Component {
     this.registration = new Registration(
       'div',
       this.isRegistrationOpen,
-      this.headerAvatar,
-      this.currentRoute
+      this.headerAvatar
+      /* this.currentRoute */
     );
     this.header = new Header(
       'div',

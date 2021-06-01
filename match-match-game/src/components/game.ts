@@ -58,7 +58,10 @@ export class Game extends BaseComponent {
       .sort(() => Math.random() - 0.5);
 
     this.cardsField.onCardClick = (card) => this.cardHandler(card);
-    this.timer.startTimer();
+    setTimeout(() => {
+      this.timer.startTimer();
+    }, 30000);
+
     return this.cardsField.addCards(cards);
   }
 
