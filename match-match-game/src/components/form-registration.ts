@@ -46,7 +46,7 @@ export class FormRegistration extends BaseComponentForm {
 
   constructor(
     title: keyof HTMLElementTagNameMap = 'h2',
-    headerAvatar: HeaderAvatar,
+    headerAvatar: HeaderAvatar
     /* currentRoute: Route */
   ) {
     super(['form']);

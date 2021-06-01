@@ -25,7 +25,7 @@ export class Registration extends BaseComponent {
     this.headerAvatar = headerAvatar;
     this.formRegistration = new FormRegistration(
       'h2',
-      this.headerAvatar,
+      this.headerAvatar
       // currentRoute
     );
     this.element.append(this.overlay, this.formRegistration.form);

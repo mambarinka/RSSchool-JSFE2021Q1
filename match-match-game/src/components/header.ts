@@ -70,7 +70,6 @@ export class Header extends BaseComponent {
     buttonMain.button.addEventListener('click', () => {
       this.buttonHandler(buttonMain);
     });
-
   }
 
   buttonHandler(toggle: ButtonMain): void {
