@@ -29,7 +29,10 @@ export class Congratulation extends BaseComponent {
   }
 
   buttonHandler = (element: HTMLElement, rootPage: HTMLElement): void => {
+    document.querySelector('main.page-main div')?.classList.remove('hide');
+
     document.querySelector('.best-score__wrapper')?.classList.remove('hide');
+
     element.classList.add('hide');
     rootPage.classList.add('hide');
   };
