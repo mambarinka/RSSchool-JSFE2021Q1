@@ -1,0 +1,51 @@
+.footer {
+  min-height: 2vh;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border-top: 1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, $main-text-color, #a2abb3, $main-text-color);
+}
+
+.footer__wrapper {
+  @include wrapper;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.footer__link {
+  @include text-options(21px, 50px, 500, $second-text-color);
+  transition: 0.3s;
+
+  &--github {
+    width: 120px;
+    height: 45px;
+    padding-left: 45px;
+    background-image: url("./assets/icons/github.svg");
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+
+  &--rsschool {
+    position: relative;
+    width: 86px;
+    height: 32px;
+    padding-right: 111px;
+    background-image: url("./assets/icons/rss.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+}
+
+.footer__link-year {
+  @include text-options(21px, 50px, 500, $second-text-color);
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  transition: 0.3s;
+}
