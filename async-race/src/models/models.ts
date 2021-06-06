@@ -1,7 +1,7 @@
 export enum Path {
   garage = '/garage',
   engine = '/engine',
-  winners = '/winners'
+  winners = '/winners',
 }
 
 export enum Method {
@@ -9,15 +9,13 @@ export enum Method {
   POST = 'POST',
   PUT = 'PUT',
   PATCH = 'PATCH',
-  DELETE = 'DELETE'
+  DELETE = 'DELETE',
 }
 
 export interface Car {
-  name?: string,
-  color?: string,
-  id?: number,
-  wins?: number,
-  time?: number
+  name?: string;
+  color?: string;
+  id?: number;
+  wins?: number;
+  time?: number;
 }
-
-

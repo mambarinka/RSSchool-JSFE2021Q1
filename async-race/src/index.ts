@@ -2,21 +2,21 @@ import { createCar } from './fetch-api/fetch-api-garage';
 import { Car } from './models/models';
 import './style.scss';
 
-//ВРЕМЕННО
+// ВРЕМЕННО
 const newCar1: Car = {
   name: 'Lada',
-  color: 'green'
+  color: 'green',
 };
 
 const newCar2: Car = {
   name: 'Ferrari',
   color: 'light-blue',
-  id: 6
+  id: 6,
 };
 
 const newCar3: Car = {
   name: 'Suzuki',
-  id: 7
+  id: 7,
 };
 
 const main = async () => {
@@ -32,6 +32,11 @@ const main = async () => {
   // console.log('Update car prop:', updCarProp);
   // const deleteOneCar = await deleteCar(11);
   // console.log('Delete car:', deleteOneCar);
-}
+};
 
 main();
+
+// window.onload = () => {
+//   const application = new App(document.body);
+//   application.render();
+// }

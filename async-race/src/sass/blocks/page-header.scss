@@ -1,0 +1,16 @@
+.page-header {
+  @include wrapper;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.page-header__button {
+&:first-child {
+  margin-right: 2%;
+}
+}

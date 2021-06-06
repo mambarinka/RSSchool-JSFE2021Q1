@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  // overflow: overlay;
+  overflow: overlay;
 }
 
 *,
@@ -10,14 +10,18 @@ html {
 }
 
 body {
-  @include text-options(12px, 15px, 400, $bg-color1);
-  min-width: 320px;
+  @include text-options(14px, 17px, 400, $text-main-color);
+  min-width: 500px;
+  // height: 100vh;
   margin: 0;
   padding: 0;
 
   font-family: $font-main;
+  letter-spacing: 1px;
 
-  background-color: $bg-color1;
+  background: url("./assets/images/background.jpg") repeat-y;
+  background-size: contain;
+  // background-image: linear-gradient(to bottom, $bg-color1, $bg-color2);
 }
 
 *:focus {

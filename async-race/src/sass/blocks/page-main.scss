@@ -1,0 +1,16 @@
+.page-main {
+  @include wrapper;
+  height: 90vh;
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.page-main__title {
+  @include h1-model;
+  margin-bottom: 20px;
+}
+
+.page-main__page-number {
+  @include h2-model;
+  margin-bottom: 20px;
+}

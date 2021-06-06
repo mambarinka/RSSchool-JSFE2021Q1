@@ -1,0 +1,9 @@
+.road {
+  padding-bottom: 0.5%;
+  border-bottom: 2px dashed $text-main-color;
+}
+
+.road__launch-pad {
+  display: flex;
+  align-items: center;
+}

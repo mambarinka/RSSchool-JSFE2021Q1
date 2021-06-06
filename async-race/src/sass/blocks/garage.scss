@@ -1,0 +1,56 @@
+.garage {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  // outline: 2px solid red;
+}
+
+.garage__list {
+  @include list-reset;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  // outline: 2px solid blueviolet;
+}
+
+.garage_item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.garage__select-button,
+.garage__remove-button {
+  font-size: 13px;
+  padding: 0.3% 1.5%;
+}
+
+.garage__car-name {
+  @include text-options(16px, 17px, 700, $text-color);
+  text-transform: uppercase;
+}
+
+.garage__control-buttons {
+  width: 14.5%;
+  text-align: center;
+}
+
+.garage__start-engine-button,
+.garage__stop-engine-button {
+  width: 30px;
+  height: 30px;
+
+  font-size: 0;
+
+  background-color: transparent;
+  border: none;
+}
+
+.garage__start-engine-button {
+  background: url("./assets/icons/icon-start.svg") no-repeat;
+}
+
+.garage__stop-engine-button {
+  background: url("./assets/icons/icon-stop.png") no-repeat;
+  background-size: 30px;
+}

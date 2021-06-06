@@ -6,18 +6,26 @@
 
 @mixin h1-model() {
   margin: 0;
-  color: $main-text-color;
-  font-size: 20px;
+  color: $text-main-color;
+  font-size: 25px;
   line-height: 30px;
-  font-weight: 500;
+  font-weight: 900;
+}
+
+@mixin h2-model() {
+  margin: 0;
+  color: $text-main-color;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 800;
 }
 
 @mixin p-model() {
   margin: 0;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 17px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
+  color: $text-main-color;
 }
 
 @mixin text-options($size, $height, $weight, $color) {
@@ -28,8 +36,8 @@
 }
 
 @mixin wrapper {
-  max-width: 1440px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 7%;
+  padding-right: 7%;
 }
