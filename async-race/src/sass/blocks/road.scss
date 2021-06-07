@@ -1,9 +1,19 @@
 .road {
-  padding-bottom: 0.5%;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
   border-bottom: 2px dashed $text-main-color;
 }
 
 .road__launch-pad {
   display: flex;
   align-items: center;
+}
+
+.road__flag {
+  width: 3.5%;
+  margin-right: 11.5%;
+  background: url("./assets/icons/icon-flag.svg") no-repeat;
+  background-position-y: center;
 }

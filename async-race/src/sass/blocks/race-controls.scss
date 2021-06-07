@@ -1,0 +1,23 @@
+.race-controls {
+  display: flex;
+  justify-content: space-around;
+  width: 34%;
+  margin: 0 auto;
+}
+
+.race-controls__button {
+  padding: 2% 6%;
+
+  &--race {
+  // color: $text-main-color;
+  // text-shadow: 0px 0px 6px black;
+  background-image: linear-gradient(#c3fcb8 0%, #a5ea90 35%, #98f090 50%, #6be56b 51%, #bdfdbd 100%);
+  }
+  &--reset {
+    background-image: linear-gradient(#fcb8b8 0%, #ea9090 35%, #f09090 50%, #e56b6b 51%, #fdbdbd 100%);
+  }
+  &--generate {
+    background-image: linear-gradient(#fcb8b8 0%, #eab990 35%, #eaf090 50%, #6fe56b 51%, #bdfdfa 100%);
+
+  }
+}

@@ -1,0 +1,27 @@
+.car-view__form-create,
+.car-view__form-update {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 26%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.car-view__button {
+  padding: 1% 5%;
+
+  &--update {
+    color: $text-main-color;
+    text-shadow: 0px 0px 6px black;
+    background-image: linear-gradient(#f2fcb8 0%, #ddea90 35%, #eef090 50%, #d3e56b 51%, #f7fdbd 100%);
+  }
+}
+
+.car-view__input {
+  padding: 3px 6px;
+}
+
+.car-view__color::-webkit-color-swatch-wrapper {
+  padding: 1px;
+}

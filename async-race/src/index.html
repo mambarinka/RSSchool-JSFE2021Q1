@@ -14,6 +14,25 @@
       <a href="#/winners" class="page-header__button button">to winners</a>
     </header>
     <main class="page-main">
+      <section class="car-view">
+        <h2 class="visually-hidden">Here you can add a new car or change any car in the garage</h2>
+        <form class="car-view__form-create">
+          <input type="text" class="car-view__input" name="name" />
+          <input type="color" class="car-view__color" name="color" value="#ffffff" />
+          <button class="car-view__button car-view__button--create button" type="submit">create</button>
+        </form>
+        <form class="car-view__form-update">
+          <input type="text" class="car-view__input" name="name" disabled/>
+          <input type="color" class="car-view__color" name="color" value="#ffffff" disabled/>
+          <button class="car-view__button car-view__button--update button" type="submit">update</button>
+        </form>
+      </section>
+      <section class="race-controls">
+        <h2 class="visually-hidden">here you can start the engines of all cars, stop them and generate new ones</h2>
+        <button class="race-controls__button race-controls__button--race button" type="button">Race</button>
+        <button class="race-controls__button race-controls__button--reset button" type="button">Reset</button>
+        <button class="race-controls__button race-controls__button--generate button" type="button">generate cars</button>
+      </section>
       <section class="garage">
         <h1 class="page-main__title">Garage (4)</h1>
         <h2 class="page-main__page-number">Page #1</h2>
@@ -31,7 +50,8 @@
                   <button class="garage__stop-engine-button">stop</button>
                 </div>
                 <div class="car">
-                  <svg class="car__icon"
+                  <svg
+                    class="car__icon"
                     version="1.0"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 1280 640"
@@ -52,28 +72,10 @@
                   </svg>
                 </div>
               </div>
+              <div class="road__flag"></div>
             </div>
           </li>
         </ul>
-      </section>
-      <section class="car-view">
-        <h2 class="visually-hidden">Here you can add a new car or change any car in the garage</h2>
-        <form class="car-view__form-create">
-          <input type="text" class="car-view__input" name="name" />
-          <input type="color" class="car-view__color" name="color" value="#ffffff" />
-          <button class="car-view__button button" type="submit">create</button>
-        </form>
-        <form class="car-view__form-update">
-          <input type="text" class="car-view__input" name="name" />
-          <input type="color" class="car-view__color" name="color" value="#ffffff" />
-          <button class="car-view__button button" type="submit">update</button>
-        </form>
-      </section>
-      <section class="race-controls">
-        <h2 class="visually-hidden">here you can start the engines of all cars, stop them and generate new ones</h2>
-        <button class="race-controls__button button" type="button">Race</button>
-        <button class="race-controls__button button" type="button">Reset</button>
-        <button class="race-controls__button button" type="button">generate cars</button>
       </section>
       <article class="pagination">
         <button class="pagination__button prev-button button">Prev</button>
