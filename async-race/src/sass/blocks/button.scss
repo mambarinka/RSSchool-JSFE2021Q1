@@ -27,4 +27,13 @@
   &:hover {
     background-image: linear-gradient(#b8fcf3 0%, #90eabd 35%, #90f0b0 50%, #6be5b2 51%, #bdfdda 100%);
   }
+
+  &:disabled {
+    background-color: grey;
+    background-image: none;
+    &:hover {
+    background-color: grey;
+    background-image: none;
+    }
+  }
 }

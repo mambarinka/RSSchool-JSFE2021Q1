@@ -1,24 +1,26 @@
-import { createCar } from "../fetch-api/fetch-api-garage";
+import { createCar, updateCar } from "../fetch-api/fetch-api-garage";
 import { BaseComponentForm, Button, Car, Input } from "../models/models";
 
-export class FormCreate extends BaseComponentForm {
+export class FormUpdate extends BaseComponentForm {
   private readonly inputText: Input;
   private readonly inputColor: Input;
   private readonly buttonSubmit: Button;
-  idNum = 5;
 
   constructor() {
-    super(['car-view__form-create']);
+    super(['car-view__form-update']);
 
     this.inputText = new Input(['car-view__input']);
     this.inputText.input.type = 'text';
     this.inputText.input.name = 'name';
+    this.inputText.input.disabled = true;
     this.inputColor = new Input(['car-view__color']);
     this.inputColor.input.type = 'color';
     this.inputColor.input.name = 'color';
+    this.inputColor.input.disabled = true;
     this.buttonSubmit = new Button(['car-view__button', 'car-view__button--create', 'button']);
     this.buttonSubmit.button.type = 'submit';
     this.buttonSubmit.button.textContent = 'create';
+    this.buttonSubmit.button.disabled = true;
 
     this.form.addEventListener('submit', async (evt) => {
       this.formSubmitHandler(evt);
@@ -42,9 +44,9 @@ export class FormCreate extends BaseComponentForm {
     let car: Car = {
       name: nameCar,
       color: colorCar,
-      id: this.getNewId()
+      // id: this.getNewId()
     };
-    await createCar(car);
+    // await updateCar(car.id,car);
     this.form.reset();
     document.dispatchEvent(new CustomEvent('createCar', {
       bubbles: true,
@@ -52,9 +54,9 @@ export class FormCreate extends BaseComponentForm {
     }))
   }
 
-  getNewId() {
-    return this.idNum++;
-  }
+  // getNewId() {
+  //   return this.idNum++;
+  // }
 }
 
 // <form class="car-view__form-create" >

@@ -1,8 +1,9 @@
 import { cars } from '../../models/constants';
 import { BaseComponent, Car } from '../../models/models';
 import { createHtmlElement } from '../../service/utils';
-import { getCar } from '../car';
+import { getCarItem } from '../car';
 import { FormCreate } from '../form-create';
+import { FormUpdate } from '../form-update';
 
 // export const renderGarage = async (): Promise<HTMLElement> => {
 //   let arrayCars = await cars;
@@ -48,20 +49,20 @@ import { FormCreate } from '../form-create';
 
 export class Garage extends BaseComponent {
   private readonly formCreate: FormCreate;
+  private readonly formUpdate: FormUpdate;
   private readonly carsList: BaseComponent;
   private readonly carItem: BaseComponent;
   constructor() {
     super('main', ['page-main']);
 
     this.formCreate = new FormCreate();
-    // this.formCreate = new FormCreate(this.renderNewCar);
+    this.formUpdate = new FormUpdate();
     this.carsList = new BaseComponent('ul', ['garage__list']);
     this.carItem = new BaseComponent('li');
 
     document.addEventListener('createCar', async (evt: CustomEventInit) => {
-      await getCar(evt.detail.id);
+      await getCarItem(evt.detail.id);
 
-      // console.log(evt.detail);
       await this.renderNewCar(evt.detail);
     })
   }
@@ -69,20 +70,20 @@ export class Garage extends BaseComponent {
   render = async (): Promise<HTMLElement> => {
     this.element.append(
       this.formCreate.renderForm(),
+      this.formUpdate.renderForm(),
       this.carsList.element
     );
 
     const arrayCars = await cars;
     arrayCars.forEach((car: Car) => {
-      this.carsList.element.append(getCar(car));
+      this.carsList.element.append(getCarItem(car));
     });
 
     return this.element;
   };
 
  async renderNewCar(newCar: Car) {
-   await this.carsList.element.append(getCar(newCar));
-
+   await this.carsList.element.append(getCarItem(newCar));
   }
 
   // async renderNewCar() {
