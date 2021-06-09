@@ -5,7 +5,7 @@ import { getCar } from './fetch-api-garage';
 const getSortOrder = (sort: string, order: string) => {
   if (sort && order) {
     return `&_sort=${sort}&_order=${order}`;
-  };
+  }
 };
 
 export const getWinners = async (
@@ -19,8 +19,7 @@ export const getWinners = async (
     `${baseURL} ${pathWinners}?_page = ${pageNumber}& _limit=${limitCars} ${getSortOrder(
       sort,
       order
-    )
-    } `
+    )} `
   );
   // const response = await fetch(`${ baseURL } ${ pathGarage }?id = ${ id } `);
   const items = await response.json();

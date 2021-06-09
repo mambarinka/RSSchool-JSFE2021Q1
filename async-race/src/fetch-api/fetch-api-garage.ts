@@ -1,13 +1,12 @@
 import { baseURL } from '../models/constants';
 import { Car, Method, Path } from '../models/models';
 
-export const getCars = async (pageNumber = 1, limitCars = 1) => {
+export const getCars = async (pageNumber = 1, limitCars = 7) => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(
     `${baseURL}${pathGarage}?_page=${pageNumber}&_limit=${limitCars}`
   );
   const dataCars = await response.json();
-
   const countCars = Number(response.headers.get('X-Total-Count'));
 
   return {

@@ -1,9 +1,13 @@
+.car-view {
+  padding-bottom: 30px;
+}
+
 .car-view__form-create,
 .car-view__form-update {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 26%;
+  width: 300px;
   padding-top: 1%;
   padding-bottom: 1%;
 }

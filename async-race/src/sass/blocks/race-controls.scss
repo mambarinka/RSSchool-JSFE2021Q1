@@ -1,8 +1,10 @@
 .race-controls {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 34%;
   margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .race-controls__button {
