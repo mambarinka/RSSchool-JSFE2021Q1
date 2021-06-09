@@ -1,4 +1,4 @@
-import {  Header } from './view/header';
+import { Header } from './view/header';
 import { Garage } from './view/pages/garage';
 
 // export const renderGame = async () => {

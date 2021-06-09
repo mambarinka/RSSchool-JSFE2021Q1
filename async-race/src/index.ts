@@ -1,5 +1,10 @@
 import { App } from './app';
-import { createCar, deleteCar, getCar, updateCar } from './fetch-api/fetch-api-garage';
+import {
+  createCar,
+  deleteCar,
+  getCar,
+  updateCar,
+} from './fetch-api/fetch-api-garage';
 import { Car } from './models/models';
 import './style.scss';
 

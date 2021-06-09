@@ -1,9 +1,10 @@
 import { cars } from '../../models/constants';
 import { BaseComponent, Car } from '../../models/models';
 import { createHtmlElement } from '../../service/utils';
-import { getCarItem } from '../car';
+import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
+// import { FormUpdate } from '../form-update';
 
 // export const renderGarage = async (): Promise<HTMLElement> => {
 //   let arrayCars = await cars;
@@ -49,22 +50,31 @@ import { FormUpdate } from '../form-update';
 
 export class Garage extends BaseComponent {
   private readonly formCreate: FormCreate;
+
   private readonly formUpdate: FormUpdate;
   private readonly carsList: BaseComponent;
-  private readonly carItem: BaseComponent;
+
+  private carItem!: CarItem;
+
+  // private readonly carItem: BaseComponent;
   constructor() {
     super('main', ['page-main']);
 
     this.formCreate = new FormCreate();
     this.formUpdate = new FormUpdate();
     this.carsList = new BaseComponent('ul', ['garage__list']);
-    this.carItem = new BaseComponent('li');
+
+    // this.carItem = new BaseComponent('li');
 
     document.addEventListener('createCar', async (evt: CustomEventInit) => {
-      await getCarItem(evt.detail.id);
+      // getCarItem(evt.detail.id);
+      console.log(evt.detail);
+      this.carItem = new CarItem(evt.detail);
+      await this.carItem.render(evt.detail);
+      // await getCarItem(evt.detail.id);
 
       await this.renderNewCar(evt.detail);
-    })
+    });
   }
 
   render = async (): Promise<HTMLElement> => {
@@ -76,14 +86,17 @@ export class Garage extends BaseComponent {
 
     const arrayCars = await cars;
     arrayCars.forEach((car: Car) => {
-      this.carsList.element.append(getCarItem(car));
+      this.carItem = new CarItem(car);
+      this.carsList.element.append(this.carItem.render(car));
+      // this.carsList.element.append(getCarItem(car));
     });
 
     return this.element;
   };
 
- async renderNewCar(newCar: Car) {
-   await this.carsList.element.append(getCarItem(newCar));
+  async renderNewCar(newCar: Car) {
+    this.carsList.element.append(this.carItem.render(newCar));
+    // await this.carsList.element.append(getCarItem(newCar));
   }
 
   // async renderNewCar() {
@@ -100,7 +113,6 @@ export class Garage extends BaseComponent {
   //     console.log(getCar(car));
   //     carInnerHtml += `<li class="garage__item">${getCar(car).innerHTML}</li>`;
   //   });
-
 
   //   const garageInnerHtml = `
   //   <section class="car-view">
@@ -130,11 +142,6 @@ export class Garage extends BaseComponent {
   //       </article>
   //   `;
 
-
   //   return garageInnerHtml;
   // };
 }
-function newCar2(newCar2: any): () => Promise<HTMLElement> {
-  throw new Error('Function not implemented.');
-}
-

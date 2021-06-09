@@ -48,19 +48,9 @@ export class FormUpdate extends BaseComponentForm {
     };
     // await updateCar(car.id,car);
     this.form.reset();
-    document.dispatchEvent(new CustomEvent('createCar', {
-      bubbles: true,
-      detail: car
-    }))
+    // document.dispatchEvent(new CustomEvent('updateCar', {
+    //   bubbles: true,
+    //   detail: car
+    // }))
   }
-
-  // getNewId() {
-  //   return this.idNum++;
-  // }
 }
-
-// <form class="car-view__form-create" >
-//   <input type="text" class="car-view__input" name = "name" />
-//     <input type="color" class="car-view__color" name = "color" value = "#ffffff" />
-//       <button class="car-view__button car-view__button--create button" type = "submit" > create < /button>
-//         < /form>

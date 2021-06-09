@@ -10,5 +10,5 @@ export const countCars = (async () => (await getCars()).countCars)();
 
 export default {
   cars,
-  countCars
-}
+  countCars,
+};

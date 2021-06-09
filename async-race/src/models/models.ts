@@ -60,5 +60,3 @@ export class Button {
     this.button.classList.add(...styles);
   }
 }
-
-
