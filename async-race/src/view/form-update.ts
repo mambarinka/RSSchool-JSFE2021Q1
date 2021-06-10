@@ -47,6 +47,10 @@ export class FormUpdate extends BaseComponentForm {
   }
 
   async formSubmitHandler(evt: Event) {
+    const inputUpdateText = document.getElementById('update-name');
+    const inputUpdateColor = document.getElementById('update-color');
+    const buttonSubmit = document.getElementById('update-submit');
+
     evt.preventDefault();
 
     const nameCar = this.inputText.input.value;
@@ -65,5 +69,9 @@ export class FormUpdate extends BaseComponentForm {
     }))
 
     this.form.reset();
+
+    inputUpdateText?.setAttribute('disabled', 'disabled');
+    inputUpdateColor?.setAttribute('disabled', 'disabled');
+    buttonSubmit?.setAttribute('disabled', 'disabled');
   }
 }

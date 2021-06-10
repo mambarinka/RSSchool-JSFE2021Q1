@@ -69,6 +69,7 @@ export class CarItem extends BaseComponent {
     const inputUpdateText = document.getElementById('update-name');
     const inputUpdateColor = document.getElementById('update-color');
     const buttonSubmit = document.getElementById('update-submit');
+    console.log(inputUpdateText);
     inputUpdateText?.removeAttribute('disabled');
     inputUpdateColor?.removeAttribute('disabled');
     buttonSubmit?.removeAttribute('disabled');
@@ -78,13 +79,14 @@ export class CarItem extends BaseComponent {
       detail: car
     }))
 
-    document.addEventListener('updateCar', async (evt: CustomEventInit) => {
+    const func = (evt: CustomEventInit) => {
       console.log(this.carName.element);
       this.carName.element.textContent = evt.detail.name;
       this.carIcon.element.innerHTML = this.getCarIcon(evt.detail.color);
-      // this.element.innerHTML = '';
-      // this.render(evt.detail);
-    });
+      document.removeEventListener('updateCar', func);
+    }
+
+    document.addEventListener('updateCar', func);
   }
 
   async buttonRemoveHandler(car: Car) {
