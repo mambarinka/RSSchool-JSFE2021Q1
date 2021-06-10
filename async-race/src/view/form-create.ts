@@ -1,4 +1,5 @@
-import { createCar } from '../fetch-api/fetch-api-garage';
+import { createCar, getCars } from '../fetch-api/fetch-api-garage';
+import { countCars } from '../models/constants';
 import { BaseComponentForm, Button, Car, Input } from '../models/models';
 
 export class FormCreate extends BaseComponentForm {
@@ -19,6 +20,7 @@ export class FormCreate extends BaseComponentForm {
     this.inputColor = new Input(['car-view__color']);
     this.inputColor.input.type = 'color';
     this.inputColor.input.name = 'color';
+    this.inputColor.input.setAttribute('value','#13406c');
     this.buttonSubmit = new Button([
       'car-view__button',
       'car-view__button--create',
@@ -28,7 +30,12 @@ export class FormCreate extends BaseComponentForm {
     this.buttonSubmit.button.textContent = 'create';
 
     this.form.addEventListener('submit', async (evt) => {
-     await this.formSubmitHandler(evt);
+      try {
+      await this.formSubmitHandler(evt);
+      } catch(e) {
+        console.log(e);
+        console.log('ошибка');
+      }
     });
   }
 
@@ -59,6 +66,19 @@ export class FormCreate extends BaseComponentForm {
         detail: car,
       })
     );
+    document.dispatchEvent(
+      new CustomEvent('updateNumberCars', {
+        bubbles: true,
+        // detail: countCars,
+      })
+    );
+
+    // const numberPage = (async () => (await getCars()).countCars)();;
+    // numberPage.then((countCars) => {
+    //   if (countCars>=7) {
+    //    document.querySelector('.next-button')?.setAttribute('disabled', 'false');
+    //   }
+    // })
   }
 
   getNewId() {

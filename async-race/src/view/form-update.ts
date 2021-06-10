@@ -21,6 +21,8 @@ export class FormUpdate extends BaseComponentForm {
     this.inputColor.input.type = 'color';
     this.inputColor.input.name = 'color';
     this.inputColor.input.disabled = true;
+    this.inputColor.input.setAttribute('value','#a3dfe4');
+
     this.buttonSubmit = new Button(['car-view__button', 'car-view__button--update', 'button']);
     this.buttonSubmit.button.id = 'update-submit';
     this.buttonSubmit.button.type = 'submit';

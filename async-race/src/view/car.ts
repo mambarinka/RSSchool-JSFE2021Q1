@@ -1,4 +1,5 @@
 import { deleteCar } from '../fetch-api/fetch-api-garage';
+import { countCars } from '../models/constants';
 import { BaseComponent, Button, Car } from '../models/models';
 
 export class CarItem extends BaseComponent {
@@ -90,10 +91,15 @@ export class CarItem extends BaseComponent {
   }
 
   async buttonRemoveHandler(car: Car) {
-    console.log(car.id);
-    console.log(car);
     await deleteCar(car.id!);
     this.element.remove();
+
+    document.dispatchEvent(
+      new CustomEvent('updateNumberCars', {
+        bubbles: true,
+        // detail: countCars,
+      })
+    );
   }
 
   getCarIcon = (color = 'black') => `<svg

@@ -1,3 +1,4 @@
+import { createCar } from '../../fetch-api/fetch-api-garage';
 import { cars } from '../../models/constants';
 import { BaseComponent, Car } from '../../models/models';
 import { CarItem } from '../car';
@@ -14,6 +15,8 @@ export class Garage extends BaseComponent {
   private carItem!: CarItem;
   private readonly raceControls: RaceControls;
   private readonly pagination: Pagination;
+  private readonly titlePage: BaseComponent;
+  private readonly titlePageNumber: BaseComponent;
 
   constructor() {
     super('main', ['page-main']);
@@ -21,6 +24,10 @@ export class Garage extends BaseComponent {
     this.formCreate = new FormCreate();
     this.formUpdate = new FormUpdate();
     this.raceControls = new RaceControls();
+    this.titlePage = new BaseComponent('h1', ['page-main__title']);
+    this.titlePage.element.textContent = 'Garage (4)'
+    this.titlePageNumber = new BaseComponent('h2', ['page-main__page-number']);
+    this.titlePageNumber.element.textContent = 'Page #1';
     this.carsList = new BaseComponent('ul', ['garage__list']);
     this.pagination = new Pagination();
 
@@ -41,12 +48,14 @@ export class Garage extends BaseComponent {
     this.element.append(
       this.wrapperForm.element,
       this.raceControls.element,
+      this.titlePage.element,
+      this.titlePageNumber.element,
       this.carsList.element,
       this.pagination.element
     );
 
     const arrayCars = await cars;
-    console.log(arrayCars);
+
     arrayCars.forEach((car: Car) => {
       this.carItem = new CarItem(car);
       this.carsList.element.append(this.carItem.render(car));

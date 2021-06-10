@@ -6,7 +6,7 @@ export const baseURL = 'http://127.0.0.1:3000';
 // const {dataCars: cars, countCars: countCars} = await getCars(1);
 
 export const cars = (async () => (await getCars()).dataCars)();
-export const countCars = (async () => (await getCars()).countCars)();
+export let countCars = (async () => (await getCars()).countCars)();
 
 export default {
   cars,
