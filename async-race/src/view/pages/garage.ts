@@ -1,147 +1,60 @@
 import { cars } from '../../models/constants';
 import { BaseComponent, Car } from '../../models/models';
-import { createHtmlElement } from '../../service/utils';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
-// import { FormUpdate } from '../form-update';
-
-// export const renderGarage = async (): Promise<HTMLElement> => {
-//   let arrayCars = await cars;
-//   let carInnerHtml: string = '';
-//   arrayCars.forEach((car: Car) => {
-//     carInnerHtml += ` <li class="garage__item">${getCar(car).innerHTML}</li>`;
-//   });
-
-//   let garageInnerHtml = `
-//   <section class="car-view">
-//         <h2 class="visually-hidden">Here you can add a new car or change any car in the garage</h2>
-//         <form class="car-view__form-create">
-//           <input type="text" class="car-view__input" name="name" />
-//           <input type="color" class="car-view__color" name="color" value="#ffffff" />
-//           <button class="car-view__button car-view__button--create button" type="submit">create</button>
-//         </form>
-//         <form class="car-view__form-update">
-//           <input type="text" class="car-view__input" name="name" disabled/>
-//           <input type="color" class="car-view__color" name="color" value="#ffffff" disabled/>
-//           <button class="car-view__button car-view__button--update button" type="submit">update</button>
-//         </form>
-//       </section>
-//       <section class="race-controls">
-//         <h2 class="visually-hidden">here you can start the engines of all cars, stop them and generate new ones</h2>
-//         <button class="race-controls__button race-controls__button--race button" type="button">Race</button>
-//         <button class="race-controls__button race-controls__button--reset button" type="button">Reset</button>
-//         <button class="race-controls__button race-controls__button--generate button" type="button">generate cars</button>
-//       </section>
-//       <section class="garage">
-//         <h1 class="page-main__title">Garage (4)</h1>
-//         <h2 class="page-main__page-number">Page #1</h2>
-//         <ul class="garage__list">
-//         ${carInnerHtml}
-//         </ul>
-//       </section>
-//       <article class="pagination">
-//         <button class="pagination__button prev-button button">Prev</button>
-//         <button class="pagination__button next-button button">next</button>
-//       </article>
-//   `;
-//   return createHtmlElement('main', ['page-main'], garageInnerHtml);
-// }
+import { Pagination } from '../pagination';
+import { RaceControls } from '../race-controls';
 
 export class Garage extends BaseComponent {
+  private readonly wrapperForm: BaseComponent;
   private readonly formCreate: FormCreate;
-
   private readonly formUpdate: FormUpdate;
   private readonly carsList: BaseComponent;
-
   private carItem!: CarItem;
+  private readonly raceControls: RaceControls;
+  private readonly pagination: Pagination;
 
-  // private readonly carItem: BaseComponent;
   constructor() {
     super('main', ['page-main']);
-
+    this.wrapperForm = new BaseComponent('div', ['car-view'])
     this.formCreate = new FormCreate();
     this.formUpdate = new FormUpdate();
+    this.raceControls = new RaceControls();
     this.carsList = new BaseComponent('ul', ['garage__list']);
-
-    // this.carItem = new BaseComponent('li');
+    this.pagination = new Pagination();
 
     document.addEventListener('createCar', async (evt: CustomEventInit) => {
-      // getCarItem(evt.detail.id);
-      console.log(evt.detail);
       this.carItem = new CarItem(evt.detail);
       await this.carItem.render(evt.detail);
-      // await getCarItem(evt.detail.id);
 
       await this.renderNewCar(evt.detail);
     });
   }
 
   render = async (): Promise<HTMLElement> => {
-    this.element.append(
+    this.wrapperForm.element.append(
       this.formCreate.renderForm(),
       this.formUpdate.renderForm(),
-      this.carsList.element
+    )
+
+    this.element.append(
+      this.wrapperForm.element,
+      this.raceControls.element,
+      this.carsList.element,
+      this.pagination.element
     );
 
     const arrayCars = await cars;
+    console.log(arrayCars);
     arrayCars.forEach((car: Car) => {
       this.carItem = new CarItem(car);
       this.carsList.element.append(this.carItem.render(car));
-      // this.carsList.element.append(getCarItem(car));
     });
-
     return this.element;
   };
 
   async renderNewCar(newCar: Car) {
     this.carsList.element.append(this.carItem.render(newCar));
-    // await this.carsList.element.append(getCarItem(newCar));
   }
-
-  // async renderNewCar() {
-  //   const arrayCars = await cars;
-  //   let newCar: Car= arrayCars[arrayCars.length - 1];
-  //   console.log(newCar);
-  //   this.carsList.element.append(getCar(newCar))
-  // }
-
-  // getHtmlGarage = async (): Promise<string> => {
-  //   const arrayCars = await cars;
-  //   let carInnerHtml = '';
-  //   arrayCars.forEach((car: Car) => {
-  //     console.log(getCar(car));
-  //     carInnerHtml += `<li class="garage__item">${getCar(car).innerHTML}</li>`;
-  //   });
-
-  //   const garageInnerHtml = `
-  //   <section class="car-view">
-  //         <h2 class="visually-hidden">Here you can add a new car or change any car in the garage</h2>
-  //         <form class="car-view__form-update">
-  //           <input type="text" class="car-view__input" name="name" disabled/>
-  //           <input type="color" class="car-view__color" name="color" value="#ffffff" disabled/>
-  //           <button class="car-view__button car-view__button--update button" type="submit">update</button>
-  //         </form>
-  //       </section>
-  //       <section class="race-controls">
-  //         <h2 class="visually-hidden">here you can start the engines of all cars, stop them and generate new ones</h2>
-  //         <button class="race-controls__button race-controls__button--race button" type="button">Race</button>
-  //         <button class="race-controls__button race-controls__button--reset button" type="button">Reset</button>
-  //         <button class="race-controls__button race-controls__button--generate button" type="button">generate cars</button>
-  //       </section>
-  //       <section class="garage">
-  //         <h1 class="page-main__title">Garage (4)</h1>
-  //         <h2 class="page-main__page-number">Page #1</h2>
-  //         <ul class="garage__list">
-  //         ${carInnerHtml}
-  //         </ul>
-  //       </section>
-  //       <article class="pagination">
-  //         <button class="pagination__button prev-button button">Prev</button>
-  //         <button class="pagination__button next-button button">next</button>
-  //       </article>
-  //   `;
-
-  //   return garageInnerHtml;
-  // };
 }

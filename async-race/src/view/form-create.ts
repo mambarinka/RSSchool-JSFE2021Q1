@@ -65,9 +65,3 @@ export class FormCreate extends BaseComponentForm {
     return this.idNum++;
   }
 }
-
-// <form class="car-view__form-create" >
-//   <input type="text" class="car-view__input" name = "name" />
-//     <input type="color" class="car-view__color" name = "color" value = "#ffffff" />
-//       <button class="car-view__button car-view__button--create button" type = "submit" > create < /button>
-//         < /form>
