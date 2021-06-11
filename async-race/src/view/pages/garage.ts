@@ -40,17 +40,21 @@ export class Garage extends BaseComponent {
     });
 
 
-    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
-      this.currentCountCars = await getCurrentCountCars();
-      this.carsPage = await getCurrentCarsPage();
-      // console.log(await this.currentCountCars);
-      // console.log(await this.carsPage);
-      // this.carsList.element.innerHTML='';
-      while (this.carsList.element.lastElementChild) {
-        this.carsList.element.removeChild( this.carsList.element.lastElementChild as ChildNode);
-      }
-      this.render();
-    });
+    // document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
+    //   this.currentCountCars = await getCurrentCountCars();
+    //   this.carsPage = await getCurrentCarsPage();
+    //   // console.log(await this.currentCountCars);
+    //   // console.log(await this.carsPage);
+    //   this.carsList.element.innerHTML='';
+    //   // while (this.carsList.element.lastElementChild) {
+    //   //   this.carsList.element.removeChild( this.carsList.element.lastElementChild as ChildNode);
+    //   // }
+    //   this.render();
+    // });
+
+    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => { this.rerender() });
+    document.addEventListener('clickOnPagination', async (evt: CustomEventInit) => { this.rerender() });
+    document.addEventListener('generateNewCars', async (evt: CustomEventInit) => { this.rerender() });
     this.render();
   }
 
@@ -78,11 +82,11 @@ export class Garage extends BaseComponent {
     const arrayCars = await (async () => (await getCars(await getCurrentCarsPage())).dataCars)();
     // const arrayCars = await cars;
 
-   for (let i = 0; i < arrayCars.length; i++) {
-     const car = arrayCars[i];
-     this.carItem = new CarItem(car);
+    for (let i = 0; i < arrayCars.length; i++) {
+      const car = arrayCars[i];
+      this.carItem = new CarItem(car);
       this.carsList.element.append(this.carItem.render(car));
-   }
+    }
 
     // arrayCars.forEach((car: Car) => {
     //   this.carItem = new CarItem(car);
@@ -95,5 +99,13 @@ export class Garage extends BaseComponent {
 
   async renderNewCar(newCar: Car) {
     this.carsList.element.append(this.carItem.render(newCar));
+  }
+
+  rerender = async () => {
+    this.currentCountCars = await getCurrentCountCars();
+    this.carsPage = await getCurrentCarsPage();
+    this.carsList.element.innerHTML = '';
+
+    this.render();
   }
 }

@@ -38,20 +38,32 @@ export class Pagination extends BaseComponent {
       this.showStateButtons();
     });
 
+
+    this.buttonPrev.button.addEventListener('click', () => {
+      console.log('click on buttonPrev');
+      this.buttonPrevHandler();
+    })
+
+    this.buttonNext.button.addEventListener('click', () => {
+      console.log('click on buttonNext');
+      this.buttonNextHandler();
+    })
   }
 
   showStateButtons = async () => {
     this.carsPage = await getCurrentCarsPage();
-      this.currentCountCars = await getCurrentCountCars();
-      if (totalCarsOnPage < this.currentCountCars) {
-        this.buttonNext.button.disabled = false;
-        // console.log('разблокировать кнопку');
-        // this.buttonPrev.button.disabled = true;
-      } else {
-        this.buttonNext.button.disabled = true;
-        // this.buttonPrev.button.disabled = false;
-        // console.log('заблокировать кнопку');
-      }
+    this.currentCountCars = await getCurrentCountCars();
+    if (totalCarsOnPage < this.currentCountCars) {
+      this.buttonNext.button.disabled = false;
+      // console.log('разблокировать кнопку');
+      // this.buttonPrev.button.disabled = true;
+
+    } else {
+      this.buttonNext.button.disabled = true;
+      // this.buttonPrev.button.disabled = false;
+      // console.log('заблокировать кнопку');
+    }
+
   }
   // buttonPrevHandler() {
   //   console.log(this.currentCountCars);
@@ -70,8 +82,20 @@ export class Pagination extends BaseComponent {
   //   });
   // }
 
-  // buttonNextHandler() {
-
-  //   carsPage++;
-  // }
+  buttonPrevHandler() {
+    document.dispatchEvent(
+      new CustomEvent('clickOnPagination', {
+        bubbles: true,
+      })
+    );
+    this.carsPage--;
+  }
+  buttonNextHandler() {
+    document.dispatchEvent(
+      new CustomEvent('clickOnPagination', {
+        bubbles: true,
+      })
+    );
+    this.carsPage++;
+  }
 }

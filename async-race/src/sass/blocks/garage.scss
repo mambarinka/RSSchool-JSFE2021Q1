@@ -21,6 +21,7 @@
 .garage__general-buttons {
   display: flex;
   padding-bottom: 10px;
+  width: 100%;
 }
 
 .garage__select-button,
@@ -41,7 +42,6 @@
 
 .garage__car-name {
   @include text-options(16px, 17px, 700, $text-color);
-  margin-left: 10%;
   text-transform: uppercase;
 }
 

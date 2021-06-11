@@ -1,4 +1,6 @@
+import { createCar } from "../fetch-api/fetch-api-garage";
 import { BaseComponent, Button } from "../models/models";
+import { generateRandomCars } from "../service/utils";
 
 export class RaceControls extends BaseComponent {
   private readonly buttonRace: Button;
@@ -18,6 +20,22 @@ export class RaceControls extends BaseComponent {
       this.buttonRace.button,
       this.buttonReset.button,
       this.buttonGenerate.button
+    );
+
+    this.buttonGenerate.button.addEventListener('click', async () => {
+      this.buttonGenerateHandler();
+    })
+  }
+
+  buttonGenerateHandler = async () => {
+    const cars = generateRandomCars();
+    console.log(cars);
+    await Promise.all(cars.map(async (car) => await createCar(car)));
+
+    document.dispatchEvent(
+      new CustomEvent('generateNewCars', {
+        bubbles: true,
+      })
     );
   }
 }
