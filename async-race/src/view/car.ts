@@ -1,5 +1,4 @@
 import { deleteCar } from '../fetch-api/fetch-api-garage';
-import { countCars } from '../models/constants';
 import { BaseComponent, Button, Car } from '../models/models';
 
 export class CarItem extends BaseComponent {
@@ -97,7 +96,6 @@ export class CarItem extends BaseComponent {
     document.dispatchEvent(
       new CustomEvent('updateNumberCars', {
         bubbles: true,
-        // detail: countCars,
       })
     );
   }

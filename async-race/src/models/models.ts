@@ -1,3 +1,5 @@
+import { getCars } from "../fetch-api/fetch-api-garage";
+
 export enum Path {
   garage = '/garage',
   engine = '/engine',
@@ -59,4 +61,16 @@ export class Button {
     this.button = document.createElement('button');
     this.button.classList.add(...styles);
   }
+}
+
+export const getCurrentCountCars = async () => {
+  let currentCountCars = (await getCars()).countCars;
+  // console.log('currentCountCars', currentCountCars);
+  return currentCountCars;
+}
+
+export const getCurrentCarsPage = async () => {
+  let currentCarsPage = Math.ceil(await getCurrentCountCars() / 7);
+  // console.log('currentCarsPage', currentCarsPage);
+  return currentCarsPage;
 }

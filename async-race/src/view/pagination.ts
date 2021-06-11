@@ -1,12 +1,13 @@
 import { getCars } from "../fetch-api/fetch-api-garage";
-import { BaseComponent, Button } from "../models/models";
-let carsPage = 1;
-export default carsPage;
+import { totalCarsOnPage } from "../models/constants";
+import { BaseComponent, Button, getCurrentCarsPage, getCurrentCountCars } from "../models/models";
+
 
 export class Pagination extends BaseComponent {
   private readonly buttonPrev: Button;
   private readonly buttonNext: Button;
   private currentCountCars!: number;
+  private carsPage!: number;
   constructor() {
     super('article', ['pagination']);
 
@@ -22,62 +23,55 @@ export class Pagination extends BaseComponent {
       this.buttonNext.button
     )
 
-    this.buttonPrev.button.addEventListener('click', () => {
-      this.buttonPrevHandler();
-    })
-
-    this.buttonNext.button.addEventListener('click', () => {
-      this.buttonNextHandler();
-    })
-
-    // const numberPage = (async () => (await getCars()).countCars)();;
-    // numberPage.then((countCars) => {
-    //   if (countCars >= 7) {
-    //     this.buttonNext.button.disabled = false;
-    //   }
+    // this.buttonPrev.button.addEventListener('click', () => {
+    //   this.buttonPrevHandler();
     // })
-    // this.currentCountCars=4;
-    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
-      // await getCars();
-      this.currentCountCars = (await getCars()).countCars;
-      console.log(this.currentCountCars);
 
-      console.log(carsPage * 7);
-      if (carsPage * 7 < this.currentCountCars) {
-        // console.log(3);
+    // this.buttonNext.button.addEventListener('click', () => {
+    //   this.buttonNextHandler();
+    // })
+
+    this.showStateButtons();
+
+
+    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
+      this.showStateButtons();
+    });
+
+  }
+
+  showStateButtons = async () => {
+    this.carsPage = await getCurrentCarsPage();
+      this.currentCountCars = await getCurrentCountCars();
+      if (totalCarsOnPage < this.currentCountCars) {
         this.buttonNext.button.disabled = false;
+        // console.log('разблокировать кнопку');
         // this.buttonPrev.button.disabled = true;
       } else {
-        // console.log(4);
         this.buttonNext.button.disabled = true;
         // this.buttonPrev.button.disabled = false;
+        // console.log('заблокировать кнопку');
       }
-      // console.log(evt.detail);
-    });
   }
+  // buttonPrevHandler() {
+  //   console.log(this.currentCountCars);
+  //   const numberPage = (async () => (await getCars()).countCars)();
 
-  buttonPrevHandler() {
-    console.log(this.currentCountCars);
-    const numberPage = (async () => (await getCars()).countCars)();
-    numberPage.then((countCars) => {
-      console.log(carsPage);
-      if (carsPage * 7 < countCars) {
-        console.log(1);
-        this.buttonPrev.button.disabled = true;
-      } else {
-        console.log(2);
-        this.buttonPrev.button.disabled = false;
-      }
-      carsPage--;
-    });
-  }
+  //   numberPage.then(async (countCars) => {
+  //     console.log(this.carsPage);
+  //     if (await this.carsPage * 7 < countCars) {
+  //       console.log(1);
+  //       this.buttonPrev.button.disabled = true;
+  //     } else {
+  //       console.log(2);
+  //       this.buttonPrev.button.disabled = false;
+  //     }
+  //     this.carsPage--;
+  //   });
+  // }
 
-  buttonNextHandler() {
+  // buttonNextHandler() {
 
-    // const numberPage = (async () => (await getCars()).countCars)();
-    // numberPage.then((countCars) => {
-
-    // });
-    carsPage++;
-  }
+  //   carsPage++;
+  // }
 }

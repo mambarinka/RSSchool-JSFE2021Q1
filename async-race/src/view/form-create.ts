@@ -1,5 +1,4 @@
 import { createCar, getCars } from '../fetch-api/fetch-api-garage';
-import { countCars } from '../models/constants';
 import { BaseComponentForm, Button, Car, Input } from '../models/models';
 
 export class FormCreate extends BaseComponentForm {
@@ -56,7 +55,6 @@ export class FormCreate extends BaseComponentForm {
     const car: Car = {
       name: nameCar,
       color: colorCar,
-      id: this.getNewId(),
     };
     await createCar(car);
     this.form.reset();
@@ -69,7 +67,6 @@ export class FormCreate extends BaseComponentForm {
     document.dispatchEvent(
       new CustomEvent('updateNumberCars', {
         bubbles: true,
-        // detail: countCars,
       })
     );
 
@@ -79,9 +76,5 @@ export class FormCreate extends BaseComponentForm {
     //    document.querySelector('.next-button')?.setAttribute('disabled', 'false');
     //   }
     // })
-  }
-
-  getNewId() {
-    return this.idNum++;
   }
 }

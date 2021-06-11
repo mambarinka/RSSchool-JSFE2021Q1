@@ -12,6 +12,6 @@ export class App {
   }
 
   async render(): Promise<void> {
-    this.rootElement?.append(this.header.element, await this.garage.render());
+    this.rootElement?.append(this.header.element, this.garage.element);
   }
 }
