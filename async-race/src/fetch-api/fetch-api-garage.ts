@@ -8,10 +8,12 @@ export const getCars = async (pageNumber = 1, limitCars = 7) => {
   );
   const dataCars = await response.json();
   const countCars = Number(response.headers.get('X-Total-Count'));
+  const currentPage = Math.ceil(countCars / 7);
 
   return {
     dataCars,
     countCars,
+    currentPage
   };
 };
 

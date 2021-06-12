@@ -1,5 +1,5 @@
 import { createCar, getCars } from '../../fetch-api/fetch-api-garage';
-import { BaseComponent, Car, getCurrentCarsPage, getCurrentCountCars } from '../../models/models';
+import { BaseComponent, Car, getCurrentCarsPage } from '../../models/models';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
@@ -18,6 +18,7 @@ export class Garage extends BaseComponent {
   private readonly titlePageNumber: BaseComponent;
   private currentCountCars!: number;
   private carsPage!: number;
+  private currentPage!: number;
 
   constructor() {
     super('main', ['page-main']);
@@ -33,32 +34,41 @@ export class Garage extends BaseComponent {
     this.pagination = new Pagination();
 
     document.addEventListener('createCar', async (evt: CustomEventInit) => {
-      this.carItem = new CarItem(evt.detail);
-      await this.carItem.render(evt.detail);
+      await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
+        await this.render(currentPage);
+      });
 
-      await this.renderNewCar(evt.detail);
     });
 
+    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
+      await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
+        this.render(currentPage);
+      });
+    });
 
-    // document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
-    //   this.currentCountCars = await getCurrentCountCars();
-    //   this.carsPage = await getCurrentCarsPage();
-    //   // console.log(await this.currentCountCars);
-    //   // console.log(await this.carsPage);
-    //   this.carsList.element.innerHTML='';
-    //   // while (this.carsList.element.lastElementChild) {
-    //   //   this.carsList.element.removeChild( this.carsList.element.lastElementChild as ChildNode);
-    //   // }
-    //   this.render();
-    // });
+    document.addEventListener('clickOnPagination', async (evt: CustomEventInit) => {
+      if (evt.detail === true) {
+        ++this.currentPage;
+      } else if (evt.detail === false) {
+        --this.currentPage;
+      }
+      this.render(this.currentPage);
+    });
 
-    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => { this.rerender() });
-    document.addEventListener('clickOnPagination', async (evt: CustomEventInit) => { this.rerender() });
-    document.addEventListener('generateNewCars', async (evt: CustomEventInit) => { this.rerender() });
-    this.render();
+    document.addEventListener('generateNewCars', async (evt: CustomEventInit) => {
+      await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
+        this.render(currentPage);
+      });
+    });
+    getCurrentCarsPage().then((currentPage) => {
+      this.currentPage = currentPage;
+      this.render(this.currentPage);
+    });
   }
 
-  render = async (): Promise<HTMLElement> => {
+  render = async (currentPage: number): Promise<HTMLElement> => {
+    console.log(currentPage);
+    this.carsList.element.innerHTML = '';
     this.wrapperForm.element.append(
       this.formCreate.renderForm(),
       this.formUpdate.renderForm(),
@@ -74,12 +84,11 @@ export class Garage extends BaseComponent {
     );
 
 
-    this.titlePage.element.textContent = `Garage (${await getCurrentCountCars()})`;
-    this.titlePageNumber.element.textContent = `Page #${await getCurrentCarsPage()}`;
-    // console.log(await getCurrentCountCars());
-    // console.log(await getCurrentCarsPage());
-    // console.log(await getCurrentCarsPage());
-    const arrayCars = await (async () => (await getCars(await getCurrentCarsPage())).dataCars)();
+    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars})`;
+    this.titlePageNumber.element.textContent = `Page #${currentPage}`;
+
+    const arrayCars = await (async () => (await getCars(currentPage)).dataCars)();
+    console.log(arrayCars);
     // const arrayCars = await cars;
 
     for (let i = 0; i < arrayCars.length; i++) {
@@ -88,24 +97,11 @@ export class Garage extends BaseComponent {
       this.carsList.element.append(this.carItem.render(car));
     }
 
-    // arrayCars.forEach((car: Car) => {
-    //   this.carItem = new CarItem(car);
-    //   this.carsList.element.append(this.carItem.render(car));
-    //   this.carItem.element.style.display = 'none';
-
-    // });
     return this.element;
   };
 
-  async renderNewCar(newCar: Car) {
-    this.carsList.element.append(this.carItem.render(newCar));
-  }
-
-  rerender = async () => {
-    this.currentCountCars = await getCurrentCountCars();
-    this.carsPage = await getCurrentCarsPage();
-    this.carsList.element.innerHTML = '';
-
-    this.render();
+  getCurrentPage = async (currentPage: number) => {
+    currentPage = (await getCars()).currentPage;
+    return currentPage;
   }
 }

@@ -64,11 +64,11 @@ export class FormCreate extends BaseComponentForm {
         detail: car,
       })
     );
-    document.dispatchEvent(
-      new CustomEvent('updateNumberCars', {
-        bubbles: true,
-      })
-    );
+    // document.dispatchEvent(
+    //   new CustomEvent('updateNumberCars', {
+    //     bubbles: true,
+    //   })
+    // );
 
     // const numberPage = (async () => (await getCars()).countCars)();;
     // numberPage.then((countCars) => {

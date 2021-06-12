@@ -1,65 +1,68 @@
 import { getCars } from "../fetch-api/fetch-api-garage";
 import { totalCarsOnPage } from "../models/constants";
-import { BaseComponent, Button, getCurrentCarsPage, getCurrentCountCars } from "../models/models";
+import { BaseComponent, Button } from "../models/models";
 
 
 export class Pagination extends BaseComponent {
   private readonly buttonPrev: Button;
   private readonly buttonNext: Button;
   private currentCountCars!: number;
-  private carsPage!: number;
+  private currentPage!: number;
   constructor() {
     super('article', ['pagination']);
 
     this.buttonPrev = new Button(['pagination__button', 'prev-button', 'button']);
     this.buttonPrev.button.textContent = 'Prev';
-    this.buttonPrev.button.disabled = true;
+    // this.buttonPrev.button.disabled = true;
     this.buttonNext = new Button(['pagination__button', 'next-button', 'button']);
     this.buttonNext.button.textContent = 'Next';
-    this.buttonNext.button.disabled = true;
+    // this.buttonNext.button.disabled = true;
 
     this.element.append(
       this.buttonPrev.button,
       this.buttonNext.button
     )
 
-    // this.buttonPrev.button.addEventListener('click', () => {
-    //   this.buttonPrevHandler();
-    // })
-
-    // this.buttonNext.button.addEventListener('click', () => {
-    //   this.buttonNextHandler();
-    // })
-
     this.showStateButtons();
 
-
-    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
-      this.showStateButtons();
-    });
+    // document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
+    //   this.showStateButtons();
+    // });
 
 
     this.buttonPrev.button.addEventListener('click', () => {
-      console.log('click on buttonPrev');
-      this.buttonPrevHandler();
+      console.log('click on prev');
+      document.dispatchEvent(
+        new CustomEvent('clickOnPagination', {
+          bubbles: true,
+          detail: false
+        })
+      );
+      // this.buttonPrevHandler();
     })
 
     this.buttonNext.button.addEventListener('click', () => {
-      console.log('click on buttonNext');
-      this.buttonNextHandler();
+      console.log('click on next');
+      document.dispatchEvent(
+        new CustomEvent('clickOnPagination', {
+          bubbles: true,
+          detail: true
+        })
+      );
+      // this.buttonNextHandler();
     })
   }
 
   showStateButtons = async () => {
-    this.carsPage = await getCurrentCarsPage();
-    this.currentCountCars = await getCurrentCountCars();
+    // this.currentPage = await getCurrentCarsPage();
+    this.currentCountCars = (await getCars()).countCars;
     if (totalCarsOnPage < this.currentCountCars) {
-      this.buttonNext.button.disabled = false;
+      // this.buttonNext.button.disabled = false;
       // console.log('разблокировать кнопку');
       // this.buttonPrev.button.disabled = true;
 
     } else {
-      this.buttonNext.button.disabled = true;
+      // this.buttonNext.button.disabled = true;
       // this.buttonPrev.button.disabled = false;
       // console.log('заблокировать кнопку');
     }
@@ -82,20 +85,20 @@ export class Pagination extends BaseComponent {
   //   });
   // }
 
-  buttonPrevHandler() {
-    document.dispatchEvent(
-      new CustomEvent('clickOnPagination', {
-        bubbles: true,
-      })
-    );
-    this.carsPage--;
-  }
-  buttonNextHandler() {
-    document.dispatchEvent(
-      new CustomEvent('clickOnPagination', {
-        bubbles: true,
-      })
-    );
-    this.carsPage++;
-  }
+  // buttonPrevHandler() {
+  //   document.dispatchEvent(
+  //     new CustomEvent('clickOnPagination', {
+  //       bubbles: true,
+  //       detail: -1
+  //     })
+  //   );
+  // }
+  // async buttonNextHandler() {
+  //   document.dispatchEvent(
+  //     new CustomEvent('clickOnPagination', {
+  //       bubbles: true,
+  //       detail: 1
+  //     })
+  //   );
+  // }
 }

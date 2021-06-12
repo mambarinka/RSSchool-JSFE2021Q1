@@ -80,7 +80,6 @@ export class CarItem extends BaseComponent {
     }))
 
     const func = (evt: CustomEventInit) => {
-      console.log(this.carName.element);
       this.carName.element.textContent = evt.detail.name;
       this.carIcon.element.innerHTML = this.getCarIcon(evt.detail.color);
       document.removeEventListener('updateCar', func);
