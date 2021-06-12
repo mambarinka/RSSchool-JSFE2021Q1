@@ -1,19 +1,35 @@
-import { createCar } from "../fetch-api/fetch-api-garage";
-import { BaseComponent, Button } from "../models/models";
-import { generateRandomCars } from "../service/utils";
+import { createCar } from '../fetch-api/fetch-api-garage';
+import { BaseComponent } from '../models/base-component';
+import { Button } from '../models/base-component-button';
+import { generateRandomCars } from '../service/utils';
 
 export class RaceControls extends BaseComponent {
   private readonly buttonRace: Button;
+
   private readonly buttonReset: Button;
+
   private readonly buttonGenerate: Button;
+
   constructor() {
     super('section', ['race-controls']);
 
-    this.buttonRace = new Button(['race-controls__button', 'race-controls__button--race', 'button']);
+    this.buttonRace = new Button([
+      'race-controls__button',
+      'race-controls__button--race',
+      'button',
+    ]);
     this.buttonRace.button.textContent = 'Race';
-    this.buttonReset = new Button(['race-controls__button', 'race-controls__button--Reset', 'button']);
+    this.buttonReset = new Button([
+      'race-controls__button',
+      'race-controls__button--Reset',
+      'button',
+    ]);
     this.buttonReset.button.textContent = 'Reset';
-    this.buttonGenerate = new Button(['race-controls__button', 'race-controls__button--generate', 'button']);
+    this.buttonGenerate = new Button([
+      'race-controls__button',
+      'race-controls__button--generate',
+      'button',
+    ]);
     this.buttonGenerate.button.textContent = 'generate cars';
 
     this.element.append(
@@ -24,18 +40,17 @@ export class RaceControls extends BaseComponent {
 
     this.buttonGenerate.button.addEventListener('click', async () => {
       this.buttonGenerateHandler();
-    })
+    });
   }
 
-  buttonGenerateHandler = async () => {
+  buttonGenerateHandler = async (): Promise<void> => {
     const cars = generateRandomCars();
-    console.log(cars);
-    await Promise.all(cars.map(async (car) => await createCar(car)));
+    await Promise.all(cars.map(async (car) => createCar(car)));
 
     document.dispatchEvent(
       new CustomEvent('generateNewCars', {
         bubbles: true,
       })
     );
-  }
+  };
 }

@@ -1,5 +1,3 @@
-import { getCars } from "../fetch-api/fetch-api-garage";
-
 export enum Path {
   garage = '/garage',
   engine = '/engine',
@@ -22,55 +20,12 @@ export interface Car {
   time?: number;
 }
 
-export class BaseComponent {
-  element: HTMLElement;
+// export const getCurrentCountCars = async () => {
+//   const currentCountCars = (await getCars()).countCars;
+//   return currentCountCars;
+// };
 
-  constructor(
-    tag: keyof HTMLElementTagNameMap = 'div',
-    styles: string[] = [],
-    innerHTML = ''
-  ) {
-    this.element = document.createElement(tag);
-    this.element.classList.add(...styles);
-    this.element.innerHTML = innerHTML;
-  }
-}
-
-export class BaseComponentForm {
-  readonly form: HTMLFormElement;
-
-  constructor(styles: string[] = []) {
-    this.form = document.createElement('form');
-    this.form.classList.add(...styles);
-  }
-}
-
-export class Input {
-  readonly input: HTMLInputElement;
-
-  constructor(styles: string[] = []) {
-    this.input = document.createElement('input');
-    this.input.classList.add(...styles);
-  }
-}
-
-export class Button {
-  button: HTMLButtonElement;
-
-  constructor(styles: string[] = []) {
-    this.button = document.createElement('button');
-    this.button.classList.add(...styles);
-  }
-}
-
-export const getCurrentCountCars = async () => {
-  let currentCountCars = (await getCars()).countCars;
-  // console.log('currentCountCars', currentCountCars);
-  return currentCountCars;
-}
-
-export const getCurrentCarsPage = async () => {
-  let currentCarsPage = Math.ceil(await getCurrentCountCars() / 7);
-  // console.log('currentCarsPage', currentCarsPage);
-  return currentCarsPage;
-}
+// export const getCurrentCarsPage = async () => {
+//   const currentCarsPage = Math.ceil((await getCurrentCountCars()) / 7);
+//   return currentCarsPage;
+// };

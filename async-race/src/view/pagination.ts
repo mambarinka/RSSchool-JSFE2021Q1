@@ -1,104 +1,85 @@
-import { getCars } from "../fetch-api/fetch-api-garage";
-import { totalCarsOnPage } from "../models/constants";
-import { BaseComponent, Button } from "../models/models";
-
+import { getCars } from '../fetch-api/fetch-api-garage';
+import { BaseComponent } from '../models/base-component';
+import { Button } from '../models/base-component-button';
+import { totalCarsOnPage } from '../models/constants';
 
 export class Pagination extends BaseComponent {
   private readonly buttonPrev: Button;
+
   private readonly buttonNext: Button;
+
   private currentCountCars!: number;
-  private currentPage!: number;
+
   constructor() {
     super('article', ['pagination']);
 
-    this.buttonPrev = new Button(['pagination__button', 'prev-button', 'button']);
+    this.buttonPrev = new Button([
+      'pagination__button',
+      'prev-button',
+      'button',
+    ]);
     this.buttonPrev.button.textContent = 'Prev';
-    // this.buttonPrev.button.disabled = true;
-    this.buttonNext = new Button(['pagination__button', 'next-button', 'button']);
+    this.buttonPrev.button.disabled = true;
+    this.buttonNext = new Button([
+      'pagination__button',
+      'next-button',
+      'button',
+    ]);
     this.buttonNext.button.textContent = 'Next';
-    // this.buttonNext.button.disabled = true;
+    this.buttonNext.button.disabled = true;
 
-    this.element.append(
-      this.buttonPrev.button,
-      this.buttonNext.button
-    )
+    this.element.append(this.buttonPrev.button, this.buttonNext.button);
 
     this.showStateButtons();
 
-    // document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
-    //   this.showStateButtons();
-    // });
+    this.buttonPrev.button.addEventListener('click', () =>
+      this.buttonPrevHandler()
+    );
 
-
-    this.buttonPrev.button.addEventListener('click', () => {
-      console.log('click on prev');
-      document.dispatchEvent(
-        new CustomEvent('clickOnPagination', {
-          bubbles: true,
-          detail: false
-        })
-      );
-      // this.buttonPrevHandler();
-    })
-
-    this.buttonNext.button.addEventListener('click', () => {
-      console.log('click on next');
-      document.dispatchEvent(
-        new CustomEvent('clickOnPagination', {
-          bubbles: true,
-          detail: true
-        })
-      );
-      // this.buttonNextHandler();
-    })
+    this.buttonNext.button.addEventListener('click', () =>
+      this.buttonNextHandler()
+    );
   }
 
-  showStateButtons = async () => {
-    // this.currentPage = await getCurrentCarsPage();
-    this.currentCountCars = (await getCars()).countCars;
-    if (totalCarsOnPage < this.currentCountCars) {
-      // this.buttonNext.button.disabled = false;
-      // console.log('разблокировать кнопку');
-      // this.buttonPrev.button.disabled = true;
+  showStateButtons = async (): Promise<void> => {
+    let currentPage;
+    await document.addEventListener(
+      'getPageNumber',
+      async (evt: CustomEventInit) => {
+        this.currentCountCars = (await getCars()).countCars;
+        currentPage = evt.detail;
+        if (this.currentCountCars > totalCarsOnPage) {
+          if (currentPage * totalCarsOnPage < this.currentCountCars) {
+            this.buttonNext.button.disabled = false;
+          } else {
+            this.buttonNext.button.disabled = true;
+          }
 
-    } else {
-      // this.buttonNext.button.disabled = true;
-      // this.buttonPrev.button.disabled = false;
-      // console.log('заблокировать кнопку');
-    }
+          if (currentPage > 1) {
+            this.buttonPrev.button.disabled = false;
+          } else {
+            this.buttonPrev.button.disabled = true;
+          }
+        }
+      }
+    );
+  };
 
-  }
-  // buttonPrevHandler() {
-  //   console.log(this.currentCountCars);
-  //   const numberPage = (async () => (await getCars()).countCars)();
+  buttonPrevHandler = () => {
+    document.dispatchEvent(
+      new CustomEvent('clickOnPagination', {
+        bubbles: true,
+        detail: false,
+      })
+    );
+  };
 
-  //   numberPage.then(async (countCars) => {
-  //     console.log(this.carsPage);
-  //     if (await this.carsPage * 7 < countCars) {
-  //       console.log(1);
-  //       this.buttonPrev.button.disabled = true;
-  //     } else {
-  //       console.log(2);
-  //       this.buttonPrev.button.disabled = false;
-  //     }
-  //     this.carsPage--;
-  //   });
-  // }
-
-  // buttonPrevHandler() {
-  //   document.dispatchEvent(
-  //     new CustomEvent('clickOnPagination', {
-  //       bubbles: true,
-  //       detail: -1
-  //     })
-  //   );
-  // }
-  // async buttonNextHandler() {
-  //   document.dispatchEvent(
-  //     new CustomEvent('clickOnPagination', {
-  //       bubbles: true,
-  //       detail: 1
-  //     })
-  //   );
-  // }
+  buttonNextHandler = () => {
+    document.dispatchEvent(
+      new CustomEvent('clickOnPagination', {
+        bubbles: true,
+        detail: true,
+      })
+    );
+  };
 }

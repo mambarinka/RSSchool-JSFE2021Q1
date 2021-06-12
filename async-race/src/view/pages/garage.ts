@@ -1,5 +1,5 @@
-import { createCar, getCars } from '../../fetch-api/fetch-api-garage';
-import { BaseComponent, Car, getCurrentCarsPage } from '../../models/models';
+import { getCars } from '../../fetch-api/fetch-api-garage';
+import { BaseComponent } from '../../models/base-component';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
@@ -8,71 +8,85 @@ import { RaceControls } from '../race-controls';
 
 export class Garage extends BaseComponent {
   private readonly wrapperForm: BaseComponent;
+
   private readonly formCreate: FormCreate;
+
   private readonly formUpdate: FormUpdate;
+
   private readonly carsList: BaseComponent;
+
   private carItem!: CarItem;
+
   private readonly raceControls: RaceControls;
+
   private readonly pagination: Pagination;
+
   private readonly titlePage: BaseComponent;
+
   private readonly titlePageNumber: BaseComponent;
-  private currentCountCars!: number;
-  private carsPage!: number;
+
   private currentPage!: number;
 
   constructor() {
     super('main', ['page-main']);
-    this.wrapperForm = new BaseComponent('div', ['car-view'])
+    this.wrapperForm = new BaseComponent('div', ['car-view']);
     this.formCreate = new FormCreate();
     this.formUpdate = new FormUpdate();
     this.raceControls = new RaceControls();
     this.titlePage = new BaseComponent('h1', ['page-main__title']);
-
     this.titlePageNumber = new BaseComponent('h2', ['page-main__page-number']);
-
     this.carsList = new BaseComponent('ul', ['garage__list']);
     this.pagination = new Pagination();
 
-    document.addEventListener('createCar', async (evt: CustomEventInit) => {
+    document.addEventListener('createCar', async () => {
       await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
         await this.render(currentPage);
       });
-
     });
 
-    document.addEventListener('updateNumberCars', async (evt: CustomEventInit) => {
+    document.addEventListener('updateNumberCars', async () => {
       await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
         this.render(currentPage);
       });
     });
 
-    document.addEventListener('clickOnPagination', async (evt: CustomEventInit) => {
-      if (evt.detail === true) {
-        ++this.currentPage;
-      } else if (evt.detail === false) {
-        --this.currentPage;
+    document.addEventListener(
+      'clickOnPagination',
+      async (evt: CustomEventInit) => {
+        if (evt.detail === true) {
+          ++this.currentPage;
+        } else if (evt.detail === false) {
+          --this.currentPage;
+        }
+        this.render(this.currentPage);
       }
-      this.render(this.currentPage);
-    });
+    );
 
-    document.addEventListener('generateNewCars', async (evt: CustomEventInit) => {
+    document.addEventListener('generateNewCars', async () => {
       await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
         this.render(currentPage);
       });
     });
-    getCurrentCarsPage().then((currentPage) => {
+
+    this.getCurrentPage(this.currentPage).then((currentPage) => {
       this.currentPage = currentPage;
       this.render(this.currentPage);
     });
   }
 
   render = async (currentPage: number): Promise<HTMLElement> => {
-    console.log(currentPage);
+    document.dispatchEvent(
+      new CustomEvent('getPageNumber', {
+        bubbles: true,
+        detail: currentPage,
+      })
+    );
+
     this.carsList.element.innerHTML = '';
     this.wrapperForm.element.append(
       this.formCreate.renderForm(),
-      this.formUpdate.renderForm(),
-    )
+      this.formUpdate.renderForm()
+    );
 
     this.element.append(
       this.wrapperForm.element,
@@ -83,25 +97,28 @@ export class Garage extends BaseComponent {
       this.pagination.element
     );
 
-
-    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars})`;
+    this.titlePage.element.textContent = `Garage (${
+      (await getCars()).countCars
+    })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
-    const arrayCars = await (async () => (await getCars(currentPage)).dataCars)();
-    console.log(arrayCars);
-    // const arrayCars = await cars;
+    const arrayCars = await (async () =>
+      (
+        await getCars(currentPage)
+      ).dataCars)();
 
     for (let i = 0; i < arrayCars.length; i++) {
       const car = arrayCars[i];
       this.carItem = new CarItem(car);
       this.carsList.element.append(this.carItem.render(car));
     }
-
     return this.element;
   };
 
-  getCurrentPage = async (currentPage: number) => {
-    currentPage = (await getCars()).currentPage;
-    return currentPage;
-  }
+  getCurrentPage = async (currentPage: number): Promise<number> => {
+    let currentPageValue = currentPage;
+    currentPageValue = (await getCars()).currentPage;
+
+    return currentPageValue;
+  };
 }

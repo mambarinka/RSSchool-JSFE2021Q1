@@ -1,11 +1,16 @@
-import { updateCar } from "../fetch-api/fetch-api-garage";
-import { BaseComponentForm, Button, Car, Input } from "../models/models";
-
+import { updateCar } from '../fetch-api/fetch-api-garage';
+import { Button } from '../models/base-component-button';
+import { BaseComponentForm } from '../models/base-component-form';
+import { Input } from '../models/base-component-input';
+import { Car } from '../models/models';
 
 export class FormUpdate extends BaseComponentForm {
   private readonly inputText: Input;
+
   private readonly inputColor: Input;
+
   private readonly buttonSubmit: Button;
+
   private currentCarId?: number;
 
   constructor() {
@@ -21,22 +26,25 @@ export class FormUpdate extends BaseComponentForm {
     this.inputColor.input.type = 'color';
     this.inputColor.input.name = 'color';
     this.inputColor.input.disabled = true;
-    this.inputColor.input.setAttribute('value','#a3dfe4');
+    this.inputColor.input.setAttribute('value', '#a3dfe4');
 
-    this.buttonSubmit = new Button(['car-view__button', 'car-view__button--update', 'button']);
+    this.buttonSubmit = new Button([
+      'car-view__button',
+      'car-view__button--update',
+      'button',
+    ]);
     this.buttonSubmit.button.id = 'update-submit';
     this.buttonSubmit.button.type = 'submit';
     this.buttonSubmit.button.textContent = 'update';
     this.buttonSubmit.button.disabled = true;
 
     document.addEventListener('selectCar', async (evt: CustomEventInit) => {
-      await console.log('start selectcar');
       this.currentCarId = evt.detail.id;
-    })
+    });
 
     this.form.addEventListener('submit', async (evt) => {
       this.formSubmitHandler(evt);
-    })
+    });
   }
 
   renderForm(): HTMLElement {
@@ -44,11 +52,11 @@ export class FormUpdate extends BaseComponentForm {
       this.inputText.input,
       this.inputColor.input,
       this.buttonSubmit.button
-    )
+    );
     return this.form;
   }
 
-  async formSubmitHandler(evt: Event) {
+  async formSubmitHandler(evt: Event): Promise<void> {
     const inputUpdateText = document.getElementById('update-name');
     const inputUpdateColor = document.getElementById('update-color');
     const buttonSubmit = document.getElementById('update-submit');
@@ -58,17 +66,19 @@ export class FormUpdate extends BaseComponentForm {
     const nameCar = this.inputText.input.value;
     const colorCar = this.inputColor.input.value;
 
-    let car: Car = {
+    const car: Car = {
       name: nameCar,
       color: colorCar,
-      id: this.currentCarId
-    }
+      id: this.currentCarId,
+    };
 
     await updateCar(car.id!, car);
-    document.dispatchEvent(new CustomEvent('updateCar', {
-      bubbles: true,
-      detail: car
-    }))
+    document.dispatchEvent(
+      new CustomEvent('updateCar', {
+        bubbles: true,
+        detail: car,
+      })
+    );
 
     this.form.reset();
 

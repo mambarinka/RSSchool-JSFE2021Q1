@@ -1,5 +1,8 @@
-import { createCar, getCars } from '../fetch-api/fetch-api-garage';
-import { BaseComponentForm, Button, Car, Input } from '../models/models';
+import { createCar } from '../fetch-api/fetch-api-garage';
+import { Button } from '../models/base-component-button';
+import { BaseComponentForm } from '../models/base-component-form';
+import { Input } from '../models/base-component-input';
+import { Car } from '../models/models';
 
 export class FormCreate extends BaseComponentForm {
   private readonly inputText: Input;
@@ -19,7 +22,7 @@ export class FormCreate extends BaseComponentForm {
     this.inputColor = new Input(['car-view__color']);
     this.inputColor.input.type = 'color';
     this.inputColor.input.name = 'color';
-    this.inputColor.input.setAttribute('value','#13406c');
+    this.inputColor.input.setAttribute('value', '#13406c');
     this.buttonSubmit = new Button([
       'car-view__button',
       'car-view__button--create',
@@ -30,8 +33,8 @@ export class FormCreate extends BaseComponentForm {
 
     this.form.addEventListener('submit', async (evt) => {
       try {
-      await this.formSubmitHandler(evt);
-      } catch(e) {
+        await this.formSubmitHandler(evt);
+      } catch (e) {
         console.log(e);
         console.log('ошибка');
       }
@@ -64,17 +67,5 @@ export class FormCreate extends BaseComponentForm {
         detail: car,
       })
     );
-    // document.dispatchEvent(
-    //   new CustomEvent('updateNumberCars', {
-    //     bubbles: true,
-    //   })
-    // );
-
-    // const numberPage = (async () => (await getCars()).countCars)();;
-    // numberPage.then((countCars) => {
-    //   if (countCars>=7) {
-    //    document.querySelector('.next-button')?.setAttribute('disabled', 'false');
-    //   }
-    // })
   }
 }

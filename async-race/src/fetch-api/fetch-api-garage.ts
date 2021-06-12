@@ -13,14 +13,13 @@ export const getCars = async (pageNumber = 1, limitCars = 7) => {
   return {
     dataCars,
     countCars,
-    currentPage
+    currentPage,
   };
 };
 
 export const getCar = async (id = 1) => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(`${baseURL}${pathGarage}/${id}`);
-  // const response = await fetch(`${baseURL}${pathGarage}?id=${id}`);
   const dataCar = await response.json();
 
   return dataCar;

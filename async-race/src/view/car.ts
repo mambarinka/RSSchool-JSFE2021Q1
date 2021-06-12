@@ -1,16 +1,27 @@
 import { deleteCar } from '../fetch-api/fetch-api-garage';
-import { BaseComponent, Button, Car } from '../models/models';
+import { BaseComponent } from '../models/base-component';
+import { Button } from '../models/base-component-button';
+import { Car } from '../models/models';
 
 export class CarItem extends BaseComponent {
   private readonly wrapperGeneralButtons: BaseComponent;
+
   private readonly buttonSelect: Button;
+
   private readonly buttonRemove: Button;
+
   private readonly carName: BaseComponent;
+
   private readonly road: BaseComponent;
+
   private readonly wrapperControlButtons: BaseComponent;
+
   private readonly buttonStart: Button;
+
   private readonly buttonStop: Button;
+
   private readonly carIcon: BaseComponent;
+
   private readonly flag: BaseComponent;
 
   constructor(car: Car) {
@@ -61,7 +72,6 @@ export class CarItem extends BaseComponent {
     );
     this.element.append(this.wrapperGeneralButtons.element, this.road.element);
 
-
     return this.element;
   }
 
@@ -74,16 +84,18 @@ export class CarItem extends BaseComponent {
     inputUpdateColor?.removeAttribute('disabled');
     buttonSubmit?.removeAttribute('disabled');
 
-    document.dispatchEvent(new CustomEvent('selectCar', {
-      bubbles: true,
-      detail: car
-    }))
+    document.dispatchEvent(
+      new CustomEvent('selectCar', {
+        bubbles: true,
+        detail: car,
+      })
+    );
 
     const func = (evt: CustomEventInit) => {
       this.carName.element.textContent = evt.detail.name;
       this.carIcon.element.innerHTML = this.getCarIcon(evt.detail.color);
       document.removeEventListener('updateCar', func);
-    }
+    };
 
     document.addEventListener('updateCar', func);
   }

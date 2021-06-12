@@ -5,6 +5,8 @@ import { getCar } from './fetch-api-garage';
 const getSortOrder = (sort: string, order: string) => {
   if (sort && order) {
     return `&_sort=${sort}&_order=${order}`;
+  } else {
+    return;
   }
 };
 

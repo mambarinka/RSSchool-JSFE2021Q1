@@ -1,4 +1,4 @@
-import { BaseComponent } from '../models/models';
+import { BaseComponent } from '../models/base-component';
 
 export class Header extends BaseComponent {
   constructor() {
