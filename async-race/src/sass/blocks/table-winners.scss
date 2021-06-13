@@ -1,0 +1,20 @@
+.table-winners {
+  border: 2px solid $bg-color1;
+  border-collapse: collapse;
+  backdrop-filter: blur(2px);
+}
+
+.table-winners__row {
+  @include text-options(15px, 19px, 500, $text-main-color);
+  text-align: center;
+  border: 1px solid $bg-color1;
+
+  &--head {
+    @include text-options(17px, 22px, 700, $text-main-color);
+    border: 2px solid $bg-color1;
+  }
+
+  &--car {
+    width: 7%;
+  }
+}

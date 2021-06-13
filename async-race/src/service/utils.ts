@@ -57,12 +57,12 @@ export const animation = (carIcon: HTMLElement, distance: number, timeAnimation:
       idAnimation = car.id;
       if (passed < distance) {
         window.requestAnimationFrame(step);
-        console.log('id animation1', car.id);
+        // console.log('id animation1', car.id);
       }
     }
 
     idAnimation = window.requestAnimationFrame(step);
-    console.log('id animation2', car.id);
+    // console.log('id animation2', car.id);
   } catch(error) {
     console.log(error);
   }
@@ -109,6 +109,7 @@ export const stopDriving = async (id: number | undefined, buttonStop: Button, ca
   });
   buttonStart.button.removeAttribute('disabled');
   buttonStart.button.classList.remove('not-active');
+  console.log(car);
   carIcon.element.style.transform = `translateX(0px)`;
   if (car.id) {
     window.cancelAnimationFrame(idAnimation!);

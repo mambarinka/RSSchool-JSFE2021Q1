@@ -1,30 +1,31 @@
 import { baseURL } from '../models/constants';
-import { Car, Method, Path } from '../models/models';
+import { Car, Method, Path, Winner } from '../models/models';
 import { getCar } from './fetch-api-garage';
 
-const getSortOrder = (sort: string, order: string) => {
+const getSortOrder = (sort?: string, order?: string) => {
   if (sort && order) {
     return `&_sort=${sort}&_order=${order}`;
   } else {
-    return;
+    return '';
   }
 };
 
 export const getWinners = async (
   pageNumber = 1,
   limitCars = 10,
-  sort: string,
-  order: string
+  sort?: string,
+  order?: string
 ) => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(
-    `${baseURL} ${pathWinners}?_page = ${pageNumber}& _limit=${limitCars} ${getSortOrder(
+    `${baseURL}${pathWinners}?_page=${pageNumber}&_limit=${limitCars}${getSortOrder(
       sort,
       order
     )} `
   );
   // const response = await fetch(`${ baseURL } ${ pathGarage }?id = ${ id } `);
-  const items = await response.json();
+  const items: Winner[] = await response.json();
+  const currentPage = Math.ceil(Number(response.headers.get('X-Total-Count')) / 10);
 
   return {
     items: await Promise.all(
@@ -34,6 +35,7 @@ export const getWinners = async (
       }))
     ),
     count: response.headers.get('X-Total-Count'),
+    currentPage
   };
 };
 

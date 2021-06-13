@@ -20,6 +20,13 @@ export interface Car {
   time?: number;
 }
 
+export interface Winner {
+  car: Car;
+  id: number;
+  time: number;
+  wins: number
+}
+
 // export const getCurrentCountCars = async () => {
 //   const currentCountCars = (await getCars()).countCars;
 //   return currentCountCars;
