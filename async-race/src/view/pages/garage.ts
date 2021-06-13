@@ -106,18 +106,8 @@ export class Garage extends BaseComponent {
       (
         await getCars(currentPage)
       ).dataCars)();
-    // console.log(arrayCars);
-    // for (let i = 0; i < arrayCars.length; i++) {
-
-    //   const car = arrayCars[i];
-    //   this.carItem = new CarItem(car);
-    //   console.log(car);
-    //   this.carsList.element.append(this.carItem.render(car));
-    // }
     arrayCars.forEach((car: Car) => {
-      // console.log(car);
       let carItem = new CarItem(car);
-      // console.log(car);
       this.carsList.element.append(carItem.render());
     });
     return this.element;

@@ -23,6 +23,8 @@ export const drive = async (id: number) => {
     `${baseURL}${pathEngine}/?id=${id}&status=drive`
   ).catch();
   const dataCar = await response.json();
+  const status= response.status;
 
-  return response.status !== 200 ? { success: false } : { ...{ dataCar } };
+  return status !== 200 ? { success: false } :   { success: true }   ;
+  // return status !== 200 ? { success: false } : { ...{ dataCar } };
 };

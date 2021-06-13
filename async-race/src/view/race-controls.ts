@@ -41,6 +41,10 @@ export class RaceControls extends BaseComponent {
     this.buttonGenerate.button.addEventListener('click', async () => {
       this.buttonGenerateHandler();
     });
+
+    this.buttonRace.button.addEventListener('click', () => {
+      this.buttonRaceHandler();
+    })
   }
 
   buttonGenerateHandler = async (): Promise<void> => {
@@ -53,4 +57,8 @@ export class RaceControls extends BaseComponent {
       })
     );
   };
+
+  buttonRaceHandler = () => {
+    this.buttonRace.button.disabled = true;
+  }
 }

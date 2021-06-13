@@ -27,6 +27,9 @@ export interface Winner {
   wins: number
 }
 
+export interface State {
+  id?: number
+}
 // export const getCurrentCountCars = async () => {
 //   const currentCountCars = (await getCars()).countCars;
 //   return currentCountCars;
