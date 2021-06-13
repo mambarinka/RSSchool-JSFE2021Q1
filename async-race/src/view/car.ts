@@ -2,7 +2,7 @@ import { deleteCar, getCars } from '../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
 import { Car } from '../models/models';
-import { idAnimation, startDriving, stopDriving } from '../service/utils';
+import state, { idAnimation, startDriving, stopDriving } from '../service/utils';
 
 export class CarItem extends BaseComponent {
   private readonly wrapperGeneralButtons: BaseComponent;
@@ -122,14 +122,11 @@ export class CarItem extends BaseComponent {
   }
 
   buttonStartHandler = async (car: Car) => {
-
     startDriving(car.id, this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, car);
   }
 
   buttonStopHandler = async (car: Car) => {
-    console.log(idAnimation);
-    stopDriving(idAnimation, this.buttonStop, car, this.buttonStart, this.carIcon);
-    this.carIcon.element.style.transform = `translateX(0px)`;
+    stopDriving(car.id, this.buttonStop, car, this.buttonStart, this.carIcon);
   }
 
   getCarIcon = (color = 'black') => `<svg

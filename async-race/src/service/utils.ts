@@ -61,25 +61,23 @@ export const animation = (carIcon: HTMLElement, distance: number, timeAnimation:
         state.id = window.requestAnimationFrame(step);
       }
     }
-
     state.id = window.requestAnimationFrame(step);
   } catch (error) {
     console.log(error);
   }
-
   return state;
 }
-
+let state: State = {};
+export default state;
 
 export const startDriving = async (id: number | undefined, buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => {
-
   buttonStart.button.disabled = true;
   buttonStart.button.classList.add('not-active');
   buttonStop.button.removeAttribute('disabled');
   buttonStop.button.classList.remove('not-active');
   let time: number;
   let htmlDistance: number;
-  let lol: State;
+  // let state: State;
   await startEngine(id).then((dataCar) => {
     time = Math.round(dataCar.distance / dataCar.velocity);
     htmlDistance = Math.floor(getDistanceBtwElements(carIcon, flag)) + 100;
@@ -90,45 +88,37 @@ export const startDriving = async (id: number | undefined, buttonStart: Button, 
       buttonStop.button.classList.add('not-active');
     }, time);
   }).then(() => {
-    lol = animation(carIcon, htmlDistance, time, car);
-
+    state = animation(carIcon, htmlDistance, time, car);
+    // console.log(state.id!);
   }).then(async () => {
-
     const status = await drive(id!);
   }).catch(() => {
-
-    console.log('undefinedddddddddd');
-    window.cancelAnimationFrame(lol.id!);
+    // console.log(state.id!);
+    window.cancelAnimationFrame(state.id!);
     console.error(`двигатель сломался`)
   })
-
+  console.log(state.id);
   return car.id;
 }
 
 
 export const stopDriving = async (id: number | undefined, buttonStop: Button, car: Car, buttonStart: Button, carIcon: BaseComponent) => {
-  try {
-    buttonStop.button.disabled = true;
-    buttonStop.button.classList.add('not-active');
-    console.log(idAnimation);
-    console.log('id stop1', car.id);
-    await stopEngine(idAnimation).then(() => {
-      carIcon.element.style.transform = `translateX(0px)`;
-      buttonStart.button.removeAttribute('disabled');
-      buttonStart.button.classList.remove('not-active');
-      console.log(car);
-      carIcon.element.style.transform = `translateX(0px)`;
-      if (car.id) {
-        console.log('yessssssssssssssssssssssssssssssssssssssssssssss');
-        window.cancelAnimationFrame(idAnimation!);
-        carIcon.element.style.transform = `translateX(0px)`;
-      }
-    });
-  } catch (error) {
-    console.error(`проблема с остановкой машины: ${error}`);
-  } finally {
+  console.log(state.id);
+  buttonStop.button.disabled = true;
+  buttonStop.button.classList.add('not-active');
+  await stopEngine(id).then(() => {
     carIcon.element.style.transform = `translateX(0px)`;
-  }
+    buttonStart.button.removeAttribute('disabled');
+    buttonStart.button.classList.remove('not-active');
+    if (car.id) {
+      console.log('yessssssssssssssssssssssssssssssssssssssssssssss');
+      carIcon.element.style.transform = `translateX(0px)`;
+    }
+    window.cancelAnimationFrame(state.id!);
+  })/* .catch(() => {
+    window.cancelAnimationFrame(state.id!);
+    console.error(`пользователь остановил машину`)
+  }); */
 }
 
 // export const raceAll = async (promises, ids) => {
