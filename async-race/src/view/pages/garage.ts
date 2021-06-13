@@ -33,7 +33,7 @@ export class Garage extends BaseComponent {
     this.wrapperForm = new BaseComponent('div', ['car-view']);
     this.formCreate = new FormCreate();
     this.formUpdate = new FormUpdate();
-    this.raceControls = new RaceControls();
+    this.raceControls = new RaceControls(this.currentPage);
     this.titlePage = new BaseComponent('h1', ['page-main__title']);
     this.titlePageNumber = new BaseComponent('h2', ['page-main__page-number']);
     this.carsList = new BaseComponent('ul', ['garage__list']);
@@ -107,7 +107,7 @@ export class Garage extends BaseComponent {
         await getCars(currentPage)
       ).dataCars)();
     arrayCars.forEach((car: Car) => {
-      let carItem = new CarItem(car);
+      let carItem = new CarItem(car, currentPage);
       this.carsList.element.append(carItem.render());
     });
     return this.element;

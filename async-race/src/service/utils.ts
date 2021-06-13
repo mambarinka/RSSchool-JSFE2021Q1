@@ -1,4 +1,5 @@
 import { drive, startEngine, stopEngine } from '../fetch-api/fetch-api-engine';
+import { getCars } from '../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
 import { models, names } from '../models/constants';
@@ -91,11 +92,15 @@ export const startDriving = async (id: number | undefined, buttonStart: Button, 
     state = animation(carIcon, htmlDistance, time, car);
     // console.log(state.id!);
   }).then(async () => {
+    // const status = await drive(car.id!).catch((error) => {
+    //     console.log(`errrooorrr`);
+    //     window.cancelAnimationFrame(state.id!);
+    //   });
     const status = await drive(id!);
-  }).catch(() => {
+  }).catch((error) => {
     // console.log(state.id!);
     window.cancelAnimationFrame(state.id!);
-    console.error(`двигатель сломался`)
+    console.error(`что-то происходит: ${error}`)
   })
   console.log(state.id);
   return car.id;

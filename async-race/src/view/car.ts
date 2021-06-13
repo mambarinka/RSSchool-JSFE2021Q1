@@ -24,8 +24,10 @@ export class CarItem extends BaseComponent {
   private readonly carIcon: BaseComponent;
 
   private readonly flag: BaseComponent;
+  private readonly currentPage: number | undefined;
+  private readonly car: Car;
 
-  constructor(car: Car) {
+  constructor(car: Car, currentPage?: number) {
     super('li', ['garage__item']);
     this.wrapperGeneralButtons = new BaseComponent('div', [
       'garage__general-buttons',
@@ -47,6 +49,8 @@ export class CarItem extends BaseComponent {
     this.carIcon = new BaseComponent('div', ['car']);
     this.carIcon.element.innerHTML = this.getCarIcon(car.color);
     this.flag = new BaseComponent('div', ['road__flag']);
+    this.currentPage = currentPage;
+
     this.buttonSelect.button.addEventListener('click', () => {
       this.buttonSelectHandler(car);
     });
@@ -62,7 +66,11 @@ export class CarItem extends BaseComponent {
     this.buttonStop.button.addEventListener('click', async () => {
       await this.buttonStopHandler(car);
     });
+    this.car = car;
 
+    document.addEventListener('startRace', async () => {
+      await this.race(startDriving);
+    });
   }
 
   render(/* car: Car */): HTMLElement {
@@ -127,6 +135,16 @@ export class CarItem extends BaseComponent {
 
   buttonStopHandler = async (car: Car) => {
     stopDriving(car.id, this.buttonStop, car, this.buttonStart, this.carIcon);
+  }
+
+
+
+  race = async (driveFunc: (id: number | undefined, buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => Promise<number | undefined>) => {
+    //     const arrayCars = await (async () => (await getCars(this.currentPage)).dataCars)();
+    // console.log(arrayCars);
+    //     const promises = arrayCars.map((car: Car) => {
+   await driveFunc(this.car.id, this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
+    // })
   }
 
   getCarIcon = (color = 'black') => `<svg
