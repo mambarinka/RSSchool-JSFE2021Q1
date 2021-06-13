@@ -1,7 +1,8 @@
-import { deleteCar } from '../fetch-api/fetch-api-garage';
+import { deleteCar, getCars } from '../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
 import { Car } from '../models/models';
+import { idAnimation, startDriving, stopDriving } from '../service/utils';
 
 export class CarItem extends BaseComponent {
   private readonly wrapperGeneralButtons: BaseComponent;
@@ -41,11 +42,11 @@ export class CarItem extends BaseComponent {
       'garage__control-buttons',
     ]);
     this.buttonStart = new Button(['garage__start-engine-button']);
-    this.buttonStop = new Button(['garage__stop-engine-button']);
+    this.buttonStop = new Button(['garage__stop-engine-button', 'not-active']);
+
     this.carIcon = new BaseComponent('div', ['car']);
     this.carIcon.element.innerHTML = this.getCarIcon(car.color);
     this.flag = new BaseComponent('div', ['road__flag']);
-
     this.buttonSelect.button.addEventListener('click', () => {
       this.buttonSelectHandler(car);
     });
@@ -53,9 +54,18 @@ export class CarItem extends BaseComponent {
     this.buttonRemove.button.addEventListener('click', () => {
       this.buttonRemoveHandler(car);
     });
+
+    this.buttonStart.button.addEventListener('click', async () => {
+      await this.buttonStartHandler(car);
+    });
+
+    this.buttonStop.button.addEventListener('click', async () => {
+      await this.buttonStopHandler(car);
+    });
+
   }
 
-  render(car: Car): HTMLElement {
+  render(/* car: Car */): HTMLElement {
     this.wrapperGeneralButtons.element.append(
       this.buttonSelect.button,
       this.buttonRemove.button,
@@ -109,6 +119,17 @@ export class CarItem extends BaseComponent {
         bubbles: true,
       })
     );
+  }
+
+  buttonStartHandler = async (car: Car) => {
+
+    startDriving(car.id, this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, car);
+  }
+
+  buttonStopHandler = async (car: Car) => {
+    console.log(idAnimation);
+    stopDriving(idAnimation, this.buttonStop, car, this.buttonStart, this.carIcon);
+    this.carIcon.element.style.transform = `translateX(0px)`;
   }
 
   getCarIcon = (color = 'black') => `<svg

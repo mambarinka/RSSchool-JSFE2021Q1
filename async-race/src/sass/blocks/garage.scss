@@ -46,6 +46,9 @@
 }
 
 .garage__control-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 12%;
   margin-right: 50px;
   text-align: center;
 }
@@ -62,10 +65,39 @@
 }
 
 .garage__start-engine-button {
+  margin-right: 1%;
   background: url("./assets/icons/icon-start.svg") no-repeat;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.2);
+    &:disabled {
+      transform: scale(1);
+    }
+  }
 }
 
 .garage__stop-engine-button {
   background: url("./assets/icons/icon-stop.png") no-repeat;
+  cursor: pointer;
   background-size: 30px;
+
+  &:hover {
+    transform: scale(1.2);
+    // &:disabled {
+    //   transform: scale(1);
+    // }
+  }
+
+  // &:disabled {
+  //   filter: brightness(40%);
+  // }
+}
+
+.not-active {
+  filter: brightness(40%);
+
+  &:hover {
+    transform: scale(1);
+  }
 }

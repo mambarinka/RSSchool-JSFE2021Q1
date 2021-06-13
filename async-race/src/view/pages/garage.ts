@@ -1,5 +1,6 @@
 import { getCars } from '../../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../../models/base-component';
+import { Car } from '../../models/models';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
@@ -97,21 +98,28 @@ export class Garage extends BaseComponent {
       this.pagination.element
     );
 
-    this.titlePage.element.textContent = `Garage (${
-      (await getCars()).countCars
-    })`;
+    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars
+      })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
     const arrayCars = await (async () =>
       (
         await getCars(currentPage)
       ).dataCars)();
+    // console.log(arrayCars);
+    // for (let i = 0; i < arrayCars.length; i++) {
 
-    for (let i = 0; i < arrayCars.length; i++) {
-      const car = arrayCars[i];
-      this.carItem = new CarItem(car);
-      this.carsList.element.append(this.carItem.render(car));
-    }
+    //   const car = arrayCars[i];
+    //   this.carItem = new CarItem(car);
+    //   console.log(car);
+    //   this.carsList.element.append(this.carItem.render(car));
+    // }
+    arrayCars.forEach((car: Car) => {
+      // console.log(car);
+      let carItem = new CarItem(car);
+      // console.log(car);
+      this.carsList.element.append(carItem.render());
+    });
     return this.element;
   };
 
