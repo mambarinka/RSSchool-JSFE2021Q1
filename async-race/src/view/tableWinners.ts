@@ -1,5 +1,7 @@
 import { getWinners } from "../fetch-api/fetch-api-winners";
 import { Table } from "../models/base-component-table";
+import { Car } from "../models/models";
+import { getCarIcon } from "../service/utils";
 import { CarItem } from "./car";
 
 export class TableWinners extends Table {
@@ -58,8 +60,7 @@ export class TableWinners extends Table {
     const arrayWinners = (await getWinners()).items;
     arrayWinners.map((winner: any, index: number) => {
       this.cellNumberValue.textContent = `${index + 1}`;
-      // const car = new CarItem(winner.car);
-      // this.cellCarValue.innerHTML = car.getCarIcon(winner.car.color);
+      this.cellCarValue.innerHTML = getCarIcon(winner.car.color);
       this.cellNameValue.textContent = `${winner.car.name}`;
       this.cellWinsValue.textContent = `${winner.wins}`;
       this.cellBsetTimeValue.textContent = `${winner.time}`;

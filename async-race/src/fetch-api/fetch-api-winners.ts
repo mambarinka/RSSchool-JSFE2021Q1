@@ -27,6 +27,17 @@ export const getWinners = async (
   const items: Winner[] = await response.json();
   const currentPage = Math.ceil(Number(response.headers.get('X-Total-Count')) / 10);
 
+  // console.log({
+  //   items: await Promise.all(
+  //     items.map(async (winner: { id: number | undefined }) => ({
+  //       ...winner,
+  //       car: await getCar(winner.id),
+  //     }))
+  //   ),
+  //   count: response.headers.get('X-Total-Count'),
+  //   currentPage
+  // });
+
   return {
     items: await Promise.all(
       items.map(async (winner: { id: number | undefined }) => ({

@@ -1,8 +1,8 @@
 import { deleteCar, getCars } from '../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
-import { Car } from '../models/models';
-import state, { idAnimation, startDriving, stopDriving } from '../service/utils';
+import { Car, State } from '../models/models';
+import { startDriving, stopDriving } from '../service/utils';
 
 export class CarItem extends BaseComponent {
   private readonly wrapperGeneralButtons: BaseComponent;
@@ -69,7 +69,7 @@ export class CarItem extends BaseComponent {
     this.car = car;
 
     document.addEventListener('startRace', async () => {
-      await this.race(startDriving);
+      return await this.race(startDriving);
     });
   }
 
@@ -130,20 +130,20 @@ export class CarItem extends BaseComponent {
   }
 
   buttonStartHandler = async (car: Car) => {
-    startDriving(car.id, this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, car);
+    const lol =startDriving(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, car);
   }
 
   buttonStopHandler = async (car: Car) => {
-    stopDriving(car.id, this.buttonStop, car, this.buttonStart, this.carIcon);
+    stopDriving(this.buttonStop, car, this.buttonStart, this.carIcon);
   }
 
 
 
-  race = async (driveFunc: (id: number | undefined, buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => Promise<number | undefined>) => {
+  race = async (driveFunc: (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => Promise<{idAnimation: number}>) => {
     //     const arrayCars = await (async () => (await getCars(this.currentPage)).dataCars)();
     // console.log(arrayCars);
     //     const promises = arrayCars.map((car: Car) => {
-   await driveFunc(this.car.id, this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
+   return await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
     // })
   }
 

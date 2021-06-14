@@ -72,17 +72,6 @@ export class RaceControls extends BaseComponent {
         bubbles: true,
       })
     );
-    // const buttonStart = document.querySelector('.garage__start-engine-button') ;
-    // const buttonStop = document.querySelector('garage__stop-engine-button not-active');
-    // const carIcon = document.querySelector('.car__icon');
-    // const flag = document.querySelector('.road__flag');
-
-    // const arrayCars = await (async () => (await getCars(this.currentPage)).dataCars)();
-    // console.log(arrayCars);
-    // const promises = arrayCars.map((car: Car) => {
-    //   let id = car.id;
-    //   // startDriving(id, buttonStart, buttonStop, carIcon, flag, car);
-    // })
   }
 }
 
