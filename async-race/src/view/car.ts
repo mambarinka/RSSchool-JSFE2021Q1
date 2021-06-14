@@ -130,11 +130,11 @@ export class CarItem extends BaseComponent {
   }
 
   buttonStartHandler = async (car: Car) => {
-    const lol =startDriving(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, car);
+    startDriving(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, car);
   }
 
   buttonStopHandler = async (car: Car) => {
-    stopDriving(this.buttonStop, car, this.buttonStart, this.carIcon);
+    stopDriving(this.buttonStop.button, car, this.buttonStart.button, this.carIcon.element);
   }
 
 

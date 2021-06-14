@@ -2,7 +2,8 @@ import { createCar, getCars } from '../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
 import { Car } from '../models/models';
-import { generateRandomCars, startDriving } from '../service/utils';
+import { generateRandomCars, startDriving, stopDriving } from '../service/utils';
+import { CarItem } from './car';
 
 export class RaceControls extends BaseComponent {
   private readonly buttonRace: Button;
@@ -50,6 +51,10 @@ export class RaceControls extends BaseComponent {
     this.buttonRace.button.addEventListener('click', () => {
       this.buttonRaceHandler();
     })
+
+    this.buttonReset.button.addEventListener('click', () => {
+      this.buttonResetHandler();
+    })
   }
 
   buttonGenerateHandler = async (): Promise<void> => {
@@ -72,6 +77,21 @@ export class RaceControls extends BaseComponent {
         bubbles: true,
       })
     );
+  }
+
+  buttonResetHandler = async () => {
+    this.buttonReset.button.disabled = true;
+    this.buttonRace.button.disabled = false;
+
+    const arrayCars = await (async () => (await getCars(this.currentPage)).dataCars)();
+    console.log(arrayCars);
+    arrayCars.map((car: Car, index: number) => {
+    let buttonStop = document.querySelectorAll('.garage__stop-engine-button')[index] as HTMLElement;
+    let buttonStart = document.querySelectorAll('.garage__start-engine-button')[index] as HTMLElement;
+    let carIcon = document.querySelectorAll('.car')[index] as HTMLElement;
+
+      stopDriving(buttonStop, car, buttonStart, carIcon);
+    })
   }
 }
 

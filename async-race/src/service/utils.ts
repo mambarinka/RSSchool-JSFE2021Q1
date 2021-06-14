@@ -116,17 +116,17 @@ export const startDriving = async (buttonStart: Button, buttonStop: Button, carI
   return { idAnimation };
 }
 
-export const stopDriving = async (buttonStop: Button, car: Car, buttonStart: Button, carIcon: BaseComponent) => {
+export const stopDriving = async (buttonStop: HTMLButtonElement | HTMLElement, car: Car, buttonStart:  HTMLButtonElement | HTMLElement, carIcon: HTMLElement) => {
 console.log(idAnimation);
-  buttonStop.button.disabled = true;
-  buttonStop.button.classList.add('not-active');
+  // buttonStop.disabled = true;
+  buttonStop.setAttribute('disabled', 'disabled');
+  buttonStop.classList.add('not-active');
   await stopEngine(car.id).then(() => {
-    console.log('11111111');
-    carIcon.element.style.transform = `translateX(0px)`;
-    buttonStart.button.removeAttribute('disabled');
-    buttonStart.button.classList.remove('not-active');
-    carIcon.element.style.transform = `translateX(0px)`;
+    carIcon.style.transform = `translateX(0px)`;
+    buttonStart.removeAttribute('disabled');
+    buttonStart.classList.remove('not-active');
     window.cancelAnimationFrame(idAnimation);
+    // carIcon.style.transform = `translateX(0px)`;
   })
 }
 
