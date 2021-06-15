@@ -69,8 +69,12 @@ export const getDistanceBtwElements = (a: HTMLElement, b: HTMLElement) => {
 //   return idAnimation;
 // }
 
-var idAnimation : number;
-export const startDriving = async (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => {
+var idAnimation: number;
+
+export const startDriving = async (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car): Promise<{
+  id: number | undefined;
+  timeAnimation: number
+}> => {
   buttonStart.button.disabled = true;
   buttonStart.button.classList.add('not-active');
   buttonStop.button.removeAttribute('disabled');
@@ -109,30 +113,31 @@ export const startDriving = async (buttonStart: Button, buttonStop: Button, carI
   }
   idAnimation = window.requestAnimationFrame(step);
 
-  await drive(car.id!).catch(() => {
+
+  try {
+    await drive(car.id!).then((status) => {
+console.log(status);
+    })
+  } catch (error) {
+    console.error('most likely the engine of the car broke down: ', error);
     window.cancelAnimationFrame(idAnimation);
-    console.log('catch');
-  })
-  return { idAnimation };
+  }
+
+  const id = car.id;
+  return { id, timeAnimation };
 }
 
-export const stopDriving = async (buttonStop: HTMLButtonElement | HTMLElement, car: Car, buttonStart:  HTMLButtonElement | HTMLElement, carIcon: HTMLElement) => {
-console.log(idAnimation);
-  // buttonStop.disabled = true;
+export const stopDriving = async (buttonStop: HTMLButtonElement | HTMLElement, car: Car, buttonStart: HTMLButtonElement | HTMLElement, carIcon: HTMLElement) => {
   buttonStop.setAttribute('disabled', 'disabled');
   buttonStop.classList.add('not-active');
   await stopEngine(car.id).then(() => {
     carIcon.style.transform = `translateX(0px)`;
     buttonStart.removeAttribute('disabled');
     buttonStart.classList.remove('not-active');
+    console.log(`idAnimation stop for ${car.name}`, idAnimation);
     window.cancelAnimationFrame(idAnimation);
-    // carIcon.style.transform = `translateX(0px)`;
   })
 }
-
-// export const raceAll = async (promises, ids) => {
-
-// }
 
 export const getCarIcon = (color = 'black') => `<svg
     class="car__icon"

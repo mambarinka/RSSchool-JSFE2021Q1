@@ -1,6 +1,7 @@
 import { getCars } from '../../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../../models/base-component';
 import { Car } from '../../models/models';
+import { startDriving } from '../../service/utils';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
@@ -17,6 +18,7 @@ export class Garage extends BaseComponent {
   private readonly carsList: BaseComponent;
 
   private carItem!: CarItem;
+  private arrayCars!: Car[];
 
   private readonly raceControls: RaceControls;
 
@@ -27,7 +29,8 @@ export class Garage extends BaseComponent {
   private readonly titlePageNumber: BaseComponent;
 
   private currentPage!: number;
-
+  private readonly message: BaseComponent;
+  private arrayCarsForRace: CarItem[] = [];
   constructor() {
     super('main', ['page-main']);
     this.wrapperForm = new BaseComponent('div', ['car-view']);
@@ -38,6 +41,7 @@ export class Garage extends BaseComponent {
     this.titlePageNumber = new BaseComponent('h2', ['page-main__page-number']);
     this.carsList = new BaseComponent('ul', ['garage__list']);
     this.pagination = new Pagination();
+    this.message = new BaseComponent('div', ['message', 'hide']);
 
     document.addEventListener('createCar', async () => {
       await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
@@ -47,7 +51,8 @@ export class Garage extends BaseComponent {
 
     document.addEventListener('updateNumberCars', async () => {
       await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
-        this.render(currentPage);
+        this.render(this.currentPage);
+        // this.render(currentPage);
       });
     });
 
@@ -65,13 +70,23 @@ export class Garage extends BaseComponent {
 
     document.addEventListener('generateNewCars', async () => {
       await this.getCurrentPage(this.currentPage).then(async (currentPage) => {
-        this.render(currentPage);
+        this.render(this.currentPage);
+        // this.render(currentPage);
       });
     });
 
     this.getCurrentPage(this.currentPage).then((currentPage) => {
       this.currentPage = currentPage;
       this.render(this.currentPage);
+    });
+
+    document.addEventListener('startRace', async () => {
+      const promises = this.arrayCarsForRace.map(async (carForRace) => {
+        /* const { id, timeAnimation } = */ await carForRace.race(startDriving);
+        // console.log(await carForRace.race(startDriving));
+      })
+// console.log(promises);
+ await Promise.race(promises);
     });
   }
 
@@ -95,21 +110,26 @@ export class Garage extends BaseComponent {
       this.titlePage.element,
       this.titlePageNumber.element,
       this.carsList.element,
-      this.pagination.element
+      this.pagination.element,
+      this.message.element
     );
 
     this.titlePage.element.textContent = `Garage (${(await getCars()).countCars
       })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
-    const arrayCars = await (async () =>
-      (
-        await getCars(currentPage)
-      ).dataCars)();
-    arrayCars.forEach((car: Car) => {
-      let carItem = new CarItem(car, currentPage);
-      this.carsList.element.append(carItem.render());
+    this.arrayCarsForRace = [];
+    this.arrayCars = await (async () => (await getCars(currentPage, 7)).dataCars)();
+    console.log(`this.arraycars `, this.arrayCars);
+    this.arrayCars.forEach((car: Car) => {
+      this.carItem = new CarItem(car, currentPage);
+      this.carsList.element.append(this.carItem.render());
+
+      this.arrayCarsForRace.push(this.carItem);
+      // console.log(this.carItem.element);
     });
+
+
     return this.element;
   };
 

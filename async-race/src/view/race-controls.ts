@@ -84,12 +84,12 @@ export class RaceControls extends BaseComponent {
     this.buttonRace.button.disabled = false;
 
     const arrayCars = await (async () => (await getCars(this.currentPage)).dataCars)();
-    console.log(arrayCars);
+
     arrayCars.map((car: Car, index: number) => {
     let buttonStop = document.querySelectorAll('.garage__stop-engine-button')[index] as HTMLElement;
     let buttonStart = document.querySelectorAll('.garage__start-engine-button')[index] as HTMLElement;
     let carIcon = document.querySelectorAll('.car')[index] as HTMLElement;
-
+// console.log(buttonStop);
       stopDriving(buttonStop, car, buttonStart, carIcon);
     })
   }

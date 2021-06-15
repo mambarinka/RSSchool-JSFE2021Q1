@@ -68,9 +68,9 @@ export class CarItem extends BaseComponent {
     });
     this.car = car;
 
-    document.addEventListener('startRace', async () => {
-      return await this.race(startDriving);
-    });
+    // document.addEventListener('startRace', async () => {
+    //   return await this.race(startDriving);
+    // });
   }
 
   render(/* car: Car */): HTMLElement {
@@ -118,7 +118,7 @@ export class CarItem extends BaseComponent {
     document.addEventListener('updateCar', func);
   }
 
-  async buttonRemoveHandler(car: Car) {
+  buttonRemoveHandler = async (car: Car) => {
     await deleteCar(car.id!);
     this.element.remove();
 
@@ -139,12 +139,13 @@ export class CarItem extends BaseComponent {
 
 
 
-  race = async (driveFunc: (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => Promise<{idAnimation: number}>) => {
-    //     const arrayCars = await (async () => (await getCars(this.currentPage)).dataCars)();
-    // console.log(arrayCars);
-    //     const promises = arrayCars.map((car: Car) => {
-   return await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
-    // })
+  race = async (driveFunc: (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => Promise<{
+    id: number | undefined;
+    timeAnimation: number
+  }>) => {
+
+    return await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
+
   }
 
   getCarIcon = (color = 'black') => `<svg
