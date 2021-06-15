@@ -30,16 +30,16 @@ export const getPositionCenter = (element: HTMLElement) => {
   const { top, left, width, height } = element.getBoundingClientRect();
   return {
     x: left + width / 2,
-    y: top + height / 2
-  }
-}
+    y: top + height / 2,
+  };
+};
 
 export const getDistanceBtwElements = (a: HTMLElement, b: HTMLElement) => {
   const aPosition = getPositionCenter(a);
   const bPosition = getPositionCenter(b);
 
   return Math.hypot(aPosition.x - bPosition.x, aPosition.y - bPosition.y);
-}
+};
 
 // let state: State = {};
 // export default state;
@@ -69,17 +69,22 @@ export const getDistanceBtwElements = (a: HTMLElement, b: HTMLElement) => {
 //   return idAnimation;
 // }
 
-var idAnimation: number;
+let idAnimation: number;
 
-export const startDriving = async (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car): Promise<{
+export const startDriving = async (
+  buttonStart: Button,
+  buttonStop: Button,
+  carIcon: HTMLElement,
+  flag: HTMLElement,
+  car: Car
+): Promise<{
   id: number | undefined;
-  timeAnimation: number
+  timeAnimation: number;
 }> => {
   buttonStart.button.disabled = true;
   buttonStart.button.classList.add('not-active');
   buttonStop.button.removeAttribute('disabled');
   buttonStop.button.classList.remove('not-active');
-
 
   const { velocity, distance } = await startEngine(car.id);
   const timeAnimation = Math.round(distance / velocity);
@@ -92,7 +97,6 @@ export const startDriving = async (buttonStart: Button, buttonStop: Button, carI
     buttonStop.button.setAttribute('disabled', 'disabled');
     buttonStop.button.classList.add('not-active');
   }, timeAnimation);
-
 
   // let idAnimation: number;
 
@@ -113,21 +117,25 @@ export const startDriving = async (buttonStart: Button, buttonStop: Button, carI
   }
   idAnimation = window.requestAnimationFrame(step);
 
-
   try {
     await drive(car.id!).then((status) => {
-console.log(status);
-    })
+      console.log(status);
+    });
   } catch (error) {
     console.error('most likely the engine of the car broke down: ', error);
     window.cancelAnimationFrame(idAnimation);
   }
 
-  const id = car.id;
+  const { id } = car;
   return { id, timeAnimation };
-}
+};
 
-export const stopDriving = async (buttonStop: HTMLButtonElement | HTMLElement, car: Car, buttonStart: HTMLButtonElement | HTMLElement, carIcon: HTMLElement) => {
+export const stopDriving = async (
+  buttonStop: HTMLButtonElement | HTMLElement,
+  car: Car,
+  buttonStart: HTMLButtonElement | HTMLElement,
+  carIcon: HTMLElement
+) => {
   buttonStop.setAttribute('disabled', 'disabled');
   buttonStop.classList.add('not-active');
   await stopEngine(car.id).then(() => {
@@ -136,8 +144,8 @@ export const stopDriving = async (buttonStop: HTMLButtonElement | HTMLElement, c
     buttonStart.classList.remove('not-active');
     console.log(`idAnimation stop for ${car.name}`, idAnimation);
     window.cancelAnimationFrame(idAnimation);
-  })
-}
+  });
+};
 
 export const getCarIcon = (color = 'black') => `<svg
     class="car__icon"

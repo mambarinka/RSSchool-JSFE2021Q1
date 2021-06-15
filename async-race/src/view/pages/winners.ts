@@ -1,12 +1,15 @@
-import { getWinners } from "../../fetch-api/fetch-api-winners";
-import { BaseComponent } from "../../models/base-component";
-import { Table } from "../../models/base-component-table";
-import { TableWinners } from "../tableWinners";
+import { getWinners } from '../../fetch-api/fetch-api-winners';
+import { BaseComponent } from '../../models/base-component';
+import { Table } from '../../models/base-component-table';
+import { TableWinners } from '../tableWinners';
 
 export class Winners extends BaseComponent {
   private readonly titlePage: BaseComponent;
+
   private readonly titlePageNumber: BaseComponent;
+
   private readonly table: TableWinners;
+
   private currentPage!: number;
 
   constructor() {
@@ -29,13 +32,12 @@ export class Winners extends BaseComponent {
       this.titlePage.element,
       this.titlePageNumber.element,
       this.table.table
-    )
+    );
     const { items: winners, count: countWinners } = await getWinners(1, 10);
-    this.titlePage.element.textContent = `Winners (${countWinners
-      })`;
+    this.titlePage.element.textContent = `Winners (${countWinners})`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
     return this.element;
-  }
+  };
 
   getCurrentPage = async (currentPage: number): Promise<number> => {
     let currentPageValue = currentPage;

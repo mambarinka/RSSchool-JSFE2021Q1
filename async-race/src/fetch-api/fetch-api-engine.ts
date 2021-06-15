@@ -3,7 +3,9 @@ import { Path } from '../models/models';
 
 export const startEngine = async (id: number | undefined) => {
   const pathEngine: Path = Path.engine;
-  const response = await fetch(`${baseURL}${pathEngine}/?id=${id}&status=started`);
+  const response = await fetch(
+    `${baseURL}${pathEngine}/?id=${id}&status=started`
+  );
   const dataCar = await response.json();
 
   return dataCar;
@@ -11,7 +13,9 @@ export const startEngine = async (id: number | undefined) => {
 
 export const stopEngine = async (id: number | undefined) => {
   const pathEngine: Path = Path.engine;
-  const response = await fetch(`${baseURL}${pathEngine}/?id=${id}&status=stopped`);
+  const response = await fetch(
+    `${baseURL}${pathEngine}/?id=${id}&status=stopped`
+  );
   const dataCar = await response.json();
 
   return dataCar;
@@ -20,14 +24,13 @@ export const stopEngine = async (id: number | undefined) => {
 export const drive = async (id: number) => {
   const pathEngine: Path = Path.engine;
   const response = await fetch(
-    `${baseURL}${pathEngine}/?id=${id}&status=drive`).catch();
+    `${baseURL}${pathEngine}/?id=${id}&status=drive`
+  ).catch();
 
   const dataCar = await response.json();
-  const status = response.status;
-
+  const { status } = response;
 
   return status !== 200 ? { success: false } : { ...(await dataCar) };
-
 };
 
 // export const drive = async (id: number) => {

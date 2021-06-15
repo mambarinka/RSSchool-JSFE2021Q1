@@ -24,7 +24,9 @@ export class CarItem extends BaseComponent {
   private readonly carIcon: BaseComponent;
 
   private readonly flag: BaseComponent;
+
   private readonly currentPage: number | undefined;
+
   private readonly car: Car;
 
   constructor(car: Car, currentPage?: number) {
@@ -127,26 +129,46 @@ export class CarItem extends BaseComponent {
         bubbles: true,
       })
     );
-  }
+  };
 
   buttonStartHandler = async (car: Car) => {
-    startDriving(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, car);
-  }
+    startDriving(
+      this.buttonStart,
+      this.buttonStop,
+      this.carIcon.element,
+      this.flag.element,
+      car
+    );
+  };
 
   buttonStopHandler = async (car: Car) => {
-    stopDriving(this.buttonStop.button, car, this.buttonStart.button, this.carIcon.element);
-  }
+    stopDriving(
+      this.buttonStop.button,
+      car,
+      this.buttonStart.button,
+      this.carIcon.element
+    );
+  };
 
-
-
-  race = async (driveFunc: (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement, car: Car) => Promise<{
-    id: number | undefined;
-    timeAnimation: number
-  }>) => {
-
-    return await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
-
-  }
+  race = async (
+    driveFunc: (
+      buttonStart: Button,
+      buttonStop: Button,
+      carIcon: HTMLElement,
+      flag: HTMLElement,
+      car: Car
+    ) => Promise<{
+      id: number | undefined;
+      timeAnimation: number;
+    }>
+  ) =>
+    driveFunc(
+      this.buttonStart,
+      this.buttonStop,
+      this.carIcon.element,
+      this.flag.element,
+      this.car
+    );
 
   getCarIcon = (color = 'black') => `<svg
     class="car__icon"

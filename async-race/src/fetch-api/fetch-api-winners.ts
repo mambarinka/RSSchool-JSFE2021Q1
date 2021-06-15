@@ -5,9 +5,8 @@ import { getCar } from './fetch-api-garage';
 const getSortOrder = (sort?: string, order?: string) => {
   if (sort && order) {
     return `&_sort=${sort}&_order=${order}`;
-  } else {
-    return '';
   }
+  return '';
 };
 
 export const getWinners = async (
@@ -25,7 +24,9 @@ export const getWinners = async (
   );
   // const response = await fetch(`${ baseURL } ${ pathGarage }?id = ${ id } `);
   const items: Winner[] = await response.json();
-  const currentPage = Math.ceil(Number(response.headers.get('X-Total-Count')) / 10);
+  const currentPage = Math.ceil(
+    Number(response.headers.get('X-Total-Count')) / 10
+  );
 
   // console.log({
   //   items: await Promise.all(
@@ -46,7 +47,7 @@ export const getWinners = async (
       }))
     ),
     count: response.headers.get('X-Total-Count'),
-    currentPage
+    currentPage,
   };
 };
 

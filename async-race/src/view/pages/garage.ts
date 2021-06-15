@@ -18,6 +18,7 @@ export class Garage extends BaseComponent {
   private readonly carsList: BaseComponent;
 
   private carItem!: CarItem;
+
   private arrayCars!: Car[];
 
   private readonly raceControls: RaceControls;
@@ -29,8 +30,11 @@ export class Garage extends BaseComponent {
   private readonly titlePageNumber: BaseComponent;
 
   private currentPage!: number;
+
   private readonly message: BaseComponent;
+
   private arrayCarsForRace: CarItem[] = [];
+
   constructor() {
     super('main', ['page-main']);
     this.wrapperForm = new BaseComponent('div', ['car-view']);
@@ -84,9 +88,9 @@ export class Garage extends BaseComponent {
       const promises = this.arrayCarsForRace.map(async (carForRace) => {
         /* const { id, timeAnimation } = */ await carForRace.race(startDriving);
         // console.log(await carForRace.race(startDriving));
-      })
-// console.log(promises);
- await Promise.race(promises);
+      });
+      // console.log(promises);
+      await Promise.race(promises);
     });
   }
 
@@ -114,12 +118,16 @@ export class Garage extends BaseComponent {
       this.message.element
     );
 
-    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars
-      })`;
+    this.titlePage.element.textContent = `Garage (${
+      (await getCars()).countCars
+    })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
     this.arrayCarsForRace = [];
-    this.arrayCars = await (async () => (await getCars(currentPage, 7)).dataCars)();
+    this.arrayCars = await (async () =>
+      (
+        await getCars(currentPage, 7)
+      ).dataCars)();
     console.log(`this.arraycars `, this.arrayCars);
     this.arrayCars.forEach((car: Car) => {
       this.carItem = new CarItem(car, currentPage);
@@ -128,7 +136,6 @@ export class Garage extends BaseComponent {
       this.arrayCarsForRace.push(this.carItem);
       // console.log(this.carItem.element);
     });
-
 
     return this.element;
   };

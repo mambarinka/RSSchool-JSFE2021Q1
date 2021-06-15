@@ -6,6 +6,7 @@ export class App {
   private readonly header: Header;
 
   private readonly garage: Garage;
+
   private readonly winners: Winners;
 
   constructor(private readonly rootElement: HTMLElement) {

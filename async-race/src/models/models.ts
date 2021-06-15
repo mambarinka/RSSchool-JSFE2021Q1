@@ -24,11 +24,11 @@ export interface Winner {
   car: Car;
   id: number;
   time: number;
-  wins: number
+  wins: number;
 }
 
 export interface State {
-  id?: number
+  id?: number;
 }
 // export const getCurrentCountCars = async () => {
 //   const currentCountCars = (await getCars()).countCars;
