@@ -5,7 +5,7 @@ import { Car } from '../models/models';
 import {
   generateRandomCars,
   startDriving,
-  stopDriving,
+  /* stopDriving ,*/
 } from '../service/utils';
 import { CarItem } from './car';
 
@@ -101,8 +101,8 @@ export class RaceControls extends BaseComponent {
         '.garage__start-engine-button'
       )[index] as HTMLElement;
       const carIcon = document.querySelectorAll('.car')[index] as HTMLElement;
-      // console.log(buttonStop);
-      stopDriving(buttonStop, car, buttonStart, carIcon);
+
+      // stopDriving(buttonStop, car, buttonStart, carIcon);
 
       return car;
     });

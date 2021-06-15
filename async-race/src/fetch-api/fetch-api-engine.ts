@@ -21,18 +21,35 @@ export const stopEngine = async (id: number | undefined) => {
   return dataCar;
 };
 
+// export const drive = async (id: number) => {
+//   const pathEngine: Path = Path.engine;
+//   const response = await fetch(
+//     `${baseURL}${pathEngine}/?id=${id}&status=drive`
+//   ).catch();
+
+//   const dataCar = await response.json();
+//   // console.log(dataCar);
+//   // const { status } = dataCar;
+
+//   return dataCar.success;
+//   // return status !== 200 ? { success: false } : { success: true  };
+// };
+
 export const drive = async (id: number) => {
   const pathEngine: Path = Path.engine;
   const response = await fetch(
     `${baseURL}${pathEngine}/?id=${id}&status=drive`
-  ).catch();
+  );
 
-  const dataCar = await response.json();
-  // console.log(dataCar);
-  // const { status } = dataCar;
+  if (response.status === 200) {
+    const dataCar = await response.json();
+    return dataCar.success;
+  }
+  if (response.status === 500) {
+    return false;
+  }
 
-  return dataCar.success;
-  // return status !== 200 ? { success: false } : { success: true  };
+  return false;
 };
 
 // export const drive = async (id: number) => {

@@ -43,33 +43,34 @@ export const getDistanceBtwElements = (a: HTMLElement, b: HTMLElement) => {
 
 // let state: State = {};
 // export default state;
+export let state: State[] = [];
+export const animation = (carIcon: HTMLElement, distance: number, timeAnimation: number, car: Car) => {
 
-// export const animation = (carIcon: HTMLElement, distance: number, timeAnimation: number, car: Car) => {
+  let start: number | null = null;
+  // const stateArray: State[] = [{ id: 0 }];
+  ;
+  let stateItem: State = {};
+  stateItem.idCar = car.id;
+  function step(timeStamp: number) {
+    if (!start) {
+      start = timeStamp;
+    }
 
-//   let idAnimation: number;
+    const time = timeStamp - start;
+    const passed = Math.round(time * (distance / timeAnimation));
+    carIcon.style.transform = `translateX(${Math.min(passed, distance)}px)`;
 
-//   let start: number | null = null;
+    if (passed < distance) {
+      stateItem.idAnimation = window.requestAnimationFrame(step);
+    }
+  }
+  stateItem.idAnimation = window.requestAnimationFrame(step);
 
-//   function step(timeStamp: number) {
-//     if (!start) {
-//       start = timeStamp;
-//     }
-
-//     const time = timeStamp - start;
-//     const passed = Math.round(time * (distance / timeAnimation));
-//     carIcon.style.transform = `translateX(${Math.min(passed, distance)}px)`;
-
-//     if (passed < distance) {
-//       idAnimation = window.requestAnimationFrame(step);
-//     }
-//   }
-//   idAnimation = window.requestAnimationFrame(step);
-
-//   console.log(idAnimation);
-//   return idAnimation;
-// }
-
-let idAnimation: number;
+  console.log(`for ${car.name} ${stateItem.idCar} ${stateItem.idAnimation}`);
+  state.push(stateItem);
+  console.log(state);
+  return state;
+}
 
 export const startDriving = async (
   buttonStart: Button,
@@ -77,10 +78,8 @@ export const startDriving = async (
   carIcon: HTMLElement,
   flag: HTMLElement,
   car: Car
-): Promise<{
-  id: number | undefined;
-  timeAnimation: number;
-}> => {
+) => {
+  /* let idAnimation: number = 0; */
   buttonStart.button.disabled = true;
   buttonStart.button.classList.add('not-active');
   buttonStop.button.removeAttribute('disabled');
@@ -98,55 +97,74 @@ export const startDriving = async (
     buttonStop.button.classList.add('not-active');
   }, timeAnimation);
 
-  let start: number | null = null;
+  state = animation(carIcon, htmlDistance, timeAnimation, car);
 
-  function step(timeStamp: number) {
-    if (!start) {
-      start = timeStamp;
+  // let start: number | null = null;
+
+  // function step(timeStamp: number) {
+  //   if (!start) {
+  //     start = timeStamp;
+  //   }
+
+  //   const time = timeStamp - start;
+  //   const passed = Math.round(time * (htmlDistance / timeAnimation));
+  //   carIcon.style.transform = `translateX(${Math.min(passed, htmlDistance)}px)`;
+
+  //   if (passed < htmlDistance) {
+  //     idAnimation = window.requestAnimationFrame(step);
+  //   }
+  // }
+  // idAnimation = window.requestAnimationFrame(step);
+
+  // try {
+
+
+
+
+  await drive(car.id!).then((status) => {
+    // console.log(`for ${car.name} ${state.idAnimation}`);
+
+    if (status === false) {
+      state.forEach((stateItem) => {
+        if (stateItem.idCar === car.id) {
+          window.cancelAnimationFrame(stateItem.idAnimation!);
+        }
+      })
     }
+    //   console.log(`${state.idAnimation}`);
+    //   window.cancelAnimationFrame(state.idAnimation!);
+    //   console.error(`most likely the engine of the car broke down for ${car.name}`);
+    // }
+  });
 
-    const time = timeStamp - start;
-    const passed = Math.round(time * (htmlDistance / timeAnimation));
-    carIcon.style.transform = `translateX(${Math.min(passed, htmlDistance)}px)`;
 
-    if (passed < htmlDistance) {
-      idAnimation = window.requestAnimationFrame(step);
-    }
-  }
-  idAnimation = window.requestAnimationFrame(step);
 
-  try {
-    await drive(car.id!).then((status) => {
-      console.log(status);
-      if (status === false) {
-        window.cancelAnimationFrame(idAnimation);
-      }
-    });
-  } catch (error) {
+
+  /*}  catch (error) {
     console.error(`most likely the engine of the car broke down for ${car.name}: `, error);
     window.cancelAnimationFrame(idAnimation);
-  }
+  } */
 
-  const { id } = car;
-  return { id, timeAnimation };
+  // const { id } = car;
+  // return { id, timeAnimation };
 };
 
-export const stopDriving = async (
-  buttonStop: HTMLButtonElement | HTMLElement,
-  car: Car,
-  buttonStart: HTMLButtonElement | HTMLElement,
-  carIcon: HTMLElement
-) => {
-  buttonStop.setAttribute('disabled', 'disabled');
-  buttonStop.classList.add('not-active');
-  await stopEngine(car.id).then(() => {
-    carIcon.style.transform = `translateX(0px)`;
-    buttonStart.removeAttribute('disabled');
-    buttonStart.classList.remove('not-active');
-    console.log(`idAnimation stop for ${car.name}`, idAnimation);
-    window.cancelAnimationFrame(idAnimation);
-  });
-};
+// export const stopDriving = async (
+//   buttonStop: HTMLButtonElement | HTMLElement,
+//   car: Car,
+//   buttonStart: HTMLButtonElement | HTMLElement,
+//   carIcon: HTMLElement
+// ) => {
+//   buttonStop.setAttribute('disabled', 'disabled');
+//   buttonStop.classList.add('not-active');
+//   await stopEngine(car.id).then(() => {
+//     carIcon.style.transform = `translateX(0px)`;
+//     buttonStart.removeAttribute('disabled');
+//     buttonStart.classList.remove('not-active');
+//     console.log(`idAnimation stop for ${car.name}`, idAnimation);
+//     window.cancelAnimationFrame(idAnimation);
+//   });
+// };
 
 export const getCarIcon = (color = 'black') => `<svg
     class="car__icon"

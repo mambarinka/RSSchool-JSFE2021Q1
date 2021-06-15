@@ -28,14 +28,6 @@ export interface Winner {
 }
 
 export interface State {
-  id?: number;
+  idAnimation?: number;
+  idCar?: number;
 }
-// export const getCurrentCountCars = async () => {
-//   const currentCountCars = (await getCars()).countCars;
-//   return currentCountCars;
-// };
-
-// export const getCurrentCarsPage = async () => {
-//   const currentCarsPage = Math.ceil((await getCurrentCountCars()) / 7);
-//   return currentCarsPage;
-// };

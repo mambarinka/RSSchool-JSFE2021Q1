@@ -1,7 +1,7 @@
 import { getCars } from '../../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../../models/base-component';
 import { Car } from '../../models/models';
-import { startDriving } from '../../service/utils';
+import { startDriving, state } from '../../service/utils';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
@@ -63,6 +63,7 @@ export class Garage extends BaseComponent {
     document.addEventListener(
       'clickOnPagination',
       async (evt: CustomEventInit) => {
+        state.splice(0, state.length);
         if (evt.detail === true) {
           ++this.currentPage;
         } else if (evt.detail === false) {
@@ -118,9 +119,8 @@ export class Garage extends BaseComponent {
       this.message.element
     );
 
-    this.titlePage.element.textContent = `Garage (${
-      (await getCars()).countCars
-    })`;
+    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars
+      })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
     this.arrayCarsForRace = [];
