@@ -98,8 +98,6 @@ export const startDriving = async (
     buttonStop.button.classList.add('not-active');
   }, timeAnimation);
 
-  // let idAnimation: number;
-
   let start: number | null = null;
 
   function step(timeStamp: number) {
@@ -120,9 +118,12 @@ export const startDriving = async (
   try {
     await drive(car.id!).then((status) => {
       console.log(status);
+      if (status === false) {
+        window.cancelAnimationFrame(idAnimation);
+      }
     });
   } catch (error) {
-    console.error('most likely the engine of the car broke down: ', error);
+    console.error(`most likely the engine of the car broke down for ${car.name}: `, error);
     window.cancelAnimationFrame(idAnimation);
   }
 

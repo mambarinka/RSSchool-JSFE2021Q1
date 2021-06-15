@@ -28,9 +28,11 @@ export const drive = async (id: number) => {
   ).catch();
 
   const dataCar = await response.json();
-  const { status } = response;
+  // console.log(dataCar);
+  // const { status } = dataCar;
 
-  return status !== 200 ? { success: false } : { ...(await dataCar) };
+  return dataCar.success;
+  // return status !== 200 ? { success: false } : { success: true  };
 };
 
 // export const drive = async (id: number) => {

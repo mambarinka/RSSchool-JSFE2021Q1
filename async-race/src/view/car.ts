@@ -162,13 +162,7 @@ export class CarItem extends BaseComponent {
       timeAnimation: number;
     }>
   ) =>
-    driveFunc(
-      this.buttonStart,
-      this.buttonStop,
-      this.carIcon.element,
-      this.flag.element,
-      this.car
-    );
+    await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
 
   getCarIcon = (color = 'black') => `<svg
     class="car__icon"

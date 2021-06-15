@@ -89,7 +89,7 @@ export class Garage extends BaseComponent {
         /* const { id, timeAnimation } = */ await carForRace.race(startDriving);
         // console.log(await carForRace.race(startDriving));
       });
-      // console.log(promises);
+      console.log(promises);
       await Promise.race(promises);
     });
   }
@@ -128,7 +128,7 @@ export class Garage extends BaseComponent {
       (
         await getCars(currentPage, 7)
       ).dataCars)();
-    console.log(`this.arraycars `, this.arrayCars);
+    // console.log(`this.arraycars `, this.arrayCars);
     this.arrayCars.forEach((car: Car) => {
       this.carItem = new CarItem(car, currentPage);
       this.carsList.element.append(this.carItem.render());
