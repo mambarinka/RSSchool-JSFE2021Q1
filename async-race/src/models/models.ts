@@ -35,5 +35,5 @@ export interface State {
 export interface PromiseWinner {
   success: boolean | undefined;
   id: number | undefined;
-  timeAnimation: number
+  timeAnimation: number;
 }

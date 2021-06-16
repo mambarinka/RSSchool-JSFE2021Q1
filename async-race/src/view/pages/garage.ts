@@ -2,7 +2,7 @@ import { getCar, getCars } from '../../fetch-api/fetch-api-garage';
 import { saveWinner } from '../../fetch-api/fetch-api-winners';
 import { BaseComponent } from '../../models/base-component';
 import { Car, PromiseWinner } from '../../models/models';
-import { getWinnerNow, startDriving, state } from '../../service/utils';
+import { startDriving } from '../../service/utils';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
@@ -64,7 +64,6 @@ export class Garage extends BaseComponent {
     document.addEventListener(
       'clickOnPagination',
       async (evt: CustomEventInit) => {
-        state.splice(0, state.length);
         if (evt.detail === true) {
           ++this.currentPage;
         } else if (evt.detail === false) {
@@ -86,7 +85,6 @@ export class Garage extends BaseComponent {
       this.render(this.currentPage);
     });
 
-
     document.addEventListener('startRace', async () => {
       const promises: PromiseWinner[] = [];
 
@@ -95,37 +93,34 @@ export class Garage extends BaseComponent {
           if (promise.success !== false) {
             promises.push(promise);
           }
-        })
+        });
       });
 
       setTimeout(async () => {
-
-        let winner = await Promise.race(promises);
+        const winner = await Promise.race(promises);
         const { id, timeAnimation } = winner;
-        await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch((error) => { console.log(`maybe no winner found: ${error}`); });
+        await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch(
+          (error) => {
+            console.log(`maybe no winner found: ${error}`);
+          }
+        );
         this.message.element.classList.remove('hide');
         document.body.classList.add('substrate');
-        let car = await getCar(id);
+        const car = await getCar(id);
 
-        this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
-
+        this.message.element.textContent = `${car.name} went first in ${+(
+          timeAnimation / 1000
+        ).toFixed(2)} seconds`;
       }, 10000);
 
-      console.log('Победитель отобразится через 10 секунд 🧡, пожалуйста, подождите ٩(｡•́‿•̀｡)۶');
-
-
-
-
+      console.log(
+        'Победитель отобразится через 10 секунд 🧡, пожалуйста, подождите ٩(｡•́‿•̀｡)۶'
+      );
     });
-
-
-
 
     document.body.addEventListener('click', () => {
       this.clickForRemoveMessage();
-    })
-
-
+    });
   }
 
   render = async (currentPage: number): Promise<HTMLElement> => {
@@ -152,8 +147,9 @@ export class Garage extends BaseComponent {
       this.message.element
     );
 
-    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars
-      })`;
+    this.titlePage.element.textContent = `Garage (${
+      (await getCars()).countCars
+    })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
     this.arrayCarsForRace = [];
@@ -161,13 +157,11 @@ export class Garage extends BaseComponent {
       (
         await getCars(currentPage, 7)
       ).dataCars)();
-    // console.log(`this.arraycars `, this.arrayCars);
     this.arrayCars.forEach((car: Car) => {
       this.carItem = new CarItem(car, currentPage);
       this.carsList.element.append(this.carItem.render());
 
       this.arrayCarsForRace.push(this.carItem);
-      // console.log(this.carItem.element);
     });
 
     return this.element;
@@ -183,5 +177,5 @@ export class Garage extends BaseComponent {
   clickForRemoveMessage = () => {
     document.body.classList.remove('substrate');
     this.message.element.classList.add('hide');
-  }
+  };
 }

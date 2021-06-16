@@ -36,14 +36,15 @@ export class TableWinners extends Table {
   constructor() {
     super(['table-winners']);
 
-
     this.getValueWinners();
   }
 
-  getValueWinners = async (sortWinners?: {
-    car: Car;
-    id: number | undefined;
-  }[]) => {
+  getValueWinners = async (
+    sortWinners?: {
+      car: Car;
+      id: number | undefined;
+    }[]
+  ) => {
     this.thead = this.table.createTHead();
     this.hrowHead = this.thead.insertRow(0);
 
@@ -103,18 +104,16 @@ export class TableWinners extends Table {
       this.cellWinsValue.textContent = `${winner.wins}`;
       this.cellBsetTimeValue.textContent = `${winner.time}`;
 
-
       return winner;
     });
 
-
     this.cellWins.addEventListener('click', () => {
       this.clickWinsHandler();
-    })
+    });
 
     this.cellBsetTime.addEventListener('click', () => {
       this.clickBestTimeHandler();
-    })
+    });
   };
 
   clickWinsHandler = () => {
@@ -123,7 +122,7 @@ export class TableWinners extends Table {
         bubbles: true,
       })
     );
-  }
+  };
 
   clickBestTimeHandler = () => {
     document.dispatchEvent(
@@ -131,5 +130,5 @@ export class TableWinners extends Table {
         bubbles: true,
       })
     );
-  }
+  };
 }

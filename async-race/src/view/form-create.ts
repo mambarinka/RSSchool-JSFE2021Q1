@@ -36,7 +36,6 @@ export class FormCreate extends BaseComponentForm {
         await this.formSubmitHandler(evt);
       } catch (e) {
         console.log(e);
-        console.log('ошибка');
       }
     });
   }

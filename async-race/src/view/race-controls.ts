@@ -17,8 +17,11 @@ export class RaceControls extends BaseComponent {
   private readonly buttonGenerate: Button;
 
   private readonly currentPage: number;
+
   private buttonStop: HTMLElement | undefined;
+
   private buttonStart: HTMLElement | undefined;
+
   private carIcon: HTMLElement | undefined;
 
   constructor(currentPage: number) {
@@ -67,16 +70,7 @@ export class RaceControls extends BaseComponent {
     document.addEventListener('clickOnPagination', () => {
       this.buttonReset.button.disabled = true;
       this.buttonRace.button.disabled = false;
-    })
-
-
-
-    document.addEventListener('getData', (evt: CustomEventInit) => {
-      // console.log(evt.detail.buttonStop);
-      this.buttonStop = evt.detail.buttonStop;
-      this.buttonStart = evt.detail.buttonStart;
-      this.carIcon = evt.detail.carIcon;
-    })
+    });
   }
 
   buttonGenerateHandler = async (): Promise<void> => {
@@ -111,20 +105,27 @@ export class RaceControls extends BaseComponent {
       ).dataCars)();
 
     arrayCars.map(async (car: Car, index: number): Promise<Car> => {
-      // const buttonStop = document.querySelectorAll(
-      //   '.garage__stop-engine-button'
-      // )[index] as HTMLElement;
-      // const buttonStart = document.querySelectorAll(
-      //   '.garage__start-engine-button'
-      // )[index] as HTMLElement;
-      // const carIcon = document.querySelectorAll('.car')[index] as HTMLElement;
-console.log(this.buttonStop);
-console.log(this.buttonStart);
-console.log(this.carIcon);
-      await stopDriving(this.buttonStop, car, this.buttonStart, this.carIcon);
+      const buttonStop = document.querySelectorAll(
+        '.garage__stop-engine-button'
+      )[index] as HTMLElement;
+      const buttonStart = document.querySelectorAll(
+        '.garage__start-engine-button'
+      )[index] as HTMLElement;
+      const carIcon = document.querySelectorAll('.car')[index] as HTMLElement;
 
-      // await stopDriving(buttonStop, car, buttonStart, carIcon);
+      // document.addEventListener('getData', async (evt: CustomEventInit) => {
+      //   // console.log(evt.detail.buttonStop);
+      //   console.log(evt.detail);
+      //   this.buttonStop = evt.detail.buttonStop;
+      //   this.buttonStart = evt.detail.buttonStart;
+      //   this.carIcon = evt.detail.carIcon;
+      //   console.log(this.buttonStop);
+      //   console.log(this.buttonStart);
+      //   console.log(this.carIcon);
+      //         await stopDriving(this.buttonStop, car, this.buttonStart, this.carIcon);
+      // })
 
+      await stopDriving(buttonStop, car, buttonStart, carIcon);
 
       return car;
     });

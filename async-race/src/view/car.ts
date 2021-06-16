@@ -1,4 +1,5 @@
 import { deleteCar, getCars } from '../fetch-api/fetch-api-garage';
+import { deleteWinner } from '../fetch-api/fetch-api-winners';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
 import { Car, State } from '../models/models';
@@ -73,6 +74,16 @@ export class CarItem extends BaseComponent {
     // document.addEventListener('startRace', async () => {
     //   return await this.race(startDriving);
     // });
+    document.dispatchEvent(
+      new CustomEvent('getData', {
+        bubbles: true,
+        detail: {
+          buttonStop: this.buttonStop.button,
+          buttonStart: this.buttonStart.button,
+          carIcon: this.carIcon.element,
+        },
+      })
+    );
   }
 
   render(/* car: Car */): HTMLElement {
@@ -92,18 +103,6 @@ export class CarItem extends BaseComponent {
     );
     this.element.append(this.wrapperGeneralButtons.element, this.road.element);
 
-    document.dispatchEvent(
-      new CustomEvent('getData', {
-        bubbles: true,
-        detail: {
-          buttonStop: this.buttonStop.button,
-          buttonStart: this.buttonStart.button,
-          carIcon: this.carIcon.element
-        }
-      })
-    );
-
-
     return this.element;
   }
 
@@ -111,7 +110,6 @@ export class CarItem extends BaseComponent {
     const inputUpdateText = document.getElementById('update-name');
     const inputUpdateColor = document.getElementById('update-color');
     const buttonSubmit = document.getElementById('update-submit');
-    console.log(inputUpdateText);
     inputUpdateText?.removeAttribute('disabled');
     inputUpdateColor?.removeAttribute('disabled');
     buttonSubmit?.removeAttribute('disabled');
@@ -134,6 +132,7 @@ export class CarItem extends BaseComponent {
 
   buttonRemoveHandler = async (car: Car) => {
     await deleteCar(car.id!);
+    await deleteWinner(car.id!);
     this.element.remove();
 
     document.dispatchEvent(
@@ -162,26 +161,28 @@ export class CarItem extends BaseComponent {
     );
   };
 
-  race = async (driveFunc: (buttonStart: Button, buttonStop: Button, carIcon: HTMLElement, flag: HTMLElement,
-    car: Car) => Promise<{
+  race = async (
+    driveFunc: (
+      buttonStart: Button,
+      buttonStop: Button,
+      carIcon: HTMLElement,
+      flag: HTMLElement,
+      car: Car
+    ) => Promise<{
       success: boolean | undefined;
       id: number | undefined;
       timeAnimation: number;
-    }>) => {
-    let carItem = await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
-    // let arrayCarItems = [];
-    // arrayCarItems.push(carItem);
-    // console.log(arrayCarItems);
-    // let winner;
-    // for (let i = 0; i < arrayCarItems.length; i++) {
-    //   winner= arrayCarItems[0];
-    //   if (arrayCarItems[i].timeAnimation < winner.timeAnimation) {
-    //     winner = arrayCarItems[i]
-    //   }
-    // }
-    // console.log(winner);
+    }>
+  ) => {
+    const carItem = await driveFunc(
+      this.buttonStart,
+      this.buttonStop,
+      this.carIcon.element,
+      this.flag.element,
+      this.car
+    );
     return carItem;
-  }
+  };
 
   getCarIcon = (color = 'black') => `<svg
     class="car__icon"
