@@ -8,7 +8,7 @@
   @include text-options(15px, 19px, 500, $text-main-color);
   text-align: center;
   border: 1px solid $bg-color1;
-
+  cursor: pointer;
   &--head {
     @include text-options(17px, 22px, 700, $text-main-color);
     border: 2px solid $bg-color1;

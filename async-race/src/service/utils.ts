@@ -155,17 +155,17 @@ export const startDriving = async (
 };
 
 export const stopDriving = async (
-  buttonStop: HTMLButtonElement | HTMLElement,
+  buttonStop: HTMLButtonElement | HTMLElement | undefined,
   car: Car,
-  buttonStart: HTMLButtonElement | HTMLElement,
-  carIcon: HTMLElement
+  buttonStart: HTMLButtonElement | HTMLElement | undefined,
+  carIcon: HTMLElement| undefined
 ) => {
-  buttonStop.setAttribute('disabled', 'disabled');
-  buttonStop.classList.add('not-active');
+  buttonStop!.setAttribute('disabled', 'disabled');
+  buttonStop!.classList.add('not-active');
   await stopEngine(car.id).then(() => {
-    carIcon.style.transform = `translateX(0px)`;
-    buttonStart.removeAttribute('disabled');
-    buttonStart.classList.remove('not-active');
+    carIcon!.style.transform = `translateX(0px)`;
+    buttonStart!.removeAttribute('disabled');
+    buttonStart!.classList.remove('not-active');
     state.forEach((stateItem) => {
       if (stateItem.idCar === car.id) {
         window.cancelAnimationFrame(stateItem.idAnimation!);

@@ -2,7 +2,7 @@ import { baseURL } from '../models/constants';
 import { Car, Method, Path, Winner } from '../models/models';
 import { getCar } from './fetch-api-garage';
 
-const getSortOrder = (sort?: string, order?: string) => {
+const getSortOrder = (sort?: string | null| undefined, order?: string | null| undefined) => {
   if (sort && order) {
     return `&_sort=${sort}&_order=${order}`;
   }
@@ -12,8 +12,8 @@ const getSortOrder = (sort?: string, order?: string) => {
 export const getWinners = async (
   pageNumber = 1,
   limitCars = 10,
-  sort?: string,
-  order?: string
+  sort?: string | null | undefined,
+  order?: string | null | undefined
 ) => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(

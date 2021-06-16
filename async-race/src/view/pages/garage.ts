@@ -89,56 +89,42 @@ export class Garage extends BaseComponent {
 
     document.addEventListener('startRace', async () => {
       const promises: PromiseWinner[] = [];
+
       this.arrayCarsForRace.map(async (carForRace) => {
         await carForRace.race(startDriving).then((promise) => {
           if (promise.success !== false) {
             promises.push(promise);
           }
         })
-
-          .then(() => {
-
-            Promise.race(promises).then(async (winner) => {
-              const { id, timeAnimation } = winner;
-
-              await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch((error) => { console.log(`maybe no winner found: ${error}`); });
-              this.message.element.classList.remove('hide');
-              document.body.classList.add('substrate');
-              let car = await getCar(id);
-              console.log(car.name);
-
-              this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
-            });
-          })
       });
-      // document.dispatchEvent(
-      //   new CustomEvent('fintBestPromise', {
-      //     bubbles: true,
-      //     detail: promises
-      //   })
-      // );
+
+      setTimeout(async () => {
+
+        let winner = await Promise.race(promises);
+        const { id, timeAnimation } = winner;
+        await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch((error) => { console.log(`maybe no winner found: ${error}`); });
+        this.message.element.classList.remove('hide');
+        document.body.classList.add('substrate');
+        let car = await getCar(id);
+
+        this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
+
+      }, 10000);
+
+      console.log('Победитель отобразится через 10 секунд 🧡, пожалуйста, подождите ٩(｡•́‿•̀｡)۶');
+
+
+
 
     });
+
+
+
 
     document.body.addEventListener('click', () => {
       this.clickForRemoveMessage();
     })
 
-    //     document.addEventListener('fintBestPromise', async (evt: CustomEventInit) => {
-    //       console.log(evt.detail);
-    //       const promises: PromiseWinner[] = evt.detail;
-    //       console.log(promises);
-    //       await    Promise.race(promises).then(async (winner) => {
-    //               const { id, timeAnimation } = winner;
-    // console.log(id);
-    //               await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch((error)=> {console.log(`maybe no winner found: ${error}`);});
-    //               this.message.element.classList.remove('hide');
-    //               let car = await getCar(id);
-    //               console.log(car.name);
-
-    //               this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
-    //             });
-    //     });
 
   }
 

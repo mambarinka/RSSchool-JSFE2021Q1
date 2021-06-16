@@ -92,6 +92,18 @@ export class CarItem extends BaseComponent {
     );
     this.element.append(this.wrapperGeneralButtons.element, this.road.element);
 
+    document.dispatchEvent(
+      new CustomEvent('getData', {
+        bubbles: true,
+        detail: {
+          buttonStop: this.buttonStop.button,
+          buttonStart: this.buttonStart.button,
+          carIcon: this.carIcon.element
+        }
+      })
+    );
+
+
     return this.element;
   }
 

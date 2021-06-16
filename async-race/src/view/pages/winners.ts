@@ -3,6 +3,8 @@ import { BaseComponent } from '../../models/base-component';
 import { Table } from '../../models/base-component-table';
 import { Pagination } from '../pagination';
 import { TableWinners } from '../tableWinners';
+export let sortBy: string | null | undefined = null;
+export let sortOrder: string | null| undefined = null;
 
 export class Winners extends BaseComponent {
   private readonly titlePage: BaseComponent;
@@ -34,6 +36,16 @@ export class Winners extends BaseComponent {
       this.table.table.textContent = '';
       this.table.getValueWinners();
     })
+
+    document.addEventListener('clickWinsTable', async () => {
+      console.log('click on wins');
+      this.setSortOrder('wins');
+    })
+
+    document.addEventListener('clickBestTimeTable', async () => {
+      console.log('click on time');
+      this.setSortOrder('time');
+    })
   }
 
   render = async (currentPage: number): Promise<HTMLElement> => {
@@ -56,4 +68,13 @@ export class Winners extends BaseComponent {
 
     return currentPageValue;
   };
+
+  setSortOrder = async (sortByValue: string) => {
+    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    sortBy = sortByValue;
+
+    const {items, count} = await getWinners(this.currentPage, 10, sortBy, sortOrder );
+    this.table.table.textContent = '';
+    this.table.getValueWinners(items);
+  }
 }
