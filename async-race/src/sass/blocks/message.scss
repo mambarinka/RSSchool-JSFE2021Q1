@@ -1,9 +1,12 @@
 .message {
+  @include text-options(20px, 50px, 700, $button-main-color);
   position: absolute;
   top: calc(50% - 50px);
   left: calc(50% - 450px / 2);
   width: 450px;
   height: 50px;
-  background-color: $button-main-color;
+  background-color: $bg-color1;
   border-radius: 12px;
+  font-style: italic;
+  text-align: center;
 }

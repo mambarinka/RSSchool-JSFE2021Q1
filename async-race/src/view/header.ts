@@ -39,5 +39,10 @@ export class Header extends BaseComponent {
   winnersLinkHandler = () => {
     this.garage.element.style.display = 'none';
     this.winners.element.style.display = 'block';
+    document.dispatchEvent(
+      new CustomEvent('updateNumberWinners', {
+        bubbles: true,
+      })
+    );
   };
 }

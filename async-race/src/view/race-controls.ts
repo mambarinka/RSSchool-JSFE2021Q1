@@ -5,7 +5,7 @@ import { Car } from '../models/models';
 import {
   generateRandomCars,
   startDriving,
-  stopDriving ,
+  stopDriving,
 } from '../service/utils';
 import { CarItem } from './car';
 
@@ -93,7 +93,7 @@ export class RaceControls extends BaseComponent {
         await getCars(this.currentPage)
       ).dataCars)();
 
-    arrayCars.map((car: Car, index: number): Car => {
+    arrayCars.map(async (car: Car, index: number): Promise<Car> => {
       const buttonStop = document.querySelectorAll(
         '.garage__stop-engine-button'
       )[index] as HTMLElement;
@@ -102,7 +102,7 @@ export class RaceControls extends BaseComponent {
       )[index] as HTMLElement;
       const carIcon = document.querySelectorAll('.car')[index] as HTMLElement;
 
-      stopDriving(buttonStop, car, buttonStart, carIcon);
+      await stopDriving(buttonStop, car, buttonStart, carIcon);
 
       return car;
     });

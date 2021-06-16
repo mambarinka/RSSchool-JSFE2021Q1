@@ -23,8 +23,8 @@ export interface Car {
 export interface Winner {
   car: Car;
   id: number;
-  time: number;
-  wins: number;
+  time?: number;
+  wins?: number;
 }
 
 export interface State {

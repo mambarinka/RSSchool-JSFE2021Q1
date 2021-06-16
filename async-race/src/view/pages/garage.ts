@@ -89,52 +89,56 @@ export class Garage extends BaseComponent {
 
     document.addEventListener('startRace', async () => {
       const promises: PromiseWinner[] = [];
-
-      // this.arrayCarsForRace.map(async (carForRace) => {
-      //   await carForRace.race(startDriving);
-      // // });
-      let carItem;
-      // let winner;
       this.arrayCarsForRace.map(async (carForRace) => {
-        carItem = await carForRace.race(startDriving).then((promise) => {
+        await carForRace.race(startDriving).then((promise) => {
           if (promise.success !== false) {
             promises.push(promise);
           }
-        }).then(() => {
-          console.log(promises);
-          Promise.race(promises).then(async (lol) => {
-            console.log(lol);
-            const { id, timeAnimation } = lol;
-
-            await saveWinner(id!, +(timeAnimation / 1000).toFixed(2));
-            this.message.element.classList.remove('hide');
-            let car = await getCar(id);
-            console.log(car.name);
-
-            this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
-          });
         })
+
+          .then(() => {
+
+            Promise.race(promises).then(async (winner) => {
+              const { id, timeAnimation } = winner;
+
+              await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch((error) => { console.log(`maybe no winner found: ${error}`); });
+              this.message.element.classList.remove('hide');
+              document.body.classList.add('substrate');
+              let car = await getCar(id);
+              console.log(car.name);
+
+              this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
+            });
+          })
       });
+      // document.dispatchEvent(
+      //   new CustomEvent('fintBestPromise', {
+      //     bubbles: true,
+      //     detail: promises
+      //   })
+      // );
 
-
-
-      console.log(promises);
-
-
-
-
-      // const { id, timeAnimation } = Promise.race(promises);
-      // // const { id, timeAnimation } = getWinnerNow(promises);
-      // console.log(id);
-
-
-
-      document.dispatchEvent(
-        new CustomEvent('updateNumberWinners', {
-          bubbles: true,
-        })
-      );
     });
+
+    document.body.addEventListener('click', () => {
+      this.clickForRemoveMessage();
+    })
+
+    //     document.addEventListener('fintBestPromise', async (evt: CustomEventInit) => {
+    //       console.log(evt.detail);
+    //       const promises: PromiseWinner[] = evt.detail;
+    //       console.log(promises);
+    //       await    Promise.race(promises).then(async (winner) => {
+    //               const { id, timeAnimation } = winner;
+    // console.log(id);
+    //               await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch((error)=> {console.log(`maybe no winner found: ${error}`);});
+    //               this.message.element.classList.remove('hide');
+    //               let car = await getCar(id);
+    //               console.log(car.name);
+
+    //               this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
+    //             });
+    //     });
 
   }
 
@@ -189,4 +193,9 @@ export class Garage extends BaseComponent {
 
     return currentPageValue;
   };
+
+  clickForRemoveMessage = () => {
+    document.body.classList.remove('substrate');
+    this.message.element.classList.add('hide');
+  }
 }

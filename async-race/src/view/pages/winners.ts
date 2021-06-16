@@ -1,6 +1,7 @@
 import { getWinners } from '../../fetch-api/fetch-api-winners';
 import { BaseComponent } from '../../models/base-component';
 import { Table } from '../../models/base-component-table';
+import { Pagination } from '../pagination';
 import { TableWinners } from '../tableWinners';
 
 export class Winners extends BaseComponent {
@@ -11,6 +12,7 @@ export class Winners extends BaseComponent {
   private readonly table: TableWinners;
 
   private currentPage!: number;
+  private readonly pagination: Pagination;
 
   constructor() {
     super('main', ['page-main']);
@@ -20,6 +22,7 @@ export class Winners extends BaseComponent {
     this.titlePageNumber = new BaseComponent('h2', ['page-main__page-number']);
 
     this.table = new TableWinners();
+    this.pagination = new Pagination();
 
     this.getCurrentPage(this.currentPage).then((currentPage) => {
       this.currentPage = currentPage;
@@ -27,7 +30,9 @@ export class Winners extends BaseComponent {
     });
 
     document.addEventListener('updateNumberWinners', async () => {
-      this.render(this.currentPage);
+      console.log('добавляю нового победителя');
+      this.table.table.textContent = '';
+      this.table.getValueWinners();
     })
   }
 
@@ -36,7 +41,8 @@ export class Winners extends BaseComponent {
     this.element.append(
       this.titlePage.element,
       this.titlePageNumber.element,
-      this.table.table
+      this.table.table,
+      this.pagination.element
     );
     const { items: winners, count: countWinners } = await getWinners(currentPage, 10);
     this.titlePage.element.textContent = `Winners (${countWinners})`;

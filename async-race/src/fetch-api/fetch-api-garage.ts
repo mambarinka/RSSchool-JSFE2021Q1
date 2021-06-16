@@ -6,10 +6,9 @@ export const getCars = async (pageNumber = 1, limitCars = 7) => {
   const response = await fetch(
     `${baseURL}${pathGarage}?_page=${pageNumber}&_limit=${limitCars}`
   );
-  const dataCars = await response.json();
+  const dataCars: Car[] = await response.json();
   const countCars = Number(response.headers.get('X-Total-Count'));
   const currentPage = Math.ceil(countCars / 7);
-
   return {
     dataCars,
     countCars,
@@ -20,7 +19,7 @@ export const getCars = async (pageNumber = 1, limitCars = 7) => {
 export const getCar = async (id = 1) => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(`${baseURL}${pathGarage}/${id}`);
-  const dataCar = await response.json();
+  const dataCar: Car = await response.json();
 
   return dataCar;
 };
