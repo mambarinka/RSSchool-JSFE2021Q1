@@ -88,6 +88,7 @@ export class TableWinners extends Table {
 
   getValueWinners = async () => {
     const arrayWinners = (await getWinners()).items;
+    console.log(arrayWinners);
     arrayWinners.map((winner: any, index: number): void => {
       this.cellNumberValue.textContent = `${index + 1}`;
       this.cellCarValue.innerHTML = getCarIcon(winner.car.color);

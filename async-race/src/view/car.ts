@@ -155,8 +155,21 @@ export class CarItem extends BaseComponent {
       success: boolean | undefined;
       id: number | undefined;
       timeAnimation: number;
-    }>) =>
-    await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
+    }>) => {
+    let carItem = await driveFunc(this.buttonStart, this.buttonStop, this.carIcon.element, this.flag.element, this.car);
+    // let arrayCarItems = [];
+    // arrayCarItems.push(carItem);
+    // console.log(arrayCarItems);
+    // let winner;
+    // for (let i = 0; i < arrayCarItems.length; i++) {
+    //   winner= arrayCarItems[0];
+    //   if (arrayCarItems[i].timeAnimation < winner.timeAnimation) {
+    //     winner = arrayCarItems[i]
+    //   }
+    // }
+    // console.log(winner);
+    return carItem;
+  }
 
   getCarIcon = (color = 'black') => `<svg
     class="car__icon"

@@ -53,7 +53,7 @@ export const getWinners = async (
 
 export const getWinner = async (id: number) => {
   const pathWinners: Path = Path.winners;
-  const response = await fetch(`${baseURL} ${pathWinners} /${id}`);
+  const response = await fetch(`${baseURL}${pathWinners}/${id}`);
   const winner = await response.json();
 
   return winner;
@@ -100,7 +100,7 @@ export const updateWinner = async (id: number, car: Car) => {
 export const getWinnerStatus = async (id: number) => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(`${baseURL}${pathWinners}/${id}`);
-  const winnerStatus = await response.status;
+  const winnerStatus = response.status;
 
   return winnerStatus;
 };

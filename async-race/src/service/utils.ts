@@ -3,7 +3,7 @@ import { getCars } from '../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
 import { models, names } from '../models/constants';
-import { Car, State } from '../models/models';
+import { Car, PromiseWinner, State } from '../models/models';
 
 export const getRandomName = () => {
   const model = models[Math.floor(Math.random() * models.length)];
@@ -173,6 +173,17 @@ export const stopDriving = async (
     })
   });
 };
+
+export const getWinnerNow = (promises: PromiseWinner[]) => {
+  let winner;
+  winner = promises[0];
+  for (let i = 0; i < promises.length; i++) {
+    if (promises[i].timeAnimation < winner.timeAnimation) {
+      winner = promises[i]
+    }
+  }
+  return winner;
+}
 
 export const getCarIcon = (color = 'black') => `<svg
     class="car__icon"

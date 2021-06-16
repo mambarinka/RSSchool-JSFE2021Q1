@@ -25,15 +25,20 @@ export class Winners extends BaseComponent {
       this.currentPage = currentPage;
       this.render(this.currentPage);
     });
+
+    document.addEventListener('updateNumberWinners', async () => {
+      this.render(this.currentPage);
+    })
   }
 
   render = async (currentPage: number): Promise<HTMLElement> => {
+    // this.table.table.innerHTML = '';
     this.element.append(
       this.titlePage.element,
       this.titlePageNumber.element,
       this.table.table
     );
-    const { items: winners, count: countWinners } = await getWinners(1, 10);
+    const { items: winners, count: countWinners } = await getWinners(currentPage, 10);
     this.titlePage.element.textContent = `Winners (${countWinners})`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
     return this.element;

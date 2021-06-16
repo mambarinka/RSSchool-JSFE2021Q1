@@ -1,7 +1,8 @@
-import { getCars } from '../../fetch-api/fetch-api-garage';
+import { getCar, getCars } from '../../fetch-api/fetch-api-garage';
+import { saveWinner } from '../../fetch-api/fetch-api-winners';
 import { BaseComponent } from '../../models/base-component';
 import { Car, PromiseWinner } from '../../models/models';
-import { startDriving, state } from '../../service/utils';
+import { getWinnerNow, startDriving, state } from '../../service/utils';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
 import { FormUpdate } from '../form-update';
@@ -89,20 +90,52 @@ export class Garage extends BaseComponent {
     document.addEventListener('startRace', async () => {
       const promises: PromiseWinner[] = [];
 
+      // this.arrayCarsForRace.map(async (carForRace) => {
+      //   await carForRace.race(startDriving);
+      // // });
+      let carItem;
+      // let winner;
       this.arrayCarsForRace.map(async (carForRace) => {
-        await carForRace.race(startDriving).then((promise) => {
-          promises.push(promise);
-        });
+        carItem = await carForRace.race(startDriving).then((promise) => {
+          if (promise.success !== false) {
+            promises.push(promise);
+          }
+        }).then(() => {
+          console.log(promises);
+          Promise.race(promises).then(async (lol) => {
+            console.log(lol);
+            const { id, timeAnimation } = lol;
+
+            await saveWinner(id!, +(timeAnimation / 1000).toFixed(2));
+            this.message.element.classList.remove('hide');
+            let car = await getCar(id);
+            console.log(car.name);
+
+            this.message.element.textContent = `${car.name} went first in ${+(timeAnimation / 1000).toFixed(2)} seconds`;
+          });
+        })
       });
+
+
+
       console.log(promises);
-      // const { success, id, timeAnimation } = Promise.race(promises);
-      // let lol = await Promise.race(promises);
-      // console.log(lol);
-      Promise.all(promises).then((promise) => {
-        console.log(promise);
-        console.log('2222');
-      })
+
+
+
+
+      // const { id, timeAnimation } = Promise.race(promises);
+      // // const { id, timeAnimation } = getWinnerNow(promises);
+      // console.log(id);
+
+
+
+      document.dispatchEvent(
+        new CustomEvent('updateNumberWinners', {
+          bubbles: true,
+        })
+      );
     });
+
   }
 
   render = async (currentPage: number): Promise<HTMLElement> => {
