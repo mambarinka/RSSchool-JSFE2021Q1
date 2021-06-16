@@ -1,6 +1,6 @@
 import { getCars } from '../../fetch-api/fetch-api-garage';
 import { BaseComponent } from '../../models/base-component';
-import { Car } from '../../models/models';
+import { Car, PromiseWinner } from '../../models/models';
 import { startDriving, state } from '../../service/utils';
 import { CarItem } from '../car';
 import { FormCreate } from '../form-create';
@@ -85,13 +85,23 @@ export class Garage extends BaseComponent {
       this.render(this.currentPage);
     });
 
+
     document.addEventListener('startRace', async () => {
-      const promises = this.arrayCarsForRace.map(async (carForRace) => {
-        /* const { id, timeAnimation } = */ await carForRace.race(startDriving);
-        // console.log(await carForRace.race(startDriving));
+      const promises: PromiseWinner[] = [];
+
+      this.arrayCarsForRace.map(async (carForRace) => {
+        await carForRace.race(startDriving).then((promise) => {
+          promises.push(promise);
+        });
       });
       console.log(promises);
-      await Promise.race(promises);
+      // const { success, id, timeAnimation } = Promise.race(promises);
+      // let lol = await Promise.race(promises);
+      // console.log(lol);
+      Promise.all(promises).then((promise) => {
+        console.log(promise);
+        console.log('2222');
+      })
     });
   }
 

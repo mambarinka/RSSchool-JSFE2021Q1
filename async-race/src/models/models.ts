@@ -31,3 +31,9 @@ export interface State {
   idAnimation?: number;
   idCar?: number;
 }
+
+export interface PromiseWinner {
+  success: boolean | undefined;
+  id: number | undefined;
+  timeAnimation: number
+}
