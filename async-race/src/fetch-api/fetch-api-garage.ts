@@ -1,7 +1,10 @@
 import { baseURL } from '../models/constants';
 import { Car, Method, Path } from '../models/models';
 
-export const getCars = async (pageNumber = 1, limitCars = 7) => {
+export const getCars = async (
+  pageNumber = 1,
+  limitCars = 7
+): Promise<{ dataCars: Car[]; countCars: number; currentPage: number }> => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(
     `${baseURL}${pathGarage}?_page=${pageNumber}&_limit=${limitCars}`
@@ -16,7 +19,7 @@ export const getCars = async (pageNumber = 1, limitCars = 7) => {
   };
 };
 
-export const getCar = async (id = 1) => {
+export const getCar = async (id = 1): Promise<Car> => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(`${baseURL}${pathGarage}/${id}`);
   const dataCar: Car = await response.json();
@@ -24,7 +27,7 @@ export const getCar = async (id = 1) => {
   return dataCar;
 };
 
-export const createCar = async (car: Car) => {
+export const createCar = async (car: Car): Promise<Car> => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(`${baseURL}${pathGarage}`, {
     method: Method.POST,
@@ -34,11 +37,10 @@ export const createCar = async (car: Car) => {
     body: JSON.stringify(car),
   });
   const dataCar = await response.json();
-
   return dataCar;
 };
 
-export const updateCar = async (id: number, car: Car) => {
+export const updateCar = async (id: number, car: Car): Promise<Car> => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(`${baseURL}${pathGarage}/${id}`, {
     method: Method.PUT,
@@ -48,11 +50,10 @@ export const updateCar = async (id: number, car: Car) => {
     body: JSON.stringify(car),
   });
   const dataCar = await response.json();
-
   return dataCar;
 };
 
-export const updateCarProp = async (id: number, car: Car) => {
+export const updateCarProp = async (id: number, car: Car): Promise<Car> => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(`${baseURL}${pathGarage}/${id}`, {
     method: Method.PATCH,
@@ -66,7 +67,7 @@ export const updateCarProp = async (id: number, car: Car) => {
   return dataCar;
 };
 
-export const deleteCar = async (id: number) => {
+export const deleteCar = async (id: number): Promise<Car> => {
   const pathGarage: Path = Path.garage;
   const response = await fetch(`${baseURL}${pathGarage}/${id}`, {
     method: Method.DELETE,

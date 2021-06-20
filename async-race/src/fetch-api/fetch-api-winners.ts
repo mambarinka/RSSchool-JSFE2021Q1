@@ -17,7 +17,14 @@ export const getWinners = async (
   limitCars = 10,
   sort?: string | null | undefined,
   order?: string | null | undefined
-) => {
+): Promise<{
+  items: {
+    car: Car;
+    id: number | undefined;
+  }[];
+  count: string | null;
+  currentPage: number;
+}> => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(
     `${baseURL}${pathWinners}?_page=${pageNumber}&_limit=${limitCars}${getSortOrder(
@@ -25,7 +32,6 @@ export const getWinners = async (
       order
     )} `
   );
-  // const response = await fetch(`${ baseURL } ${ pathGarage }?id = ${ id } `);
   const items: Winner[] = await response.json();
   const currentPage = Math.ceil(
     Number(response.headers.get('X-Total-Count')) / 10
@@ -43,15 +49,14 @@ export const getWinners = async (
   };
 };
 
-export const getWinner = async (id: number) => {
+export const getWinner = async (id: number): Promise<Winner> => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(`${baseURL}${pathWinners}/${id}`);
   const winner = await response.json();
-
   return winner;
 };
 
-export const createWinner = async (car: Car) => {
+export const createWinner = async (car: Car): Promise<Winner> => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(`${baseURL}${pathWinners}`, {
     method: Method.POST,
@@ -65,7 +70,7 @@ export const createWinner = async (car: Car) => {
   return newWinner;
 };
 
-export const deleteWinner = async (id: number) => {
+export const deleteWinner = async (id: number): Promise<Winner> => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(`${baseURL}${pathWinners}/${id}`, {
     method: Method.DELETE,
@@ -75,7 +80,7 @@ export const deleteWinner = async (id: number) => {
   return delWinner;
 };
 
-export const updateWinner = async (id: number, car: Car) => {
+export const updateWinner = async (id: number, car: Car): Promise<Winner> => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(`${baseURL}${pathWinners}/${id}`, {
     method: Method.PUT,
@@ -89,32 +94,35 @@ export const updateWinner = async (id: number, car: Car) => {
   return updWinner;
 };
 
-export const getWinnerStatus = async (id: number) => {
+export const getWinnerStatus = async (id: number): Promise<number> => {
   const pathWinners: Path = Path.winners;
   const response = await fetch(`${baseURL}${pathWinners}/${id}`);
   const winnerStatus = response.status;
-
   return winnerStatus;
 };
 
-export const saveWinner = async (id: number, time: number) => {
+export const saveWinner = async (id: number, time: number): Promise<number> => {
   const winnerStatus = await getWinnerStatus(id);
-  console.log(winnerStatus);
   if (winnerStatus === 404) {
     await createWinner({ id, wins: 1, time });
   } else {
     const winner = await getWinner(id);
-    await updateWinner(id, {
-      id,
-      wins: winner.wins++,
-      time: time < winner.time ? time : winner.time,
-    });
-    console.log(
+    if (winner.wins && winner.time) {
       await updateWinner(id, {
         id,
         wins: winner.wins++,
         time: time < winner.time ? time : winner.time,
-      })
-    );
+      });
+    }
+    if (winner.wins && winner.time) {
+      console.log(
+        await updateWinner(id, {
+          id,
+          wins: winner.wins++,
+          time: time < winner.time ? time : winner.time,
+        })
+      );
+    }
   }
+  return winnerStatus;
 };

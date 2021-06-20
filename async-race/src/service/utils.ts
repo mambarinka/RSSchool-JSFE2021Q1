@@ -1,11 +1,9 @@
 import { drive, startEngine, stopEngine } from '../fetch-api/fetch-api-engine';
-import { getCars } from '../fetch-api/fetch-api-garage';
-import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
 import { models, names } from '../models/constants';
-import { Car, PromiseWinner, State } from '../models/models';
+import { Car, State } from '../models/models';
 
-export const getRandomName = () => {
+export const getRandomName = (): string => {
   const model = models[Math.floor(Math.random() * models.length)];
   const name = names[Math.floor(Math.random() * names.length)];
   return `${model} ${name}`;
