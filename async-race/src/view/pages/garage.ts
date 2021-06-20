@@ -85,18 +85,23 @@ export class Garage extends BaseComponent {
       this.render(this.currentPage);
     });
 
-    document.addEventListener('startRace', async () => {
-      const promises: PromiseWinner[] = [];
+    const startRace = async () => {
+      let promises: PromiseWinner[] = [];
 
-      this.arrayCarsForRace.map(async (carForRace) => {
-        await carForRace.race(startDriving).then((promise) => {
-          if (promise.success !== false) {
-            promises.push(promise);
-          }
+      const getPromiseCarItem = () => {
+        return new Promise(async (resolve) => {
+          this.arrayCarsForRace.map(async (carForRace) => {
+            await carForRace.race(startDriving).then(async (promise) => {
+              if (promise.success === true) {
+                await promises.push(promise);
+
+                resolve(promises);
+              }
+            })
+          })
         });
-      });
-
-      setTimeout(async () => {
+      }
+      getPromiseCarItem().then(async () => {
         const winner = await Promise.race(promises);
         const { id, timeAnimation } = winner;
         await saveWinner(id!, +(timeAnimation / 1000).toFixed(2)).catch(
@@ -111,12 +116,14 @@ export class Garage extends BaseComponent {
         this.message.element.textContent = `${car.name} went first in ${+(
           timeAnimation / 1000
         ).toFixed(2)} seconds`;
-      }, 10000);
+      })
+    }
 
-      console.log(
-        'Победитель отобразится через 10 секунд 🧡, пожалуйста, подождите ٩(｡•́‿•̀｡)۶'
-      );
-    });
+    document.addEventListener('startRace', startRace);
+
+    // document.addEventListener('stopRace', () => {
+    //   document.removeEventListener('startRace', startRace)
+    // })
 
     document.body.addEventListener('click', () => {
       this.clickForRemoveMessage();
@@ -147,9 +154,8 @@ export class Garage extends BaseComponent {
       this.message.element
     );
 
-    this.titlePage.element.textContent = `Garage (${
-      (await getCars()).countCars
-    })`;
+    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars
+      })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
     this.arrayCarsForRace = [];

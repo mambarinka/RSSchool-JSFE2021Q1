@@ -113,19 +113,15 @@ export class RaceControls extends BaseComponent {
       )[index] as HTMLElement;
       const carIcon = document.querySelectorAll('.car')[index] as HTMLElement;
 
-      // document.addEventListener('getData', async (evt: CustomEventInit) => {
-      //   // console.log(evt.detail.buttonStop);
-      //   console.log(evt.detail);
-      //   this.buttonStop = evt.detail.buttonStop;
-      //   this.buttonStart = evt.detail.buttonStart;
-      //   this.carIcon = evt.detail.carIcon;
-      //   console.log(this.buttonStop);
-      //   console.log(this.buttonStart);
-      //   console.log(this.carIcon);
-      //         await stopDriving(this.buttonStop, car, this.buttonStart, this.carIcon);
-      // })
+      if (buttonStop !== undefined) {
+        await stopDriving(buttonStop, car, buttonStart, carIcon);
+      }
 
-      await stopDriving(buttonStop, car, buttonStart, carIcon);
+      document.dispatchEvent(
+        new CustomEvent('stopRace', {
+          bubbles: true,
+        })
+      );
 
       return car;
     });

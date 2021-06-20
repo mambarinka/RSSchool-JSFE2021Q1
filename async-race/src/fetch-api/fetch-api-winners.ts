@@ -99,6 +99,7 @@ export const getWinnerStatus = async (id: number) => {
 
 export const saveWinner = async (id: number, time: number) => {
   const winnerStatus = await getWinnerStatus(id);
+  console.log(winnerStatus);
   if (winnerStatus === 404) {
     await createWinner({ id, wins: 1, time });
   } else {
@@ -108,5 +109,10 @@ export const saveWinner = async (id: number, time: number) => {
       wins: winner.wins++,
       time: time < winner.time ? time : winner.time,
     });
+    console.log( await updateWinner(id, {
+      id,
+      wins: winner.wins++,
+      time: time < winner.time ? time : winner.time,
+    }));
   }
 };
