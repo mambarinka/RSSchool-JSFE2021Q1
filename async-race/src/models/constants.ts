@@ -1,5 +1,6 @@
 export const baseURL = 'http://127.0.0.1:3000';
 export const totalCarsOnPage = 7;
+export const totalWinnersOnPage = 10;
 
 export const models = [
   'Mazda',

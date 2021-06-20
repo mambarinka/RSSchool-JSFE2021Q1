@@ -1,7 +1,6 @@
 import { getWinners } from '../../fetch-api/fetch-api-winners';
 import { BaseComponent } from '../../models/base-component';
-import { Table } from '../../models/base-component-table';
-import { Pagination } from '../pagination';
+import { Pagination } from '../pagination-winner';
 import { TableWinners } from '../tableWinners';
 
 let sortBy: string | null | undefined = null;
@@ -35,19 +34,43 @@ export class Winners extends BaseComponent {
 
     document.addEventListener('updateNumberWinners', async () => {
       this.table.table.textContent = '';
-      this.table.getValueWinners();
+      this.getCurrentPage(this.currentPage).then((currentPage) => {
+        this.currentPage = currentPage;
+      });
+      // this.table.getValueWinners(this.currentPage);
+      this.render(this.currentPage);
     });
 
     document.addEventListener('clickWinsTable', async () => {
-      this.setSortOrder('wins');
+      this.setSortOrder(this.currentPage, 'wins');
     });
 
     document.addEventListener('clickBestTimeTable', async () => {
-      this.setSortOrder('time');
+      this.setSortOrder(this.currentPage, 'time');
     });
+
+    document.addEventListener(
+      'clickOnPaginationWinner',
+      async (evt: CustomEventInit) => {
+        if (evt.detail === true) {
+          ++this.currentPage;
+        } else if (evt.detail === false) {
+          --this.currentPage;
+        }
+        this.render(this.currentPage);
+      }
+    );
   }
 
   render = async (currentPage: number): Promise<HTMLElement> => {
+    document.dispatchEvent(
+      new CustomEvent('getPageNumberWinners', {
+        bubbles: true,
+        detail: currentPage,
+      })
+    );
+
+    this.table.getValueWinners(currentPage);
     // this.table.table.innerHTML = '';
     this.element.append(
       this.titlePage.element,
@@ -67,11 +90,10 @@ export class Winners extends BaseComponent {
   getCurrentPage = async (currentPage: number): Promise<number> => {
     let currentPageValue = currentPage;
     currentPageValue = (await getWinners()).currentPage;
-
     return currentPageValue;
   };
 
-  setSortOrder = async (sortByValue: string) => {
+  setSortOrder = async (currentPage: number, sortByValue: string) => {
     sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
     sortBy = sortByValue;
 
@@ -82,6 +104,6 @@ export class Winners extends BaseComponent {
       sortOrder
     );
     this.table.table.textContent = '';
-    this.table.getValueWinners(items);
+    this.table.getValueWinners(currentPage, items);
   };
 }

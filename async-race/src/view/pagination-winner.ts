@@ -1,16 +1,14 @@
-import { getCars } from '../fetch-api/fetch-api-garage';
-// import { getWinners } from '../fetch-api/fetch-api-winners';
+import { getWinners } from '../fetch-api/fetch-api-winners';
 import { BaseComponent } from '../models/base-component';
 import { Button } from '../models/base-component-button';
-import { totalCarsOnPage, totalWinnersOnPage } from '../models/constants';
+import { totalWinnersOnPage } from '../models/constants';
 
 export class Pagination extends BaseComponent {
   private readonly buttonPrev: Button;
 
   private readonly buttonNext: Button;
 
-  private currentCountCars!: number;
-  // private currentCountWinners!: number;
+  private currentCountWinners!: number;
 
   constructor() {
     super('article', ['pagination']);
@@ -32,8 +30,7 @@ export class Pagination extends BaseComponent {
 
     this.element.append(this.buttonPrev.button, this.buttonNext.button);
 
-    this.showStateButtonsGarage();
-    // this.showStateButtonsWinners();
+    this.showStateButtonsWinners();
 
     this.buttonPrev.button.addEventListener('click', () =>
       this.buttonPrevHandler()
@@ -44,15 +41,15 @@ export class Pagination extends BaseComponent {
     );
   }
 
-  showStateButtonsGarage = async (): Promise<void> => {
+  showStateButtonsWinners = async (): Promise<void> => {
     let currentPage;
     await document.addEventListener(
-      'getPageNumberGarage',
+      'getPageNumberWinners',
       async (evt: CustomEventInit) => {
-        this.currentCountCars = (await getCars()).countCars;
+        this.currentCountWinners = (await getWinners()).count;
         currentPage = evt.detail;
-        if (this.currentCountCars > totalCarsOnPage) {
-          if (currentPage * totalCarsOnPage < this.currentCountCars) {
+        if (this.currentCountWinners > totalWinnersOnPage) {
+          if (currentPage * totalWinnersOnPage < this.currentCountWinners) {
             this.buttonNext.button.disabled = false;
           } else {
             this.buttonNext.button.disabled = true;
@@ -68,36 +65,9 @@ export class Pagination extends BaseComponent {
     );
   };
 
-  // showStateButtonsWinners = async (): Promise<void> => {
-  //   let currentPage;
-  //   await document.addEventListener('getPageNumberWinners',
-  //     async (evt: CustomEventInit) => {
-  //       this.currentCountWinners = (await getWinners()).count;
-  //       currentPage = evt.detail;
-  //       console.log(this.currentCountWinners);
-  //       console.log(totalWinnersOnPage);
-  //       console.log(currentPage);
-  //       if (this.currentCountWinners > totalWinnersOnPage) {
-  //         if (currentPage * totalWinnersOnPage < this.currentCountWinners) {
-  //           this.buttonNext.button.disabled = false;
-  //         } else {
-  //           console.log('dddddddd');
-  //           this.buttonNext.button.disabled = true;
-  //         }
-
-  //         if (currentPage > 1) {
-  //           this.buttonPrev.button.disabled = false;
-  //         } else {
-  //           this.buttonPrev.button.disabled = true;
-  //         }
-  //       }
-  //     }
-  //   )
-  // }
-
   buttonPrevHandler = () => {
     document.dispatchEvent(
-      new CustomEvent('clickOnPagination', {
+      new CustomEvent('clickOnPaginationWinner', {
         bubbles: true,
         detail: false,
       })
@@ -106,7 +76,7 @@ export class Pagination extends BaseComponent {
 
   buttonNextHandler = () => {
     document.dispatchEvent(
-      new CustomEvent('clickOnPagination', {
+      new CustomEvent('clickOnPaginationWinner', {
         bubbles: true,
         detail: true,
       })

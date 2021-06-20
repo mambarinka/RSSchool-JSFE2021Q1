@@ -131,7 +131,7 @@ export class Garage extends BaseComponent {
 
   render = async (currentPage: number): Promise<HTMLElement> => {
     document.dispatchEvent(
-      new CustomEvent('getPageNumber', {
+      new CustomEvent('getPageNumberGarage', {
         bubbles: true,
         detail: currentPage,
       })

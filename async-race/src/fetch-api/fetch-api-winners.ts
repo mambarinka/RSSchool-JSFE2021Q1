@@ -22,7 +22,7 @@ export const getWinners = async (
     car: Car;
     id: number | undefined;
   }[];
-  count: string | null;
+  count: number;
   currentPage: number;
 }> => {
   const pathWinners: Path = Path.winners;
@@ -44,7 +44,7 @@ export const getWinners = async (
         car: await getCar(winner.id),
       }))
     ),
-    count: response.headers.get('X-Total-Count'),
+    count: Number(response.headers.get('X-Total-Count')),
     currentPage,
   };
 };

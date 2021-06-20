@@ -1,5 +1,6 @@
 import { getWinners } from '../fetch-api/fetch-api-winners';
 import { Table } from '../models/base-component-table';
+import { totalWinnersOnPage } from '../models/constants';
 import { Car, Winner } from '../models/models';
 import { getCarIcon } from '../service/utils';
 import { CarItem } from './car';
@@ -36,15 +37,17 @@ export class TableWinners extends Table {
   constructor() {
     super(['table-winners']);
 
-    this.getValueWinners();
+    this.getValueWinners(1);
   }
 
   getValueWinners = async (
+    currentPage = 1,
     sortWinners?: {
       car: Car;
       id: number | undefined;
     }[]
   ) => {
+    this.table.textContent = '';
     this.thead = this.table.createTHead();
     this.hrowHead = this.thead.insertRow(0);
 
@@ -79,12 +82,10 @@ export class TableWinners extends Table {
       'table-winners__row--head'
     );
     this.cellBsetTime.textContent = 'Best Time';
-    let arrayWinners = (await getWinners()).items;
-
+    let arrayWinners = (await getWinners(currentPage)).items;
     if (sortWinners) {
       arrayWinners = sortWinners;
     }
-
     arrayWinners.map((winner: any, index: number) => {
       this.tbody = this.table.createTBody();
       this.hrowBody = this.tbody.insertRow(0);
@@ -98,7 +99,9 @@ export class TableWinners extends Table {
       this.cellWinsValue.classList.add('table-winners__row');
       this.cellBsetTimeValue = this.hrowBody.insertCell(4);
       this.cellBsetTimeValue.classList.add('table-winners__row');
-      this.cellNumberValue.textContent = `${index + 1}`;
+      this.cellNumberValue.textContent = `${
+        index + 1 + totalWinnersOnPage * (currentPage - 1)
+      }`;
       this.cellCarValue.innerHTML = getCarIcon(winner.car.color);
       this.cellNameValue.textContent = `${winner.car.name}`;
       this.cellWinsValue.textContent = `${winner.wins}`;
