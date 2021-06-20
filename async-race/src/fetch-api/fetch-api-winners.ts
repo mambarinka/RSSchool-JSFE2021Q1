@@ -109,10 +109,12 @@ export const saveWinner = async (id: number, time: number) => {
       wins: winner.wins++,
       time: time < winner.time ? time : winner.time,
     });
-    console.log( await updateWinner(id, {
-      id,
-      wins: winner.wins++,
-      time: time < winner.time ? time : winner.time,
-    }));
+    console.log(
+      await updateWinner(id, {
+        id,
+        wins: winner.wins++,
+        time: time < winner.time ? time : winner.time,
+      })
+    );
   }
 };

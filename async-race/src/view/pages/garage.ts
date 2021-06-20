@@ -86,10 +86,10 @@ export class Garage extends BaseComponent {
     });
 
     const startRace = async () => {
-      let promises: PromiseWinner[] = [];
+      const promises: PromiseWinner[] = [];
 
-      const getPromiseCarItem = () => {
-        return new Promise(async (resolve) => {
+      const getPromiseCarItem = () =>
+        new Promise((resolve) => {
           this.arrayCarsForRace.map(async (carForRace) => {
             await carForRace.race(startDriving).then(async (promise) => {
               if (promise.success === true) {
@@ -97,10 +97,9 @@ export class Garage extends BaseComponent {
 
                 resolve(promises);
               }
-            })
-          })
+            });
+          });
         });
-      }
       getPromiseCarItem().then(async () => {
         const winner = await Promise.race(promises);
         const { id, timeAnimation } = winner;
@@ -116,8 +115,8 @@ export class Garage extends BaseComponent {
         this.message.element.textContent = `${car.name} went first in ${+(
           timeAnimation / 1000
         ).toFixed(2)} seconds`;
-      })
-    }
+      });
+    };
 
     document.addEventListener('startRace', startRace);
 
@@ -154,8 +153,9 @@ export class Garage extends BaseComponent {
       this.message.element
     );
 
-    this.titlePage.element.textContent = `Garage (${(await getCars()).countCars
-      })`;
+    this.titlePage.element.textContent = `Garage (${
+      (await getCars()).countCars
+    })`;
     this.titlePageNumber.element.textContent = `Page #${currentPage}`;
 
     this.arrayCarsForRace = [];
