@@ -34,10 +34,6 @@ export class Winners extends BaseComponent {
 
     document.addEventListener('updateNumberWinners', async () => {
       this.table.table.textContent = '';
-      this.getCurrentPage(this.currentPage).then((currentPage) => {
-        this.currentPage = currentPage;
-      });
-      // this.table.getValueWinners(this.currentPage);
       this.render(this.currentPage);
     });
 
