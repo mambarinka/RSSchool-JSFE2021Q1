@@ -4,16 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const toggle = document.querySelector('.toggle');
   const switchButton = document.querySelector('.switch');
-console.log(switchButton);
+  const navigation = document.querySelector('.menu');
+  const overlay = document.querySelector('.overlay');
 
   toggle!.addEventListener('click', () => {
     document.querySelector('.page-header')?.classList.toggle('open-nav');
     toggle?.classList.toggle('toggle--open');
+    navigation?.classList.toggle('menu--open');
+    overlay?.classList.toggle('overlay--open');
   });
 
   switchButton?.addEventListener('click', () => {
-    console.log('sgrgs');
     document.body.classList.toggle('play-mode');
+  })
+
+  overlay?.addEventListener('click', ()=> {
+    toggle?.classList.toggle('toggle--open');
+    navigation?.classList.toggle('menu--open');
+    overlay?.classList.toggle('overlay--open');
   })
 });
 
