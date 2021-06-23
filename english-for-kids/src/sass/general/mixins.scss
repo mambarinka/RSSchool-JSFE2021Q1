@@ -1,0 +1,67 @@
+@mixin desktop() {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin mobile() {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin wrapper() {
+  @include desktop {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+
+  @include mobile {
+    width: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@mixin list-reset() {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin h1-model() {
+  margin: 0;
+  color: $text-main-color;
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: 900;
+}
+
+@mixin h2-model() {
+  margin: 0;
+  color: $text-main-color;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 800;
+}
+
+@mixin p-model() {
+  margin: 0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: $text-main-color;
+}
+
+@mixin text-options($size, $height, $weight, $color) {
+  font-size: $size;
+  line-height: $height;
+  font-weight: $weight;
+  color: $color;
+}
