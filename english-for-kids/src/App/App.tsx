@@ -19,6 +19,14 @@ export const App = () => {
             {/* <div className={styles.contentCenter}> */}
               <Switch>
                 <Route path="/main" component={Main} />
+                {/* <Route path="/fruits" component={CategoryFruits} />
+                <Route path="/animals" component={CategoryAnimals} />
+                <Route path="/body-parts" component={CategoryBodyParts} />
+                <Route path="/clothes" component={CategoryClothes} />
+                <Route path="/colors" component={CategoryColors} />
+                <Route path="/profession" component={CategoryProfession} />
+                <Route path="/emotion" component={CategoryEmotion} />
+                <Route path="/numbers" component={CategoryNumbers} /> */}
                 <Redirect from="/" to="/main" />
               </Switch>
             {/* </div> */}
