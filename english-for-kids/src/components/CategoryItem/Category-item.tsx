@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import styles from './Category-item.scss';
@@ -14,10 +15,10 @@ export interface IMenuItemProps {
 export const CategoryItem: FunctionComponent<IMenuItemProps> = (/* { onClick, close } */{ category }) => {
   return (
     <li className={styles.categoryItem} /* onClick={close ? undefined : onClick} */>
-      <a href={`#/${category}`} className={styles.categoryLink}>
+      <Link to={`/${category}`} className={styles.categoryLink}>
         <img src={`../images/categories/${category}.png`} alt={`${category} category`} />
         <span className={styles.categoryName}></span>
-      </a>
+      </Link>
     </li>
   );
 };

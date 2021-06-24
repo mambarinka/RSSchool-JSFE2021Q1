@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 
 import styles from './Menu-item.scss';
 
@@ -15,7 +16,7 @@ export const MenuItem: FunctionComponent<IMenuItemProps>   = (/* { onClick, clos
   const textContent = `${mod}`;
   return (    
       <li className={styles.menuItem} /* onClick={close ? undefined : onClick} */>
-      <a className={cn(styles.menuLink, styles[`menu-link--${mod}`])}>{textContent}</a>
+      <Link to={`/${mod}`} className={cn(styles.menuLink, styles[`menu-link--${mod}`])}>{textContent}</Link>
        </li>
   );
 };
