@@ -26,7 +26,8 @@ export const App = () => {
                 <Route path="/colors" component={CategoryColors} />
                 <Route path="/profession" component={CategoryProfession} />
                 <Route path="/emotion" component={CategoryEmotion} />
-                <Route path="/numbers" component={CategoryNumbers} /> */}
+                <Route path="/numbers" component={CategoryNumbers} /> 
+                <Route path="/statistics" component={Statistics} />  */}
                 <Redirect from="/" to="/main" />
               </Switch>
             {/* </div> */}

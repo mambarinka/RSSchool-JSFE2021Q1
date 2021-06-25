@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toggle!.addEventListener('click', () => {
     document.querySelector('.page-header')?.classList.toggle('open-nav');
-    toggle?.classList.toggle('toggle--open');
-    navigation?.classList.toggle('menu--open');
-    overlay?.classList.toggle('overlay--open');
+    // toggle?.classList.toggle('toggle--open');
+    // navigation?.classList.toggle('menu--open');
+    // overlay?.classList.toggle('overlay--open');
   });
 
   switchButton?.addEventListener('click', () => {
@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   overlay?.addEventListener('click', ()=> {
-    toggle?.classList.toggle('toggle--open');
-    navigation?.classList.toggle('menu--open');
-    overlay?.classList.toggle('overlay--open');
+    // toggle?.classList.toggle('toggle--open');
+    // navigation?.classList.toggle('menu--open');
+    // overlay?.classList.toggle('overlay--open');
   })
 });

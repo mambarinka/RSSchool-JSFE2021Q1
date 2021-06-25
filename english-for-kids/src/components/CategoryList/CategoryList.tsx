@@ -4,25 +4,22 @@ import cn from 'classnames';
 import styles from './CategoryList.scss';
 import { MenuItem } from '../Menu-item';
 import { CategoryItem } from '../CategoryItem';
+import { Category, mainSelector } from '@/pages/Main/reducer';
+import { useSelector } from 'react-redux';
 
 export interface IToggleProps {
-  // onClick?: (value?: any) => void;
-  // disabled?: boolean;
-  // size?: 'small' | 'normal' | 'large';
-  // close: boolean
 }
 
-export const CategoryList/* : FunctionComponent<IToggleProps>  */ = (/* { onClick, close } */) => {
+export const CategoryList = () => {
+  
+  const { categories } = useSelector(mainSelector);
   return (
-    <ul className={styles.category} /* onClick={close ? undefined : onClick} */>
-      <CategoryItem category='fruits' />
-      <CategoryItem category='animals' />
-      <CategoryItem category='body-parts' />
-      <CategoryItem category='clothes' />
-      <CategoryItem category='colors' />
-      <CategoryItem category='profession' />
-      <CategoryItem category='emotion' />
-      <CategoryItem category='numbers' />
+    <ul className={cn(styles.category, 'play-mode')} >
+          {
+        categories.map((categoryItem: Category) => (
+          <CategoryItem category={categoryItem.value} key={categoryItem.value} />
+        ))
+      }
     </ul>
   );
 };

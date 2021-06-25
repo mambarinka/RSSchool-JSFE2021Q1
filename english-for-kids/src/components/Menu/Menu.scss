@@ -12,16 +12,21 @@
   padding-top: 100px;
 
   top: 0;
-  // left: -355px;
-  left: 0;
+  left: -355px;
+  // left: 0;
 
   background: linear-gradient(40deg, #ffd86f, #fc6262);
   list-style-type: none;
   transition: 0.5s ease;
   box-shadow: 5px 0px 10px #00000033;
+
+  // &--open {
+  //   top: 0;
+  //   left: 0;
+  // }
 }
 
- .open {
-    top: 0;
-    left: 0;
-  }
+.open {
+  top: 0;
+  left: 0;
+}

@@ -5,16 +5,12 @@ import cn from 'classnames';
 import styles from './Category-item.scss';
 
 export interface IMenuItemProps {
-  // onClick?: (value?: any) => void;
-  // disabled?: boolean;
-  // size?: 'small' | 'normal' | 'large';
-  // close: boolean 
-  category: 'fruits' | 'animals' | 'body-parts' | 'clothes' | 'colors' | 'profession' | 'emotion' | 'numbers'
+  category: string
 }
 
-export const CategoryItem: FunctionComponent<IMenuItemProps> = (/* { onClick, close } */{ category }) => {
+export const CategoryItem: FunctionComponent<IMenuItemProps> = ({ category }) => {
   return (
-    <li className={styles.categoryItem} /* onClick={close ? undefined : onClick} */>
+    <li className={styles.categoryItem} >
       <Link to={`/${category}`} className={styles.categoryLink}>
         <img src={`../images/categories/${category}.png`} alt={`${category} category`} />
         <span className={styles.categoryName}></span>

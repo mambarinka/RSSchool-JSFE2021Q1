@@ -30,6 +30,10 @@
   }
 }
 
+.play-mode .category__item{
+  background-color: $third-color;
+}
+
 .category__link {
   display: flex;
   flex-direction: column;
