@@ -6,13 +6,16 @@ import cn from 'classnames';
 
 import styles from './AppHeaderView.scss';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { switchPlayMode } from './actions';
 
 
 export const AppHeaderView = (/* {onClick}: IAppHeaderViewProps */) => {
+  const dispatch = useDispatch();
   const [openClassToggle, changeOpenClassToggle] = useState(true);
   const [openClassMenu, changeOpenClassMenu] = useState(true);
   const [openClassOverlay, changeOpenClassOverlay] = useState(true);
-  const [playMode, changePlayMode] = useState(false);
+  const [playMode, changePlayMode] = useState(true);
 
   const onClickToggle = useCallback(() => {
     changeOpenClassToggle(!openClassToggle);
@@ -27,8 +30,9 @@ export const AppHeaderView = (/* {onClick}: IAppHeaderViewProps */) => {
   }, [openClassToggle, openClassMenu, openClassOverlay])
 
   const onclickSwitch = useCallback(() => {
-    changePlayMode(playMode);   
-  }, [playMode]) //нужно при клике на switch добавлялся/удалялся класс "play-mode" для Main, как это можно сделать? как свзяать два компонента, которые не вложены друг в друга?
+    dispatch(switchPlayMode(playMode));
+    changePlayMode(!playMode);
+  }, [playMode, switchPlayMode, dispatch])
 
   return (
     <header className={styles.pageHeader}>

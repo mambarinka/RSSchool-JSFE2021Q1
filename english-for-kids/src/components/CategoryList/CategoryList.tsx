@@ -14,7 +14,7 @@ export const CategoryList = () => {
   
   const { categories } = useSelector(mainSelector);
   return (
-    <ul className={cn(styles.category, 'play-mode')} >
+    <ul className={cn(styles.category)} >
           {
         categories.map((categoryItem: Category) => (
           <CategoryItem category={categoryItem.value} key={categoryItem.value} />

@@ -21,5 +21,5 @@ export const initialState: IMainState = {
 export const mainSelector = (state: { main: IMainState }) => state.main;
 
 export function main(state = initialState) {
-  return state
+  return state;
 }
