@@ -1,4 +1,4 @@
-@import '../style.scss';
+@import '../../style.scss';
 
 .menu-item {
   margin-bottom: 2%;
@@ -33,6 +33,12 @@
     transition: 0.3s ease;
   }
 
+  &--main {
+    &::before{
+      background-image: url("https://image.flaticon.com/icons/png/512/3094/3094372.png");
+    }
+  }
+
   &--fruits {
     &::before{
       background-image: url("https://image.flaticon.com/icons/png/512/1277/1277773.png");
@@ -41,7 +47,7 @@
 
   &--profession {
     &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/4802/4802596.png");
+      background-image: url("https://image.flaticon.com/icons/png/512/360/360484.png");
     }
   }
 
@@ -54,7 +60,7 @@
 
   &--emotion {
     &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/3896/3896036.png");
+      background-image: url("https://image.flaticon.com/icons/png/512/1090/1090919.png");
     }
   }
 
@@ -66,19 +72,19 @@
 
   &--body-parts {
     &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/4025/4025126.png");
+      background-image: url("https://image.flaticon.com/icons/png/512/3699/3699470.png");
     }
   }
 
   &--animals {
     &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/4089/4089550.png");
+      background-image: url("https://image.flaticon.com/icons/png/512/220/220088.png");
     }
   }
 
   &--colors {
     &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/3957/3957220.png");
+      background-image: url("https://image.flaticon.com/icons/png/512/595/595084.png");
     }
   }
 }

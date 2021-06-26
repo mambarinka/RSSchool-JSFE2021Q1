@@ -4,6 +4,7 @@ import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 
 import { configureStore } from "@/store/store";
 import { Main } from "@/pages/Main";
+import { Fruits } from "@/pages/Categories/Fruits";
 import { AppHeader } from "./AppHedaer";
 
 const store = configureStore();
@@ -16,15 +17,7 @@ export const App: () => JSX.Element = () => (
       {/* <div className={styles.contentCenter}> */}
       <Switch>
         <Route path="/main" component={Main} />
-        {/* <Route path="/fruits" component={CategoryFruits} />
-                <Route path="/animals" component={CategoryAnimals} />
-                <Route path="/body-parts" component={CategoryBodyParts} />
-                <Route path="/clothes" component={CategoryClothes} />
-                <Route path="/colors" component={CategoryColors} />
-                <Route path="/profession" component={CategoryProfession} />
-                <Route path="/emotion" component={CategoryEmotion} />
-                <Route path="/numbers" component={CategoryNumbers} /> 
-                <Route path="/statistics" component={Statistics} />  */}
+        <Route path="/fruits" component={Fruits} />
         <Redirect from="/" to="/main" />
       </Switch>
       {/* </div> */}
@@ -32,3 +25,12 @@ export const App: () => JSX.Element = () => (
     </BrowserRouter>
   </Provider>
 );
+
+// <Route path='/animals' component={CategoryAnimals} />
+//                 <Route path='/body-parts' component={CategoryBodyParts} />
+//                 <Route path='/clothes' component={CategoryClothes} />
+//                 <Route path='/colors' component={CategoryColors} />
+//                 <Route path='/profession' component={CategoryProfession} />
+//                 <Route path='/emotion' component={CategoryEmotion} />
+//                 <Route path='/numbers' component={CategoryNumbers} />
+//                 <Route path='/statistics' component={Statistics} />

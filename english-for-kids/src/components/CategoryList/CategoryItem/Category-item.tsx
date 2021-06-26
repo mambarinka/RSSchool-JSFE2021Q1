@@ -6,11 +6,11 @@ import { appHeaderViewSelector } from "@/App/AppHedaer/AppHeaderView/reducers";
 import { useSelector } from "react-redux";
 import styles from "./Category-item.scss";
 
-export interface IMenuItemProps {
+export interface ICategoryItemProps {
   category: string;
 }
 
-export const CategoryItem: FunctionComponent<IMenuItemProps> = ({
+export const CategoryItem: FunctionComponent<ICategoryItemProps> = ({
   category,
 }) => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
@@ -23,7 +23,7 @@ export const CategoryItem: FunctionComponent<IMenuItemProps> = ({
           src={`../images/categories/${category}.png`}
           alt={`${category} category`}
         />
-        <span className={styles.categoryName}></span>
+        <span className={styles.categoryName}>{category}</span>
       </Link>
     </li>
   );

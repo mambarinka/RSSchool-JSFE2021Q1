@@ -48,7 +48,7 @@ export const AppHeaderView: () => JSX.Element =
             onClick={onclickSwitch}
           />
           <Link
-            to={`/statistics`}
+            to={"/statistics"}
             className={cn(styles.pageHeaderLink, styles.button)}
           >
             stats

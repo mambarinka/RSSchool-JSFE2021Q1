@@ -4,14 +4,14 @@ import cn from "classnames";
 import { Category, mainSelector } from "@/pages/Main/reducer";
 import { useSelector } from "react-redux";
 import styles from "./CategoryList.scss";
-import { CategoryItem } from "./CategoryItem";
+import { CardItem } from "./CardItem";
 
-export const CategoryList: () => JSX.Element = () => {
+export const CardList: () => JSX.Element = () => {
   const { categories } = useSelector(mainSelector);
   return (
     <ul className={cn(styles.category)}>
       {categories.map((categoryItem: Category) => (
-        <CategoryItem category={categoryItem.value} key={categoryItem.value} />
+        <CardItem category={categoryItem.value} key={categoryItem.value} />
       ))}
     </ul>
   );
