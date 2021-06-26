@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
-import { AppHeaderView } from "./AppHeaderView";
+import { AppHeaderView } from './AppHeaderView';
 
 export const AppHeader: () => JSX.Element = () => <AppHeaderView />;

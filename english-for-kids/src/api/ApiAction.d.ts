@@ -1,11 +1,11 @@
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux';
 
 export interface IApiRequest {
   url: string;
   method?: string;
   body?: any;
   headers?: { [k: string]: any };
-  responseType?: null | "arraybuffer" | "blob" | "formData" | "json" | "text";
+  responseType?: null | 'arraybuffer' | 'blob' | 'formData' | 'json' | 'text';
 }
 
 export interface IApiAction extends AnyAction {

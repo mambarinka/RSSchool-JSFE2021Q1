@@ -1,4 +1,4 @@
-import { IAppActions, TEST_ACTION_SUCCESS, testActionCreator } from "./actions";
+import { IAppActions, TEST_ACTION_SUCCESS, testActionCreator } from './actions';
 
 export interface IAppState {
   data: any;
@@ -8,9 +8,7 @@ export const initialState: IAppState = {
   data: [],
 };
 
-export const appSelector: (state: { app: IAppState }) => IAppState = (state: {
-  app: IAppState;
-}) => state.app;
+export const appSelector: (state: { app: IAppState }) => IAppState = (state: { app: IAppState }) => state.app;
 
 export function app(
   state = initialState,

@@ -1,1 +1,1 @@
-export { AppHeaderView } from "./AppHeaderView";
+export { AppHeaderView } from './AppHeaderView';

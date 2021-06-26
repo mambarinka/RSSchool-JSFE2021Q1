@@ -1,11 +1,11 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 
-import { configureStore } from "@/store/store";
-import { Main } from "@/pages/Main";
-import { Fruits } from "@/pages/Categories/Fruits";
-import { AppHeader } from "./AppHedaer";
+import { configureStore } from '@/store/store';
+import { Main } from '@/pages/Main';
+import { Fruits } from '@/pages/Categories/Fruits';
+import { AppHeader } from './AppHedaer';
 
 const store = configureStore();
 

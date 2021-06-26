@@ -1,12 +1,12 @@
-import { IMainAction, PLAYMODE, SWITCH_PLAYMODE } from "./actions";
+import { IMainAction, PLAYMODE, SWITCH_PLAYMODE } from './actions';
 
 export const initialState: PLAYMODE = {
   isPlayMode: false,
 };
 
-export const appHeaderViewSelector: (state: {
+export const appHeaderViewSelector: (state: { appHeaderView: PLAYMODE }) => PLAYMODE = (state: {
   appHeaderView: PLAYMODE;
-}) => PLAYMODE = (state: { appHeaderView: PLAYMODE }) => state.appHeaderView;
+}) => state.appHeaderView;
 
 export function appHeaderView(state = initialState, action: IMainAction) {
   switch (action.type) {

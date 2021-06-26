@@ -1,4 +1,4 @@
-declare module "*.scss" {
+declare module '*.scss' {
   interface IClassNames {
     [className: string]: string;
   }
@@ -8,7 +8,7 @@ declare module "*.scss" {
 }
 
 // declare module 'react'
-declare module "react-redux";
-declare module "react-router-dom";
-declare module "react-dom";
-declare module "redux-reducer-actions";
+declare module 'react-redux';
+declare module 'react-router-dom';
+declare module 'react-dom';
+declare module 'redux-reducer-actions';

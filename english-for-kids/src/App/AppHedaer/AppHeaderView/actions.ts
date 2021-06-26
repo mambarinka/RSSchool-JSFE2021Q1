@@ -1,6 +1,6 @@
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux';
 
-export const SWITCH_PLAYMODE = "SWITCH_PLAYMODE";
+export const SWITCH_PLAYMODE = 'SWITCH_PLAYMODE';
 
 export interface PLAYMODE {
   isPlayMode: boolean;
