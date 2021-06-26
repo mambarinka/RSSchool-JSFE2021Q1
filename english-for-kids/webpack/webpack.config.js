@@ -3,6 +3,8 @@ const resolve = require('path').resolve;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const  {CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const config = {
   entry: './src/index.tsx',
@@ -51,6 +53,8 @@ const config = {
         ignore: ['*.html'],
       }
     ),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    new ESLintPlugin({ extensions: ['ts', 'tsx', 'js'] })
   ],
   module: {
     rules: [
