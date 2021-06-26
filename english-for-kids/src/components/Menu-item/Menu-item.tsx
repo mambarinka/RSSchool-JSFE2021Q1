@@ -1,18 +1,23 @@
-import React, { FunctionComponent } from 'react';
-import cn from 'classnames';
-import { Link } from 'react-router-dom';
+import React, { FunctionComponent } from "react";
+import cn from "classnames";
+import { Link } from "react-router-dom";
 
-import styles from './Menu-item.scss';
+import styles from "./Menu-item.scss";
 
 export interface IMenuItemProps {
-  mod: string
+  mod: string;
 }
 
-export const MenuItem: FunctionComponent<IMenuItemProps>   = ({mod}) => {
+export const MenuItem: FunctionComponent<IMenuItemProps> = ({ mod }) => {
   const textContent = `${mod}`;
-  return (    
-      <li className={styles.menuItem} >
-      <Link to={`/${mod}`} className={cn(styles.menuLink, styles[`menu-link--${mod}`])}>{textContent}</Link>
-       </li>
+  return (
+    <li className={styles.menuItem}>
+      <Link
+        to={`/${mod}`}
+        className={cn(styles.menuLink, styles[`menu-link--${mod}`])}
+      >
+        {textContent}
+      </Link>
+    </li>
   );
 };

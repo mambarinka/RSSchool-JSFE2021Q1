@@ -1,6 +1,6 @@
-export interface Category {   
+export interface Category {
   value: string;
-};
+}
 
 export interface IMainState {
   categories: Category[];
@@ -8,18 +8,20 @@ export interface IMainState {
 
 export const initialState: IMainState = {
   categories: [
-    { value: 'fruits' },
-    { value: 'animals' },
-    { value: 'body-parts' },
-    { value: 'clothes' },
-    { value: 'colors' },
-    { value: 'profession' },
-    { value: 'emotion' },
-    { value: 'numbers' }]
+    { value: "fruits" },
+    { value: "animals" },
+    { value: "body-parts" },
+    { value: "clothes" },
+    { value: "colors" },
+    { value: "profession" },
+    { value: "emotion" },
+    { value: "numbers" },
+  ],
 };
 
-export const mainSelector = (state: { main: IMainState }) => state.main;
+export const mainSelector: (state: { main: IMainState }) => IMainState =
+  (state: { main: IMainState }) => state.main;
 
-export function main(state = initialState) {
+export function main(state = initialState): IMainState {
   return state;
 }

@@ -1,32 +1,23 @@
-import { AnyAction } from 'redux';
+import { AnyAction } from "redux";
 
-export const SWITCH_PLAYMODE = 'SWITCH_PLAYMODE';
+export const SWITCH_PLAYMODE = "SWITCH_PLAYMODE";
 
 export interface PLAYMODE {
-  isPlayMode: boolean
+  isPlayMode: boolean;
 }
 
 export interface ISwitchMode extends AnyAction {
   type: typeof SWITCH_PLAYMODE;
   payload: {
-    isPlayMode: boolean
-  }
+    isPlayMode: boolean;
+  };
 }
 
-export interface ISwitchMode extends AnyAction {
-  type: typeof SWITCH_PLAYMODE;
+export const switchPlayMode = (playModeValue: boolean): ISwitchMode => ({
+  type: SWITCH_PLAYMODE,
   payload: {
-    isPlayMode: boolean
-  }
-}
-
-export const switchPlayMode = (playModeValue: boolean): ISwitchMode => {
-  return {
-    type: SWITCH_PLAYMODE,
-    payload: {
-      isPlayMode: playModeValue
-    }
-  }
-}
+    isPlayMode: playModeValue,
+  },
+});
 
 export type IMainAction = ISwitchMode;

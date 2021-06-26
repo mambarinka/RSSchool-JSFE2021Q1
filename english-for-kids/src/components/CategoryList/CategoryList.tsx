@@ -1,25 +1,18 @@
-import React, { FunctionComponent } from 'react';
-import cn from 'classnames';
+import React from "react";
+import cn from "classnames";
 
-import styles from './CategoryList.scss';
-import { MenuItem } from '../Menu-item';
-import { CategoryItem } from '../CategoryItem';
-import { Category, mainSelector } from '@/pages/Main/reducer';
-import { useSelector } from 'react-redux';
+import { Category, mainSelector } from "@/pages/Main/reducer";
+import { useSelector } from "react-redux";
+import styles from "./CategoryList.scss";
+import { CategoryItem } from "../CategoryItem";
 
-export interface IToggleProps {
-}
-
-export const CategoryList = () => {
-  
+export const CategoryList: () => JSX.Element = () => {
   const { categories } = useSelector(mainSelector);
   return (
-    <ul className={cn(styles.category)} >
-          {
-        categories.map((categoryItem: Category) => (
-          <CategoryItem category={categoryItem.value} key={categoryItem.value} />
-        ))
-      }
+    <ul className={cn(styles.category)}>
+      {categories.map((categoryItem: Category) => (
+        <CategoryItem category={categoryItem.value} key={categoryItem.value} />
+      ))}
     </ul>
   );
 };

@@ -24,13 +24,9 @@
     box-shadow: 0 8px 17px 0 RGB(0 0 0 / 15%), 0 6px 20px 0 RGB(0 0 0 / 15%);
     transform: translateY(-7px);
   }
-
-  .play-mode & {
-    background-color: $third-color;
-  }
 }
 
-.play-mode .category__item{
+.play-mode{
   background-color: $third-color;
 }
 

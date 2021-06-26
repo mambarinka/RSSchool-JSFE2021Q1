@@ -1,26 +1,22 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
-import cn from 'classnames';
+import React, { FunctionComponent } from "react";
+import cn from "classnames";
 
-import styles from './Menu.scss';
-import { MenuItem } from '../Menu-item';
-import { useSelector } from 'react-redux';
-import { Category, mainSelector } from '@/pages/Main/reducer';
-
+import { useSelector } from "react-redux";
+import { Category, mainSelector } from "@/pages/Main/reducer";
+import styles from "./Menu.scss";
+import { MenuItem } from "../Menu-item";
 
 export interface IMenuProps {
-  isInitialState: boolean
+  isInitialState: boolean;
 }
 
 export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState }) => {
-
   const { categories } = useSelector(mainSelector);
   return (
     <ul className={cn(styles.menu, isInitialState ? null : styles.open)}>
-      {
-        categories.map((category: Category) => (
-          <MenuItem mod={category.value}  key={category.value}/>
-        ))
-      }
+      {categories.map((category: Category) => (
+        <MenuItem mod={category.value} key={category.value} />
+      ))}
     </ul>
   );
 };
