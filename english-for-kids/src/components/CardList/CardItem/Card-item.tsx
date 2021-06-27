@@ -7,10 +7,11 @@ import styles from './Card-item.scss';
 
 export interface ICardItemProps {
   category: string;
+  translate: string;
   // isInitialState: boolean;
 }
 
-export const CardItem: FunctionComponent<ICardItemProps> = ({ category /* isInitialState */ }) => {
+export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translate }) => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
   const path = window.location.pathname.slice(1);
   const [translateClassCard, changeTranslateClassCard] = useState(false);
@@ -20,7 +21,6 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category /* isInit
   }, [translateClassCard]);
 
   const onMouseLeave = useCallback(() => {
-    console.log(translateClassCard);
     if (translateClassCard) {
       changeTranslateClassCard(!translateClassCard);
     }
@@ -38,7 +38,7 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category /* isInit
 
       <div className={styles.back}>
         <img src={`../images/cards/${path}/${category}.png`} alt={`${category} category`} />
-        <span className={styles.cardName}>{category}</span>
+        <span className={styles.cardName}>{translate}</span>
       </div>
 
       <button type="button" className={styles.cardButtonFlip} onClick={onClickButtonFlip}></button>

@@ -31,6 +31,7 @@ const config = {
     watchContentBase: true,
     progress: true,
     disableHostCheck: true,
+    clientLogLevel: 'none',
     historyApiFallback: true,
     stats: {
       colors: true,

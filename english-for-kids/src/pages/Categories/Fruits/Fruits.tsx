@@ -10,7 +10,6 @@ import styles from './Fruits.scss';
 export const Fruits: () => JSX.Element = () => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
   const path = window.location.pathname.slice(1);
-  console.log(path);
   return (
     <main className={cn(styles.pageFruits, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageFruitsTitle}>Fruits</h1>
