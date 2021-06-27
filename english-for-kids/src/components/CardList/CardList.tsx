@@ -13,7 +13,7 @@ export const CardList: () => JSX.Element = () => {
   const path = window.location.pathname.slice(1);
   const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
 
-  console.log(result[0]);
+  // console.log(result[0]);
   // Object.values(result[0]).forEach((v) => {
   //   for (let i = 0; i < v.length; i++) {
   //     console.log(v[i]);

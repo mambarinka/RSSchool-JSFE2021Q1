@@ -1,0 +1,16 @@
+@import '../../../components/style.scss';
+
+.page-numbers {
+  @include wrapper;
+  position: relative;
+  padding-top: 50px;
+  height: 90vh;
+  padding-bottom: 45px;
+}
+
+.page-numbers__title {
+  @include h1-model;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}
