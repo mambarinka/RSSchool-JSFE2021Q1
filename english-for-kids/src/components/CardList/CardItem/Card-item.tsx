@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { useSelector } from 'react-redux';
-import styles from './Category-item.scss';
+import styles from './Card-item.scss';
 
 export interface ICardItemProps {
   category: string;
@@ -12,12 +12,11 @@ export interface ICardItemProps {
 
 export const CardItem: FunctionComponent<ICardItemProps> = ({ category }) => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
+  const path = window.location.pathname.slice(1);
   return (
-    <li className={cn(styles.categoryItem, isPlayMode ? styles.playMode : null)}>
-      <Link to={`/${category}`} className={styles.categoryLink}>
-        <img src={`../images/categories/${category}.png`} alt={`${category} category`} />
-        <span className={styles.categoryName}>{category}</span>
-      </Link>
+    <li className={cn(styles.cardItem, isPlayMode ? styles.playMode : null)}>
+      <img src={`../images/cards/${path}/${category}.png`} alt={`${category} category`} />
+      <span className={styles.cardName}>{category}</span>
     </li>
   );
 };
