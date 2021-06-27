@@ -4,7 +4,7 @@ import cn from 'classnames';
 import styles from './Toggle.scss';
 
 export interface IToggleProps {
-  onClick?: (value?: any) => void;
+  onClick?: () => void;
   isInitialState: boolean;
 }
 

@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import cn from 'classnames';
 
-import { Category, IMainState, mainSelector } from '@/pages/Main/reducer';
+import { Category, mainSelector } from '@/pages/Main/reducer';
 import { useSelector } from 'react-redux';
 import styles from './CardList.scss';
 import { CardItem } from './CardItem';

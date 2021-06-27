@@ -8,7 +8,7 @@ export const appHeaderViewSelector: (state: { appHeaderView: PLAYMODE }) => PLAY
   appHeaderView: PLAYMODE;
 }) => state.appHeaderView;
 
-export function appHeaderView(state = initialState, action: IMainAction) {
+export function appHeaderView(state = initialState, action: IMainAction): PLAYMODE {
   switch (action.type) {
     case SWITCH_PLAYMODE: {
       const {
