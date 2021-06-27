@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import styles from './AppHeaderView.scss';
 import { switchPlayMode } from './actions';
 
-export const AppHeaderView: () => JSX.Element = (/* {onClick}: IAppHeaderViewProps */) => {
+export const AppHeaderView: () => JSX.Element = () => {
   const dispatch = useDispatch();
   const [openClassToggle, changeOpenClassToggle] = useState(true);
   const [openClassMenu, changeOpenClassMenu] = useState(true);
