@@ -26,7 +26,7 @@ const config = {
     hot: true,
     contentBase: resolve(__dirname, '../', 'public'),
     publicPath: '/',
-    compress: true,
+    // compress: true,
     port: 8080,
     watchContentBase: true,
     progress: true,

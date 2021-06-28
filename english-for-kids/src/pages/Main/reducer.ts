@@ -45,7 +45,7 @@ export const initialState: IMainState = {
     emotion: {
       value: 'emotion',
       cards: ['angry', 'hurt', 'joy', 'laugh', 'sadness', 'surprise', 'tiredness', 'love'],
-      translate: ['злость', 'обида', 'радость', 'смех', 'печаль', 'удивление', 'влюбленность', 'panda'],
+      translate: ['злость', 'боль', 'радость', 'смех', 'печаль', 'удивление', 'усталость', 'влюбленность'],
     },
     numbers: {
       value: 'numbers',
