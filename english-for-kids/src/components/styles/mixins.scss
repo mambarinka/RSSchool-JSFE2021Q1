@@ -5,13 +5,13 @@
 }
 
 @mixin tablet() {
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 640px) and (max-width: 1023px) {
     @content;
   }
 }
 
 @mixin mobile() {
-  @media (max-width: 767px) {
+  @media (max-width: 639px) {
     @content;
   }
 }

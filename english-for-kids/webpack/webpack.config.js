@@ -20,7 +20,7 @@ const config = {
     filename: 'static/js/[name].[hash].js',
     path: resolve(__dirname, '../', 'build'),
     chunkFilename: 'static/js/[name].chunk.js',
-    publicPath: '/',
+    publicPath: './',
   },
   devServer: {
     hot: true,

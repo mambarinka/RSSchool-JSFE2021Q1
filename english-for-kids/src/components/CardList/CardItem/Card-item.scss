@@ -26,16 +26,32 @@
   &:hover {
     box-shadow: 0 8px 17px 0 RGB(0 0 0 / 15%), 0 6px 20px 0 RGB(0 0 0 / 15%);
   }
+
+  @include tablet {
+    width: calc(100% / 3 - 6%);
+    height: 250px;
+  }
+
+  @include mobile {
+    width: calc(100% / 2 - 6%);
+    height: 250px;
+  }
 }
 
 .play-mode {
   background-color: $third-color;
 }
 
+.play-mode .front .card__name,
+.play-mode .card__button-flip  {
+  display: none;
+}
+
 .front,
 .back {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   position: absolute;
   width: 100%;
   top: 0;

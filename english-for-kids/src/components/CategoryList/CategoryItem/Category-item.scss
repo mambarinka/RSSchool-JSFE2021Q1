@@ -14,7 +14,8 @@
   // border-bottom-right-radius: 20% 50%;
   cursor: pointer;
   box-shadow: 0 2px 5px 0 RGB(0 0 0 / 8%), 0 2px 10px 0 RGB(0 0 0 / 8%);
-  transition: box-shadow 0.25s, transform 0.3s;
+  // transition: box-shadow 0.25s, transform 0.3s;
+  transition: all 0.4s;
 
   &:nth-child(4n) {
     margin-right: 0;

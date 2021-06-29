@@ -46,12 +46,12 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
       onMouseLeave={onMouseLeave}
     >
       <div className={styles.front} onClick={(event) => onClickFrontCard(srcValue, event)}>
-        <img src={`../images/cards/${path}/${category}.png`} alt={`${category} category`} />
+        <img src={`./images/cards/${path}/${category}.png`} alt={`${category} category`} />
         <span className={styles.cardName}>{category}</span>
       </div>
 
       <div className={styles.back}>
-        <img src={`../images/cards/${path}/${category}.png`} alt={`${category} category`} />
+        <img src={`./images/cards/${path}/${category}.png`} alt={`${category} category`} />
         <span className={styles.cardName}>{translate}</span>
       </div>
 
