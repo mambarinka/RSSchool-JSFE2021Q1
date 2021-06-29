@@ -3,19 +3,13 @@ import cn from 'classnames';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { useSelector } from 'react-redux';
+import { playAudio } from '@/helpers/utils';
 import styles from './Card-item.scss';
 
 export interface ICardItemProps {
   category: string;
   translate: string;
 }
-
-const playAudio = (src: string) => {
-  const audio = new Audio();
-  audio.src = src;
-  audio.currentTime = 0;
-  audio.play();
-};
 
 export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translate }) => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
@@ -34,9 +28,11 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
   }, [translateClassCard]);
 
   const onClickFrontCard = (src: string, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (event!.currentTarget) {
-      event.preventDefault();
-      playAudio(src);
+    if (!isPlayMode) {
+      if (event!.currentTarget) {
+        event.preventDefault();
+        playAudio(src);
+      }
     }
   };
 

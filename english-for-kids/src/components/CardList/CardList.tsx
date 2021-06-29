@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import { Category, mainSelector } from '@/pages/Main/reducer';
 import { useSelector } from 'react-redux';
+import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import styles from './CardList.scss';
 import { CardItem } from './CardItem';
 
@@ -26,7 +27,6 @@ export const CardList: () => JSX.Element = () => {
   // const def = Object.values(result[0])[2];
   // console.log(abc);
   // console.log(def);
-
   return (
     <ul className={cn(styles.cardList)}>
       {result[0].cards.map((categoryItem, index) => (

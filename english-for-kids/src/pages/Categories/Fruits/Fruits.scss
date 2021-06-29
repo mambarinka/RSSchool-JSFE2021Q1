@@ -14,3 +14,53 @@
   text-align: center;
   text-transform: uppercase;
 }
+
+.page-fruits__button-start {
+  display: none;
+  transition: 0.3s ease;
+}
+
+.open {
+  position: absolute;
+  top: 400px;
+  left: calc(50% - 150px / 2);
+  display: block;
+  width: 150px;
+  height: 150px;
+  padding-top: 24px;
+  padding-bottom: 20px;
+  padding-left: 34px;
+  background-image: url('../../../../assets/icons/icon-button-start.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 1px 1px 11px 4px #b6d0f266;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: top 1.3s, transform 1s;
+  z-index: 1;
+}
+
+.hide {
+  display: none;
+  transition: 0.3s ease;
+}
+
+
+.overlay {
+  display: none;
+  transition: 0.3s ease;
+
+  &--open {
+    display: block;
+    height: calc(100vh + 0px);
+    width: calc(100vw + 0px);
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
