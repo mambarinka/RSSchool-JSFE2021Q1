@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
 
@@ -8,6 +8,7 @@ import { Category, mainSelector } from '@/pages/Main/reducer';
 import { playAudio } from '@/helpers/utils';
 import styles from './Animals.scss';
 
+let isStartNewGame = false;
 export const Animals: () => JSX.Element = () => {
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
@@ -16,29 +17,51 @@ export const Animals: () => JSX.Element = () => {
   const shuffleArray = result[0].shuffleCards;
 
   const { isPlayMode } = useSelector(appHeaderViewSelector);
-  const [openClassButtonStart, changeOpenClassButtonStart] = useState(false);
-  const [openClassOverlay, changeOpenClassOverlay] = useState(false);
+  const [openClassButtonStart, setOpenClassButtonStart] = useState(false);
+  const [openClassOverlay, setOpenClassOverlay] = useState(false);
 
-  const onclickButtonStart = useCallback(() => {
-    changeOpenClassButtonStart(!openClassButtonStart);
-    changeOpenClassOverlay(!openClassOverlay);
+  useEffect(() => {
+    if (isStartNewGame === false) {
+      isStartNewGame = true;
+      setOpenClassButtonStart(!openClassButtonStart);
+      setOpenClassOverlay(!openClassOverlay);
+    } else {
+      isStartNewGame = false;
+    }
+  }, [isPlayMode]);
+
+  const ButtonStartHandler = useCallback(() => {
+    setOpenClassOverlay(!openClassOverlay);
+    setOpenClassButtonStart(!openClassButtonStart);
 
     const srcValue = `../audio/cards/${path}/${shuffleArray[0]}.mp3`;
     playAudio(srcValue);
-    shuffleArray.splice(0, 1);
   }, [openClassButtonStart, openClassOverlay]);
-
-  console.log(result);
 
   return (
     <main className={cn(styles.pageAnimals, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageAnimalsTitle}>Animals</h1>
       <CardList />
       <button
-        className={cn(styles.pageAnimalsButtonStart, !isPlayMode ? null : openClassButtonStart ? null : styles.open)}
-        onClick={onclickButtonStart}
+        className={cn(
+          styles.pageAnimalsButtonStart,
+          !isPlayMode ? null : openClassButtonStart ? styles.open : isStartNewGame ? styles.open : null
+        )}
+        onClick={ButtonStartHandler}
       ></button>
-      <div className={cn(styles.overlay, !isPlayMode ? null : openClassOverlay ? null : styles.overlayOpen)}></div>
+      <button
+        className={cn(
+          styles.pageAnimalsButtonRepeat,
+          !isPlayMode ? null : openClassButtonStart ? null : isStartNewGame ? null : styles.repeat
+        )}
+      ></button>
+
+      <div
+        className={cn(
+          styles.overlay,
+          !isPlayMode ? null : openClassOverlay ? styles.overlayOpen : isStartNewGame ? styles.overlayOpen : null
+        )}
+      ></div>
     </main>
   );
 };
