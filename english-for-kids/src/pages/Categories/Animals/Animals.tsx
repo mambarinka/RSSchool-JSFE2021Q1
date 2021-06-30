@@ -9,6 +9,7 @@ import { playAudio } from '@/helpers/utils';
 import styles from './Animals.scss';
 
 let isStartNewGame = false;
+
 export const Animals: () => JSX.Element = () => {
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
@@ -30,18 +31,19 @@ export const Animals: () => JSX.Element = () => {
     }
   }, [isPlayMode]);
 
+  const [currentWord] = shuffleArray;
+
   const ButtonStartHandler = useCallback(() => {
     setOpenClassOverlay(!openClassOverlay);
     setOpenClassButtonStart(!openClassButtonStart);
 
-    const srcValue = `../audio/cards/${path}/${shuffleArray[0]}.mp3`;
-    playAudio(srcValue);
+    playAudio(path, shuffleArray[0]);
   }, [openClassButtonStart, openClassOverlay]);
 
   return (
     <main className={cn(styles.pageAnimals, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageAnimalsTitle}>Animals</h1>
-      <CardList />
+      <CardList currentCard={currentWord} />
       <button
         className={cn(
           styles.pageAnimalsButtonStart,
@@ -54,6 +56,7 @@ export const Animals: () => JSX.Element = () => {
           styles.pageAnimalsButtonRepeat,
           !isPlayMode ? null : openClassButtonStart ? null : isStartNewGame ? null : styles.repeat
         )}
+        onClick={() => playAudio(path, currentWord)}
       ></button>
 
       <div
