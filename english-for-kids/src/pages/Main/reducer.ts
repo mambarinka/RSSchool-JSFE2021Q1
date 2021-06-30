@@ -24,13 +24,13 @@ export const initialState: IMainState = {
     animals: {
       value: 'animals',
       cards: ['cat', 'monkey', 'penguin', 'elephant', 'bear', 'zebra', 'wolf', 'panda'],
-      translate: ['кошка', 'обезьяна', 'пенгвин', 'слон', 'медведь', 'зебра', 'волк', 'panda'],
+      translate: ['кошка', 'обезьяна', 'пингвин', 'слон', 'медведь', 'зебра', 'волк', 'панда'],
       shuffleCards: shuffleArray(['cat', 'monkey', 'penguin', 'elephant', 'bear', 'zebra', 'wolf', 'panda']),
     },
     bodyParts: {
       value: 'body-parts',
       cards: ['ear', 'hand', 'knee', 'leg', 'head', 'finger', 'eye', 'neck'],
-      translate: ['ухо', 'рука', 'коленка', 'нога', 'голова', 'палец', 'глаз', 'шея'],
+      translate: ['ухо', 'рука', 'коленка', 'нога', 'голова', 'палец', 'глаз', 'neck'],
       shuffleCards: shuffleArray(['ear', 'hand', 'knee', 'leg', 'head', 'finger', 'eye', 'neck']),
     },
     clothes: {
