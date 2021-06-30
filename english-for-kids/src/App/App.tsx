@@ -12,6 +12,7 @@ import { Colors } from '@/pages/Categories/Colors';
 import { Profession } from '@/pages/Categories/Profession';
 import { Emotion } from '@/pages/Categories/Emotion';
 import { Numbers } from '@/pages/Categories/Numbers';
+import { Statistics } from '@/pages/Statistics';
 import { AppHeader } from './AppHedaer';
 
 const store = configureStore();
@@ -30,10 +31,9 @@ export const App: () => JSX.Element = () => (
         <Route path="/profession" component={Profession} />
         <Route path="/emotion" component={Emotion} />
         <Route path="/numbers" component={Numbers} />
+        <Route path="/statistics" component={Statistics} />
         <Redirect from="/" to="/main" />
       </Switch>
     </BrowserRouter>
   </Provider>
 );
-
-//                 <Route path='/statistics' component={Statistics} />
