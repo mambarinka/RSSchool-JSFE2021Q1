@@ -43,7 +43,7 @@
 }
 
 .play-mode .front .card__name,
-.play-mode .card__button-flip  {
+.play-mode .card__button-flip {
   display: none;
 }
 
@@ -101,4 +101,9 @@
     transform: scale(1.3) rotate(-180deg);
     border-bottom-right-radius: 50%;
   }
+}
+
+.checked {
+  opacity: 0.4;
+  pointer-events: none;
 }

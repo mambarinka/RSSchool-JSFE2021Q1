@@ -1,8 +1,15 @@
-export const playAudio: (path: string | null, card: string | null, success?: boolean | undefined) => void = (
+export const playAudio: (
+  isPlayMode: boolean,
   path: string | null,
   card: string | null,
-  success?: boolean
-) => {
+  success?: boolean | undefined
+) => void = (isPlayMode: boolean, path: string | null, card: string | null, success?: boolean) => {
+  let delay;
+  if (isPlayMode) {
+    delay = 1000;
+  } else {
+    delay = 200;
+  }
   const audio = new Audio();
   audio.currentTime = 0;
 
@@ -18,7 +25,7 @@ export const playAudio: (path: string | null, card: string | null, success?: boo
 
   setTimeout(() => {
     audio.play();
-  }, 200);
+  }, delay);
 };
 
 export const shuffleArray: (array: string[]) => string[] = (array: string[]) => array.sort(() => 0.5 - Math.random());

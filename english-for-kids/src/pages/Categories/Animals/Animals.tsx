@@ -36,8 +36,7 @@ export const Animals: () => JSX.Element = () => {
   const ButtonStartHandler = useCallback(() => {
     setOpenClassOverlay(!openClassOverlay);
     setOpenClassButtonStart(!openClassButtonStart);
-
-    playAudio(path, shuffleArray[0]);
+    playAudio(true, path, shuffleArray[0]);
   }, [openClassButtonStart, openClassOverlay]);
 
   return (
@@ -56,7 +55,7 @@ export const Animals: () => JSX.Element = () => {
           styles.pageAnimalsButtonRepeat,
           !isPlayMode ? null : openClassButtonStart ? null : isStartNewGame ? null : styles.repeat
         )}
-        onClick={() => playAudio(path, currentWord)}
+        onClick={() => playAudio(isPlayMode, path, currentWord)}
       ></button>
 
       <div
