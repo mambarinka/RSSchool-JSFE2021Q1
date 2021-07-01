@@ -38,6 +38,10 @@ const config = {
       chunks: false,
       'errors-only': true,
     },
+    watchOptions: { 
+      aggregateTimeout: 300, 
+      poll: true 
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

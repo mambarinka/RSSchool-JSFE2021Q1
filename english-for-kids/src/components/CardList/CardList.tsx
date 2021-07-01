@@ -6,11 +6,7 @@ import { useSelector } from 'react-redux';
 import styles from './CardList.scss';
 import { CardItem } from './CardItem';
 
-export interface ICardListProps {
-  currentCard: string;
-}
-
-export const CardList: FunctionComponent<ICardListProps> = (currentCard) => {
+export const CardList = () => {
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
 
@@ -19,12 +15,7 @@ export const CardList: FunctionComponent<ICardListProps> = (currentCard) => {
   return (
     <ul className={cn(styles.cardList)}>
       {result[0].cards.map((categoryItem, index) => (
-        <CardItem
-          category={categoryItem}
-          key={categoryItem}
-          translate={result[0].translate[index]}
-          currentAudioCard={currentCard}
-        />
+        <CardItem category={categoryItem} key={categoryItem} translate={result[0].translate[index]} />
       ))}
     </ul>
   );

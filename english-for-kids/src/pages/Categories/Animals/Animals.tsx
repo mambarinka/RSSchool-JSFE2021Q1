@@ -6,6 +6,7 @@ import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { CardList } from '@/components/CardList';
 import { Category, mainSelector } from '@/pages/Main/reducer';
 import { playAudio } from '@/helpers/utils';
+import { index } from '@/components/CardList/CardItem/Card-item';
 import styles from './Animals.scss';
 
 let isStartNewGame = false;
@@ -31,8 +32,6 @@ export const Animals: () => JSX.Element = () => {
     }
   }, [isPlayMode]);
 
-  const [currentWord] = shuffleArray;
-
   const ButtonStartHandler = useCallback(() => {
     setOpenClassOverlay(!openClassOverlay);
     setOpenClassButtonStart(!openClassButtonStart);
@@ -42,7 +41,7 @@ export const Animals: () => JSX.Element = () => {
   return (
     <main className={cn(styles.pageAnimals, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageAnimalsTitle}>Animals</h1>
-      <CardList currentCard={currentWord} />
+      <CardList />
       <button
         className={cn(
           styles.pageAnimalsButtonStart,
@@ -55,7 +54,7 @@ export const Animals: () => JSX.Element = () => {
           styles.pageAnimalsButtonRepeat,
           !isPlayMode ? null : openClassButtonStart ? null : isStartNewGame ? null : styles.repeat
         )}
-        onClick={() => playAudio(isPlayMode, path, currentWord)}
+        onClick={() => playAudio(isPlayMode, path, shuffleArray[index])}
       ></button>
 
       <div
