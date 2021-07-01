@@ -7,6 +7,7 @@ import { CardList } from '@/components/CardList';
 import { Category, mainSelector } from '@/pages/Main/reducer';
 import { playAudio } from '@/helpers/utils';
 import { index } from '@/components/CardList/CardItem/Card-item';
+import { statisticsSelector } from '@/pages/Statistics/reducers';
 import styles from './Animals.scss';
 
 let isStartNewGame = false;
@@ -37,6 +38,12 @@ export const Animals: () => JSX.Element = () => {
     setOpenClassButtonStart(!openClassButtonStart);
     playAudio(true, path, shuffleArray[0]);
   }, [openClassButtonStart, openClassOverlay]);
+
+  const { categoriesStat } = useSelector(statisticsSelector);
+
+  // console.log(categoriesStat.animals);
+  const lol = categoriesStat.animals.find((item) => item.value === 'cat');
+  // console.log(lol);
 
   return (
     <main className={cn(styles.pageAnimals, isPlayMode ? 'play-mode' : null)}>

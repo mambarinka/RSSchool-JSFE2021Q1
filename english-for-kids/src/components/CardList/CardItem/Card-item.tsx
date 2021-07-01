@@ -2,9 +2,10 @@ import React, { FunctionComponent, useEffect, useCallback, useState } from 'reac
 import cn from 'classnames';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { playAudio } from '@/helpers/utils';
 import { Category, mainSelector } from '@/pages/Main/reducer';
+import { updateSuccessClicks } from '@/pages/Categories/Animals/action';
 import styles from './Card-item.scss';
 
 export interface ICardItemProps {
@@ -22,6 +23,7 @@ export let index = 0;
 
 export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translate }) => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
+  const dispatch = useDispatch();
   const path = window.location.pathname.slice(1);
   const [translateClassCard, changeTranslateClassCard] = useState(false);
   const { categories } = useSelector(mainSelector);
@@ -56,6 +58,9 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
             playAudio(isPlayMode, null, null, false);
           } else {
             playAudio(isPlayMode, null, null, true);
+            console.log('path', path);
+            console.log('shuffleArray[index]', shuffleArray[index]);
+            dispatch(updateSuccessClicks(path, shuffleArray[index]));
             index++;
             if (index < shuffleArray.length) {
               setTimeout(() => {

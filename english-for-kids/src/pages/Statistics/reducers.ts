@@ -1,6 +1,4 @@
-import { shuffleArray } from '@/helpers/utils';
-import { useSelector } from 'react-redux';
-import { mainSelector } from '../Main/reducer';
+import { IAnimalAction, SET_SUCCESS_CLICK } from '../Categories/Animals/action';
 
 export interface Card {
   value: string;
@@ -19,11 +17,11 @@ export interface Category {
 }
 
 export interface IStatisticsState {
-  categories: Category;
+  categoriesStat: Category;
 }
 
 export const initialState: IStatisticsState = {
-  categories: {
+  categoriesStat: {
     fruits: [
       {
         value: 'apple',
@@ -751,6 +749,32 @@ export const statisticsSelector: (state: { statistics: IStatisticsState }) => IS
   statistics: IStatisticsState;
 }) => state.statistics;
 
-export function statistics(state = initialState): IStatisticsState {
-  return state;
+export function statistics(state = initialState, action: IAnimalAction): IStatisticsState {
+  switch (action.type) {
+    case SET_SUCCESS_CLICK: {
+      const {
+        payload: { category, card },
+      } = action;
+      const curentCard = state.categoriesStat[category].find((item: { value: string }) => item.value === card);
+      // console.log(curentCard);
+      const changeState = state.categoriesStat[category].map((item: { value: string }) =>
+        item.value === card
+          ? {
+              ...item,
+              playMode: {
+                successClicks: curentCard!.playMode.successClicks++,
+                errorClicks: curentCard!.playMode.errorClicks,
+              },
+            }
+          : item
+      );
+      console.log(state.categoriesStat[category]);
+
+      return {
+        ...state,
+      };
+    }
+    default:
+      return state;
+  }
 }
