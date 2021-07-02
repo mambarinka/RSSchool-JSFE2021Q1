@@ -5,7 +5,7 @@ import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { playAudio } from '@/helpers/utils';
 import { Category, mainSelector } from '@/pages/Main/reducer';
-import { updateSuccessClicks } from '@/pages/Categories/Animals/action';
+import { updateErrorClicks, updateSuccessClicks, updateTrainClicks } from '@/pages/Categories/Animals/action';
 import { arrayStars } from '@/components/PointStarsBlock/PointStarsBlock';
 import styles from './Card-item.scss';
 
@@ -45,12 +45,14 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
     if (event!.currentTarget) {
       if (!isPlayMode) {
         playAudio(isPlayMode, path, category);
+        dispatch(updateTrainClicks(path, category));
       } else if (isPlayMode) {
         if (!isChecked) {
           if (category !== currentAudio) {
             playAudio(isPlayMode, null, null, false);
             arrayStars.push(false);
             setObjCardsChecked(false);
+            dispatch(updateErrorClicks(path, shuffleArray[index]));
           } else {
             playAudio(isPlayMode, null, null, true);
             dispatch(updateSuccessClicks(path, shuffleArray[index]));

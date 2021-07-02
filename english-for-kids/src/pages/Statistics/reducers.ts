@@ -1,4 +1,4 @@
-import { IAnimalAction, SET_SUCCESS_CLICK } from '../Categories/Animals/action';
+import { IAnimalAction, SET_ERROR_CLICK, SET_SUCCESS_CLICK, SET_TRAIN_CLICK } from '../Categories/Animals/action';
 
 export interface Card {
   value: string;
@@ -756,8 +756,8 @@ export function statistics(state = initialState, action: IAnimalAction): IStatis
         payload: { category, card },
       } = action;
       const curentCard = state.categoriesStat[category].find((item: { value: string }) => item.value === card);
-      // console.log(curentCard);
-      const changeState = state.categoriesStat[category].map((item: { value: string }) =>
+
+      state.categoriesStat[category].map((item: { value: string }) =>
         item.value === card
           ? {
               ...item,
@@ -768,12 +768,57 @@ export function statistics(state = initialState, action: IAnimalAction): IStatis
             }
           : item
       );
-      // console.log(state.categoriesStat[category]);
 
       return {
         ...state,
       };
     }
+
+    case SET_ERROR_CLICK: {
+      const {
+        payload: { category, card },
+      } = action;
+      const curentCard = state.categoriesStat[category].find((item: { value: string }) => item.value === card);
+
+      state.categoriesStat[category].map((item: { value: string }) =>
+        item.value === card
+          ? {
+              ...item,
+              playMode: {
+                successClicks: curentCard!.playMode.successClicks,
+                errorClicks: curentCard!.playMode.errorClicks++,
+              },
+            }
+          : item
+      );
+
+      return {
+        ...state,
+      };
+    }
+
+    case SET_TRAIN_CLICK: {
+      const {
+        payload: { category, card },
+      } = action;
+      const curentCard = state.categoriesStat[category].find((item: { value: string }) => item.value === card);
+
+      state.categoriesStat[category].map((item: { value: string }) =>
+        item.value === card
+          ? {
+              ...item,
+              trainMode: {
+                clicks: curentCard!.trainMode.clicks++,
+              },
+            }
+          : item
+      );
+
+      return {
+        ...state,
+      };
+    }
+
     default:
       return state;
   }
