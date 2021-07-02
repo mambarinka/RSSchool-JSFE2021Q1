@@ -1,0 +1,1 @@
+export { PointStarsBlock } from './PointStarsBlock';

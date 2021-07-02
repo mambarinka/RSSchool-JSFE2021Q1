@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { CardList } from '@/components/CardList';
@@ -8,6 +8,7 @@ import { Category, mainSelector } from '@/pages/Main/reducer';
 import { playAudio } from '@/helpers/utils';
 import { index } from '@/components/CardList/CardItem/Card-item';
 import { statisticsSelector } from '@/pages/Statistics/reducers';
+import { PointStarsBlock } from '@/components/PointStarsBlock';
 import styles from './Animals.scss';
 
 let isStartNewGame = false;
@@ -20,8 +21,10 @@ export const Animals: () => JSX.Element = () => {
   const shuffleArray = result[0].shuffleCards;
 
   const { isPlayMode } = useSelector(appHeaderViewSelector);
+  const dispatch = useDispatch();
   const [openClassButtonStart, setOpenClassButtonStart] = useState(false);
   const [openClassOverlay, setOpenClassOverlay] = useState(false);
+  const [openClassPointStarsBlock, setOpenClassPointStarsBlock] = useState(true);
 
   useEffect(() => {
     if (isStartNewGame === false) {
@@ -36,18 +39,14 @@ export const Animals: () => JSX.Element = () => {
   const ButtonStartHandler = useCallback(() => {
     setOpenClassOverlay(!openClassOverlay);
     setOpenClassButtonStart(!openClassButtonStart);
+    setOpenClassPointStarsBlock(!openClassPointStarsBlock);
     playAudio(true, path, shuffleArray[0]);
   }, [openClassButtonStart, openClassOverlay]);
-
-  const { categoriesStat } = useSelector(statisticsSelector);
-
-  // console.log(categoriesStat.animals);
-  const lol = categoriesStat.animals.find((item) => item.value === 'cat');
-  // console.log(lol);
 
   return (
     <main className={cn(styles.pageAnimals, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageAnimalsTitle}>Animals</h1>
+      <PointStarsBlock path={path} isInitialState={openClassPointStarsBlock} />
       <CardList />
       <button
         className={cn(

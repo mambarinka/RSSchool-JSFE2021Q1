@@ -768,7 +768,7 @@ export function statistics(state = initialState, action: IAnimalAction): IStatis
             }
           : item
       );
-      console.log(state.categoriesStat[category]);
+      // console.log(state.categoriesStat[category]);
 
       return {
         ...state,

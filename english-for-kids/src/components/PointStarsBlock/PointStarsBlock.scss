@@ -1,0 +1,13 @@
+@import '../style.scss';
+
+.points-stars-block {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-bottom: 12px;
+  overflow-x: hidden;
+
+  &--hide {
+    display: none;
+  }
+}

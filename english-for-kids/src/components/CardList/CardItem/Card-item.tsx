@@ -6,15 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { playAudio } from '@/helpers/utils';
 import { Category, mainSelector } from '@/pages/Main/reducer';
 import { updateSuccessClicks } from '@/pages/Categories/Animals/action';
+import { arrayStars } from '@/components/PointStarsBlock/PointStarsBlock';
 import styles from './Card-item.scss';
 
 export interface ICardItemProps {
   category: string;
   translate: string;
-}
-
-interface CheckedCard {
-  [key: string]: boolean;
 }
 
 let currentAudio: string | null;
@@ -41,44 +38,41 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
     }
   }, [translateClassCard]);
 
-  const objCardsChecked = shuffleArray.reduce((acc: CheckedCard, item) => {
-    acc[item] = false;
-    return acc;
-  }, {});
+  const [isChecked, setObjCardsChecked] = useState(false);
 
   const onClickFrontCard = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     currentAudio = shuffleArray[index];
     if (event!.currentTarget) {
       if (!isPlayMode) {
-        event.preventDefault();
         playAudio(isPlayMode, path, category);
       } else if (isPlayMode) {
-        if (!objCardsChecked[category]) {
+        if (!isChecked) {
           if (category !== currentAudio) {
             playAudio(isPlayMode, null, null, false);
+            arrayStars.push(false);
+            setObjCardsChecked(false);
           } else {
             playAudio(isPlayMode, null, null, true);
-            console.log('path', path);
-            console.log('shuffleArray[index]', shuffleArray[index]);
             dispatch(updateSuccessClicks(path, shuffleArray[index]));
+            arrayStars.push(true);
             index++;
             if (index < shuffleArray.length) {
               setTimeout(() => {
                 playAudio(isPlayMode, path, shuffleArray[index]);
               }, 1000);
             }
-            objCardsChecked[category] = true;
+            setObjCardsChecked(true);
           }
         }
       }
     }
   };
+
   return (
     <li
       className={cn(
         styles.cardItem,
-        { checked: objCardsChecked[category] === true },
-        // objCardsChecked[category] ? styles.checked : null,
+        isChecked ? styles.checked : null,
         isPlayMode ? styles.playMode : null,
         translateClassCard ? styles.translate : null
       )}

@@ -1,0 +1,19 @@
+@import '../../style.scss';
+
+.star,
+.no-star {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  flex-shrink: 0;
+  background-size: contain;
+  background-position: center;
+}
+
+.star {
+  background-image: url('../../../../assets/icons/star.png');
+}
+
+.no-star {
+  background-image: url('../../../../assets/icons/no-star.png');
+}
