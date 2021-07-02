@@ -1,13 +1,12 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { CardList } from '@/components/CardList';
 import { Category, mainSelector } from '@/pages/Main/reducer';
 import { playAudio } from '@/helpers/utils';
 import { index } from '@/components/CardList/CardItem/Card-item';
-import { statisticsSelector } from '@/pages/Statistics/reducers';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
 import styles from './Animals.scss';
 
@@ -21,7 +20,6 @@ export const Animals: () => JSX.Element = () => {
   const shuffleArray = result[0].shuffleCards;
 
   const { isPlayMode } = useSelector(appHeaderViewSelector);
-  const dispatch = useDispatch();
   const [openClassButtonStart, setOpenClassButtonStart] = useState(false);
   const [openClassOverlay, setOpenClassOverlay] = useState(false);
   const [openClassPointStarsBlock, setOpenClassPointStarsBlock] = useState(true);

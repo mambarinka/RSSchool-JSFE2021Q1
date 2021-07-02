@@ -12,6 +12,7 @@ export const CardList = () => {
 
   const path = window.location.pathname.slice(1);
   const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
+
   return (
     <ul className={cn(styles.cardList)}>
       {result[0].cards.map((categoryItem, index) => (

@@ -5,7 +5,7 @@ import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { playAudio } from '@/helpers/utils';
 import { Category, mainSelector } from '@/pages/Main/reducer';
-import { updateErrorClicks, updateSuccessClicks, updateTrainClicks } from '@/pages/Categories/Animals/action';
+import { updateErrorClicks, updateSuccessClicks, updateTrainClicks } from '@/pages/Statistics/actions';
 import { arrayStars } from '@/components/PointStarsBlock/PointStarsBlock';
 import styles from './Card-item.scss';
 

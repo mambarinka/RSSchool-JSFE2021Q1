@@ -1,4 +1,4 @@
-import { IAnimalAction, SET_ERROR_CLICK, SET_SUCCESS_CLICK, SET_TRAIN_CLICK } from '../Categories/Animals/action';
+import { IAnimalAction, SET_ERROR_CLICK, SET_SUCCESS_CLICK, SET_TRAIN_CLICK } from './actions';
 
 export interface Card {
   value: string;
@@ -202,7 +202,7 @@ export const initialState: IStatisticsState = {
         },
       },
     ],
-    bodyParts: [
+    'body-parts': [
       {
         value: 'ear',
         translate: 'ухо',
@@ -801,6 +801,7 @@ export function statistics(state = initialState, action: IAnimalAction): IStatis
       const {
         payload: { category, card },
       } = action;
+      console.log(category);
       const curentCard = state.categoriesStat[category].find((item: { value: string }) => item.value === card);
 
       state.categoriesStat[category].map((item: { value: string }) =>
