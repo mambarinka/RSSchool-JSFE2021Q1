@@ -6,19 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { playAudio } from '@/helpers/utils';
 import { Category, mainSelector } from '@/pages/Main/reducer';
 import { updateErrorClicks, updateSuccessClicks, updateTrainClicks } from '@/pages/Statistics/actions';
-import { arrayStars } from '@/components/PointStarsBlock/PointStarsBlock';
+// import { arrayStars } from '@/components/PointStarsBlock/PointStarsBlock';
 import styles from './Card-item.scss';
 
 export interface ICardItemProps {
   category: string;
   translate: string;
+  arrayStars: boolean[];
 }
 
 let currentAudio: string | null;
 
 export let index = 0;
 
-export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translate }) => {
+export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translate, arrayStars }) => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
   const dispatch = useDispatch();
   const path = window.location.pathname.slice(1);
@@ -40,6 +41,18 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
 
   const [isChecked, setObjCardsChecked] = useState(false);
 
+  useEffect(() => {
+    index = 0;
+  }, [path]);
+
+  useEffect(() => {
+    setObjCardsChecked(false);
+  }, [isPlayMode]);
+
+  useEffect(() => {
+    console.log(arrayStars);
+  }, [arrayStars]);
+
   const frontCardClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     currentAudio = shuffleArray[index];
     if (event!.currentTarget) {
@@ -51,14 +64,14 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
           if (category !== currentAudio) {
             playAudio(isPlayMode, null, null, false);
             // useEffect(() => {
-            arrayStars.push(false);
+            arrayStars.push(isChecked);
             // }, [arrayStars]);
             setObjCardsChecked(false);
             dispatch(updateErrorClicks(path, shuffleArray[index]));
           } else {
             playAudio(isPlayMode, null, null, true);
             dispatch(updateSuccessClicks(path, shuffleArray[index]));
-            arrayStars.push(true);
+            arrayStars.push(!isChecked);
             index++;
             if (index < shuffleArray.length) {
               setTimeout(() => {
@@ -70,6 +83,7 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
         }
       }
     }
+
     console.log(arrayStars);
   };
 
