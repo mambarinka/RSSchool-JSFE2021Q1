@@ -11,41 +11,44 @@ import { switchPlayMode } from './actions';
 
 export const AppHeaderView: () => JSX.Element = () => {
   const dispatch = useDispatch();
-  const [openClassToggle, changeOpenClassToggle] = useState(true);
-  const [openClassMenu, changeOpenClassMenu] = useState(true);
-  const [openClassOverlay, changeOpenClassOverlay] = useState(true);
-  const [playMode, changePlayMode] = useState(true);
+  const [openClassToggle, setOpenClassToggle] = useState(true);
+  const [openClassMenu, setOpenClassMenu] = useState(true);
+  const [openClassOverlay, setOpenClassOverlay] = useState(true);
+  const [playMode, setPlayMode] = useState(true);
 
-  const onClickToggle = useCallback(() => {
-    changeOpenClassToggle(!openClassToggle);
-    changeOpenClassMenu(!openClassMenu);
-    changeOpenClassOverlay(!openClassOverlay);
+  const toggleClickHandler = useCallback(() => {
+    setOpenClassToggle(!openClassToggle);
+    setOpenClassMenu(!openClassMenu);
+    setOpenClassOverlay(!openClassOverlay);
   }, [openClassToggle, openClassMenu]);
 
-  const onclickOverlay = useCallback(() => {
-    changeOpenClassToggle(!openClassToggle);
-    changeOpenClassMenu(!openClassMenu);
-    changeOpenClassOverlay(!openClassOverlay);
+  const overlayClickHandler = useCallback(() => {
+    setOpenClassToggle(!openClassToggle);
+    setOpenClassMenu(!openClassMenu);
+    setOpenClassOverlay(!openClassOverlay);
   }, [openClassToggle, openClassMenu, openClassOverlay]);
 
-  const onclickSwitch = useCallback(() => {
+  const switchClickHandler = useCallback(() => {
     dispatch(switchPlayMode(playMode));
-    changePlayMode(!playMode);
+    setPlayMode((isPlayMode) => !isPlayMode);
   }, [playMode, switchPlayMode, dispatch]);
 
   return (
     <header className={styles.pageHeader}>
       <div className={styles['page-header__wrapper']}>
         <nav className={styles['page-header__navigation']}>
-          <Toggle isInitialState={openClassToggle} onClick={onClickToggle} />
+          <Toggle isInitialState={openClassToggle} onClick={toggleClickHandler} />
           <Menu isInitialState={openClassMenu} />
         </nav>
-        <Switch htmlType="checkbox" id="switch__input" tabindex={0} onClick={onclickSwitch} />
+        <Switch htmlType="checkbox" id="switch__input" tabindex={0} onClick={switchClickHandler} />
         <Link to={'/statistics'} className={cn(styles.pageHeaderLink, styles.button)}>
           stats
         </Link>
       </div>
-      <div className={cn(styles.overlay, openClassOverlay ? null : styles.overlayOpen)} onClick={onclickOverlay}></div>
+      <div
+        className={cn(styles.overlay, openClassOverlay ? null : styles.overlayOpen)}
+        onClick={overlayClickHandler}
+      ></div>
     </header>
   );
 };

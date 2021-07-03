@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useCallback, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
@@ -22,25 +22,25 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
   const { isPlayMode } = useSelector(appHeaderViewSelector);
   const dispatch = useDispatch();
   const path = window.location.pathname.slice(1);
-  const [translateClassCard, changeTranslateClassCard] = useState(false);
+  const [translateClassCard, setTranslateClassCard] = useState(false);
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
   const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
   const shuffleArray = result[0].shuffleCards;
 
-  const onClickButtonFlip = useCallback(() => {
-    changeTranslateClassCard(!translateClassCard);
+  const buttonFlipClickHandler = useCallback(() => {
+    setTranslateClassCard(!translateClassCard);
   }, [translateClassCard]);
 
-  const onMouseLeave = useCallback(() => {
+  const mouseLeaveHandler = useCallback(() => {
     if (translateClassCard) {
-      changeTranslateClassCard(!translateClassCard);
+      setTranslateClassCard(!translateClassCard);
     }
   }, [translateClassCard]);
 
   const [isChecked, setObjCardsChecked] = useState(false);
 
-  const onClickFrontCard = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const frontCardClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     currentAudio = shuffleArray[index];
     if (event!.currentTarget) {
       if (!isPlayMode) {
@@ -50,7 +50,9 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
         if (!isChecked) {
           if (category !== currentAudio) {
             playAudio(isPlayMode, null, null, false);
+            // useEffect(() => {
             arrayStars.push(false);
+            // }, [arrayStars]);
             setObjCardsChecked(false);
             dispatch(updateErrorClicks(path, shuffleArray[index]));
           } else {
@@ -68,6 +70,7 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
         }
       }
     }
+    console.log(arrayStars);
   };
 
   return (
@@ -78,9 +81,9 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
         isPlayMode ? styles.playMode : null,
         translateClassCard ? styles.translate : null
       )}
-      onMouseLeave={onMouseLeave}
+      onMouseLeave={mouseLeaveHandler}
     >
-      <div className={cn(styles.front)} onClick={(event) => onClickFrontCard(event)}>
+      <div className={cn(styles.front)} onClick={(event) => frontCardClickHandler(event)}>
         <img src={`./images/cards/${path}/${category}.png`} alt={`${category} category`} />
         <span className={styles.cardName}>{category}</span>
       </div>
@@ -90,7 +93,7 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
         <span className={styles.cardName}>{translate}</span>
       </div>
 
-      <button type="button" className={styles.cardButtonFlip} onClick={onClickButtonFlip}></button>
+      <button type="button" className={styles.cardButtonFlip} onClick={buttonFlipClickHandler}></button>
     </li>
   );
 };
