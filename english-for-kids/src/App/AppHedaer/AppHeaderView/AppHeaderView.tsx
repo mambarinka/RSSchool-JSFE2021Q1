@@ -38,7 +38,7 @@ export const AppHeaderView: () => JSX.Element = () => {
       <div className={styles['page-header__wrapper']}>
         <nav className={styles['page-header__navigation']}>
           <Toggle isInitialState={openClassToggle} onClick={toggleClickHandler} />
-          <Menu isInitialState={openClassMenu} />
+          <Menu isInitialState={openClassMenu} onClick={overlayClickHandler} />
         </nav>
         <Switch htmlType="checkbox" id="switch__input" tabindex={0} onClick={switchClickHandler} />
         <Link to={'/statistics'} className={cn(styles.pageHeaderLink, styles.button)}>
