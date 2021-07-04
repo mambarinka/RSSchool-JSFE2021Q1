@@ -6,6 +6,7 @@
   padding-top: 50px;
   height: 90vh;
   padding-bottom: 45px;
+  transition: all 1s ease 1s;
 }
 
 .page-clothes__title {
@@ -59,7 +60,6 @@
   background-position: 4px 4px;
   transform: none;
   transition: top 1.3s, transform 1s, background 0.2s;
-  // border: none;
   border-radius: 50%;
   box-shadow: 1px 1px 11px 4px #b6d0f266;
   cursor: pointer;
@@ -79,4 +79,39 @@
   top: 0;
   left: 0;
   background: rgba(255, 255, 255, 0.4);
+}
+
+.game-is-over {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100%);
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #00000040;
+  transition: all 1s ease 1s;
+}
+
+.game-is-over-text {
+  @include text-options(50px, 60px, 700, $sixth-color);
+  display: block;
+  margin-bottom: 5px;
+  padding: 40px;
+  background-color: $bg-secondary-color;
+  border-radius: 30px;
+  text-transform: uppercase;
+  text-shadow: 5px -5px 0 $text-main-color;
+}
+
+.open-image {
+  display: block;
+  width: 20%;
+}
+
+.hide {
+  display: none;
 }

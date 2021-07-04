@@ -80,10 +80,6 @@ export const initialState: IMainState = {
 
 export const mainSelector: (state: { main: IMainState }) => IMainState = (state: { main: IMainState }) => state.main;
 
-// export function main(state = initialState): IMainState {
-//   return state;
-// }
-
 export function main(state = initialState, action: IMainAction): IMainState {
   switch (action.type) {
     case ADD_STAR: {

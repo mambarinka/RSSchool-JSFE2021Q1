@@ -66,12 +66,12 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({ category, translat
             dispatch(updateSuccessClicks(path, shuffleArray[index]));
             dispatch(addStar(!isChecked));
             index++;
+            setObjCardsChecked(true);
             if (index < shuffleArray.length) {
               setTimeout(() => {
                 playAudio(isPlayMode, path, shuffleArray[index]);
-              }, 1000);
+              }, 500);
             }
-            setObjCardsChecked(true);
           }
         }
       }
