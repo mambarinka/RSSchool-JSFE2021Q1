@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { CardList } from '@/components/CardList';
@@ -8,9 +8,11 @@ import { Category, mainSelector } from '@/pages/Main/reducer';
 import { playAudio } from '@/helpers/utils';
 import { index } from '@/components/CardList/CardItem/Card-item';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
+import { clearArrayStars } from '@/pages/Main/actions';
 import styles from './Emotion.scss';
-// export let arrayStars: boolean[] = [];
+
 export const Emotion: () => JSX.Element = () => {
+  const dispatch = useDispatch();
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
   const path = window.location.pathname.slice(1);
@@ -22,9 +24,6 @@ export const Emotion: () => JSX.Element = () => {
   const [openClassOverlay, setOpenClassOverlay] = useState(true);
   const [openClassPointStarsBlock, setOpenClassPointStarsBlock] = useState(true);
 
-  const [arrayStars, setarrayStars] = useState([]);
-  // const arrayStars: boolean[] = [];
-
   useEffect(() => {
     if (openClassButtonStart) {
       setOpenClassButtonStart((openClass) => !openClass);
@@ -33,8 +32,8 @@ export const Emotion: () => JSX.Element = () => {
   }, [isPlayMode, path]);
 
   useEffect(() => {
-    setarrayStars([]);
-  }, [path, isPlayMode]);
+    dispatch(clearArrayStars());
+  }, [dispatch, clearArrayStars]);
 
   const ButtonStartHandler = useCallback(() => {
     console.log('isPlayMode', isPlayMode);
@@ -47,8 +46,8 @@ export const Emotion: () => JSX.Element = () => {
   return (
     <main className={cn(styles.pageEmotion, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageEmotionTitle}>Emotion</h1>
-      <PointStarsBlock path={path} isInitialState={openClassPointStarsBlock} arrayStars={arrayStars} />
-      <CardList arrayStars={arrayStars} />
+      <PointStarsBlock path={path} isInitialState={openClassPointStarsBlock} />
+      <CardList />
       <button
         className={cn(styles.pageEmotionButtonStart, !isPlayMode ? null : openClassButtonStart ? null : styles.open)}
         onClick={ButtonStartHandler}

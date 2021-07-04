@@ -1,4 +1,5 @@
 import { shuffleArray } from '@/helpers/utils';
+import { IMainAction, ADD_STAR, CLEAR_ARRAY_STARS } from './actions';
 
 export interface Category {
   value: string;
@@ -11,6 +12,7 @@ export interface IMainState {
   categories: {
     [key: string]: Category;
   };
+  arrayStars: boolean[];
 }
 
 export const initialState: IMainState = {
@@ -73,19 +75,33 @@ export const initialState: IMainState = {
       shuffleCards: shuffleArray(['eight', 'four', 'nine', 'one', 'seven', 'six', 'three', 'two']),
     },
   },
+  arrayStars: [],
 };
 
 export const mainSelector: (state: { main: IMainState }) => IMainState = (state: { main: IMainState }) => state.main;
 
-export function main(state = initialState): IMainState {
-  return state;
-}
+// export function main(state = initialState): IMainState {
+//   return state;
+// }
 
-// { value: 'fruits' },
-// { value: 'animals' },
-// { value: 'body-parts' },
-// { value: 'clothes' },
-// { value: 'colors' },
-// { value: 'profession' },
-// { value: 'emotion' },
-// { value: 'numbers' },
+export function main(state = initialState, action: IMainAction): IMainState {
+  switch (action.type) {
+    case ADD_STAR: {
+      const { payload } = action;
+
+      return {
+        ...state,
+        arrayStars: [...state.arrayStars, payload],
+      };
+    }
+    case CLEAR_ARRAY_STARS: {
+      return {
+        ...state,
+        arrayStars: [],
+      };
+    }
+
+    default:
+      return state;
+  }
+}

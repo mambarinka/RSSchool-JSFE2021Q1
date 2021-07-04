@@ -3,22 +3,17 @@ import cn from 'classnames';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { useSelector } from 'react-redux';
+import { mainSelector } from '@/pages/Main/reducer';
 import { StarBlock } from './StarBlock';
 import styles from './PointStarsBlock.scss';
 
 export interface IPointStarsBlockProps {
   path: string;
   isInitialState: boolean;
-  arrayStars: boolean[];
 }
 
-// export let arrayStars: boolean[] = [];
-
-export const PointStarsBlock: FunctionComponent<IPointStarsBlockProps> = ({ path, isInitialState, arrayStars }) => {
-  const { isPlayMode } = useSelector(appHeaderViewSelector);
-  useEffect(() => {
-    arrayStars = [];
-  }, [path, isPlayMode]);
+export const PointStarsBlock: FunctionComponent<IPointStarsBlockProps> = ({ path, isInitialState }) => {
+  const { arrayStars } = useSelector(mainSelector);
 
   return (
     <div className={cn(styles.pointsStarsBlock, isInitialState ? styles.pointsStarsBlockHide : null)}>
