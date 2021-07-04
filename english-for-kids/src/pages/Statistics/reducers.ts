@@ -282,7 +282,7 @@ export const initialState: IStatisticsState = {
       },
       {
         value: 'neck',
-        translate: 'neck',
+        translate: 'шея',
         trainMode: {
           clicks: 0,
         },

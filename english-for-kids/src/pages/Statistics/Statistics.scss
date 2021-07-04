@@ -1,1 +1,68 @@
 @import '../../components/style.scss';
+
+.page-statistics {
+  @include wrapper;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.page-statistics__title {
+  @include h1-model;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.statistics-table {
+  @include text-options(15px, 16px, 400, $text-main-color);
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  background: $bg-main-color;
+  cursor: default;
+  border-collapse: collapse;
+}
+
+.statistics-table tr {
+  text-align: center;
+  // color: $sixth-color;
+  text-transform: capitalize;
+
+  &:hover {
+    background-color: $fourth-color;
+  }
+}
+
+.statistics-table th {
+  @include text-options(17px, 20px, 500, $button-main-color);
+  position: sticky;
+  width: 50px;
+  top: 0;
+  padding: 10px;
+  // letter-spacing: 0.05em;
+  cursor: pointer;
+  background: $main-color;
+
+  &:hover {
+    background-color: $text-main-color;
+  }
+}
+
+.statistics-table tr td {
+  padding: 4px;
+  letter-spacing: 1px;
+
+  &:hover {
+    background-color: #64ae09;
+  }
+}
+
+.statistics-table tr td:nth-child(1),
+.statistics-table tr td:nth-child(2),
+.statistics-table tr td:nth-child(3) {
+  padding-left: 10px;
+  text-align: left;
+}

@@ -32,7 +32,7 @@ export const initialState: IMainState = {
     bodyParts: {
       value: 'body-parts',
       cards: ['ear', 'hand', 'knee', 'leg', 'head', 'finger', 'eye', 'neck'],
-      translate: ['ухо', 'рука', 'коленка', 'нога', 'голова', 'палец', 'глаз', 'neck'],
+      translate: ['ухо', 'рука', 'коленка', 'нога', 'голова', 'палец', 'глаз', 'шея'],
       shuffleCards: shuffleArray(['ear', 'hand', 'knee', 'leg', 'head', 'finger', 'eye', 'neck']),
     },
     clothes: {
