@@ -29,5 +29,3 @@ export const playAudio: (
 };
 
 export const shuffleArray: (array: string[]) => string[] = (array: string[]) => array.sort(() => 0.5 - Math.random());
-
-export const getRandomInt = (max: number) => Math.floor(Math.random() * max);

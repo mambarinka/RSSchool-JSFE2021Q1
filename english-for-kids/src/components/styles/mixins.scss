@@ -22,6 +22,12 @@
     margin: 0 auto;
   }
 
+  @include tablet {
+    width: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
   @include mobile {
     width: auto;
     padding-left: 5%;
