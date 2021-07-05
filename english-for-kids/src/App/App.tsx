@@ -1,8 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { configureStore } from '@/store/store';
+import { configureStore, persistor } from '@/store/store';
 import { Main } from '@/pages/Main';
 import { Fruits } from '@/pages/Categories/Fruits';
 import { Animals } from '@/pages/Categories/Animals';
@@ -20,22 +21,24 @@ const store = configureStore();
 
 export const App: () => JSX.Element = () => (
   <Provider store={store}>
-    <BrowserRouter>
-      <AppHeader />
-      <Switch>
-        <Route path="/main" component={Main} />
-        <Route path="/fruits" component={Fruits} />
-        <Route path="/animals" component={Animals} />
-        <Route path="/body-parts" component={BodyParts} />
-        <Route path="/clothes" component={Clothes} />
-        <Route path="/colors" component={Colors} />
-        <Route path="/profession" component={Profession} />
-        <Route path="/emotion" component={Emotion} />
-        <Route path="/numbers" component={Numbers} />
-        <Route path="/statistics" component={Statistics} />
-        <Redirect from="/" to="/main" />
-      </Switch>
-      <AppFooter />
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <AppHeader />
+        <Switch>
+          <Route path="/main" component={Main} />
+          <Route path="/fruits" component={Fruits} />
+          <Route path="/animals" component={Animals} />
+          <Route path="/body-parts" component={BodyParts} />
+          <Route path="/clothes" component={Clothes} />
+          <Route path="/colors" component={Colors} />
+          <Route path="/profession" component={Profession} />
+          <Route path="/emotion" component={Emotion} />
+          <Route path="/numbers" component={Numbers} />
+          <Route path="/statistics" component={Statistics} />
+          <Redirect from="/" to="/main" />
+        </Switch>
+        <AppFooter />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 );

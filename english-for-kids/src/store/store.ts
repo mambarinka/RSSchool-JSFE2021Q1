@@ -5,6 +5,7 @@ import { handleRequests } from '@redux-requests/core';
 import { createDriver } from '@redux-requests/fetch';
 import { createLogger } from 'redux-logger';
 
+import { persistStore } from 'redux-persist';
 import rootReducer from './rootReducer';
 
 const { requestsMiddleware } = handleRequests({
@@ -32,10 +33,13 @@ const enhancer = applyMiddleware(...middlewares);
 
 const actionEnchancer = createActionsEnhancer({});
 
-const store = createStore(rootReducer, compose(actionEnchancer, enhancer));
+export const store = createStore(rootReducer, compose(actionEnchancer, enhancer));
+
+export const persistor = persistStore(store);
 
 export function configureStore() {
   return {
     ...store,
+    ...persistStore,
   };
 }
