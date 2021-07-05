@@ -14,6 +14,7 @@ import { Emotion } from '@/pages/Categories/Emotion';
 import { Numbers } from '@/pages/Categories/Numbers';
 import { Statistics } from '@/pages/Statistics';
 import { AppHeader } from './AppHedaer';
+import { AppFooter } from './AppFooter';
 
 const store = configureStore();
 
@@ -34,6 +35,7 @@ export const App: () => JSX.Element = () => (
         <Route path="/statistics" component={Statistics} />
         <Redirect from="/" to="/main" />
       </Switch>
+      <AppFooter />
     </BrowserRouter>
   </Provider>
 );

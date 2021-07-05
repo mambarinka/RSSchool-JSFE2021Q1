@@ -1,3 +1,6 @@
+import { Category } from '@/pages/Main/reducer';
+import { useMemo, useState } from 'react';
+
 export const playAudio: (
   isPlayMode: boolean,
   path: string | null,
@@ -29,3 +32,13 @@ export const playAudio: (
 };
 
 export const shuffleArray: (array: string[]) => string[] = (array: string[]) => array.sort(() => 0.5 - Math.random());
+
+// export const cloneObj=(firstObj: Category) {
+//   let clone = {};
+//   for (const key in firstObj) {
+//     if (type) {
+//       const element = object[key];
+
+//     }
+//   }
+// }

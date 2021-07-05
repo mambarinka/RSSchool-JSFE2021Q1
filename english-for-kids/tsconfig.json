@@ -8,7 +8,7 @@
         { "transform": "ts-auto-mock/transformer", "cacheBetweenTests": false }
       ],
       /* Basic Options */
-      "target": "ES5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,
+      "target": "ESNEXT" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,
       "module": "esnext" /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd', 'es2015' or 'esnext'. */,
       "esModuleInterop": true,
       "lib": [

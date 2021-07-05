@@ -26,7 +26,8 @@
 .statistics-table {
   @include text-options(15px, 16px, 400, $text-main-color);
   position: relative;
-  width: 500px;
+  width: 100%;
+  // width: 500px;
   min-width: 320px;
   background: $bg-main-color;
   cursor: default;
