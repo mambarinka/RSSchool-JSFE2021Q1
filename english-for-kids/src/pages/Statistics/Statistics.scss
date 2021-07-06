@@ -61,7 +61,7 @@
 
 .statistics-table th {
   @include text-options(17px, 20px, 500, $button-main-color);
-  // position: sticky;
+  position: sticky;
   // width: 50px;
   top: 0;
   padding: 10px;
@@ -70,11 +70,6 @@
   vertical-align: middle;
   background: $main-color;
   // white-space: nowrap;
-
-  &:first-child {
-    position: sticky;
-    // width: 110px;
-  }
 
   &:first-child,
   &:nth-child(2),
@@ -144,7 +139,22 @@ tbody tr td {
   }
 }
 
-thead,
-tbody {
-  overflow: scroll;
+// thead,
+// tbody {
+//   overflow: scroll;
+// }
+
+.statistics-table thead tr th.ascending {
+  outline: 5px solid black;
+  &::after {
+    content: '▲';
+    color: white;
+    width: 40px;
+  }
+}
+
+.statistics-table thead tr th.descending::after {
+  content: '▼';
+  // display: inline-block;
+  margin-left: 1em;
 }

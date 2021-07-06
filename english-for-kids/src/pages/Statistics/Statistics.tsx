@@ -1,55 +1,30 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 
 import { useSelector } from 'react-redux';
-import { Category, statisticsSelector } from './reducers';
+import { statisticsSelector } from './reducers';
 import styles from './Statistics.scss';
 
 export const Statistics: () => JSX.Element = () => {
   const { categoriesStat } = useSelector(statisticsSelector);
-  // const sortedCategories = Object.keys(categoriesStat);
-  // const sortedWords = [
-  //   ...Object.keys(categoriesStat)
-  //     .map((item) => categoriesStat[item].map((el) => el.value))
-  //     .flat(),
-  // ];
 
-  const useSortableData = (items: Category, config: { key: string; direction: string }) => {
+  const useSortableData = (items: any, config: { key: string; direction: string }) => {
     const [sortConfig, setSortConfig] = React.useState(config);
 
-    // const sortedCategories = Object.keys(categoriesStat);
-    // const sortedWords = [
-    //   ...Object.keys(categoriesStat)
-    //     .map((item) => categoriesStat[item].map((el) => el.value))
-    //     .flat(),
-    // ];
-
-    // const sortFunc = (obj: Category) => {
-    //   obj.sort((a, b) => {
-    //     if (a < b) {
-    //       return sortConfig.direction === 'ascending' ? -1 : 1;
-    //     }
-    //     if (a > b) {
-    //       return sortConfig.direction === 'ascending' ? 1 : -1;
-    //     }
-    //     return 0;
-    //   });
-    // };
-
     const sortedItems = React.useMemo(() => {
-      const sortableItems = Object.assign(items);
+      const sortableItems = [...items];
 
       if (sortConfig != null) {
-        Object.keys(sortableItems).sort((a, b) => {
-          if (a < b) {
+        sortableItems.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
             return sortConfig.direction === 'ascending' ? -1 : 1;
           }
-          if (a > b) {
+          if (a[sortConfig.key] > b[sortConfig.key]) {
             return sortConfig.direction === 'ascending' ? 1 : -1;
           }
           return 0;
         });
       }
-      console.log(sortableItems);
+      console.log('sortableItems', sortableItems);
       return sortableItems;
     }, [items, sortConfig]);
 
@@ -64,24 +39,54 @@ export const Statistics: () => JSX.Element = () => {
     return { items: sortedItems, requestSort, sortConfig };
   };
 
-  // console.log(sortedCategories);
-  // console.log(sortedWords);
-  // const [sortedField, setSortedField] = useState('');
+  const arrayData: any[] = [];
+  const arrayNames = Object.keys(categoriesStat);
+  const arrayCardValue: {
+    item: string;
+    value: string;
+    translate: string;
+    clicks: number;
+    successClicks: number;
+    errorClicks: number;
+    correctPerсent: number;
+  }[] = [];
 
-  // if (sortedField !== '') {
-  //   if (sortedField === 'Categories') {
-  //     sortFunc(sortedCategories);
-  //   } else if (sortedField === 'Words') {
-  //     sortFunc(sortedWords);
-  //   }
-  // }
+  arrayNames.map((item) =>
+    categoriesStat[item].map((el) =>
+      arrayCardValue.push({
+        item,
+        value: el.value,
+        translate: el.translate,
+        clicks: el.trainMode.clicks,
+        successClicks: el.playMode.successClicks,
+        errorClicks: el.playMode.errorClicks,
+        correctPerсent:
+          Math.round(el.playMode.successClicks / (el.playMode.successClicks + el.playMode.errorClicks)) * 100,
+      })
+    )
+  );
 
-  const { items, requestSort, sortConfig } = useSortableData(categoriesStat, {
-    key: 'Categories',
+  arrayNames.map((element) =>
+    arrayCardValue.map((el) => {
+      if (el.item === element) {
+        arrayData.push({
+          name: element,
+          value: el.value,
+          translate: el.translate,
+          clicks: el.clicks,
+          successClicks: el.successClicks,
+          errorClicks: el.errorClicks,
+          correctPerсent: el.correctPerсent,
+        });
+      }
+      return arrayData;
+    })
+  );
+
+  const { items, requestSort, sortConfig } = useSortableData(arrayData, {
+    key: 'name',
     direction: 'ascending',
   });
-  console.log('items', items);
-
   const getClassNamesFor = (name: any) => (sortConfig.key === name ? sortConfig.direction : undefined);
   return (
     <main className={styles.pageStatistics}>
@@ -90,39 +95,41 @@ export const Statistics: () => JSX.Element = () => {
         <table className={styles.statisticsTable}>
           <thead>
             <tr>
-              <th onClick={() => requestSort('Categories')} className={getClassNamesFor('Categories')}>
+              <th onClick={() => requestSort('name')} className={getClassNamesFor('name')}>
                 Categories
               </th>
-              <th onClick={() => requestSort('Words')} className={getClassNamesFor('Words')}>
+              <th onClick={() => requestSort('value')} className={getClassNamesFor('value')}>
                 Words
               </th>
-              <th onClick={() => requestSort('Translation')}>Translation</th>
-              <th onClick={() => requestSort('Trained')}>Trained</th>
-              <th onClick={() => requestSort('Correct')}>Correct</th>
-              <th onClick={() => requestSort('Wrong')}>Wrong</th>
-              <th onClick={() => requestSort('%Correct')}>%Correct</th>
+              <th onClick={() => requestSort('translate')} className={getClassNamesFor('translate')}>
+                Translation
+              </th>
+              <th onClick={() => requestSort('clicks')} className={getClassNamesFor('clicks')}>
+                Trained
+              </th>
+              <th onClick={() => requestSort('successClicks')} className={getClassNamesFor('successClicks')}>
+                Correct
+              </th>
+              <th onClick={() => requestSort('errorClicks')} className={getClassNamesFor('errorClicks')}>
+                Wrong
+              </th>
+              <th onClick={() => requestSort('correctPerсent')} className={getClassNamesFor('correctPerсent')}>
+                %Correct
+              </th>
             </tr>
           </thead>
           <tbody>
-            {Object.keys(categoriesStat).map((item) =>
-              categoriesStat[item].map((el, index) => (
-                <tr key={index}>
-                  <td>{item}</td>
-                  <td>{el.value}</td>
-                  <td>{el.translate}</td>
-                  <td>{el.trainMode.clicks}</td>
-                  <td>{el.playMode.successClicks}</td>
-                  <td>{el.playMode.errorClicks}</td>
-                  <td>
-                    {el.playMode.successClicks === 0
-                      ? 0
-                      : Math.round(
-                          (el.playMode.successClicks / (el.playMode.successClicks + el.playMode.errorClicks)) * 100
-                        )}
-                  </td>
-                </tr>
-              ))
-            )}
+            {items.map((el: any, index: number) => (
+              <tr key={index}>
+                <td>{el.name}</td>
+                <td>{el.value}</td>
+                <td>{el.translate}</td>
+                <td>{el.clicks}</td>
+                <td>{el.successClicks}</td>
+                <td>{el.errorClicks}</td>
+                <td>{el.successClicks === 0 ? 0 : el.correctPerсent}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
