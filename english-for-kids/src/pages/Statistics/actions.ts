@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 export const SET_SUCCESS_CLICK = 'SET_SUCCESS_CLICKS';
 export const SET_ERROR_CLICK = 'SET_ERROR_CLICKS';
 export const SET_TRAIN_CLICK = 'SET_TRAIN_CLICK';
+export const RESET_STATISTICS = 'RESET_STATISTICS';
 
 export interface ISetSuccessClicks extends AnyAction {
   type: typeof SET_SUCCESS_CLICK;
@@ -82,4 +83,12 @@ export const updateTrainClicks = (category: string, card: string): ISetTrainClic
   },
 });
 
-export type IAnimalAction = ISetSuccessClicks | ISetErrorClicks | ISetTrainClicks;
+export interface IResetStatistics extends AnyAction {
+  type: typeof RESET_STATISTICS;
+}
+
+export const resetStatistics = (): IResetStatistics => ({
+  type: RESET_STATISTICS,
+});
+
+export type IAnimalAction = ISetSuccessClicks | ISetErrorClicks | ISetTrainClicks | IResetStatistics;

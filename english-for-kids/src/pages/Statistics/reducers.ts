@@ -1,4 +1,4 @@
-import { IAnimalAction, SET_ERROR_CLICK, SET_SUCCESS_CLICK, SET_TRAIN_CLICK } from './actions';
+import { IAnimalAction, RESET_STATISTICS, SET_ERROR_CLICK, SET_SUCCESS_CLICK, SET_TRAIN_CLICK } from './actions';
 
 export interface Card {
   value: string;
@@ -801,7 +801,7 @@ export function statistics(state = initialState, action: IAnimalAction): IStatis
       const {
         payload: { category, card },
       } = action;
-      console.log(category);
+
       const curentCard = state.categoriesStat[category].find((item: { value: string }) => item.value === card);
 
       state.categoriesStat[category].map((item: { value: string }) =>
@@ -817,6 +817,12 @@ export function statistics(state = initialState, action: IAnimalAction): IStatis
 
       return {
         ...state,
+      };
+    }
+
+    case RESET_STATISTICS: {
+      return {
+        ...initialState,
       };
     }
 

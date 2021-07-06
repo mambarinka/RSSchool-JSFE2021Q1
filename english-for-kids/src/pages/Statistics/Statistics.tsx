@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
+import { resetStatistics } from './actions';
 import { statisticsSelector } from './reducers';
 import styles from './Statistics.scss';
 
 export const Statistics: () => JSX.Element = () => {
   const { categoriesStat } = useSelector(statisticsSelector);
+  const dispatch = useDispatch();
 
   const useSortableData = (items: any, config: { key: string; direction: string }) => {
     const [sortConfig, setSortConfig] = React.useState(config);
@@ -24,7 +27,6 @@ export const Statistics: () => JSX.Element = () => {
           return 0;
         });
       }
-      console.log('sortableItems', sortableItems);
       return sortableItems;
     }, [items, sortConfig]);
 
@@ -88,32 +90,66 @@ export const Statistics: () => JSX.Element = () => {
     direction: 'ascending',
   });
   const getClassNamesFor = (name: any) => (sortConfig.key === name ? sortConfig.direction : undefined);
+
+  const resetButtonHandler = useCallback(() => {
+    dispatch(resetStatistics());
+  }, [dispatch, resetStatistics]);
+
   return (
     <main className={styles.pageStatistics}>
       <h1 className={styles.pageStatisticsTitle}>Statistics</h1>
+      <div className={styles.buttonWrapper}>
+        <button>Repeat difficult words</button>
+        <button onClick={resetButtonHandler} className={cn(styles.button, styles.buttonReset)}>
+          Reset
+        </button>
+      </div>
       <div className={styles.statisticsWrapper}>
         <table className={styles.statisticsTable}>
           <thead>
             <tr>
-              <th onClick={() => requestSort('name')} className={getClassNamesFor('name')}>
+              <th
+                onClick={() => requestSort('name')}
+                className={cn(getClassNamesFor('name') === 'ascending' ? styles.ascending : styles.descending)}
+              >
                 Categories
               </th>
-              <th onClick={() => requestSort('value')} className={getClassNamesFor('value')}>
+              <th
+                onClick={() => requestSort('value')}
+                className={cn(getClassNamesFor('value') === 'ascending' ? styles.ascending : styles.descending)}
+              >
                 Words
               </th>
-              <th onClick={() => requestSort('translate')} className={getClassNamesFor('translate')}>
+              <th
+                onClick={() => requestSort('translate')}
+                className={cn(getClassNamesFor('translate') === 'ascending' ? styles.ascending : styles.descending)}
+              >
                 Translation
               </th>
-              <th onClick={() => requestSort('clicks')} className={getClassNamesFor('clicks')}>
+              <th
+                onClick={() => requestSort('clicks')}
+                className={cn(getClassNamesFor('clicks') === 'ascending' ? styles.ascending : styles.descending)}
+              >
                 Trained
               </th>
-              <th onClick={() => requestSort('successClicks')} className={getClassNamesFor('successClicks')}>
+              <th
+                onClick={() => requestSort('successClicks')}
+                className={cn(getClassNamesFor('successClicks') === 'ascending' ? styles.ascending : styles.descending)}
+              >
                 Correct
               </th>
-              <th onClick={() => requestSort('errorClicks')} className={getClassNamesFor('errorClicks')}>
+              <th
+                onClick={() => requestSort('errorClicks')}
+                className={cn(getClassNamesFor('errorClicks') === 'ascending' ? styles.ascending : styles.descending)}
+              >
                 Wrong
               </th>
-              <th onClick={() => requestSort('correctPerсent')} className={getClassNamesFor('correctPerсent')}>
+              <th
+                onClick={() => requestSort('correctPerсent')}
+                className={cn(
+                  getClassNamesFor('correctPerсent') === 'ascending' ? styles.ascending : styles.descending
+                )}
+              >
                 %Correct
               </th>
             </tr>

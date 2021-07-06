@@ -3,6 +3,7 @@
 .page-statistics {
   @include wrapper;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -13,6 +14,7 @@
 
 .page-statistics__title {
   @include h1-model;
+  width: 100%;
   margin-bottom: 50px;
   text-align: center;
   text-transform: uppercase;
@@ -29,7 +31,7 @@
   width: 100%;
   // width: 500px;
   min-width: 320px;
-  background: $bg-main-color;
+  backdrop-filter: blur(2px);
   cursor: default;
   border-collapse: collapse;
   // overflow: auto;
@@ -127,7 +129,6 @@ thead tr th {
   &:first-child {
     position: sticky;
     left: 0;
-    background: $main-color;
   }
 }
 
@@ -135,7 +136,6 @@ tbody tr td {
   &:first-child {
     position: sticky;
     left: 0;
-    background: $bg-main-color;
   }
 }
 
@@ -144,17 +144,26 @@ tbody tr td {
 //   overflow: scroll;
 // }
 
-.statistics-table thead tr th.ascending {
-  outline: 5px solid black;
-  &::after {
-    content: '▲';
-    color: white;
-    width: 40px;
-  }
+.ascending::after {
+  content: '▲';
+  margin-left: 5%;
 }
 
-.statistics-table thead tr th.descending::after {
+.descending::after {
   content: '▼';
-  // display: inline-block;
-  margin-left: 1em;
+  margin-left: 5%;
+}
+
+.button-wrapper {
+  align-self: flex-end;
+  margin-bottom: 5px;
+}
+
+.button-reset {
+  padding: 15px;
+  background-color: $sixth-color;
+
+  &:hover {
+    background-color: $fourth-color;
+  }
 }
