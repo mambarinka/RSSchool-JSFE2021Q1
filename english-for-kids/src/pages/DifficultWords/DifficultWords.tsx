@@ -107,10 +107,16 @@ export const DifficultWords: () => JSX.Element = () => {
       ></button>
 
       <div className={cn(styles.overlay, !isPlayMode ? null : openClassOverlay ? styles.overlayOpen : null)}></div>
-      <div className={cn(arrayFilterStars.length === arrayValuesShuffle.length ? styles.gameIsOver : null)}>
+      <div
+        className={cn(
+          arrayFilterStars.length === arrayValuesShuffle.length && arrayValuesShuffle.length !== 0
+            ? styles.gameIsOver
+            : null
+        )}
+      >
         <img
           className={cn(
-            arrayFilterStars.length === arrayValuesShuffle.length
+            arrayFilterStars.length === arrayValuesShuffle.length && arrayValuesShuffle.length !== 0
               ? !isWin
                 ? styles.openImage
                 : styles.hide
@@ -120,7 +126,7 @@ export const DifficultWords: () => JSX.Element = () => {
         />
         <p
           className={cn(
-            arrayFilterStars.length === arrayValuesShuffle.length
+            arrayFilterStars.length === arrayValuesShuffle.length && arrayValuesShuffle.length !== 0
               ? !isWin
                 ? styles.gameIsOverText
                 : styles.hide
@@ -131,7 +137,7 @@ export const DifficultWords: () => JSX.Element = () => {
         </p>
         <p
           className={cn(
-            arrayFilterStars.length === arrayValuesShuffle.length
+            arrayFilterStars.length === arrayValuesShuffle.length && arrayValuesShuffle.length !== 0
               ? !isWin
                 ? styles.gameIsOverText
                 : styles.hide
@@ -142,7 +148,7 @@ export const DifficultWords: () => JSX.Element = () => {
         </p>
         <img
           className={cn(
-            arrayFilterStars.length === arrayValuesShuffle.length
+            arrayFilterStars.length === arrayValuesShuffle.length && arrayValuesShuffle.length !== 0
               ? isWin
                 ? styles.openImage
                 : styles.hide
@@ -152,7 +158,7 @@ export const DifficultWords: () => JSX.Element = () => {
         />
         <p
           className={cn(
-            arrayFilterStars.length === arrayValuesShuffle.length
+            arrayFilterStars.length === arrayValuesShuffle.length && arrayValuesShuffle.length !== 0
               ? isWin
                 ? styles.gameIsOverText
                 : styles.hide
