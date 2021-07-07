@@ -43,19 +43,21 @@ export const DifficultWords: () => JSX.Element = () => {
   const errors = arrayStars.filter((item) => item === false).length;
 
   useEffect(() => {
-    if (arrayFilterStars.length === arrayValuesShuffle.length) {
-      if (errors === 0) {
-        setIsWin(!isWin);
-        audio.src = '../audio/win.mp3';
-      } else {
-        setIsWin(isWin);
-        audio.src = '../audio/lose.mp3';
+    if (arrayValuesShuffle.length !== 0) {
+      if (arrayFilterStars.length === arrayValuesShuffle.length) {
+        if (errors === 0) {
+          setIsWin(!isWin);
+          audio.src = '../audio/win.mp3';
+        } else {
+          setIsWin(isWin);
+          audio.src = '../audio/lose.mp3';
+        }
+        audio.play();
+        setTimeout(() => {
+          dispatch(clearArrayStars());
+          history.push('main');
+        }, 4000);
       }
-      audio.play();
-      setTimeout(() => {
-        dispatch(clearArrayStars());
-        history.push('main');
-      }, 4000);
     }
   }, [arrayStars]);
 
