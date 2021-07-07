@@ -108,7 +108,6 @@ export const Statistics: () => JSX.Element = () => {
       }
       return repeatArrayCards;
     });
-    // console.log(repeatArrayCards);
   }, [items]);
 
   const resetButtonHandler = useCallback(() => {

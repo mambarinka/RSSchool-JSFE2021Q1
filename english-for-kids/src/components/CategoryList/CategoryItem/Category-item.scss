@@ -25,9 +25,19 @@
     box-shadow: 0 8px 17px 0 RGB(0 0 0 / 15%), 0 6px 20px 0 RGB(0 0 0 / 15%);
     transform: translateY(-7px);
   }
+
+  @include tablet {
+    width: calc(100% / 3 - 6%);
+    height: 250px;
+  }
+
+  @include mobile {
+    width: calc(100% / 2 - 6%);
+    height: 250px;
+  }
 }
 
-.play-mode{
+.play-mode {
   background-color: $third-color;
 }
 

@@ -43,7 +43,7 @@ export const DifficultWords: () => JSX.Element = () => {
   const errors = arrayStars.filter((item) => item === false).length;
 
   useEffect(() => {
-    if (arrayFilterStars.length === 8) {
+    if (arrayFilterStars.length === arrayValuesShuffle.length) {
       if (errors === 0) {
         setIsWin(!isWin);
         audio.src = '../audio/win.mp3';
@@ -60,7 +60,6 @@ export const DifficultWords: () => JSX.Element = () => {
   }, [arrayStars]);
 
   const categoryValue = repeatArrayCards.find((item) => item.value === arrayValuesShuffle[0]);
-  console.log('arrayValuesShuffle71', arrayValuesShuffle);
   const ButtonStartHandler = useCallback(() => {
     setOpenClassOverlay((openClass) => !openClass);
     setOpenClassButtonStart((openClass) => !openClass);
@@ -81,13 +80,14 @@ export const DifficultWords: () => JSX.Element = () => {
     <main className={cn(styles.pageDifficultWords, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageDifficultWordsTitle}>Difficult Words</h1>
       <PointStarsBlock isInitialState={openClassPointStarsBlock} />
-      <ul className={cn(styles.cardList)} key={666}>
+      <ul className={cn(styles.cardList)} key={'666'}>
         {repeatArrayCards.map((categoryItem) => (
           <CardItemDifficult
             path={categoryItem.name}
             category={categoryItem.value}
             translate={categoryItem.translate}
             arrshuffle={arrayValuesShuffle}
+            key={categoryItem.translate}
           />
         ))}
       </ul>
@@ -107,22 +107,58 @@ export const DifficultWords: () => JSX.Element = () => {
       ></button>
 
       <div className={cn(styles.overlay, !isPlayMode ? null : openClassOverlay ? styles.overlayOpen : null)}></div>
-      <div className={cn(arrayFilterStars.length === 8 ? styles.gameIsOver : null)}>
+      <div className={cn(arrayFilterStars.length === arrayValuesShuffle.length ? styles.gameIsOver : null)}>
         <img
-          className={cn(arrayFilterStars.length === 8 ? (!isWin ? styles.openImage : styles.hide) : styles.hide)}
+          className={cn(
+            arrayFilterStars.length === arrayValuesShuffle.length
+              ? !isWin
+                ? styles.openImage
+                : styles.hide
+              : styles.hide
+          )}
           src={'./images/lose.png'}
         />
-        <p className={cn(arrayFilterStars.length === 8 ? (!isWin ? styles.gameIsOverText : styles.hide) : styles.hide)}>
+        <p
+          className={cn(
+            arrayFilterStars.length === arrayValuesShuffle.length
+              ? !isWin
+                ? styles.gameIsOverText
+                : styles.hide
+              : styles.hide
+          )}
+        >
           O no...
         </p>
-        <p className={cn(arrayFilterStars.length === 8 ? (!isWin ? styles.gameIsOverText : styles.hide) : styles.hide)}>
+        <p
+          className={cn(
+            arrayFilterStars.length === arrayValuesShuffle.length
+              ? !isWin
+                ? styles.gameIsOverText
+                : styles.hide
+              : styles.hide
+          )}
+        >
           You had {errors} errors...
         </p>
         <img
-          className={cn(arrayFilterStars.length === 8 ? (isWin ? styles.openImage : styles.hide) : styles.hide)}
+          className={cn(
+            arrayFilterStars.length === arrayValuesShuffle.length
+              ? isWin
+                ? styles.openImage
+                : styles.hide
+              : styles.hide
+          )}
           src={'./images/win.png'}
         />
-        <p className={cn(arrayFilterStars.length === 8 ? (isWin ? styles.gameIsOverText : styles.hide) : styles.hide)}>
+        <p
+          className={cn(
+            arrayFilterStars.length === arrayValuesShuffle.length
+              ? isWin
+                ? styles.gameIsOverText
+                : styles.hide
+              : styles.hide
+          )}
+        >
           Congratulations! You won!!!
         </p>
       </div>

@@ -89,6 +89,21 @@
   &:hover {
     background-color: $text-main-color;
   }
+
+  @include mobile {
+    &:first-child,
+    &:nth-child(2),
+    &:nth-child(3) {
+      width: 26%;
+    }
+
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(7) {
+      width: 5.5%;
+    }
+  }
 }
 
 .statistics-table tr td {
@@ -115,6 +130,21 @@
 
   &:hover {
     background-color: #64ae09;
+  }
+
+  @include mobile {
+    &:first-child,
+    &:nth-child(2),
+    &:nth-child(3) {
+      width: 26%;
+    }
+
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(7) {
+      width: 5.5%;
+    }
   }
 }
 

@@ -87,7 +87,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
   height: calc(100%);
   top: 0;
   left: 0;
@@ -99,11 +99,15 @@
 .game-is-over-text {
   @include text-options(50px, 60px, 700, $sixth-color);
   display: block;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 5px;
   padding: 40px;
   background-color: $bg-secondary-color;
   border-radius: 30px;
   text-transform: uppercase;
+  word-wrap: break-word;
   text-shadow: 5px -5px 0 $text-main-color;
 }
 
