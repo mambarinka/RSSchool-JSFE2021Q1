@@ -8,11 +8,10 @@ import { StarBlock } from './StarBlock';
 import styles from './PointStarsBlock.scss';
 
 export interface IPointStarsBlockProps {
-  path: string;
   isInitialState: boolean;
 }
 
-export const PointStarsBlock: FunctionComponent<IPointStarsBlockProps> = ({ path, isInitialState }) => {
+export const PointStarsBlock: FunctionComponent<IPointStarsBlockProps> = ({ isInitialState }) => {
   const { arrayStars } = useSelector(mainSelector);
 
   return (

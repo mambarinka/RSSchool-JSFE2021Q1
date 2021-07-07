@@ -45,7 +45,6 @@ export const Numbers: () => JSX.Element = () => {
   const errors = arrayStars.filter((item) => item === false).length;
 
   useEffect(() => {
-    console.log(errors);
     if (arrayFilterStars.length === 8) {
       if (errors === 0) {
         setIsWin(!isWin);
@@ -58,7 +57,7 @@ export const Numbers: () => JSX.Element = () => {
       setTimeout(() => {
         dispatch(clearArrayStars());
         history.push('main');
-      }, 5000);
+      }, 4000);
     }
   }, [arrayStars]);
 
@@ -72,7 +71,7 @@ export const Numbers: () => JSX.Element = () => {
   return (
     <main className={cn(styles.pageNumbers, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageNumbersTitle}>Numbers</h1>
-      <PointStarsBlock path={path} isInitialState={openClassPointStarsBlock} />
+      <PointStarsBlock isInitialState={openClassPointStarsBlock} />
       <CardList />
       <button
         className={cn(styles.pageNumbersButtonStart, !isPlayMode ? null : openClassButtonStart ? null : styles.open)}

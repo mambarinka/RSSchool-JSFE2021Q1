@@ -3,22 +3,20 @@ import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
-import { CardList } from '@/components/CardList';
-import { Category, mainSelector } from '@/pages/Main/reducer';
+import { mainSelector } from '@/pages/Main/reducer';
 import { playAudio } from '@/helpers/utils';
-import { index } from '@/components/CardList/CardItem/Card-item';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
 import { clearArrayStars } from '@/pages/Main/actions';
 import { useHistory } from 'react-router-dom';
-import styles from './Profession.scss';
+import { CardItemDifficult } from '@/components/CardList/CardItemDifficult';
+import { index } from '@/components/CardList/CardItemDifficult/CardItemDifficult';
+import styles from './DifficultWords.scss';
+import { repeatArrayCards } from '../Statistics/Statistics';
 
-export const Profession: () => JSX.Element = () => {
+export const DifficultWords: () => JSX.Element = () => {
+  const arrayValuesShuffle: string[] = [];
   const dispatch = useDispatch();
-  const { categories } = useSelector(mainSelector);
-  const arrayCategory: Category[] = Object.values(categories);
-  const path = window.location.pathname.slice(1);
-  const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
-  const shuffleArray = result[0].shuffleCards;
+
   const { arrayStars } = useSelector(mainSelector);
   const history = useHistory();
 
@@ -29,13 +27,13 @@ export const Profession: () => JSX.Element = () => {
   const [isWin, setIsWin] = useState(false);
   const audio = new Audio();
   audio.currentTime = 0;
-
+  repeatArrayCards.map((categoryItem) => arrayValuesShuffle.push(categoryItem.value));
   useEffect(() => {
     if (openClassButtonStart) {
       setOpenClassButtonStart((openClass) => !openClass);
       setOpenClassOverlay((openClass) => !openClass);
     }
-  }, [isPlayMode, path]);
+  }, [isPlayMode]);
 
   useEffect(() => {
     dispatch(clearArrayStars());
@@ -61,28 +59,51 @@ export const Profession: () => JSX.Element = () => {
     }
   }, [arrayStars]);
 
+  const categoryValue = repeatArrayCards.find((item) => item.value === arrayValuesShuffle[0]);
+  console.log('arrayValuesShuffle71', arrayValuesShuffle);
   const ButtonStartHandler = useCallback(() => {
     setOpenClassOverlay((openClass) => !openClass);
     setOpenClassButtonStart((openClass) => !openClass);
     setOpenClassPointStarsBlock((openClass) => !openClass);
-    playAudio(true, path, shuffleArray[0]);
-  }, [openClassOverlay]);
+    if (categoryValue) {
+      playAudio(true, categoryValue.name, arrayValuesShuffle[0]);
+    }
+  }, [openClassOverlay, repeatArrayCards, arrayValuesShuffle]);
+
+  const ButtonRepeatHandler = useCallback(() => {
+    const currentPath = repeatArrayCards.find((item) => item.value === arrayValuesShuffle[index]);
+    if (categoryValue) {
+      playAudio(isPlayMode, currentPath.name, arrayValuesShuffle[index]);
+    }
+  }, [repeatArrayCards, arrayValuesShuffle]);
 
   return (
-    <main className={cn(styles.pageProfession, isPlayMode ? 'play-mode' : null)}>
-      <h1 className={styles.pageProfessionTitle}>Profession</h1>
+    <main className={cn(styles.pageDifficultWords, isPlayMode ? 'play-mode' : null)}>
+      <h1 className={styles.pageDifficultWordsTitle}>Difficult Words</h1>
       <PointStarsBlock isInitialState={openClassPointStarsBlock} />
-      <CardList />
+      <ul className={cn(styles.cardList)} key={666}>
+        {repeatArrayCards.map((categoryItem) => (
+          <CardItemDifficult
+            path={categoryItem.name}
+            category={categoryItem.value}
+            translate={categoryItem.translate}
+            arrshuffle={arrayValuesShuffle}
+          />
+        ))}
+      </ul>
       <button
-        className={cn(styles.pageProfessionButtonStart, !isPlayMode ? null : openClassButtonStart ? null : styles.open)}
+        className={cn(
+          styles.pageDifficultWordsButtonStart,
+          !isPlayMode ? null : openClassButtonStart ? null : styles.open
+        )}
         onClick={ButtonStartHandler}
       ></button>
       <button
         className={cn(
-          styles.pageProfessionButtonRepeat,
+          styles.pageDifficultWordsButtonRepeat,
           !isPlayMode ? null : openClassButtonStart ? styles.repeat : null
         )}
-        onClick={() => playAudio(isPlayMode, path, shuffleArray[index])}
+        onClick={ButtonRepeatHandler}
       ></button>
 
       <div className={cn(styles.overlay, !isPlayMode ? null : openClassOverlay ? styles.overlayOpen : null)}></div>

@@ -33,12 +33,4 @@ export const playAudio: (
 
 export const shuffleArray: (array: string[]) => string[] = (array: string[]) => array.sort(() => 0.5 - Math.random());
 
-// export const cloneObj=(firstObj: Category) {
-//   let clone = {};
-//   for (const key in firstObj) {
-//     if (type) {
-//       const element = object[key];
-
-//     }
-//   }
-// }
+export const compareNumbers = (a: number, b: number) => a - b;

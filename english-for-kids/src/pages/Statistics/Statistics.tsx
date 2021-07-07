@@ -1,14 +1,22 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
-import { resetStatistics } from './actions';
+import { compareNumbers } from '@/helpers/utils';
+import { Link } from 'react-router-dom';
+import { resetStatistics, setCorrectPercent } from './actions';
 import { statisticsSelector } from './reducers';
 import styles from './Statistics.scss';
+
+export let repeatArrayCards: any[] = [];
 
 export const Statistics: () => JSX.Element = () => {
   const { categoriesStat } = useSelector(statisticsSelector);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCorrectPercent());
+  }, [dispatch, setCorrectPercent]);
 
   const useSortableData = (items: any, config: { key: string; direction: string }) => {
     const [sortConfig, setSortConfig] = React.useState(config);
@@ -62,8 +70,7 @@ export const Statistics: () => JSX.Element = () => {
         clicks: el.trainMode.clicks,
         successClicks: el.playMode.successClicks,
         errorClicks: el.playMode.errorClicks,
-        correctPerсent:
-          Math.round(el.playMode.successClicks / (el.playMode.successClicks + el.playMode.errorClicks)) * 100,
+        correctPerсent: el.correctPerсent,
       })
     )
   );
@@ -84,12 +91,25 @@ export const Statistics: () => JSX.Element = () => {
       return arrayData;
     })
   );
-
   const { items, requestSort, sortConfig } = useSortableData(arrayData, {
-    key: 'name',
+    key: 'name1',
     direction: 'ascending',
   });
   const getClassNamesFor = (name: any) => (sortConfig.key === name ? sortConfig.direction : undefined);
+
+  const repeatButtonHundler = useCallback(() => {
+    repeatArrayCards = [];
+    items.sort((a, b) => b.errorClicks - a.errorClicks);
+    items.map((element, index) => {
+      if (index < 8) {
+        if (element.errorClicks !== 0) {
+          repeatArrayCards.push(element);
+        }
+      }
+      return repeatArrayCards;
+    });
+    // console.log(repeatArrayCards);
+  }, [items]);
 
   const resetButtonHandler = useCallback(() => {
     dispatch(resetStatistics());
@@ -99,7 +119,9 @@ export const Statistics: () => JSX.Element = () => {
     <main className={styles.pageStatistics}>
       <h1 className={styles.pageStatisticsTitle}>Statistics</h1>
       <div className={styles.buttonWrapper}>
-        <button>Repeat difficult words</button>
+        <Link to={'/difficult-words'} onClick={repeatButtonHundler} className={cn(styles.button, styles.buttonRepeat)}>
+          Repeat difficult words
+        </Link>
         <button onClick={resetButtonHandler} className={cn(styles.button, styles.buttonReset)}>
           Reset
         </button>

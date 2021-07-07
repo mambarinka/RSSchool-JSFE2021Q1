@@ -13,6 +13,7 @@ import { Colors } from '@/pages/Categories/Colors';
 import { Profession } from '@/pages/Categories/Profession';
 import { Emotion } from '@/pages/Categories/Emotion';
 import { Numbers } from '@/pages/Categories/Numbers';
+import { DifficultWords } from '@/pages/DifficultWords';
 import { Statistics } from '@/pages/Statistics';
 import { AppHeader } from './AppHedaer';
 import { AppFooter } from './AppFooter';
@@ -35,6 +36,7 @@ export const App: () => JSX.Element = () => (
           <Route path="/emotion" component={Emotion} />
           <Route path="/numbers" component={Numbers} />
           <Route path="/statistics" component={Statistics} />
+          <Route path="/difficult-words" component={DifficultWords} />
           <Redirect from="/" to="/main" />
         </Switch>
         <AppFooter />

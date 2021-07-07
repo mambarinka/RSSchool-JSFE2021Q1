@@ -1,4 +1,11 @@
-import { IAnimalAction, RESET_STATISTICS, SET_ERROR_CLICK, SET_SUCCESS_CLICK, SET_TRAIN_CLICK } from './actions';
+import {
+  IAnimalAction,
+  RESET_STATISTICS,
+  SET_CORRECT_PERCENT,
+  SET_ERROR_CLICK,
+  SET_SUCCESS_CLICK,
+  SET_TRAIN_CLICK,
+} from './actions';
 
 export interface Card {
   value: string;
@@ -10,6 +17,7 @@ export interface Card {
     successClicks: number;
     errorClicks: number;
   };
+  correctPerсent: number;
 }
 
 export interface Category {
@@ -33,6 +41,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'banana',
@@ -44,6 +53,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'orange',
@@ -55,6 +65,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'grapes',
@@ -66,6 +77,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'watermelon',
@@ -77,6 +89,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'pineapple',
@@ -88,6 +101,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'kiwi',
@@ -99,6 +113,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'peach',
@@ -110,6 +125,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
     animals: [
@@ -123,6 +139,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'monkey',
@@ -134,6 +151,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'penguin',
@@ -145,6 +163,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'elephant',
@@ -156,6 +175,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'bear',
@@ -167,6 +187,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'zebra',
@@ -178,6 +199,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'wolf',
@@ -189,6 +211,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'panda',
@@ -200,6 +223,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
     'body-parts': [
@@ -213,6 +237,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'hand',
@@ -224,6 +249,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'knee',
@@ -235,6 +261,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'leg',
@@ -246,6 +273,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'head',
@@ -257,6 +285,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'finger',
@@ -268,6 +297,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'eye',
@@ -279,6 +309,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'neck',
@@ -290,6 +321,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
     clothes: [
@@ -303,6 +335,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'dress',
@@ -314,6 +347,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'socks',
@@ -325,6 +359,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'tie',
@@ -336,6 +371,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'trousers',
@@ -347,6 +383,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'shirt',
@@ -358,6 +395,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'skirt',
@@ -369,6 +407,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'swimsuit',
@@ -380,6 +419,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
     colors: [
@@ -393,6 +433,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'orange',
@@ -404,6 +445,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'yellow',
@@ -415,6 +457,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'green',
@@ -426,6 +469,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'blue',
@@ -437,6 +481,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'purple',
@@ -448,6 +493,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'white',
@@ -459,6 +505,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'brown',
@@ -470,6 +517,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
     profession: [
@@ -483,6 +531,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'builder',
@@ -494,6 +543,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'clown',
@@ -505,6 +555,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'conductor',
@@ -516,6 +567,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'doctor',
@@ -527,6 +579,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'pilot',
@@ -538,6 +591,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'politician',
@@ -549,6 +603,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'teacher',
@@ -560,6 +615,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
     emotion: [
@@ -573,6 +629,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'hurt',
@@ -584,6 +641,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'joy',
@@ -595,6 +653,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'laugh',
@@ -606,6 +665,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'sadness',
@@ -617,6 +677,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'surprise',
@@ -628,6 +689,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'tiredness',
@@ -639,6 +701,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'love',
@@ -650,6 +713,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
     numbers: [
@@ -663,6 +727,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'four',
@@ -674,6 +739,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'nine',
@@ -685,6 +751,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'one',
@@ -696,6 +763,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'seven',
@@ -707,6 +775,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'six',
@@ -718,6 +787,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'three',
@@ -729,6 +799,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
       {
         value: 'two',
@@ -740,6 +811,7 @@ export const initialState: IStatisticsState = {
           successClicks: 0,
           errorClicks: 0,
         },
+        correctPerсent: 0,
       },
     ],
   },
@@ -813,6 +885,21 @@ export function statistics(state = initialState, action: IAnimalAction): IStatis
               },
             }
           : item
+      );
+
+      return {
+        ...state,
+      };
+    }
+
+    case SET_CORRECT_PERCENT: {
+      Object.keys(state.categoriesStat).map((el) =>
+        state.categoriesStat[el].map((item) => {
+          item.correctPerсent = Math.round(
+            (item.playMode.successClicks / (item.playMode.successClicks + item.playMode.errorClicks)) * 100
+          );
+          return item;
+        })
       );
 
       return {

@@ -1,0 +1,1 @@
+export { DifficultWords } from './DifficultWords';

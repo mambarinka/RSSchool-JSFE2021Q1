@@ -159,6 +159,14 @@ tbody tr td {
   margin-bottom: 5px;
 }
 
+.button-repeat {
+  padding: 15px;
+  background-color: $third-color;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
 .button-reset {
   padding: 15px;
   background-color: $sixth-color;
