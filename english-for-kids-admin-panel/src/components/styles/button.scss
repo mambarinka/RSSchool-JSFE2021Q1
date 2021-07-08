@@ -1,0 +1,39 @@
+.button {
+  display: inline-block;
+  // width: 245px;
+  // height: 43px;
+  margin: 0;
+  padding: 0.6% 1.8%;
+
+  @include text-options(14px, 16px, 500, $button-main-color);
+
+  // text-shadow: 0px 0px 6px $bg-color1;
+  letter-spacing: 1px;
+  // text-shadow: 1px 1px 1px #111111, 2px 2px 2px #222222;
+
+  text-align: center;
+  vertical-align: middle;
+
+  background-color: $fourth-color;
+  border-radius: 50px;
+
+  text-decoration: none;
+  text-transform: uppercase;
+  transition-duration: 500ms;
+  cursor: pointer;
+  outline: none;
+  border: none;
+
+  &:hover {
+    background-color: $sixth-color;
+  }
+
+  &:disabled {
+    background-color: grey;
+    background-image: none;
+    &:hover {
+      background-color: grey;
+      background-image: none;
+    }
+  }
+}

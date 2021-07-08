@@ -1,0 +1,1 @@
+export { Profession } from './Profession';

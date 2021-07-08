@@ -1,0 +1,16 @@
+@import '../../components/style.scss';
+
+.page-main {
+  @include wrapper;
+  position: relative;
+  padding-top: 50px;
+  min-height: 85vh;
+  padding-bottom: 45px;
+}
+
+.page-main__title {
+  @include h1-model;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}

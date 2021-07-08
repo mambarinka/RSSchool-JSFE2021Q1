@@ -1,0 +1,55 @@
+@import '../../style.scss';
+
+.category__item {
+  width: calc(100% / 4 - 6%);
+  height: 250px;
+  margin-right: 2%;
+  margin-bottom: 25px;
+
+  background-color: $secondary-color;
+  border: 20px solid RGBA(255, 255, 255, 0.4);
+  border-radius: 50px;
+  // border-top-right-radius: 100px 50px;
+  // border-bottom-left-radius: 20% 50%;
+  // border-bottom-right-radius: 20% 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 RGB(0 0 0 / 8%), 0 2px 10px 0 RGB(0 0 0 / 8%);
+  // transition: box-shadow 0.25s, transform 0.3s;
+  transition: all 0.4s;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  &:hover {
+    box-shadow: 0 8px 17px 0 RGB(0 0 0 / 15%), 0 6px 20px 0 RGB(0 0 0 / 15%);
+    transform: translateY(-7px);
+  }
+
+  @include tablet {
+    width: calc(100% / 3 - 6%);
+    height: 250px;
+  }
+
+  @include mobile {
+    width: calc(100% / 2 - 6%);
+    height: 250px;
+  }
+}
+
+.play-mode {
+  background-color: $third-color;
+}
+
+.category__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.category__name {
+  @include text-options(20px, 24px, 700, $text-main-color);
+  text-transform: uppercase;
+}

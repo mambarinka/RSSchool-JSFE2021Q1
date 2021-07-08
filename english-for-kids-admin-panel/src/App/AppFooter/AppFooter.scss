@@ -1,0 +1,56 @@
+@import '../../components/style.scss';
+
+.footer {
+  display: flex;
+  height: 6vh;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border-top: 1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, $text-main-color, #a2abb3, $text-main-color);
+}
+
+.footer__wrapper {
+  @include wrapper;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.footer__link {
+  @include text-options(21px, 50px, 500, $text-main-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.icon-github {
+  width: 40px;
+  height: auto;
+  margin-right: 2%;
+  fill: $secondary-color;
+}
+
+.icon-github-playmode {
+  fill: $third-color;
+}
+
+.icon-rsschool {
+  width: 100px;
+  height: auto;
+  margin-right: 1%;
+  fill: $secondary-color;
+}
+
+.icon-rsschool-playmode {
+  fill: $third-color;
+}
+
+.footer__link-year {
+  @include text-options(21px, 50px, 500, $text-main-color);
+  transition: 0.3s;
+}

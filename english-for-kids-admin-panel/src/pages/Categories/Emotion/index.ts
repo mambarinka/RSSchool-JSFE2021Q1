@@ -1,0 +1,1 @@
+export { Emotion } from './Emotion';
