@@ -2,7 +2,8 @@
   "name": "server",
   "scripts": {
     "start": "ts-node ./src/app.ts",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

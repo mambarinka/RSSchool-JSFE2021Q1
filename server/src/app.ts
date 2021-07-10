@@ -11,18 +11,60 @@ const app = express();
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(json());
 app.use(cors());
+app.get('/', (req, res) => {
+  res.end(`
+  <div>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="/about">
+            About
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <h1>Home page</h1>
+  </div>
+  `)
+})
 
-const staticFilesPath = path.resolve(__dirname, '../english-for-kids/data');
-const indexPath = path.resolve(__dirname, '../english-for-kids/index.html');
+app.get('/about', (req, res)=> {
+  res.end(`
+  <div>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="/about">
+            About
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <h1>About page</h1>
+  </div>
+  `)
+})
+// const staticFilesPath = path.resolve(__dirname, '../static');
+// const indexPath = path.resolve(__dirname, '../english-for-kids/index.html');
 
-app.use(express.static('../english-for-kids/data'));
+app.use(express.static('../static'));
 
 // if query not starts with '/api/' string - send file from wwwroot
-app.use(/^(?!\/api\/)/, express.static(staticFilesPath));
+// app.use(/^(?!\/api\/)/, express.static(staticFilesPath));
 // if file doesn't exists - send index.html
-app.use(/^(?!\/api\/)/, (req, res) => {
-  res.sendFile(indexPath);
-});
+// app.use(/^(?!\/api\/)/, (req, res) => {
+//   res.sendFile(indexPath);
+// });
 app.use('/api/categories', categories);
 app.use('/api/cards', cards);
 
