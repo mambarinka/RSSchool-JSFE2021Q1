@@ -11,6 +11,7 @@
     "test:coverage": "jest --env=jsdom --config=./jest.config.js --coverage"
   },
   "dependencies": {
+    "@babel/runtime": "^7.14.6",
     "@redux-requests/core": "^0.31.0",
     "@redux-requests/fetch": "^0.12.0",
     "@types/classnames": "^2.2.10",
@@ -38,6 +39,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-reducer-actions": "^1.0.0",
+    "regenerator-runtime": "^0.13.7",
     "ts-node": "^10.0.0",
     "yarn": "^1.22.4"
   },
@@ -45,6 +47,7 @@
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.5",
     "@babel/node": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
@@ -55,11 +58,13 @@
     "@types/node": "^16.0.1",
     "@types/react-hot-loader": "^4.1.1",
     "@types/react-table": "^7.0.19",
+    "@types/regenerator-runtime": "^0.13.1",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "autoprefixer": "^9.8.5",
     "babel-jest": "^26.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "compression-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^6.0.3",
