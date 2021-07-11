@@ -38,7 +38,7 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
           <MenuItem mod={categoryItem.value} key={categoryItem.value} onClick={onClick} />
         ))}
       </ul>
-      {/* <img src={data ? data[0].image : null} alt="" /> */}
+      <button>Log in</button>
     </>
   );
 };
