@@ -1,0 +1,47 @@
+@import '../../../components/style.scss';
+
+.header {
+  padding: 15px 0;
+  border-bottom: 1px solid $text-main-color;
+}
+
+.label {
+  @include text-options(20px, 24px, 500, $text-main-color);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.content {
+  width: 360px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 #000;
+  display: block;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  & + & {
+    margin-top: 15px;
+  }
+}
+
+.caption {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.main {
+  padding: 20px 35px;
+  border-bottom: 1px solid $text-main-color;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+}

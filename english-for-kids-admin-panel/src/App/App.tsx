@@ -1,10 +1,11 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { configureStore, persistor } from '@/store/store';
 import { Main } from '@/pages/Main';
+import { Auth } from '@/pages/Auth/Auth';
 import { Fruits } from '@/pages/Categories/Fruits';
 import { Animals } from '@/pages/Categories/Animals';
 import { BodyParts } from '@/pages/Categories/Body-parts';
@@ -15,13 +16,17 @@ import { Emotion } from '@/pages/Categories/Emotion';
 import { Numbers } from '@/pages/Categories/Numbers';
 import { DifficultWords } from '@/pages/DifficultWords';
 import { Statistics } from '@/pages/Statistics';
+import { Categories } from '@/pages/Admin-panel/Categories';
+import { appHeaderViewSelector } from './AppHedaer/AppHeaderView/reducers';
 import { AppHeader } from './AppHedaer';
 import { AppFooter } from './AppFooter';
 
 const store = configureStore();
 
 export const App: () => JSX.Element = () => (
-  <Provider store={store}>
+  /* {
+  const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  return */ <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <AppHeader />
@@ -37,6 +42,10 @@ export const App: () => JSX.Element = () => (
           <Route path="/numbers" component={Numbers} />
           <Route path="/statistics" component={Statistics} />
           <Route path="/difficult-words" component={DifficultWords} />
+          <Route path="/admin-panel-categories" component={Categories} />
+          {/* <Auth isOpen={isAuthorizationOpen}>
+            <Route path="/admin-panel-categories" component={Categories} />
+          </Auth> */}
           <Redirect from="/" to="/main" />
         </Switch>
         <AppFooter />
@@ -44,3 +53,4 @@ export const App: () => JSX.Element = () => (
     </PersistGate>
   </Provider>
 );
+/* }; */

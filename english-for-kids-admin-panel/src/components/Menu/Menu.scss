@@ -13,20 +13,29 @@
 
   top: 0;
   left: -355px;
-  // left: 0;
 
   background: linear-gradient(40deg, #ffd86f, #fc6262);
   list-style-type: none;
   transition: 0.5s ease;
   box-shadow: 5px 0px 10px #00000033;
-
-  // &--open {
-  //   top: 0;
-  //   left: 0;
-  // }
 }
 
 .open {
   top: 0;
   left: 0;
+}
+
+.login {
+  position: absolute;
+  width: 150px;
+  bottom: 0;
+  left: -355px;
+  z-index: 6;
+  transition: 0.5s ease;
+  background-color: $sixth-color;
+}
+
+.login-open {
+  left: calc(290px / 2 - 150px / 2);
+  bottom: 5%;
 }

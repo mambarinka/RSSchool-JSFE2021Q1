@@ -1,0 +1,7 @@
+@import '../style.scss';
+
+.caption {
+  @include text-options(30px, 34px, 500, $text-main-color);
+  display: block;
+  text-transform: uppercase;
+}

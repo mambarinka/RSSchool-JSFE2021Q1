@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import cn from 'classnames';
 import { CardList } from '@/components/CardList';
 import { playAudio } from '@/helpers/utils';
 import { index } from '@/components/CardList/CardItem/Card-item';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
+import { Link } from 'react-router-dom';
 import styles from './Categories.scss';
 
 export const Categories: () => JSX.Element = () => {
+  const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
+
+  const handleClickUpdate = useCallback(() => {
+    setOpenClassFormUpdate((openClass) => !openClass);
+  }, [openClassFormUpdate]);
   // const dispatch = useDispatch();
   // const { categories } = useSelector(mainSelector);
   // const arrayCategory: Category[] = Object.values(categories);
@@ -63,16 +69,32 @@ export const Categories: () => JSX.Element = () => {
   // }, [openClassOverlay]);
 
   return (
-    <main>
-      <h1>Categories</h1>
-      <ul>
-        <li>
-          <h2></h2>
-          <button></button>
-          <p></p>
-          <span></span>
-          <button></button>
-          <button></button>
+    <main className={styles.pageAdminCategories}>
+      <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
+      <ul className={styles.categoriesList}>
+        <li className={styles.categoriesItem}>
+          <div className={styles.itemWrapper}>
+            <h2 className={styles.itemTitle}>Animals</h2>
+            <button className={styles.itemCloseButton}></button>
+            <div className={styles.textWrapper}>
+              <p>WORDS:</p>
+              <span className={styles.countWords}>8</span>
+            </div>
+            <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
+              Update
+            </button>
+            <Link className={cn(styles.button, styles.buttonAddWord)}>Add word</Link>
+          </div>
+          <form
+            className={cn(styles.formUpdate, openClassFormUpdate ? styles.formUpdateOpen : null)}
+            action="/api/categories"
+            method="post"
+            encType="multipart/form-data"
+          >
+            <input type="text" name="avatar" />
+            <button className={cn(styles.button, styles.buttonCreate)}>Cancel</button>
+            <button className={cn(styles.button, styles.buttonCancel)}>Create</button>
+          </form>
         </li>
       </ul>
     </main>

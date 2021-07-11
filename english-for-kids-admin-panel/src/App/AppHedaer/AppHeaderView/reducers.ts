@@ -1,14 +1,18 @@
-import { IMainAction, PLAYMODE, SWITCH_PLAYMODE } from './actions';
+import { IHeaderViewAction, PLAYMODE, SWITCH_AUTHORIZATION, SWITCH_PLAYMODE } from './actions';
 
-export const initialState: PLAYMODE = {
+export interface IHeaderViewState {
+  isPlayMode: boolean;
+  isAuthorizationOpen: boolean;
+}
+
+export const initialState: IHeaderViewState = {
   isPlayMode: false,
+  isAuthorizationOpen: false,
 };
 
-export const appHeaderViewSelector: (state: { appHeaderView: PLAYMODE }) => PLAYMODE = (state: {
-  appHeaderView: PLAYMODE;
-}) => state.appHeaderView;
+export const appHeaderViewSelector = (state: { appHeaderView: IHeaderViewState }) => state.appHeaderView;
 
-export function appHeaderView(state = initialState, action: IMainAction): PLAYMODE {
+export function appHeaderView(state = initialState, action: IHeaderViewAction) {
   switch (action.type) {
     case SWITCH_PLAYMODE: {
       const {
@@ -19,6 +23,17 @@ export function appHeaderView(state = initialState, action: IMainAction): PLAYMO
         isPlayMode,
       };
     }
+
+    case SWITCH_AUTHORIZATION: {
+      const {
+        payload: { isAuthorizationOpen },
+      } = action;
+
+      return {
+        isAuthorizationOpen,
+      };
+    }
+
     default:
       return state;
   }
