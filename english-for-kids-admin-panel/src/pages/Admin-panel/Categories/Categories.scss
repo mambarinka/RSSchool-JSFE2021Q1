@@ -24,8 +24,8 @@
 
 .categories-item {
   position: relative;
-  width: calc(100% / 4 - 6%);
-  height: 280px;
+  width: calc(100% / 4 - 4%);
+  height: 350px;
   margin-right: 2%;
   margin-bottom: 25px;
   padding: 10px;
@@ -115,10 +115,13 @@
 .form-update {
   position: absolute;
   display: none;
+  flex-direction: column;
   width: 100%;
-  height: 280px;
+  height: 100%;
+  padding: 10px;
   top: 0;
-  background-color: transparent;
+  left: 0;
+  background-color: $bg-secondary-color;
   border: none;
 
   &--open {
@@ -126,12 +129,67 @@
   }
 }
 
-.button-create {
-  padding: 18px;
-  border: 2px solid $text-main-color;
+.text-input {
+  @include text-options(20px, 24px, 400, $text-main-color);
+  margin-bottom: 5%;
+  padding: 4%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid $text-main-color;
+}
+
+.file-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-input {
+  @include text-options(20px, 24px, 400, $text-main-color);
+  width: 100%;
+  padding: 4%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid $text-main-color;
+
+  & > span {
+    display: none;
+  }
+}
+
+.image-category {
+  max-height: 227px;
+  outline: 1px solid red;
+}
+
+.button-form-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
 }
 
 .button-cancel {
-  padding: 18px;
+  padding: 10px;
+  color: $secondary-color;
+  background-color: transparent;
   border: 2px solid $secondary-color;
+
+  &:hover {
+    color: $button-main-color;
+    font-weight: 800;
+    background-color: $secondary-color;
+  }
+}
+
+.button-create {
+  padding: 10px;
+  color: $text-main-color;
+  background-color: transparent;
+  border: 2px solid $text-main-color;
+
+  &:hover {
+    color: $button-main-color;
+    font-weight: 800;
+    background-color: $text-main-color;
+  }
 }

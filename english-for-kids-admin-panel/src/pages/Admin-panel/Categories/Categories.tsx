@@ -83,7 +83,7 @@ export const Categories: () => JSX.Element = () => {
             <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
               Update
             </button>
-            <Link className={cn(styles.button, styles.buttonAddWord)}>Add word</Link>
+            <button className={cn(styles.button, styles.buttonAddWord)}>Add word</button>
           </div>
           <form
             className={cn(styles.formUpdate, openClassFormUpdate ? styles.formUpdateOpen : null)}
@@ -91,9 +91,27 @@ export const Categories: () => JSX.Element = () => {
             method="post"
             encType="multipart/form-data"
           >
-            <input type="text" name="avatar" />
-            <button className={cn(styles.button, styles.buttonCreate)}>Cancel</button>
-            <button className={cn(styles.button, styles.buttonCancel)}>Create</button>
+            <label htmlFor="category-name">Category name</label>
+            <input className={styles.textInput} type="text" name="name category" id="category-name" />
+            <div className={styles.fileWrapper}>
+              <label htmlFor="category-image">Category image</label>
+              <input
+                className={styles.fileInput}
+                type="file"
+                name="image category"
+                id="category-image"
+                accept="image/png, image/jpeg, image/svg"
+              />
+              <img
+                className={styles.imageCategory}
+                src={'./images/image-category-default.png.png'}
+                alt="image category default"
+              />
+            </div>
+            <div className={styles.buttonFormWrapper}>
+              <button className={cn(styles.button, styles.buttonCancel)}>Cancel</button>
+              <button className={cn(styles.button, styles.buttonCreate)}>Create</button>
+            </div>
           </form>
         </li>
       </ul>
