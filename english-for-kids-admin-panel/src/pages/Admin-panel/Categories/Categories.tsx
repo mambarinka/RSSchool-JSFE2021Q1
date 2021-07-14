@@ -5,68 +5,134 @@ import { playAudio } from '@/helpers/utils';
 import { index } from '@/components/CardList/CardItem/Card-item';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
 import { Link } from 'react-router-dom';
+import { Input } from '@/components/Input';
+import { createCategory } from '@/api/actions';
+import { createCategory1 } from '@/api/api';
+import { Category } from '@/models/models';
+import axios from 'axios';
 import styles from './Categories.scss';
 
 export const Categories: () => JSX.Element = () => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
+  const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
+  const [valueInputText, setValueInputText] = useState('');
+  const [valueInputFile, setValueInputFile] = useState('');
 
   const handleClickUpdate = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
   }, [openClassFormUpdate]);
-  // const dispatch = useDispatch();
-  // const { categories } = useSelector(mainSelector);
-  // const arrayCategory: Category[] = Object.values(categories);
-  // const path = window.location.pathname.slice(1);
-  // const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
-  // const shuffleArray = result[0].shuffleCards;
-  // const { arrayStars } = useSelector(mainSelector);
-  // const history = useHistory();
 
-  // const { isPlayMode } = useSelector(appHeaderViewSelector);
-  // const [openClassButtonStart, setOpenClassButtonStart] = useState(false);
-  // const [openClassOverlay, setOpenClassOverlay] = useState(true);
-  // const [openClassPointStarsBlock, setOpenClassPointStarsBlock] = useState(true);
-  // const [isWin, setIsWin] = useState(false);
-  // const audio = new Audio();
-  // audio.currentTime = 0;
+  const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const inputText = evt.currentTarget;
+    setValueInputText(inputText.value);
+  };
 
-  // useEffect(() => {
-  //   if (openClassButtonStart) {
-  //     setOpenClassButtonStart((openClass) => !openClass);
-  //     setOpenClassOverlay((openClass) => !openClass);
+  let imageFile: string | Blob;
+  const handleInputFile = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const inputFile = evt.currentTarget;
+    imageFile = inputFile!.files![0];
+    setValueInputFile(inputFile.value);
+    const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+    if (inputFile.files !== null) {
+      const file: File = inputFile.files[0];
+      const fileName = file.name.toLowerCase();
+
+      const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+      if (matches) {
+        const reader = new FileReader();
+
+        reader.addEventListener('load', () => {
+          if (reader.result !== null) {
+            setInitialImageCategory(reader.result as string);
+          }
+        });
+
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
+  const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const data = new FormData();
+    // const categoryItem: Category = {
+    //   name: valueInputText,
+    //   image: valueInputFile,
+    // };
+
+    // data.append("name", valueInputText);
+    // data.append("image", valueInputFile);
+
+    // data.append("name", imageFile);
+
+    data.append(
+      'name',
+      new Blob(
+        [
+          JSON.stringify({
+            name: valueInputText,
+          }),
+        ],
+        {
+          type: 'application/json',
+        }
+      ),
+      valueInputFile
+    );
+
+    data.append(
+      'image',
+      new Blob(
+        [
+          JSON.stringify({
+            image: valueInputFile,
+          }),
+        ],
+        {
+          type: 'multipart/form-data; boundary=<calculated when request is sent>',
+        }
+      ),
+      valueInputFile
+    );
+
+    // axios
+    //   .post("http://localhost:3000/api/categories", data)
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+    fetch('http://localhost:3000/api/categories', {
+      method: 'POST',
+      body: data,
+    })
+      .then((result) => {
+        console.log(result);
+        console.log('File sent successful');
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
+  };
+
+  //   try {
+  //     const response = await fetch("http://localhost:3000/api/categories", {
+  //       method: "POST",
+  //       mode: "cors",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
+  //     const result = await response.json();
+  //     console.log("Успех:", JSON.stringify(result));
+  //   } catch (error) {
+  //     console.error("Ошибка:", error);
   //   }
-  // }, [isPlayMode, path]);
+  // };
 
-  // useEffect(() => {
-  //   dispatch(clearArrayStars());
-  // }, [dispatch, clearArrayStars]);
-
-  // const arrayFilterStars = arrayStars.filter((item) => item === true);
-  // const errors = arrayStars.filter((item) => item === false).length;
-
-  // useEffect(() => {
-  //   if (arrayFilterStars.length === 8) {
-  //     if (errors === 0) {
-  //       setIsWin(!isWin);
-  //       audio.src = '../audio/win.mp3';
-  //     } else {
-  //       setIsWin(isWin);
-  //       audio.src = '../audio/lose.mp3';
-  //     }
-  //     audio.play();
-  //     setTimeout(() => {
-  //       dispatch(clearArrayStars());
-  //       history.push('main');
-  //     }, 4000);
-  //   }
-  // }, [arrayStars]);
-
-  // const ButtonStartHandler = useCallback(() => {
-  //   setOpenClassOverlay((openClass) => !openClass);
-  //   setOpenClassButtonStart((openClass) => !openClass);
-  //   setOpenClassPointStarsBlock((openClass) => !openClass);
-  //   playAudio(true, path, shuffleArray[0]);
-  // }, [openClassOverlay]);
+  // const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  //   console.log("11111");
+  //   evt.preventDefault();
+  //   createCategory1({ name: valueInputText, image: valueInputFile });
+  // };
 
   return (
     <main className={styles.pageAdminCategories}>
@@ -90,27 +156,33 @@ export const Categories: () => JSX.Element = () => {
             action="/api/categories"
             method="post"
             encType="multipart/form-data"
+            onSubmit={(evt) => handleFormSubmit(evt)}
           >
             <label htmlFor="category-name">Category name</label>
-            <input className={styles.textInput} type="text" name="name category" id="category-name" />
+            <input
+              className={styles.textInput}
+              type="text"
+              name="name"
+              id="category-name"
+              onChange={(event) => handleInputText(event)}
+            />
             <div className={styles.fileWrapper}>
               <label htmlFor="category-image">Category image</label>
               <input
                 className={styles.fileInput}
                 type="file"
-                name="image category"
+                name="image"
                 id="category-image"
                 accept="image/png, image/jpeg, image/svg"
+                onChange={(event) => handleInputFile(event)}
               />
-              <img
-                className={styles.imageCategory}
-                src={'./images/image-category-default.png.png'}
-                alt="image category default"
-              />
+              <img className={styles.imageCategory} src={initialImageCategory} alt="image category default" />
             </div>
             <div className={styles.buttonFormWrapper}>
               <button className={cn(styles.button, styles.buttonCancel)}>Cancel</button>
-              <button className={cn(styles.button, styles.buttonCreate)}>Create</button>
+              <button className={cn(styles.button, styles.buttonCreate)} type="submit">
+                Create
+              </button>
             </div>
           </form>
         </li>

@@ -25,7 +25,7 @@
 .categories-item {
   position: relative;
   width: calc(100% / 4 - 4%);
-  height: 350px;
+  height: 400px;
   margin-right: 2%;
   margin-bottom: 25px;
   padding: 10px;
@@ -117,7 +117,7 @@
   display: none;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 396px;
   padding: 10px;
   top: 0;
   left: 0;
@@ -141,11 +141,13 @@
 .file-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .file-input {
   @include text-options(20px, 24px, 400, $text-main-color);
   width: 100%;
+  margin-bottom: 2%;
   padding: 4%;
   background-color: transparent;
   border: none;
@@ -154,11 +156,14 @@
   & > span {
     display: none;
   }
+
+  & #file-upload-button {
+    width: 100%;
+  }
 }
 
 .image-category {
-  max-height: 227px;
-  outline: 1px solid red;
+  width: 80%;
 }
 
 .button-form-wrapper {

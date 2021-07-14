@@ -46,6 +46,7 @@
       "tsx": "never",
       "mjs": "never",
       "": "never"
-    }]
+    }],
+    "prefer-destructuring": ["error", {"object": true, "array": false}]
   }
 }
