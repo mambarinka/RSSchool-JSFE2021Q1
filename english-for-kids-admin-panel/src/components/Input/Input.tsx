@@ -40,10 +40,8 @@ export const Input: FunctionComponent<IInputProps> = ({
   }, [toggleEye]);
 
   const onChangeInputValue = ({ target }: any) => {
-    const { valueTarget } = target;
-
     if (onChange) {
-      onChange(valueTarget);
+      onChange(target.value!);
     }
   };
 

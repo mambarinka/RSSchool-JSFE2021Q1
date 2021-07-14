@@ -6,6 +6,7 @@ import { Category, mainSelector } from '@/pages/Main/reducer';
 import { getCategories } from '@/api/api';
 import { switchAuthorization } from '@/App/AppHedaer/AppHeaderView/actions';
 import { Link } from 'react-router-dom';
+import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { MenuItem } from './Menu-item';
 import styles from './Menu.scss';
 
@@ -16,9 +17,17 @@ export interface IMenuProps {
 
 export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick }) => {
   const dispatch = useDispatch();
-  const [authorizationOpen, setAuthorizationOpen] = useState(true);
+  const [authorizationOpen, setAuthorizationOpen] = useState(false);
+  const [adminIsHere, setAdminIsHere] = useState(false);
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
+  const { isAdminHere } = useSelector(appHeaderViewSelector);
+
+  useEffect(() => {
+    if (isAdminHere) {
+      setAdminIsHere((isAdmin) => !isAdmin);
+    }
+  }, [isAdminHere]);
 
   // const [data, dataSet] = useState<any>(null);
 
@@ -47,8 +56,13 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
         {arrayCategory.map((categoryItem: Category) => (
           <MenuItem mod={categoryItem.value} key={categoryItem.value} onClick={onClick} />
         ))}
+        <li className={cn(styles.menuItem, !adminIsHere ? null : styles.hide)} onClick={onClick}>
+          <Link to={'/admin-panel-categories'} className={cn(styles.menuLink)}>
+            Categories
+          </Link>
+        </li>
       </ul>
-      <Link
+      {/* <Link
         to={'/admin-panel-categories'}
         className={cn(styles.login, styles.button, isInitialState ? null : styles.loginOpen)}
         onClick={() => {
@@ -57,13 +71,13 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
         }}
       >
         Log in
-      </Link>
-      {/* <button
+      </Link> */}
+      <button
         className={cn(styles.login, styles.button, isInitialState ? null : styles.loginOpen)}
         onClick={handleSwitchAuthorization}
       >
         Log in
-      </button> */}
+      </button>
     </>
   );
 };

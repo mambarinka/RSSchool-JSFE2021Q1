@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { useSelector, Provider } from 'react-redux';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -24,33 +24,29 @@ import { AppFooter } from './AppFooter';
 const store = configureStore();
 
 export const App: () => JSX.Element = () => (
-  /* {
-  const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
-  return */ <Provider store={store}>
+  <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
-        <AppHeader />
-        <Switch>
-          <Route path="/main" component={Main} />
-          <Route path="/fruits" component={Fruits} />
-          <Route path="/animals" component={Animals} />
-          <Route path="/body-parts" component={BodyParts} />
-          <Route path="/clothes" component={Clothes} />
-          <Route path="/colors" component={Colors} />
-          <Route path="/profession" component={Profession} />
-          <Route path="/emotion" component={Emotion} />
-          <Route path="/numbers" component={Numbers} />
-          <Route path="/statistics" component={Statistics} />
-          <Route path="/difficult-words" component={DifficultWords} />
-          <Route path="/admin-panel-categories" component={Categories} />
-          {/* <Auth isOpen={isAuthorizationOpen}>
+        <Auth>
+          <AppHeader />
+          <Switch>
+            <Route path="/main" component={Main} />
+            <Route path="/fruits" component={Fruits} />
+            <Route path="/animals" component={Animals} />
+            <Route path="/body-parts" component={BodyParts} />
+            <Route path="/clothes" component={Clothes} />
+            <Route path="/colors" component={Colors} />
+            <Route path="/profession" component={Profession} />
+            <Route path="/emotion" component={Emotion} />
+            <Route path="/numbers" component={Numbers} />
+            <Route path="/statistics" component={Statistics} />
+            <Route path="/difficult-words" component={DifficultWords} />
             <Route path="/admin-panel-categories" component={Categories} />
-          </Auth> */}
-          <Redirect from="/" to="/main" />
-        </Switch>
-        <AppFooter />
+            <Redirect from="/" to="/main" />
+          </Switch>
+          <AppFooter />
+        </Auth>
       </BrowserRouter>
     </PersistGate>
   </Provider>
 );
-/* }; */

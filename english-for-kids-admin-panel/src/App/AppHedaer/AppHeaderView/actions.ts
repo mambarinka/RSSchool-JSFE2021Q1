@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 
 export const SWITCH_PLAYMODE = 'SWITCH_PLAYMODE';
 export const SWITCH_AUTHORIZATION = 'SWITCH_AUTHORIZATION';
+export const SWITCH_ADMIN_HERE = 'SWITCH_ADMIN_HERE';
 
 export interface PLAYMODE {
   isPlayMode: boolean;
@@ -9,6 +10,10 @@ export interface PLAYMODE {
 
 export interface AUTHORIZATION {
   isAuthorizationOpen: boolean;
+}
+
+export interface ADMINHERE {
+  isAdminHere: boolean;
 }
 
 export interface ISwitchPlayMode extends AnyAction {
@@ -39,4 +44,18 @@ export const switchAuthorization = (AuthorizationValue: boolean): ISwitchAuthori
   },
 });
 
-export type IHeaderViewAction = ISwitchPlayMode | ISwitchAuthorization;
+export interface ISwitchAdminHere extends AnyAction {
+  type: typeof SWITCH_ADMIN_HERE;
+  payload: {
+    isAdminHere: boolean;
+  };
+}
+
+export const switchAdminHere = (AdminHere: boolean): ISwitchAdminHere => ({
+  type: SWITCH_ADMIN_HERE,
+  payload: {
+    isAdminHere: AdminHere,
+  },
+});
+
+export type IHeaderViewAction = ISwitchPlayMode | ISwitchAuthorization | ISwitchAdminHere;

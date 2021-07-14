@@ -11,10 +11,10 @@ export const CategoryList: () => JSX.Element = () => {
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
 
-  useEffect(() => {
-    const cats = getCategories();
-    console.log(cats);
-  });
+  // useEffect(() => {
+  //   const cats = getCategories();
+  //   console.log(cats);
+  // });
 
   return (
     <ul className={cn(styles.category)}>
