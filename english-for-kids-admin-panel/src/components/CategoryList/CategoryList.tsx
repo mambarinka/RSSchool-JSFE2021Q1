@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import { Category, mainSelector } from '@/pages/Main/reducer';
-import { useSelector } from 'react-redux';
-import { getCategories } from '@/api/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories } from '@/api/actions';
+import { baseURL } from '@/api/api';
 import { CategoryItem } from './CategoryItem';
 import styles from './CategoryList.scss';
 
 export const CategoryList: () => JSX.Element = () => {
-  const { categories } = useSelector(mainSelector);
-  const arrayCategory: Category[] = Object.values(categories);
+  const dispatch = useDispatch();
+  const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
 
-  // useEffect(() => {
-  //   const cats = getCategories();
-  //   console.log(cats);
-  // });
+  useEffect(() => {
+    dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
+  }, [dispatch]);
 
   return (
     <ul className={cn(styles.category)}>
-      {arrayCategory.map((categoryItem: Category) => (
-        <CategoryItem category={categoryItem.value} key={categoryItem.value} />
+      {arrayCategoryApi.map((item: { text: React.Key | null | undefined; link: string; id: string }) => (
+        <CategoryItem category={item.text} src={`${baseURL}${item.link}`} key={item.id} />
       ))}
     </ul>
   );

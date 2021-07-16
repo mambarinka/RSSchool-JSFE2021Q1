@@ -47,9 +47,14 @@
   justify-content: space-around;
   align-items: center;
   height: 100%;
+
+  & img {
+    height: 85%
+  }
 }
 
 .category__name {
   @include text-options(20px, 24px, 700, $text-main-color);
+  height: 14%;
   text-transform: uppercase;
 }

@@ -7,7 +7,9 @@ import { CATEGORIES_ENDPOINT } from './endpoints';
 // export const TEST_ACTION = "TEST_ACTION";
 export const TEST_ACTION_SUCCESS = 'TEST_ACTION_SUCCESS';
 export const TEST_ACTION_ERROR = 'TEST_ACTION_ERROR';
-export const CREATE_CATEGORY_ACTION = 'CREATE_CATEGORY_ACTION';
+// export const CREATE_CATEGORY_ACTION = 'CREATE_CATEGORY_ACTION';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
 
 // export interface IGetData extends IApiAction {
 //   type: typeof TEST_ACTION;
@@ -34,27 +36,47 @@ export interface IGetDataError extends IApiActionError {
 //   type: "TEST_ACTION",
 // });
 
-export interface ICreateCategory extends IApiAction {
-  type: typeof CREATE_CATEGORY_ACTION;
+export interface IGetCategories extends IApiAction {
+  type: typeof GET_CATEGORIES;
+}
+export interface IGetCategoriesSuccess extends IApiAction {
+  type: typeof GET_CATEGORIES_SUCCESS;
 }
 
-export const createCategory = (category: Category): ICreateCategory => ({
-  type: CREATE_CATEGORY_ACTION,
+export const getCategories = (): IGetCategories => ({
+  type: GET_CATEGORIES,
   request: {
     url: CATEGORIES_ENDPOINT,
-    method: 'POST',
-    body: JSON.stringify(category),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    responseType: 'formData',
+    method: 'GET',
   },
 });
 
-export const createCategoryActionCreator: () => {
+export const getCategoriesActionCreator: () => {
   type: string;
 } = () => ({
-  type: 'CREATE_CATEGORY_ACTION',
+  type: 'GET_CATEGORIES',
 });
+// export interface ICreateCategory extends IApiAction {
+//   type: typeof CREATE_CATEGORY_ACTION;
+// }
 
-export type IAppActions = IGetDataSuccess | IGetDataError | ICreateCategory;
+// export const createCategory = (category: Category): ICreateCategory => ({
+//   type: CREATE_CATEGORY_ACTION,
+//   request: {
+//     url: CATEGORIES_ENDPOINT,
+//     method: 'POST',
+//     body: JSON.stringify(category),
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     responseType: 'formData',
+//   },
+// });
+
+// export const createCategoryActionCreator: () => {
+//   type: string;
+// } = () => ({
+//   type: 'CREATE_CATEGORY_ACTION',
+// });
+
+export type IApiActions = IGetDataSuccess | IGetDataError | IGetCategories | IGetCategoriesSuccess;

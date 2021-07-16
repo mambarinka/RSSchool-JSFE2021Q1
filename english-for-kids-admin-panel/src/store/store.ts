@@ -10,7 +10,7 @@ import rootReducer from './rootReducer';
 
 const { requestsMiddleware } = handleRequests({
   driver: createDriver(window.fetch, {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://server-english-for-kids.herokuapp.com/',
   }),
 });
 

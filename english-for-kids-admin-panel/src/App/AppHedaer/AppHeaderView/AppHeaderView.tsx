@@ -1,7 +1,7 @@
 import { Menu } from '@/components/Menu';
 import { Switch } from '@/components/Switсh';
 import { Toggle } from '@/components/Toggle';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import { Link } from 'react-router-dom';
@@ -16,9 +16,12 @@ export const AppHeaderView: () => JSX.Element = () => {
   const [openClassMenu, setOpenClassMenu] = useState(true);
   const [openClassOverlay, setOpenClassOverlay] = useState(true);
   const [playMode, setPlayMode] = useState(true);
-  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  const [authorizationOpen, setAuthorizationOpen] = useState(false);
+  const [adminIsHere, setAdminIsHere] = useState(false);
   const { isAdminHere } = useSelector(appHeaderViewSelector);
-  const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  // const { isAdminHere } = useSelector(appHeaderViewSelector);
+  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
 
   const toggleClickHandler = useCallback(() => {
     dispatch(switchAuthorization(false));
@@ -40,6 +43,21 @@ export const AppHeaderView: () => JSX.Element = () => {
     setPlayMode((isPlayMode) => !isPlayMode);
   }, [playMode, switchPlayMode, dispatch]);
 
+  const handleSwitchAuthorization = useCallback(() => {
+    dispatch(switchAuthorization(authorizationOpen));
+    setAuthorizationOpen((isAuth) => !isAuth);
+    // console.log(authorizationOpen);
+  }, [authorizationOpen, switchAuthorization, dispatch]);
+
+  useEffect(() => {
+    if (isAdminHere) {
+      setAdminIsHere((isAdmin) => !isAdmin);
+    } else {
+      setAdminIsHere((isAdmin) => isAdmin);
+    }
+  }, [isAdminHere]);
+  console.log('isAdminHere', isAdminHere);
+
   return (
     <header className={styles.pageHeader}>
       <div className={styles['page-header__wrapper']}>
@@ -47,6 +65,9 @@ export const AppHeaderView: () => JSX.Element = () => {
           <Toggle isInitialState={openClassToggle} onClick={toggleClickHandler} />
           <Menu isInitialState={openClassMenu} onClick={overlayClickHandler} />
         </nav>
+        <button className={cn(styles.login, styles.button)} onClick={handleSwitchAuthorization}>
+          {adminIsHere ? 'Log out' : 'Log in'}
+        </button>
         <Switch htmlType="checkbox" id="switch__input" tabindex={0} onClick={switchClickHandler} />
         <Link to={'/statistics'} className={cn(styles.pageHeaderLink, styles.button)}>
           stats

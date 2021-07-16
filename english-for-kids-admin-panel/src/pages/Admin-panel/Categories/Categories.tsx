@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import cn from 'classnames';
+import { useDispatch } from 'react-redux';
+import { getCategories } from '@/api/actions';
 import styles from './Categories.scss';
 
 export const Categories: () => JSX.Element = () => {
@@ -7,23 +9,26 @@ export const Categories: () => JSX.Element = () => {
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
-  // const [valueInputFileForServer, setvalueInputFileForServer] = useState({});
+  const dispatch = useDispatch();
 
-  const handleClickUpdate = useCallback(() => {
+  const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
   }, [openClassFormUpdate]);
 
-  const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleClickButtonCancel = useCallback(() => {
+    setOpenClassFormUpdate((openClass) => !openClass);
+    setValueInputText('');
+    setValueInputFile({});
+  }, []);
+
+  const handleInputText = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
     setValueInputText(inputText.value);
-  };
-  // let imageFile: string | Blob;
-  const handleInputFile = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  }, []);
+
+  const handleInputFile = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
     setValueInputFile(inputFile.files![0]);
-    // console.log('valueInputFile input', valueInputFile);
-
-    // setValueInputFile(inputFile.value);
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
@@ -42,76 +47,37 @@ export const Categories: () => JSX.Element = () => {
         reader.readAsDataURL(file);
       }
     }
-  };
+  }, []);
 
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const data = new FormData();
     data.append('name', valueInputText);
-    // data.append('image', valueInputFile);
-
-    // data.append(
-    //   'name',
-    //   new Blob(
-    //     [
-    //       JSON.stringify({
-    //         name: valueInputText,
-    //       }),
-    //     ],
-    //     {
-    //       type: 'application/json',
-    //     }
-    //   ),
-    //   valueInputFile
-    // );
-
     data.append('image', valueInputFile as Blob);
-    await fetch('http://localhost:3000/api/categories', {
+
+    await fetch('https://server-english-for-kids.herokuapp.com/api/categories', {
       method: 'POST',
       body: data,
     })
       .then((result) => {
+        console.log('data', data);
         console.log('result', result);
         console.log('File sent successful');
       })
       .catch((e) => {
         console.log(e.message);
       });
+    dispatch(getCategories());
+    setOpenClassFormUpdate((openClass) => !openClass);
   };
-
-  //   try {
-  //     const response = await fetch("http://localhost:3000/api/categories", {
-  //       method: "POST",
-  //       mode: "cors",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(data),
-  //     });
-  //     const result = await response.json();
-  //     console.log("Успех:", JSON.stringify(result));
-  //   } catch (error) {
-  //     console.error("Ошибка:", error);
-  //   }
-  // };
 
   return (
     <main className={styles.pageAdminCategories}>
       <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
       <ul className={styles.categoriesList}>
         <li className={styles.categoriesItem}>
-          <div className={styles.itemWrapper}>
-            <h2 className={styles.itemTitle}>Animals</h2>
-            <button className={styles.itemCloseButton}></button>
-            <div className={styles.textWrapper}>
-              <p>WORDS:</p>
-              <span className={styles.countWords}>8</span>
-            </div>
-            <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
-              Update
-            </button>
-            <button className={cn(styles.button, styles.buttonAddWord)}>Add word</button>
-          </div>
+          <h2 className={styles.categoriesItemTitle}>Create new Category</h2>
+          <button className={styles.categoriesButtonNew} onClick={handleClickButtonNew}></button>
           <form
             className={cn(styles.formUpdate, openClassFormUpdate ? styles.formUpdateOpen : null)}
             action="/api/categories"
@@ -140,7 +106,9 @@ export const Categories: () => JSX.Element = () => {
               <img className={styles.imageCategory} src={initialImageCategory} alt="image category default" />
             </div>
             <div className={styles.buttonFormWrapper}>
-              <button className={cn(styles.button, styles.buttonCancel)}>Cancel</button>
+              <button className={cn(styles.button, styles.buttonCancel)} onClick={handleClickButtonCancel}>
+                Cancel
+              </button>
               <button className={cn(styles.button, styles.buttonCreate)} type="submit">
                 Create
               </button>

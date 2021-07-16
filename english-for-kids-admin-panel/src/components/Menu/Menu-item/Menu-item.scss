@@ -18,7 +18,7 @@
   border-radius: 20px;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     display: inline-block;
     width: 31px;
@@ -31,59 +31,8 @@
     background-size: contain;
     transition: 0.3s ease;
   }
-
-  &--main {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/3094/3094372.png");
-    }
-  }
-
-  &--fruits {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/1277/1277773.png");
-    }
-  }
-
-  &--profession {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/360/360484.png");
-    }
-  }
-
-
-  &--clothes {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/4506/4506590.png");
-    }
-  }
-
-  &--emotion {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/1090/1090919.png");
-    }
-  }
-
-  &--numbers {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/1016/1016502.png");
-    }
-  }
-
-  &--body-parts {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/3699/3699470.png");
-    }
-  }
-
-  &--animals {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/220/220088.png");
-    }
-  }
-
-  &--colors {
-    &::before{
-      background-image: url("https://image.flaticon.com/icons/png/512/595/595084.png");
-    }
+  
+  &:hover {
+    color: $text-main-color;
   }
 }

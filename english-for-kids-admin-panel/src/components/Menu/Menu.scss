@@ -25,26 +25,15 @@
   left: 0;
 }
 
-.login {
-  position: absolute;
-  width: 150px;
-  bottom: 0;
-  left: -355px;
-  z-index: 6;
-  transition: 0.5s ease;
-  background-color: $sixth-color;
-}
-
-.login-open {
-  left: calc(290px / 2 - 150px / 2);
-  bottom: 5%;
-}
-
 .menu-item {
   margin-bottom: 2%;
   padding: 11px 28px;
   padding-left: 51px;
   cursor: pointer;
+
+  &--categories {
+    margin-top: 300px;
+  }
 }
 
 .menu-link {
@@ -56,6 +45,18 @@
   padding: 11px 28px;
   padding-left: 51px;
   border-radius: 20px;
+
+  &:hover {
+    color: $sixth-color;
+  }
+
+  &--categories {
+    @include text-options(18px, 23px, 500, $text-main-color);
+
+    &:hover {
+      color: $button-main-color;
+    }
+  }
 }
 
 .hide {

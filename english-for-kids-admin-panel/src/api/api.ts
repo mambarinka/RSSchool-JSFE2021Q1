@@ -2,13 +2,13 @@ import { Category } from '@/models/models';
 
 const CATEGORIES = 'categories';
 const CARDS = 'cards';
+export const baseURL = 'https://server-english-for-kids.herokuapp.com';
+const url = (endpoint: string) => `https://server-english-for-kids.herokuapp.com/api/${endpoint}`;
 
-const url = (endpoint: string) => `http://localhost:3000/api/${endpoint}`;
-
-export const getCategories = async (): Promise<Category[]> => {
-  const response = await fetch(`${url(CATEGORIES)}`);
-  return response.json();
-};
+// export const getCategories = async (): Promise<Category[]> => {
+//   const response = await fetch(`${url(CATEGORIES)}`);
+//   return response.json();
+// };
 
 // export const getCategoryByName = async (categoryName: string): Promise<Category | undefined> => {
 //   const response = await fetch(`${url(CATEGORIES)}/${categoryName}`);

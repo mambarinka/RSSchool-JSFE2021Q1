@@ -2,13 +2,13 @@ import { IHeaderViewAction, PLAYMODE, SWITCH_ADMIN_HERE, SWITCH_AUTHORIZATION, S
 
 export interface IHeaderViewState {
   isPlayMode: boolean;
-  isAuthorizationOpen: boolean;
+  // isAuthorizationOpen: boolean;
   isAdminHere: boolean;
 }
 
 export const initialState: IHeaderViewState = {
   isPlayMode: false,
-  isAuthorizationOpen: false,
+  // isAuthorizationOpen: false,
   isAdminHere: false,
 };
 
@@ -26,15 +26,15 @@ export function appHeaderView(state = initialState, action: IHeaderViewAction) {
       };
     }
 
-    case SWITCH_AUTHORIZATION: {
-      const {
-        payload: { isAuthorizationOpen },
-      } = action;
+    // case SWITCH_AUTHORIZATION: {
+    //   const {
+    //     payload: { isAuthorizationOpen },
+    //   } = action;
 
-      return {
-        isAuthorizationOpen,
-      };
-    }
+    //   return {
+    //     isAuthorizationOpen,
+    //   };
+    // }
 
     case SWITCH_ADMIN_HERE: {
       const {

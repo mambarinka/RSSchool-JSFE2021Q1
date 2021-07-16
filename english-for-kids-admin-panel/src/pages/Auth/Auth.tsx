@@ -18,16 +18,16 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children }) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [authorizationOpen, setAuthorizationOpen] = useState(false);
-  const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
-  const { isAdminHere } = useSelector(appHeaderViewSelector);
+  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  // const { isAdminHere } = useSelector(appHeaderViewSelector);
 
   useEffect(() => {
     setAuthorizationOpen(authorizationOpen);
     dispatch(switchAuthorization(authorizationOpen));
-    console.log('isAuthorizationOpen useeff', isAuthorizationOpen);
+    // console.log('isAuthorizationOpen useeff', isAuthorizationOpen);
   }, [dispatch]);
 
-  console.log('isAuthorizationOpen', isAuthorizationOpen);
+  // console.log('isAuthorizationOpen', isAuthorizationOpen);
   const handleOnAccept = useCallback(() => {
     dispatch(switchAdminHere(auth));
     if (login === 'admin' && password === 'admin') {
@@ -49,7 +49,7 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children }) => {
 
   return (
     <>
-      {!isAuthorizationOpen ? (
+      {!auth ? (
         children
       ) : (
         <AuthView onAccept={handleOnAccept} onChangeLogin={handleChangeLogin} onChangePassword={handleChangePassword} />

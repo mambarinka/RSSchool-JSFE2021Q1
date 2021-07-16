@@ -3,10 +3,10 @@ import cn from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Category, mainSelector } from '@/pages/Main/reducer';
-import { getCategories } from '@/api/api';
 import { switchAuthorization } from '@/App/AppHedaer/AppHeaderView/actions';
 import { Link } from 'react-router-dom';
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
+import { getCategories } from '@/api/actions';
 import { MenuItem } from './Menu-item';
 import styles from './Menu.scss';
 
@@ -17,12 +17,13 @@ export interface IMenuProps {
 
 export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick }) => {
   const dispatch = useDispatch();
-  const [authorizationOpen, setAuthorizationOpen] = useState(false);
-  const [adminIsHere, setAdminIsHere] = useState(false);
-  const { categories } = useSelector(mainSelector);
-  const arrayCategory: Category[] = Object.values(categories);
   const { isAdminHere } = useSelector(appHeaderViewSelector);
-  const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  const [adminIsHere, setAdminIsHere] = useState(false);
+  // const { categories } = useSelector(mainSelector);
+  // const arrayCategory: Category[] = Object.values(categories);
+
+  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
 
   useEffect(() => {
     if (isAdminHere) {
@@ -31,32 +32,34 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
       setAdminIsHere((isAdmin) => isAdmin);
     }
   }, [isAdminHere]);
-  console.log('isAdminHere', isAdminHere);
-  const handleSwitchAuthorization = useCallback(() => {
-    dispatch(switchAuthorization(authorizationOpen));
-    setAuthorizationOpen((isAuth) => !isAuth);
-    // console.log(authorizationOpen);
-  }, [authorizationOpen, switchAuthorization, dispatch]);
+
+  useEffect(() => {
+    dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
+  }, [dispatch]);
 
   return (
     <>
       <ul className={cn(styles.menu, isInitialState ? null : styles.open)}>
-        <MenuItem mod={'main'} onClick={onClick} />
-        {arrayCategory.map((categoryItem: Category) => (
-          <MenuItem mod={categoryItem.value} key={categoryItem.value} onClick={onClick} />
+        <li
+          className={cn(styles.menuItem, !adminIsHere ? null : styles.hide, styles.menuItemCategories)}
+          onClick={onClick}
+        >
+          <Link to={'/main'} className={cn(styles.menuLink, styles.menuLinkCategories)} onClick={onClick}>
+            Main
+          </Link>
+        </li>
+        {arrayCategoryApi.map((item: { text: React.Key | null | undefined; link: string; id: string }) => (
+          <MenuItem category={item.text} key={item.id} onClick={onClick} />
         ))}
-        <li className={cn(styles.menuItem, !adminIsHere ? null : styles.hide)} onClick={onClick}>
-          <Link to={'/admin-panel-categories'} className={cn(styles.menuLink)}>
+        <li
+          className={cn(styles.menuItem, !adminIsHere ? null : styles.hide, styles.menuItemCategories)}
+          onClick={onClick}
+        >
+          <Link to={'/admin-panel-categories'} className={cn(styles.menuLink, styles.menuLinkCategories)}>
             Categories
           </Link>
         </li>
       </ul>
-      <button
-        className={cn(styles.login, styles.button, isInitialState ? null : styles.loginOpen)}
-        onClick={handleSwitchAuthorization}
-      >
-        {isAdminHere ? 'Log out' : 'Log in'}
-      </button>
     </>
   );
 };

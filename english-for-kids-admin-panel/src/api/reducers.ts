@@ -1,4 +1,4 @@
-import { createCategoryActionCreator, IAppActions, TEST_ACTION_ERROR, TEST_ACTION_SUCCESS } from './actions';
+import { getCategoriesActionCreator, GET_CATEGORIES_SUCCESS, IApiActions } from './actions';
 
 export interface IApiState {
   data: any;
@@ -10,11 +10,11 @@ export const initialState: IApiState = {
   error: [],
 };
 
-export const appSelector: (state: { app: IApiState }) => IApiState = (state: { app: IApiState }) => state.app;
+export const apiSelector: (state: { api: IApiState }) => IApiState = (state: { api: IApiState }) => state.api;
 
-export function app(
+export function api(
   state = initialState,
-  action: IAppActions
+  action: IApiActions
 ):
   | IApiState
   | {
@@ -24,25 +24,14 @@ export function app(
       }[];
     } {
   switch (action.type) {
-    case TEST_ACTION_SUCCESS: {
+    case GET_CATEGORIES_SUCCESS: {
       const {
         response: { data },
       } = action;
-      const actions = [createCategoryActionCreator()];
+      const actions = [getCategoriesActionCreator()];
       return {
         ...state,
         data,
-        actions,
-      };
-    }
-    case TEST_ACTION_ERROR: {
-      const {
-        response: { error },
-      } = action;
-      const actions = [createCategoryActionCreator()];
-      return {
-        ...state,
-        error,
         actions,
       };
     }

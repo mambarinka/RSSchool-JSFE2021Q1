@@ -39,3 +39,14 @@
     background: rgba(255, 255, 255, 0.4);
   }
 }
+
+.login {
+  margin-right: 1%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: $sixth-color;
+
+  &:hover {
+    background-color: $fourth-color;
+  }
+}
