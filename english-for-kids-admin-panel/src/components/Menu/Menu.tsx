@@ -22,31 +22,20 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   const { categories } = useSelector(mainSelector);
   const arrayCategory: Category[] = Object.values(categories);
   const { isAdminHere } = useSelector(appHeaderViewSelector);
+  const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
 
   useEffect(() => {
     if (isAdminHere) {
       setAdminIsHere((isAdmin) => !isAdmin);
+    } else {
+      setAdminIsHere((isAdmin) => isAdmin);
     }
   }, [isAdminHere]);
-
-  // const [data, dataSet] = useState<any>(null);
-
-  // const fetchMyAPI = useCallback(async () => {
-  //   const response = await (await fetch('http://localhost:3000/api/categories')).json();
-  //   dataSet(response);
-  // }, []);
-  // useEffect(() => {
-  //   fetchMyAPI();
-  // }, [fetchMyAPI]);
-
-  // if (data) {
-  //   console.log(data);
-  //   console.log(data[0].image);
-  // }
-
+  console.log('isAdminHere', isAdminHere);
   const handleSwitchAuthorization = useCallback(() => {
     dispatch(switchAuthorization(authorizationOpen));
-    setAuthorizationOpen((isAuthorizationOpen) => !isAuthorizationOpen);
+    setAuthorizationOpen((isAuth) => !isAuth);
+    // console.log(authorizationOpen);
   }, [authorizationOpen, switchAuthorization, dispatch]);
 
   return (
@@ -62,21 +51,11 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
           </Link>
         </li>
       </ul>
-      {/* <Link
-        to={'/admin-panel-categories'}
-        className={cn(styles.login, styles.button, isInitialState ? null : styles.loginOpen)}
-        onClick={() => {
-          handleSwitchAuthorization();
-          onClick();
-        }}
-      >
-        Log in
-      </Link> */}
       <button
         className={cn(styles.login, styles.button, isInitialState ? null : styles.loginOpen)}
         onClick={handleSwitchAuthorization}
       >
-        Log in
+        {isAdminHere ? 'Log out' : 'Log in'}
       </button>
     </>
   );

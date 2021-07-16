@@ -5,9 +5,10 @@ import React, { useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { appHeaderViewSelector } from './reducers';
+import { switchAdminHere, switchAuthorization, switchPlayMode } from './actions';
 import styles from './AppHeaderView.scss';
-import { switchPlayMode } from './actions';
 
 export const AppHeaderView: () => JSX.Element = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,14 @@ export const AppHeaderView: () => JSX.Element = () => {
   const [openClassMenu, setOpenClassMenu] = useState(true);
   const [openClassOverlay, setOpenClassOverlay] = useState(true);
   const [playMode, setPlayMode] = useState(true);
+  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
+  const { isAdminHere } = useSelector(appHeaderViewSelector);
+  const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
 
   const toggleClickHandler = useCallback(() => {
+    dispatch(switchAuthorization(false));
+    // dispatch(switchAdminHere(false));
+    dispatch(switchAdminHere(false));
     setOpenClassToggle(!openClassToggle);
     setOpenClassMenu(!openClassMenu);
     setOpenClassOverlay(!openClassOverlay);

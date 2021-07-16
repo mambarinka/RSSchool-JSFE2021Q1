@@ -1,22 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import cn from 'classnames';
-import { CardList } from '@/components/CardList';
-import { playAudio } from '@/helpers/utils';
-import { index } from '@/components/CardList/CardItem/Card-item';
-import { PointStarsBlock } from '@/components/PointStarsBlock';
-import { Link } from 'react-router-dom';
-import { Input } from '@/components/Input';
-import { createCategory } from '@/api/actions';
-import { createCategory1 } from '@/api/api';
-import { Category } from '@/models/models';
-import axios from 'axios';
 import styles from './Categories.scss';
 
 export const Categories: () => JSX.Element = () => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
-  const [valueInputFile, setValueInputFile] = useState('');
+  const [valueInputFile, setValueInputFile] = useState({});
+  // const [valueInputFileForServer, setvalueInputFileForServer] = useState({});
 
   const handleClickUpdate = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -26,18 +17,19 @@ export const Categories: () => JSX.Element = () => {
     const inputText = evt.currentTarget;
     setValueInputText(inputText.value);
   };
-
-  let imageFile: string | Blob;
+  // let imageFile: string | Blob;
   const handleInputFile = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
-    imageFile = inputFile!.files![0];
-    setValueInputFile(inputFile.value);
+    setValueInputFile(inputFile.files![0]);
+    // console.log('valueInputFile input', valueInputFile);
+
+    // setValueInputFile(inputFile.value);
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
       const fileName = file.name.toLowerCase();
 
-      const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+      const matches = FILE_TYPES.some((it) => fileName.endsWith(`.${it}`));
       if (matches) {
         const reader = new FileReader();
 
@@ -55,56 +47,31 @@ export const Categories: () => JSX.Element = () => {
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const data = new FormData();
-    // const categoryItem: Category = {
-    //   name: valueInputText,
-    //   image: valueInputFile,
-    // };
+    data.append('name', valueInputText);
+    // data.append('image', valueInputFile);
 
-    // data.append("name", valueInputText);
-    // data.append("image", valueInputFile);
+    // data.append(
+    //   'name',
+    //   new Blob(
+    //     [
+    //       JSON.stringify({
+    //         name: valueInputText,
+    //       }),
+    //     ],
+    //     {
+    //       type: 'application/json',
+    //     }
+    //   ),
+    //   valueInputFile
+    // );
 
-    // data.append("name", imageFile);
-
-    data.append(
-      'name',
-      new Blob(
-        [
-          JSON.stringify({
-            name: valueInputText,
-          }),
-        ],
-        {
-          type: 'application/json',
-        }
-      ),
-      valueInputFile
-    );
-
-    data.append(
-      'image',
-      new Blob(
-        [
-          JSON.stringify({
-            image: valueInputFile,
-          }),
-        ],
-        {
-          type: 'multipart/form-data; boundary=<calculated when request is sent>',
-        }
-      ),
-      valueInputFile
-    );
-
-    // axios
-    //   .post("http://localhost:3000/api/categories", data)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
-    fetch('http://localhost:3000/api/categories', {
+    data.append('image', valueInputFile as Blob);
+    await fetch('http://localhost:3000/api/categories', {
       method: 'POST',
       body: data,
     })
       .then((result) => {
-        console.log(result);
+        console.log('result', result);
         console.log('File sent successful');
       })
       .catch((e) => {
@@ -126,12 +93,6 @@ export const Categories: () => JSX.Element = () => {
   //   } catch (error) {
   //     console.error("Ошибка:", error);
   //   }
-  // };
-
-  // const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-  //   console.log("11111");
-  //   evt.preventDefault();
-  //   createCategory1({ name: valueInputText, image: valueInputFile });
   // };
 
   return (

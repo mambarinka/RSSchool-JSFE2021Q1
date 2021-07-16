@@ -8,7 +8,7 @@ export interface IHeaderViewState {
 
 export const initialState: IHeaderViewState = {
   isPlayMode: false,
-  isAuthorizationOpen: true,
+  isAuthorizationOpen: false,
   isAdminHere: false,
 };
 

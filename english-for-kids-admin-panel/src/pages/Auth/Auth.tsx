@@ -1,6 +1,6 @@
 import { switchAdminHere, switchAuthorization } from '@/App/AppHedaer/AppHeaderView/actions';
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
-import React, { ReactNode, FunctionComponent, useCallback, useState } from 'react';
+import React, { ReactNode, FunctionComponent, useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Auth.scss';
@@ -17,28 +17,34 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children }) => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [authorizationOpen, setAuthorizationOpen] = useState(false);
   const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
   const { isAdminHere } = useSelector(appHeaderViewSelector);
 
+  useEffect(() => {
+    setAuthorizationOpen(authorizationOpen);
+    dispatch(switchAuthorization(authorizationOpen));
+    console.log('isAuthorizationOpen useeff', isAuthorizationOpen);
+  }, [dispatch]);
+
+  console.log('isAuthorizationOpen', isAuthorizationOpen);
   const handleOnAccept = useCallback(() => {
     dispatch(switchAdminHere(auth));
     if (login === 'admin' && password === 'admin') {
-      setAuth((isAdmin) => !isAdmin);
+      setAuth(true);
     } else {
-      alert('Уходи с моей полянки');
-      setAuth(isAdminHere);
+      alert('Вы не админ');
+      setAuth(false);
+      dispatch(switchAuthorization(false));
     }
-    dispatch(switchAuthorization(!isAuthorizationOpen));
   }, [login, password]);
 
   const handleChangeLogin = useCallback((value: string) => {
-    // console.log(value);
     setLogin(value);
   }, []);
 
   const handleChangePassword = useCallback((value: string) => {
     setPassword(value);
-    console.log(password);
   }, []);
 
   return (
