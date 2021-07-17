@@ -34,7 +34,10 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   }, [isAdminHere]);
 
   useEffect(() => {
-    dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
+    dispatch(getCategories()).then((arr: any) => {
+      setArrayCategoryApi(arr.data);
+      console.log(arr.data);
+    });
   }, [dispatch]);
 
   return (
@@ -49,7 +52,7 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
           </Link>
         </li>
         {arrayCategoryApi.map((item: { text: React.Key | null | undefined; link: string; id: string }) => (
-          <MenuItem category={item.text} key={item.id} onClick={onClick} />
+          <MenuItem category={item.text} key={item.id} onClick={onClick} src={`/${item.text}`} />
         ))}
         <li
           className={cn(styles.menuItem, !adminIsHere ? null : styles.hide, styles.menuItemCategories)}

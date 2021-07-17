@@ -6,7 +6,7 @@ import styles from './Menu-item.scss';
 
 export interface IMenuItemProps {
   category: string | React.Key | null | undefined;
-  src?: string;
+  src: string;
   onClick: () => void;
 }
 
