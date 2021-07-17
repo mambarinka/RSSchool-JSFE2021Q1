@@ -1,8 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
 import styles from './CategoriesItem.scss';
 
-export const CategoriesItem: () => JSX.Element = () => {
+export interface ICategoriesItemProps {
+  category: string | React.Key | null | undefined;
+  // src: string;
+}
+
+export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ category }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
@@ -61,11 +66,11 @@ export const CategoriesItem: () => JSX.Element = () => {
   return (
     <li className={styles.categoriesItem}>
       <div className={styles.itemWrapper}>
-        <h2 className={styles.itemTitle}>Animals</h2>
+        <h2 className={styles.itemTitle}>{category}</h2>
         <button className={styles.itemCloseButton}></button>
         <div className={styles.textWrapper}>
           <p>WORDS:</p>
-          <span className={styles.countWords}>8</span>
+          <span className={styles.countWords}></span>
         </div>
         <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
           Update

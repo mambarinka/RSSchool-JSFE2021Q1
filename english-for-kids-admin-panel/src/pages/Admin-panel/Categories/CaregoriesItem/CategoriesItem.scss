@@ -1,4 +1,4 @@
-@import '../../../components/style.scss';
+@import '../../../../components/style.scss';
 
 .page-admin-categories {
   @include wrapper;
@@ -74,7 +74,7 @@
   top: 0;
   right: 0;
   background-color: transparent;
-  background-image: url('../../../../assets/icons/icon-button-close.png');
+  background-image: url('../../../../../assets/icons/icon-button-close.png');
   background-repeat: no-repeat;
   background-size: 85%;
   border: none;

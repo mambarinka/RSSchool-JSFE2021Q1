@@ -1,14 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useDispatch } from 'react-redux';
 import { getCategories } from '@/api/actions';
 import styles from './Categories.scss';
+import { CategoriesItem } from './CaregoriesItem';
 
 export const Categories: () => JSX.Element = () => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
+  const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
   const dispatch = useDispatch();
 
   const handleClickButtonNew = useCallback(() => {
@@ -71,6 +73,10 @@ export const Categories: () => JSX.Element = () => {
     setOpenClassFormUpdate((openClass) => !openClass);
   };
 
+  useEffect(() => {
+    dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
+  }, [dispatch]);
+
   return (
     <main className={styles.pageAdminCategories}>
       <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
@@ -115,6 +121,9 @@ export const Categories: () => JSX.Element = () => {
             </div>
           </form>
         </li>
+        {arrayCategoryApi.map((item: { text: React.Key | null | undefined; id: string }) => (
+          <CategoriesItem category={item.text} key={item.id} />
+        ))}
       </ul>
     </main>
   );
