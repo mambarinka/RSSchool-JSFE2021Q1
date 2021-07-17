@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCategories } from '@/api/actions';
 import { baseURL } from '@/api/api';
+import { apiSelector } from '@/api/reducers';
 import { CategoriesItem } from './CaregoriesItem';
 import styles from './Categories.scss';
 
@@ -13,6 +14,7 @@ export const Categories: () => JSX.Element = () => {
   const [valueInputFile, setValueInputFile] = useState({});
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
   const dispatch = useDispatch();
+  const { data } = useSelector(apiSelector);
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -58,17 +60,17 @@ export const Categories: () => JSX.Element = () => {
     setValueInputText('');
     setValueInputFile({});
 
-    const data = new FormData();
-    data.append('name', valueInputText);
-    data.append('image', valueInputFile as Blob);
+    const dataForm = new FormData();
+    dataForm.append('name', valueInputText);
+    dataForm.append('image', valueInputFile as Blob);
 
     // await fetch('http://localhost:3000/api/categories', {
     await fetch('https://server-english-for-kids.herokuapp.com/api/categories', {
       method: 'POST',
-      body: data,
+      body: dataForm,
     })
       .then((result) => {
-        console.log('data', data);
+        console.log('data', dataForm);
         console.log('result', result);
         console.log('File sent successful');
       })
@@ -81,6 +83,9 @@ export const Categories: () => JSX.Element = () => {
 
   useEffect(() => {
     dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
+    // dispatch(getCategories());
+    // console.log(data);
+    // setArrayCategoryApi(data);
   }, [dispatch, getCategories, fetch, setOpenClassFormUpdate]);
 
   return (
