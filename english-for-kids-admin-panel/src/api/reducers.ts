@@ -1,4 +1,10 @@
-import { getCategoriesActionCreator, GET_CATEGORIES_SUCCESS, IApiActions } from './actions';
+import {
+  getCategoriesActionCreator,
+  GET_CATEGORIES_SUCCESS,
+  IApiActions,
+  updateCategoryActionCreator,
+  UPDATE_CATEGORY_SUCCESS,
+} from './actions';
 
 export interface IApiState {
   data: any;
@@ -29,6 +35,18 @@ export function api(
         response: { data },
       } = action;
       const actions = [getCategoriesActionCreator()];
+      return {
+        ...state,
+        data,
+        actions,
+      };
+    }
+
+    case UPDATE_CATEGORY_SUCCESS: {
+      const {
+        response: { data },
+      } = action;
+      const actions = [updateCategoryActionCreator()];
       return {
         ...state,
         data,

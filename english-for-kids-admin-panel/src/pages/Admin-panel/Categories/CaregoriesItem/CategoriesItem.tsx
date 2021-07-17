@@ -1,21 +1,31 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
+import { updateCategory } from '@/api/actions';
+import { useDispatch } from 'react-redux';
 import styles from './CategoriesItem.scss';
 
 export interface ICategoriesItemProps {
   category: string | React.Key | null | undefined;
-  // src: string;
+  categoryId: string;
+  src: string;
 }
 
-export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ category }) => {
+export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ category, categoryId, src }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
+  const dispatch = useDispatch();
 
   const handleClickUpdate = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
   }, [openClassFormUpdate]);
+
+  const handleClickButtonCancel = useCallback(() => {
+    setOpenClassFormUpdate((openClass) => !openClass);
+    setValueInputText('');
+    setValueInputFile({});
+  }, []);
 
   const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
@@ -46,21 +56,31 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
 
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const data = new FormData();
-    data.append('name', valueInputText);
-    data.append('image', valueInputFile as Blob);
+    setOpenClassFormUpdate((openClass) => !openClass);
+    setValueInputText('');
+    setValueInputFile({});
 
-    await fetch('https://server-english-for-kids.herokuapp.com/', {
-      method: 'POST',
-      body: data,
-    })
-      .then((result) => {
-        console.log('result', result);
-        console.log('File sent successful');
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
+    const data = new FormData();
+    if (valueInputText === '' || valueInputFile === {}) {
+      alert('Заполните, пожалуйста, все поля');
+    } else {
+      data.append('name', valueInputText);
+      data.append('image', valueInputFile as Blob);
+      data.append('id', categoryId);
+
+      dispatch(updateCategory(data));
+    }
+    // await fetch('https://server-english-for-kids.herokuapp.com/', {
+    //   method: 'POST',
+    //   body: data,
+    // })
+    //   .then((result) => {
+    //     console.log('result', result);
+    //     console.log('File sent successful');
+    //   })
+    //   .catch((e) => {
+    //     console.log(e.message);
+    //   });
   };
 
   return (
@@ -72,6 +92,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
           <p>WORDS:</p>
           <span className={styles.countWords}></span>
         </div>
+        <img src={src} alt={`${category} category`} />
         <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
           Update
         </button>
@@ -85,29 +106,24 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
         onSubmit={(evt) => handleFormSubmit(evt)}
       >
         <label htmlFor="category-name">Category name</label>
-        <input
-          className={styles.textInput}
-          type="text"
-          name="name"
-          id="category-name"
-          onChange={(event) => handleInputText(event)}
-        />
+        <input className={styles.textInput} type="text" name="name" onChange={(event) => handleInputText(event)} />
         <div className={styles.fileWrapper}>
           <label htmlFor="category-image">Category image</label>
           <input
             className={styles.fileInput}
             type="file"
             name="image"
-            id="category-image"
             accept="image/png, image/jpeg, image/svg"
             onChange={(event) => handleInputFile(event)}
           />
           <img className={styles.imageCategory} src={initialImageCategory} alt="image category default" />
         </div>
         <div className={styles.buttonFormWrapper}>
-          <button className={cn(styles.button, styles.buttonCancel)}>Cancel</button>
+          <button className={cn(styles.button, styles.buttonCancel)} type="button" onClick={handleClickButtonCancel}>
+            Cancel
+          </button>
           <button className={cn(styles.button, styles.buttonCreate)} type="submit">
-            Create
+            Save
           </button>
         </div>
       </form>

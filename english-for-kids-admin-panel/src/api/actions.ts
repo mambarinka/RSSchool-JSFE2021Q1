@@ -10,6 +10,8 @@ export const TEST_ACTION_ERROR = 'TEST_ACTION_ERROR';
 // export const CREATE_CATEGORY_ACTION = 'CREATE_CATEGORY_ACTION';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
+export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
+export const UPDATE_CATEGORY_SUCCESS = 'UPDATE_CATEGORY_SUCCESS';
 
 // export interface IGetData extends IApiAction {
 //   type: typeof TEST_ACTION;
@@ -56,6 +58,29 @@ export const getCategoriesActionCreator: () => {
 } = () => ({
   type: 'GET_CATEGORIES',
 });
+
+export interface IUpdateCategory extends IApiAction {
+  type: typeof UPDATE_CATEGORY;
+}
+export interface IUpdateCategorySuccess extends IApiAction {
+  type: typeof UPDATE_CATEGORY_SUCCESS;
+}
+
+export const updateCategory = (data: FormData): IUpdateCategory => ({
+  type: UPDATE_CATEGORY,
+  request: {
+    url: CATEGORIES_ENDPOINT,
+    // url: `${CATEGORIES_ENDPOINT}/${id}`,
+    method: 'PUT',
+    body: data,
+  },
+});
+
+export const updateCategoryActionCreator: () => {
+  type: string;
+} = () => ({
+  type: 'UPDATE_CATEGORY',
+});
 // export interface ICreateCategory extends IApiAction {
 //   type: typeof CREATE_CATEGORY_ACTION;
 // }
@@ -79,4 +104,10 @@ export const getCategoriesActionCreator: () => {
 //   type: 'CREATE_CATEGORY_ACTION',
 // });
 
-export type IApiActions = IGetDataSuccess | IGetDataError | IGetCategories | IGetCategoriesSuccess;
+export type IApiActions =
+  | IGetDataSuccess
+  | IGetDataError
+  | IGetCategories
+  | IGetCategoriesSuccess
+  | IUpdateCategory
+  | IUpdateCategorySuccess;

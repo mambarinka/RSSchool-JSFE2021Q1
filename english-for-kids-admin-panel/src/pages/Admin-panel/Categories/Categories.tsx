@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useDispatch } from 'react-redux';
 import { getCategories } from '@/api/actions';
-import styles from './Categories.scss';
+import { baseURL } from '@/api/api';
 import { CategoriesItem } from './CaregoriesItem';
+import styles from './Categories.scss';
 
 export const Categories: () => JSX.Element = () => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
@@ -53,10 +54,15 @@ export const Categories: () => JSX.Element = () => {
 
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    setOpenClassFormUpdate((openClass) => !openClass);
+    setValueInputText('');
+    setValueInputFile({});
+
     const data = new FormData();
     data.append('name', valueInputText);
     data.append('image', valueInputFile as Blob);
 
+    // await fetch('http://localhost:3000/api/categories', {
     await fetch('https://server-english-for-kids.herokuapp.com/api/categories', {
       method: 'POST',
       body: data,
@@ -75,7 +81,7 @@ export const Categories: () => JSX.Element = () => {
 
   useEffect(() => {
     dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
-  }, [dispatch]);
+  }, [dispatch, getCategories, fetch, setOpenClassFormUpdate]);
 
   return (
     <main className={styles.pageAdminCategories}>
@@ -121,8 +127,8 @@ export const Categories: () => JSX.Element = () => {
             </div>
           </form>
         </li>
-        {arrayCategoryApi.map((item: { text: React.Key | null | undefined; id: string }) => (
-          <CategoriesItem category={item.text} key={item.id} />
+        {arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
+          <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
         ))}
       </ul>
     </main>
