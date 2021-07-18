@@ -10,13 +10,14 @@ import { index } from '@/components/CardList/CardItem/Card-item';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
 import { clearArrayStars } from '@/pages/Main/actions';
 import { useHistory } from 'react-router-dom';
-import styles from './BaseComponentCategory.scss';
+import styles from './BaseComponentCategoryWords.scss';
 
-export interface IBaseComponentCategoryProps {
+export interface IBaseComponentCategoryWordsProps {
   category: string | React.Key | null | undefined;
+  word: string | React.Key | null | undefined;
 }
 
-export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProps> = ({ category }) => {
+export const BaseComponentCategoryWords: FunctionComponent<IBaseComponentCategoryWordsProps> = ({ category, word }) => {
   const dispatch = useDispatch();
   // const { categories } = useSelector(mainSelector);
   // const arrayCategory: Category[] = Object.values(categories);
@@ -73,19 +74,19 @@ export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProp
   }, [openClassOverlay]);
 
   return (
-    <main className={cn(styles.pageBaseComponentCategory, isPlayMode ? 'play-mode' : null)}>
-      <h1 className={styles.pageBaseComponentCategoryTitle}>{category}</h1>
+    <main className={cn(styles.pageBaseComponentCategoryWords, isPlayMode ? 'play-mode' : null)}>
+      <h1 className={styles.pageBaseComponentCategoryWordsTitle}>{word}</h1>
       <PointStarsBlock isInitialState={openClassPointStarsBlock} />
       <button
         className={cn(
-          styles.pageBaseComponentCategoryButtonStart,
+          styles.pageBaseComponentCategoryWordsButtonStart,
           !isPlayMode ? null : openClassButtonStart ? null : styles.open
         )}
         onClick={ButtonStartHandler}
       ></button>
       <button
         className={cn(
-          styles.pageBaseComponentCategoryButtonRepeat,
+          styles.pageBaseComponentCategoryWordsButtonRepeat,
           !isPlayMode ? null : openClassButtonStart ? styles.repeat : null
         )}
         /* onClick={() => playAudio(isPlayMode, path, shuffleArray[index])} */

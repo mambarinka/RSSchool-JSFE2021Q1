@@ -9,6 +9,7 @@ import { Auth } from '@/pages/Auth/Auth';
 import { DifficultWords } from '@/pages/DifficultWords';
 import { Statistics } from '@/pages/Statistics';
 import { Categories } from '@/pages/Admin-panel/Categories';
+import { Words } from '@/pages/Admin-panel/Words';
 import { getCategories } from '@/api/actions';
 import { BaseComponentCategory } from '@/pages/BaseComponentCategory';
 import { IBaseComponentCategoryProps } from '@/pages/BaseComponentCategory/BaseComponentCategory';
@@ -40,6 +41,15 @@ export const App = () => {
             <Route path="/statistics" component={Statistics} />
             <Route path="/difficult-words" component={DifficultWords} />
             <Route path="/admin-panel-categories" component={Categories} />
+            {arrayCategoryApi!.map((item: { text: PropsWithChildren<IBaseComponentCategoryProps>; id: string }) => (
+              <Route
+                path={`/${item.text}-category/words`}
+                key={item.id}
+                render={(props: any) => <Words {...props} word={item.text} />}
+              />
+            ))}
+
+            <Route path="/admin-panel-words" component={Words} />
             <Redirect from="/" to="/main" />
           </Switch>
           <AppFooter />

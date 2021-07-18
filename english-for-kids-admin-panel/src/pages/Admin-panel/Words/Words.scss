@@ -1,6 +1,6 @@
-@import '../../../../components/style.scss';
+@import '../../../components/style.scss';
 
-.page-admin-categories {
+.page-admin-words {
   @include wrapper;
   position: relative;
   padding-top: 50px;
@@ -9,30 +9,33 @@
   transition: all 1s ease 1s;
 }
 
-.page-admin-categories__title {
+.page-admin-words__title {
   @include h1-model;
   margin-bottom: 50px;
   text-align: center;
   text-transform: uppercase;
 }
 
-.categories-list {
+.words-list {
   @include list-reset;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.categories-item {
+.words-item {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: calc(100% / 4 - 4%);
-  height: 400px;
   margin-right: 2%;
   margin-bottom: 25px;
   padding: 10px;
 
   border: 2px solid black;
   transition: all 0.5s;
-  overflow: hidden;
 
   &:nth-child(4n) {
     margin-right: 0;
@@ -53,31 +56,17 @@
   }
 }
 
-.item-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  // height: 100%;
-  padding: 7px;
-}
-
-.item-title {
+.words-item-title {
   @include text-options(27px, 30px, 500, $text-main-color);
   width: 100%;
-  margin-bottom: 0;
   text-align: center;
 }
 
-.item-close-button {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 0;
-  right: 0;
+.words-button-new {
+  width: 100px;
+  height: 100px;
   background-color: transparent;
-  background-image: url('../../../../../assets/icons/icon-button-close.png');
+  background-image: url('../../../../assets/icons/icon-plus.png');
   background-repeat: no-repeat;
   background-size: 85%;
   border: none;
@@ -85,45 +74,10 @@
   transition: all 0.2s ease 0.2s;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
+    box-shadow: 0 0 5px $bg-secondary-color;
+    transition: all 0.2s ease 0.2s;
   }
-}
-
-.text-wrapper {
-  @include text-options(20px, 24px, 400, $text-main-color);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  align-self: center;
-  width: 100%;
-  margin-bottom: auto;
-  text-align: center;
-  text-decoration: underline;
-}
-
-.count-words {
-  font-weight: 600;
-}
-
-.button-category-wrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: auto;
-}
-
-.button-update {
-  margin-right: auto;
-  margin-top: auto;
-  padding: 10px;
-  background-color: $main-color;
-}
-
-.button-add-word {
-  margin-top: auto;
-  margin-left: auto;
-  padding: 10px;
-  background-color: $secondary-color;
 }
 
 .form-update {
@@ -131,10 +85,11 @@
   display: none;
   flex-direction: column;
   width: 100%;
-  height: 396px;
+  height: 100%;
   padding: 10px;
   top: 0;
   left: 0;
+  // z-index: 10;
   background-color: $bg-secondary-color;
   border: none;
 
@@ -177,10 +132,7 @@
 }
 
 .image-category {
-  // width: 80%;
-  height: 185px;
-  margin-bottom: 4%;
-  // flex: 1 1 auto;
+  width: 80%;
 }
 
 .button-form-wrapper {

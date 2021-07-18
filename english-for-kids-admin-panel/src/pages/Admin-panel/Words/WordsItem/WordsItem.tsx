@@ -2,16 +2,15 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
 import { updateCategory } from '@/api/actions';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import styles from './CategoriesItem.scss';
+import styles from './WordsItem.scss';
 
-export interface ICategoriesItemProps {
+export interface IWordsItemProps {
   category: string | React.Key | null | undefined;
   categoryId: string;
   src: string;
 }
 
-export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ category, categoryId, src }) => {
+export const WordsItem: FunctionComponent<IWordsItemProps> = ({ category, categoryId, src }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
@@ -85,7 +84,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
   };
 
   return (
-    <li className={styles.categoriesItem}>
+    <li className={styles.wordsItem}>
       <div className={styles.itemWrapper}>
         <h2 className={styles.itemTitle}>{category}</h2>
         <button className={styles.itemCloseButton}></button>
@@ -98,14 +97,12 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
           <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
             Update
           </button>
-          <Link to={`/${category}-category/words`} className={cn(styles.button, styles.buttonAddWord)}>
-            Add word
-          </Link>
+          <button className={cn(styles.button, styles.buttonAddWord)}>Add word</button>
         </div>
       </div>
       <form
         className={cn(styles.formUpdate, openClassFormUpdate ? styles.formUpdateOpen : null)}
-        action="/api/categories"
+        action="/api/Words"
         method="post"
         encType="multipart/form-data"
         onSubmit={(evt) => handleFormSubmit(evt)}

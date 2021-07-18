@@ -1,6 +1,6 @@
 @import '../../../../components/style.scss';
 
-.page-admin-categories {
+.page-admin-words {
   @include wrapper;
   position: relative;
   padding-top: 50px;
@@ -9,20 +9,20 @@
   transition: all 1s ease 1s;
 }
 
-.page-admin-categories__title {
+.page-admin-words__title {
   @include h1-model;
   margin-bottom: 50px;
   text-align: center;
   text-transform: uppercase;
 }
 
-.categories-list {
+.words-list {
   @include list-reset;
   display: flex;
   flex-wrap: wrap;
 }
 
-.categories-item {
+.words-item {
   position: relative;
   width: calc(100% / 4 - 4%);
   height: 400px;
