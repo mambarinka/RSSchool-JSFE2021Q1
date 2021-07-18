@@ -81,26 +81,13 @@ export const Categories: () => JSX.Element = () => {
     setOpenClassFormUpdate((openClass) => !openClass);
   };
 
-  // useEffect(() => {
-  //   dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
-  //   // dispatch(getCategories());
-  //   // console.log(data);
-  //   // setArrayCategoryApi(data);
-  // }, [dispatch, getCategories, fetch, setOpenClassFormUpdate]);
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   useEffect(() => {
-    (async () => {
-      const arrCat = await dispatch(await getCategories());
-      // console.log('arrCat', arrCat);
-      // here i'm using the location from the first function
-      setArrayCategoryApi(arrCat.data);
-
-      // arrCat.data.map((item: { text: React.Key | null | undefined; id: React.Key | null | undefined }) => {
-      //   console.log('item.text in APP', item.text);
-      //   return item;
-      // });
-    })();
-  }, [dispatch, arrayCategoryApi]);
+    setArrayCategoryApi(data);
+  }, [data]);
 
   return (
     <main className={styles.pageAdminCategories}>

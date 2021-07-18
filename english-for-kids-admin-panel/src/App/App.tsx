@@ -1,9 +1,10 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { persistor } from '@/store/store';
+import { apiSelector } from '@/api/reducers';
 import { Main } from '@/pages/Main';
 import { Auth } from '@/pages/Auth/Auth';
 import { DifficultWords } from '@/pages/DifficultWords';
@@ -20,33 +21,15 @@ import { AppFooter } from './AppFooter';
 export const App = () => {
   const dispatch = useDispatch();
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
-
-  // useEffect( async () => {
-  //   // dispatch(getCategories()).then((arr: any) => {
-  //   //   setArrayCategoryApi(arr.data);
-  //   //   console.log('arr.data', arr.data);
-
-  //   // });
-  //   const arrCat=await getCategories();
-  //   // dispatch( getCategories());
-  //   // console.log(dispatch(getCategories()));
-  //   // console.log(data);
-  //   setArrayCategoryApi([]);
-  // }, [dispatch, getCategories]);
+  const { data } = useSelector(apiSelector);
 
   useEffect(() => {
-    (async () => {
-      const arrCat = await dispatch(await getCategories());
-      // console.log('arrCat', arrCat);
-      // here i'm using the location from the first function
-      setArrayCategoryApi(arrCat.data);
+    dispatch(getCategories());
+  }, [dispatch]);
 
-      // arrCat.data.map((item: { text: React.Key | null | undefined; id: React.Key | null | undefined }) => {
-      //   console.log('item.text in APP', item.text);
-      //   return item;
-      // });
-    })();
-  }, [dispatch, arrayCategoryApi]);
+  useEffect(() => {
+    setArrayCategoryApi(data);
+  }, [data]);
 
   return (
     <PersistGate loading={null} persistor={persistor}>
@@ -66,12 +49,9 @@ export const App = () => {
             <Route path="/difficult-words" component={DifficultWords} />
             <Route path="/admin-panel-categories" component={Categories} />
             {arrayCategoryApi!.map((item: any) => {
-              console.log(item);
               const WrappedWords = function (
                 props: JSX.IntrinsicAttributes & IWordsProps & { children?: React.ReactNode }
               ) {
-                // Конструкция "{...props}" нужна, чтобы не потерять
-                // параметры, переданные от компонента Route
                 return <Words {...props} category={item.text} />;
               };
               return <Route path={`/${item.text}-category/words`} key={item.id} component={WrappedWords} />;

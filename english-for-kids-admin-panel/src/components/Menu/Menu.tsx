@@ -7,6 +7,7 @@ import { switchAuthorization } from '@/App/AppHedaer/AppHeaderView/actions';
 import { Link } from 'react-router-dom';
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { getCategories } from '@/api/actions';
+import { apiSelector } from '@/api/reducers';
 import { MenuItem } from './Menu-item';
 import styles from './Menu.scss';
 
@@ -19,6 +20,7 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   const dispatch = useDispatch();
   const { isAdminHere } = useSelector(appHeaderViewSelector);
   const [adminIsHere, setAdminIsHere] = useState(false);
+  const { data } = useSelector(apiSelector);
   // const { categories } = useSelector(mainSelector);
   // const arrayCategory: Category[] = Object.values(categories);
 
@@ -34,11 +36,12 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   }, [isAdminHere]);
 
   useEffect(() => {
-    (async () => {
-      const arrCat = await dispatch(await getCategories());
-      setArrayCategoryApi(arrCat.data);
-    })();
-  }, [dispatch, arrayCategoryApi]);
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setArrayCategoryApi(data);
+  }, [data]);
 
   return (
     <>
