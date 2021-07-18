@@ -3,6 +3,9 @@
 .page-admin-words {
   @include wrapper;
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   padding-top: 50px;
   min-height: 85vh;
   padding-bottom: 45px;
@@ -14,6 +17,17 @@
   margin-bottom: 50px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.page-admin-words-category {
+  @include text-options(16px, 20px, 400, $text-main-color);
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+
+  & span {
+    text-decoration: underline;
+  }
 }
 
 .words-list {
@@ -110,7 +124,7 @@
 .file-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .file-input {
@@ -131,8 +145,9 @@
   }
 }
 
-.image-category {
+.image-word {
   width: 80%;
+  align-self: center;
 }
 
 .button-form-wrapper {
