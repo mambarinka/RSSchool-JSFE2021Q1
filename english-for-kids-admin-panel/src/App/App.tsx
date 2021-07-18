@@ -37,7 +37,7 @@ export const App = () => {
   useEffect(() => {
     (async () => {
       const arrCat = await dispatch(await getCategories());
-      console.log('arrCat', arrCat);
+      // console.log('arrCat', arrCat);
       // here i'm using the location from the first function
       setArrayCategoryApi(arrCat.data);
 
@@ -46,7 +46,7 @@ export const App = () => {
       //   return item;
       // });
     })();
-  }, [dispatch]);
+  }, [dispatch, arrayCategoryApi]);
 
   return (
     <PersistGate loading={null} persistor={persistor}>

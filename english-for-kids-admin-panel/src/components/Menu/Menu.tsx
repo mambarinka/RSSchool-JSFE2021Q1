@@ -34,11 +34,11 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   }, [isAdminHere]);
 
   useEffect(() => {
-    dispatch(getCategories()).then((arr: any) => {
-      setArrayCategoryApi(arr.data);
-      console.log(arr.data);
-    });
-  }, [dispatch]);
+    (async () => {
+      const arrCat = await dispatch(await getCategories());
+      setArrayCategoryApi(arrCat.data);
+    })();
+  }, [dispatch, arrayCategoryApi]);
 
   return (
     <>

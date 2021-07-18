@@ -15,9 +15,12 @@ export interface IWordsProps {
 
 export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
-  const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
-  const [valueInputText, setValueInputText] = useState('');
-  const [valueInputFile, setValueInputFile] = useState({});
+  const [initialImageWord, setInitialImageWord] = useState('./images/image-category-default.png');
+  const [initialSoundWord, setInitialSoundWord] = useState('');
+  const [valueInputTextName, setValueInputTextName] = useState('');
+  const [valueInputTextTranslate, setValueInputTextTranslate] = useState('');
+  const [valueInputFileSound, setValueInputFileSound] = useState({});
+  const [valueInputFileImage, setValueInputFileImage] = useState({});
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
   const dispatch = useDispatch();
   const { data } = useSelector(apiSelector);
@@ -28,38 +31,45 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
 
   const handleClickButtonCancel = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
+    setValueInputTextName('');
+    setValueInputTextTranslate('');
+    setValueInputFileSound({});
+    setValueInputFileImage({});
   }, []);
 
-  const handleInputText = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputTextName = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
-    setValueInputText(inputText.value);
+    setValueInputTextName(inputText.value);
+  }, []);
+
+  const handleInputTextTranslate = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    const inputText = evt.currentTarget;
+    setValueInputTextTranslate(inputText.value);
   }, []);
 
   const handleInputSound = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
-    // const inputFile = evt.currentTarget;
-    // setValueInputFile(inputFile.files![0]);
-    // const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-    // if (inputFile.files !== null) {
-    //   const file: File = inputFile.files[0];
-    //   const fileName = file.name.toLowerCase();
-    //   const matches = FILE_TYPES.some((it) => fileName.endsWith(`.${it}`));
-    //   if (matches) {
-    //     const reader = new FileReader();
-    //     reader.addEventListener('load', () => {
-    //       if (reader.result !== null) {
-    //         setInitialImageCategory(reader.result as string);
-    //       }
-    //     });
-    //     reader.readAsDataURL(file);
-    //   }
-    // }
+    const inputFile = evt.currentTarget;
+    setValueInputFileSound(inputFile.files![0]);
+    // const FILE_TYPES = ['aac', '', 'jpeg', 'png'];
+    if (inputFile.files !== null) {
+      const file: File = inputFile.files[0];
+      // const fileName = file.name.toLowerCase();
+      // const matches = FILE_TYPES.some((it) => fileName.endsWith(`.${it}`));
+      // if (matches) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        if (reader.result !== null) {
+          setInitialSoundWord(reader.result as string);
+        }
+      });
+      reader.readAsDataURL(file);
+      // }
+    }
   }, []);
 
   const handleInputImage = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
-    setValueInputFile(inputFile.files![0]);
+    setValueInputFileImage(inputFile.files![0]);
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
@@ -71,7 +81,7 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
 
         reader.addEventListener('load', () => {
           if (reader.result !== null) {
-            setInitialImageCategory(reader.result as string);
+            setInitialImageWord(reader.result as string);
           }
         });
 
@@ -83,12 +93,16 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
+    setValueInputTextName('');
+    setValueInputTextTranslate('');
+    setValueInputFileSound({});
+    setValueInputFileImage({});
 
     const dataForm = new FormData();
-    dataForm.append('name', valueInputText);
-    dataForm.append('image', valueInputFile as Blob);
+    dataForm.append('word-name', valueInputTextName);
+    dataForm.append('word-translate', valueInputTextTranslate);
+    dataForm.append('word-image', valueInputFileSound as Blob);
+    dataForm.append('word-image', valueInputFileImage as Blob);
 
     // await fetch('http://localhost:3000/api/Words', {
     // await fetch('https://server-english-for-kids.herokuapp.com/api/Words', {
@@ -136,7 +150,7 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
               type="text"
               name="word-name"
               id="word-name"
-              onChange={(event) => handleInputText(event)}
+              onChange={(event) => handleInputTextName(event)}
             />
             <label htmlFor="word-translate">Word translate</label>
             <input
@@ -144,7 +158,7 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
               type="text"
               name="word-translate"
               id="word-translate"
-              onChange={(event) => handleInputText(event)}
+              onChange={(event) => handleInputTextTranslate(event)}
             />
             <div className={styles.fileWrapper}>
               <label htmlFor="word-sound">Word Sound</label>
@@ -167,7 +181,7 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
                 accept="image/png, image/jpeg, image/svg"
                 onChange={(event) => handleInputImage(event)}
               />
-              <img className={styles.imageWord} src={initialImageCategory} alt="image word default" />
+              <img className={styles.imageWord} src={initialImageWord} alt="image word default" />
             </div>
             <div className={styles.buttonFormWrapper}>
               <button className={cn(styles.button, styles.buttonCancel)} onClick={handleClickButtonCancel}>
@@ -179,9 +193,6 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
             </div>
           </form>
         </li>
-        {/* {arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
-          <WordsItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
-        ))} */}
       </ul>
     </main>
   );

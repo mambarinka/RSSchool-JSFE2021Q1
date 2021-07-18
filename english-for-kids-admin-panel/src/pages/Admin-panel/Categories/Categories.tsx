@@ -81,17 +81,34 @@ export const Categories: () => JSX.Element = () => {
     setOpenClassFormUpdate((openClass) => !openClass);
   };
 
+  // useEffect(() => {
+  //   dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
+  //   // dispatch(getCategories());
+  //   // console.log(data);
+  //   // setArrayCategoryApi(data);
+  // }, [dispatch, getCategories, fetch, setOpenClassFormUpdate]);
+
   useEffect(() => {
-    dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
-    // dispatch(getCategories());
-    // console.log(data);
-    // setArrayCategoryApi(data);
-  }, [dispatch, getCategories, fetch, setOpenClassFormUpdate]);
+    (async () => {
+      const arrCat = await dispatch(await getCategories());
+      // console.log('arrCat', arrCat);
+      // here i'm using the location from the first function
+      setArrayCategoryApi(arrCat.data);
+
+      // arrCat.data.map((item: { text: React.Key | null | undefined; id: React.Key | null | undefined }) => {
+      //   console.log('item.text in APP', item.text);
+      //   return item;
+      // });
+    })();
+  }, [dispatch, arrayCategoryApi]);
 
   return (
     <main className={styles.pageAdminCategories}>
       <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
       <ul className={styles.categoriesList}>
+        {arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
+          <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
+        ))}
         <li className={styles.categoriesItem}>
           <h2 className={styles.categoriesItemTitle}>Create new Category</h2>
           <button className={styles.categoriesButtonNew} onClick={handleClickButtonNew}></button>
@@ -132,9 +149,6 @@ export const Categories: () => JSX.Element = () => {
             </div>
           </form>
         </li>
-        {arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
-          <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
-        ))}
       </ul>
     </main>
   );
