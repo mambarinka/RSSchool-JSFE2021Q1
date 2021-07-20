@@ -94,8 +94,8 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
           <p>Translation:</p>
           <span className={styles.countWords}>{textEn}</span>
         </div>
-        {console.log(linkImage)}
-        {console.log(linkSound)}
+        {/* {console.log(linkImage)}
+        {console.log(linkSound)} */}
         <img className={styles.imageCategory} src={linkImage} alt={`${category} category`} />
         <div className={styles.buttonCategoryWrapper}>
           <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickChange}>

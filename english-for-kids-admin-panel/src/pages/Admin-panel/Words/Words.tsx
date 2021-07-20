@@ -142,7 +142,7 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
         Category: <span>{category}</span>
       </p>
       <ul className={styles.wordsList}>
-        {console.log(arrayWordsApi)}
+        {/* {console.log(arrayWordsApi)} */}
         {arrayWordsApi.map(
           (item: {
             id: string;

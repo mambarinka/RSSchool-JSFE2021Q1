@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { deleteCategory, updateCategory } from '@/api/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { apiSelector } from '@/api/reducers';
 import styles from './CategoriesItem.scss';
 
 export interface ICategoriesItemProps {
@@ -16,7 +17,9 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
+
   const dispatch = useDispatch();
+  const { words } = useSelector(apiSelector);
 
   const handleClickUpdate = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -36,6 +39,15 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
   // useEffect(() => {
   //   dispatch(deleteCategory(categoryId));
   // }, [dispatch]);
+
+  // useEffect(()=> {
+
+  // },[words])
+
+  const countWordsinCategory = words.filter((obj: { categoryId: string }) => obj.categoryId === categoryId).length;
+  // console.log(countWordsinCategory);
+  // const [countWords, setCounstWords] = useState(countWordsinCategory);
+  // db = db.filter((el: { id: number; }) => el.id !== categoryId);
 
   const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
@@ -89,7 +101,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
         <button className={styles.itemCloseButton} onClick={handleClickButtonDelete}></button>
         <div className={styles.textWrapper}>
           <p>WORDS:</p>
-          <span className={styles.countWords}></span>
+          <span className={styles.countWords}>{countWordsinCategory}</span>
         </div>
         <img className={styles.imageCategory} src={src} alt={`${category} category`} />
         <div className={styles.buttonCategoryWrapper}>

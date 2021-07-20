@@ -53,7 +53,7 @@ export function api(
       const {
         response: { data },
       } = action;
-      console.log('data', data);
+      // console.log('data', data);
       const actions = [updateCategoryActionCreator()];
       return {
         ...state,
