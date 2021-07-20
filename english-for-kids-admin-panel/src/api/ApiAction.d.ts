@@ -20,7 +20,8 @@ export interface IApiActionSuccess extends AnyAction {
     request: IApiRequest;
     [k: string]: any;
   };
-  data: any;
+  categories?: any;
+  data?: any;
 }
 
 export interface IApiActionError extends AnyAction {

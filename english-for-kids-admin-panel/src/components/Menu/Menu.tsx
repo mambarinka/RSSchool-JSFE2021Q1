@@ -57,14 +57,6 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
         {arrayCategoryApi.map((item: { text: React.Key | null | undefined; link: string; id: string }) => (
           <MenuItem category={item.text} key={item.id} onClick={onClick} src={`/${item.text}`} />
         ))}
-        <li
-          className={cn(styles.menuItem, !adminIsHere ? null : styles.hide, styles.menuItemCategories)}
-          onClick={onClick}
-        >
-          <Link to={'/admin-panel-categories'} className={cn(styles.menuLink, styles.menuLinkCategories)}>
-            Categories
-          </Link>
-        </li>
       </ul>
     </>
   );

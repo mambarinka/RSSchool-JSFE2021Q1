@@ -1,1 +1,1 @@
-export { BaseComponentCategoryWords} from './BaseComponentCategoryWords';
+export { BaseComponentCategoryWords } from './BaseComponentCategoryWords';

@@ -1,4 +1,7 @@
 import {
+  CREATE_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_SUCCESS,
+  getCategories,
   getCategoriesActionCreator,
   GET_CATEGORIES_SUCCESS,
   IApiActions,
@@ -46,11 +49,40 @@ export function api(
       const {
         response: { data },
       } = action;
+      console.log('data', data);
       const actions = [updateCategoryActionCreator()];
       return {
         ...state,
-        data,
+        data: state.data.map((item: { id: any }) => {
+          if (item.id === data.id) {
+            return data;
+          }
+          return item;
+        }),
+        // data: state.data.filter((category: { id: any }) => category.id !== data.id).concat(data),
         actions,
+      };
+    }
+
+    case DELETE_CATEGORY_SUCCESS: {
+      const {
+        response: { data },
+      } = action;
+
+      return {
+        ...state,
+        data: state.data.filter((category: { id: any }) => category.id !== data),
+      };
+    }
+
+    case CREATE_CATEGORY_SUCCESS: {
+      const {
+        response: { data },
+      } = action;
+
+      return {
+        ...state,
+        data: [...state.data, data],
       };
     }
 

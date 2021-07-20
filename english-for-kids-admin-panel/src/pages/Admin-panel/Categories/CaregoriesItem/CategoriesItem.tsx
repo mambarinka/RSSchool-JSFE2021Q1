@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
-import { updateCategory } from '@/api/actions';
+import { deleteCategory, updateCategory } from '@/api/actions';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from './CategoriesItem.scss';
@@ -27,6 +27,15 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
     setValueInputText('');
     setValueInputFile({});
   }, []);
+
+  const handleClickButtonDelete = useCallback(() => {
+    dispatch(deleteCategory(JSON.stringify(categoryId)));
+    console.log(categoryId);
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(deleteCategory(categoryId));
+  // }, [dispatch]);
 
   const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
@@ -55,7 +64,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
     }
   };
 
-  const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
     setValueInputText('');
@@ -88,7 +97,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
     <li className={styles.categoriesItem}>
       <div className={styles.itemWrapper}>
         <h2 className={styles.itemTitle}>{category}</h2>
-        <button className={styles.itemCloseButton}></button>
+        <button className={styles.itemCloseButton} onClick={handleClickButtonDelete}></button>
         <div className={styles.textWrapper}>
           <p>WORDS:</p>
           <span className={styles.countWords}></span>

@@ -22,7 +22,6 @@ export const App = () => {
   const dispatch = useDispatch();
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
   const { data } = useSelector(apiSelector);
-
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -30,7 +29,7 @@ export const App = () => {
   useEffect(() => {
     setArrayCategoryApi(data);
   }, [data]);
-  alert(
+  console.log(
     'Уважаемый проверяющий, если вас не сильно затруднит, проверьте, пожалуйста мою работу в среду/четверг или как можно позже! Я буду очень вам признательна! ❤️️❤️️❤️️ Мой телеграм https://t.me/anya_tav'
   );
   return (
@@ -39,8 +38,9 @@ export const App = () => {
         <Auth>
           <AppHeader />
           <Switch>
+            {/* {console.log('arrayCategoryApi', arrayCategoryApi)} */}
             <Route path="/main" component={Main} />
-            {arrayCategoryApi!.map((item: { text: PropsWithChildren<IBaseComponentCategoryProps>; id: string }) => (
+            {arrayCategoryApi.map((item: { text: PropsWithChildren<IBaseComponentCategoryProps>; id: string }) => (
               <Route
                 path={`/${item.text}`}
                 key={item.id}
@@ -50,7 +50,7 @@ export const App = () => {
             <Route path="/statistics" component={Statistics} />
             <Route path="/difficult-words" component={DifficultWords} />
             <Route path="/admin-panel-categories" component={Categories} />
-            {arrayCategoryApi!.map((item: any) => {
+            {arrayCategoryApi.map((item: any) => {
               const WrappedWords = function (
                 props: JSX.IntrinsicAttributes & IWordsProps & { children?: React.ReactNode }
               ) {

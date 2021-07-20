@@ -50,3 +50,16 @@
     background-color: $fourth-color;
   }
 }
+
+.link-categories {
+  @include text-options(20px, 24px, 600, $text-main-color);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  background-color: transparent;
+  border: 2px solid $text-main-color;
+
+  &:hover {
+    background-color: $main-color;
+  }
+}

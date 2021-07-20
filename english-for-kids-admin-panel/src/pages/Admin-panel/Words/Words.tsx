@@ -104,21 +104,20 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
     dataForm.append('word-image', valueInputFileSound as Blob);
     dataForm.append('word-image', valueInputFileImage as Blob);
 
-    // await fetch('http://localhost:3000/api/Words', {
-    // await fetch('https://server-english-for-kids.herokuapp.com/api/Words', {
-    //   method: 'POST',
-    //   body: dataForm,
-    // })
-    //   .then((result) => {
-    //     console.log('data', dataForm);
-    //     console.log('result', result);
-    //     console.log('File sent successful');
-    //   })
-    //   .catch((e) => {
-    //     console.log(e.message);
-    //   });
+    await fetch('http://localhost:3000/api/Words', {
+      // await fetch('https://server-english-for-kids.herokuapp.com/api/Words', {
+      method: 'POST',
+      body: dataForm,
+    })
+      .then((result) => {
+        console.log('data', dataForm);
+        console.log('result', result);
+        console.log('File sent successful');
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
     // dispatch(getWords());
-    // setOpenClassFormUpdate((openClass) => !openClass);
   };
 
   // useEffect(() => {

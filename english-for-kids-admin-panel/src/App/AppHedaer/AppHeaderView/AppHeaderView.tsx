@@ -56,7 +56,6 @@ export const AppHeaderView: () => JSX.Element = () => {
       setAdminIsHere((isAdmin) => isAdmin);
     }
   }, [isAdminHere]);
-  console.log('isAdminHere', isAdminHere);
 
   return (
     <header className={styles.pageHeader}>
@@ -65,6 +64,13 @@ export const AppHeaderView: () => JSX.Element = () => {
           <Toggle isInitialState={openClassToggle} onClick={toggleClickHandler} />
           <Menu isInitialState={openClassMenu} onClick={overlayClickHandler} />
         </nav>
+        <Link
+          to={'/admin-panel-categories'}
+          className={cn(styles.button, styles.linkCategories)}
+          onClick={overlayClickHandler}
+        >
+          Categories
+        </Link>
         <button className={cn(styles.login, styles.button)} onClick={handleSwitchAuthorization}>
           {adminIsHere ? 'Log out' : 'Log in'}
         </button>

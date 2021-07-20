@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories } from '@/api/actions';
+import { createCategory, deleteCategory, getCategories, updateCategory } from '@/api/actions';
 import { baseURL } from '@/api/api';
 import { apiSelector } from '@/api/reducers';
 import { CategoriesItem } from './CaregoriesItem';
@@ -18,9 +18,11 @@ export const Categories: () => JSX.Element = () => {
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-  }, [openClassFormUpdate]);
+  }, []);
 
-  const handleClickButtonCancel = useCallback(() => {
+  const handleClickButtonCancel = useCallback((event: SyntheticEvent) => {
+    // event.stopPropagation();
+    // event.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
     setValueInputText('');
     setValueInputFile({});
@@ -64,35 +66,36 @@ export const Categories: () => JSX.Element = () => {
     dataForm.append('name', valueInputText);
     dataForm.append('image', valueInputFile as Blob);
 
+    dispatch(createCategory(dataForm));
     // await fetch('http://localhost:3000/api/categories', {
-    await fetch('https://server-english-for-kids.herokuapp.com/api/categories', {
-      method: 'POST',
-      body: dataForm,
-    })
-      .then((result) => {
-        console.log('data', dataForm);
-        console.log('result', result);
-        console.log('File sent successful');
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
-    dispatch(getCategories());
-    setOpenClassFormUpdate((openClass) => !openClass);
+    //   // await fetch('https://server-english-for-kids.herokuapp.com/api/categories', {
+    //   method: 'POST',
+    //   body: dataForm,
+    // })
+    //   .then((result) => {
+    //     console.log('data', dataForm);
+    //     console.log('result', result);
+    //     console.log('File sent successful');
+    //   })
+    //   .catch((e) => {
+    //     console.log(e.message);
+    //   });
+    // dispatch(getCategories());
   };
 
   useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
+  }, [dispatch, updateCategory, deleteCategory]);
 
   useEffect(() => {
     setArrayCategoryApi(data);
-  }, [data]);
+  }, [data, dispatch, updateCategory, deleteCategory]);
 
   return (
     <main className={styles.pageAdminCategories}>
       <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
       <ul className={styles.categoriesList}>
+        {/* {console.log('arrayCategoryApi', arrayCategoryApi)} */}
         {arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
           <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
         ))}
@@ -127,7 +130,11 @@ export const Categories: () => JSX.Element = () => {
               <img className={styles.imageCategory} src={initialImageCategory} alt="image category default" />
             </div>
             <div className={styles.buttonFormWrapper}>
-              <button className={cn(styles.button, styles.buttonCancel)} onClick={handleClickButtonCancel}>
+              <button
+                className={cn(styles.button, styles.buttonCancel)}
+                type="button"
+                onClick={handleClickButtonCancel}
+              >
                 Cancel
               </button>
               <button className={cn(styles.button, styles.buttonCreate)} type="submit">

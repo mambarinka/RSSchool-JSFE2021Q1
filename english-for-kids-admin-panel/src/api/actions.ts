@@ -12,6 +12,10 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
 export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 export const UPDATE_CATEGORY_SUCCESS = 'UPDATE_CATEGORY_SUCCESS';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
+export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+export const CREATE_CATEGORY_SUCCESS = 'CREATE_CATEGORY_SUCCESS';
 
 // export interface IGetData extends IApiAction {
 //   type: typeof TEST_ACTION;
@@ -41,7 +45,7 @@ export interface IGetDataError extends IApiActionError {
 export interface IGetCategories extends IApiAction {
   type: typeof GET_CATEGORIES;
 }
-export interface IGetCategoriesSuccess extends IApiAction {
+export interface IGetCategoriesSuccess extends IApiActionSuccess {
   type: typeof GET_CATEGORIES_SUCCESS;
 }
 
@@ -70,7 +74,6 @@ export const updateCategory = (data: FormData): IUpdateCategory => ({
   type: UPDATE_CATEGORY,
   request: {
     url: CATEGORIES_ENDPOINT,
-    // url: `${CATEGORIES_ENDPOINT}/${id}`,
     method: 'PUT',
     body: data,
   },
@@ -81,28 +84,37 @@ export const updateCategoryActionCreator: () => {
 } = () => ({
   type: 'UPDATE_CATEGORY',
 });
-// export interface ICreateCategory extends IApiAction {
-//   type: typeof CREATE_CATEGORY_ACTION;
-// }
 
-// export const createCategory = (category: Category): ICreateCategory => ({
-//   type: CREATE_CATEGORY_ACTION,
-//   request: {
-//     url: CATEGORIES_ENDPOINT,
-//     method: 'POST',
-//     body: JSON.stringify(category),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     responseType: 'formData',
-//   },
-// });
+export interface IDeleteCategory extends IApiAction {
+  type: typeof DELETE_CATEGORY;
+}
+export interface IDeleteCategorySuccess extends IApiAction {
+  type: typeof DELETE_CATEGORY_SUCCESS;
+}
 
-// export const createCategoryActionCreator: () => {
-//   type: string;
-// } = () => ({
-//   type: 'CREATE_CATEGORY_ACTION',
-// });
+export const deleteCategory = (id: string): IDeleteCategory => ({
+  type: DELETE_CATEGORY,
+  request: {
+    url: `${CATEGORIES_ENDPOINT}/${id}`,
+    method: 'DELETE',
+  },
+});
+
+export interface ICreateCategory extends IApiAction {
+  type: typeof CREATE_CATEGORY;
+}
+export interface ICreateCategorySuccess extends IApiAction {
+  type: typeof CREATE_CATEGORY_SUCCESS;
+}
+
+export const createCategory = (data: FormData): ICreateCategory => ({
+  type: CREATE_CATEGORY,
+  request: {
+    url: CATEGORIES_ENDPOINT,
+    method: 'POST',
+    body: data,
+  },
+});
 
 export type IApiActions =
   | IGetDataSuccess
@@ -110,4 +122,8 @@ export type IApiActions =
   | IGetCategories
   | IGetCategoriesSuccess
   | IUpdateCategory
-  | IUpdateCategorySuccess;
+  | IUpdateCategorySuccess
+  | IDeleteCategory
+  | IDeleteCategorySuccess
+  | ICreateCategory
+  | ICreateCategorySuccess;
