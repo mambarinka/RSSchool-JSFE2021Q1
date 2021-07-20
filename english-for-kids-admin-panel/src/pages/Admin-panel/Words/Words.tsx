@@ -104,8 +104,8 @@ export const Words: FunctionComponent<IWordsProps> = ({ category }) => {
     dataForm.append('word-image', valueInputFileSound as Blob);
     dataForm.append('word-image', valueInputFileImage as Blob);
 
-    await fetch('http://localhost:3000/api/Words', {
-      // await fetch('https://server-english-for-kids.herokuapp.com/api/Words', {
+    // await fetch('http://localhost:3000/api/Words', {
+      await fetch('https://server-english-for-kids.herokuapp.com/api/Words', {
       method: 'POST',
       body: dataForm,
     })
