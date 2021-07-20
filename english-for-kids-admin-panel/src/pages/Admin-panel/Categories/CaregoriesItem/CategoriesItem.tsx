@@ -80,17 +80,6 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
 
       dispatch(updateCategory(data));
     }
-    // await fetch('https://server-english-for-kids.herokuapp.com/', {
-    //   method: 'POST',
-    //   body: data,
-    // })
-    //   .then((result) => {
-    //     console.log('result', result);
-    //     console.log('File sent successful');
-    //   })
-    //   .catch((e) => {
-    //     console.log(e.message);
-    //   });
   };
 
   return (

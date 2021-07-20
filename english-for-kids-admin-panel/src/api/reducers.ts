@@ -1,21 +1,25 @@
 import {
   CREATE_CATEGORY_SUCCESS,
+  CREATE_WORD_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
   getCategories,
   getCategoriesActionCreator,
   GET_CATEGORIES_SUCCESS,
+  GET_WORDS_SUCCESS,
   IApiActions,
   updateCategoryActionCreator,
   UPDATE_CATEGORY_SUCCESS,
 } from './actions';
 
 export interface IApiState {
-  data: any;
+  categories: any;
+  words: any;
   error: any;
 }
 
 export const initialState: IApiState = {
-  data: [],
+  categories: [],
+  words: [],
   error: [],
 };
 
@@ -40,7 +44,7 @@ export function api(
       const actions = [getCategoriesActionCreator()];
       return {
         ...state,
-        data,
+        categories: data,
         actions,
       };
     }
@@ -53,13 +57,12 @@ export function api(
       const actions = [updateCategoryActionCreator()];
       return {
         ...state,
-        data: state.data.map((item: { id: any }) => {
+        categories: state.categories.map((item: { id: any }) => {
           if (item.id === data.id) {
             return data;
           }
           return item;
         }),
-        // data: state.data.filter((category: { id: any }) => category.id !== data.id).concat(data),
         actions,
       };
     }
@@ -71,7 +74,7 @@ export function api(
 
       return {
         ...state,
-        data: state.data.filter((category: { id: any }) => category.id !== data),
+        categories: state.categories.filter((category: { id: any }) => category.id !== data),
       };
     }
 
@@ -82,7 +85,29 @@ export function api(
 
       return {
         ...state,
-        data: [...state.data, data],
+        categories: [...state.categories, data],
+      };
+    }
+
+    case GET_WORDS_SUCCESS: {
+      const {
+        response: { data },
+      } = action;
+      return {
+        ...state,
+        words: data,
+      };
+    }
+
+    case CREATE_WORD_SUCCESS: {
+      const {
+        response: { data },
+      } = action;
+      state.words.push(data);
+      return {
+        ...state,
+        // data,
+        words: state.words,
       };
     }
 

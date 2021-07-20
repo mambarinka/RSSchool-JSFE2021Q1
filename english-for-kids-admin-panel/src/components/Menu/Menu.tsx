@@ -20,7 +20,7 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   const dispatch = useDispatch();
   const { isAdminHere } = useSelector(appHeaderViewSelector);
   const [adminIsHere, setAdminIsHere] = useState(false);
-  const { data } = useSelector(apiSelector);
+  const { categories } = useSelector(apiSelector);
   // const { categories } = useSelector(mainSelector);
   // const arrayCategory: Category[] = Object.values(categories);
 
@@ -40,8 +40,8 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   }, [dispatch]);
 
   useEffect(() => {
-    setArrayCategoryApi(data);
-  }, [data]);
+    setArrayCategoryApi(categories);
+  }, [categories]);
 
   return (
     <>

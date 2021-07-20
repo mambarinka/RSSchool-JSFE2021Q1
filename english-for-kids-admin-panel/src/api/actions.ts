@@ -2,7 +2,7 @@
 import { IApiAction, IApiActionError, IApiActionSuccess } from '@/api/ApiAction';
 
 import { Category } from '@/models/models';
-import { CATEGORIES_ENDPOINT } from './endpoints';
+import { CATEGORIES_ENDPOINT, WORDS_ENDPOINT } from './endpoints';
 
 // export const TEST_ACTION = "TEST_ACTION";
 export const TEST_ACTION_SUCCESS = 'TEST_ACTION_SUCCESS';
@@ -16,6 +16,10 @@ export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
 export const CREATE_CATEGORY_SUCCESS = 'CREATE_CATEGORY_SUCCESS';
+export const CREATE_WORD = 'CREATE_WORD';
+export const CREATE_WORD_SUCCESS = 'CREATE_WORD_SUCCESS';
+export const GET_WORDS = 'GET_WORDS';
+export const GET_WORDS_SUCCESS = 'GET_WORDS_SUCCESS';
 
 // export interface IGetData extends IApiAction {
 //   type: typeof TEST_ACTION;
@@ -116,6 +120,37 @@ export const createCategory = (data: FormData): ICreateCategory => ({
   },
 });
 
+export interface ICreateWord extends IApiAction {
+  type: typeof CREATE_WORD;
+}
+export interface ICreateWordSuccess extends IApiAction {
+  type: typeof CREATE_WORD_SUCCESS;
+}
+
+export const createWord = (data: FormData): ICreateWord => ({
+  type: CREATE_WORD,
+  request: {
+    url: WORDS_ENDPOINT,
+    method: 'POST',
+    body: data,
+  },
+});
+
+export interface IGetWords extends IApiAction {
+  type: typeof GET_WORDS;
+}
+export interface IGetWordsSuccess extends IApiActionSuccess {
+  type: typeof GET_WORDS_SUCCESS;
+}
+
+export const getWords = (): IGetWords => ({
+  type: GET_WORDS,
+  request: {
+    url: WORDS_ENDPOINT,
+    method: 'GET',
+  },
+});
+
 export type IApiActions =
   | IGetDataSuccess
   | IGetDataError
@@ -126,4 +161,8 @@ export type IApiActions =
   | IDeleteCategory
   | IDeleteCategorySuccess
   | ICreateCategory
-  | ICreateCategorySuccess;
+  | ICreateCategorySuccess
+  | ICreateWord
+  | ICreateWordSuccess
+  | IGetWords
+  | IGetWordsSuccess;

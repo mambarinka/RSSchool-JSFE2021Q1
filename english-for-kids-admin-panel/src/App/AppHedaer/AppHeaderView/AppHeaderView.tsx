@@ -64,11 +64,7 @@ export const AppHeaderView: () => JSX.Element = () => {
           <Toggle isInitialState={openClassToggle} onClick={toggleClickHandler} />
           <Menu isInitialState={openClassMenu} onClick={overlayClickHandler} />
         </nav>
-        <Link
-          to={'/admin-panel-categories'}
-          className={cn(styles.button, styles.linkCategories)}
-          onClick={overlayClickHandler}
-        >
+        <Link to={'/admin-panel-categories'} className={cn(styles.button, styles.linkCategories)}>
           Categories
         </Link>
         <button className={cn(styles.login, styles.button)} onClick={handleSwitchAuthorization}>

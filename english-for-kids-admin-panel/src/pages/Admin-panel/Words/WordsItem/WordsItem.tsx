@@ -5,19 +5,31 @@ import { useDispatch } from 'react-redux';
 import styles from './WordsItem.scss';
 
 export interface IWordsItemProps {
-  category: string | React.Key | null | undefined;
+  id: string;
   categoryId: string;
-  src: string;
+  textRu: string;
+  textEn: string;
+  linkSound: string;
+  linkImage: string;
+  category: string | React.Key | null | undefined;
 }
 
-export const WordsItem: FunctionComponent<IWordsItemProps> = ({ category, categoryId, src }) => {
+export const WordsItem: FunctionComponent<IWordsItemProps> = ({
+  id,
+  categoryId,
+  textRu,
+  textEn,
+  linkSound,
+  linkImage,
+  category,
+}) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
-  const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
+  const [initialImageCategory, setInitialImageCategory] = useState('./../images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
   const dispatch = useDispatch();
 
-  const handleClickUpdate = useCallback(() => {
+  const handleClickChange = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
   }, [openClassFormUpdate]);
 
@@ -59,45 +71,36 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({ category, catego
     setOpenClassFormUpdate((openClass) => !openClass);
     setValueInputText('');
     setValueInputFile({});
-
-    const data = new FormData();
-    if (valueInputText === '' || valueInputFile === {}) {
-      alert('Заполните, пожалуйста, все поля');
-    } else {
-      data.append('name', valueInputText);
-      data.append('image', valueInputFile as Blob);
-      data.append('id', categoryId);
-
-      dispatch(updateCategory(data));
-    }
-    // await fetch('https://server-english-for-kids.herokuapp.com/', {
-    //   method: 'POST',
-    //   body: data,
-    // })
-    //   .then((result) => {
-    //     console.log('result', result);
-    //     console.log('File sent successful');
-    //   })
-    //   .catch((e) => {
-    //     console.log(e.message);
-    //   });
+    // const data = new FormData();
+    // if (valueInputText === '' || valueInputFile === {}) {
+    //   alert('Заполните, пожалуйста, все поля');
+    // } else {
+    //   data.append('name', valueInputText);
+    //   data.append('image', valueInputFile as Blob);
+    //   data.append('id', categoryId);
+    //   dispatch(updateCategory(data));
+    // }
   };
 
   return (
     <li className={styles.wordsItem}>
       <div className={styles.itemWrapper}>
-        <h2 className={styles.itemTitle}>{category}</h2>
         <button className={styles.itemCloseButton}></button>
         <div className={styles.textWrapper}>
-          <p>WORDS:</p>
-          <span className={styles.countWords}></span>
+          <p>Word:</p>
+          <span className={styles.countWords}>{textRu}</span>
         </div>
-        <img className={styles.imageCategory} src={src} alt={`${category} category`} />
+        <div className={styles.textWrapper}>
+          <p>Translation:</p>
+          <span className={styles.countWords}>{textEn}</span>
+        </div>
+        {console.log(linkImage)}
+        {console.log(linkSound)}
+        <img className={styles.imageCategory} src={linkImage} alt={`${category} category`} />
         <div className={styles.buttonCategoryWrapper}>
-          <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
-            Update
+          <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickChange}>
+            Change
           </button>
-          <button className={cn(styles.button, styles.buttonAddWord)}>Add word</button>
         </div>
       </div>
       <form

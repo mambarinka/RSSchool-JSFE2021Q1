@@ -21,14 +21,14 @@ import { AppFooter } from './AppFooter';
 export const App = () => {
   const dispatch = useDispatch();
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
-  const { data } = useSelector(apiSelector);
+  const { categories } = useSelector(apiSelector);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
   useEffect(() => {
-    setArrayCategoryApi(data);
-  }, [data]);
+    setArrayCategoryApi(categories);
+  }, [categories]);
   console.log(
     'Уважаемый проверяющий, если вас не сильно затруднит, проверьте, пожалуйста мою работу в среду/четверг или как можно позже! Я буду очень вам признательна! ❤️️❤️️❤️️ Мой телеграм https://t.me/anya_tav'
   );
@@ -54,7 +54,7 @@ export const App = () => {
               const WrappedWords = function (
                 props: JSX.IntrinsicAttributes & IWordsProps & { children?: React.ReactNode }
               ) {
-                return <Words {...props} category={item.text} />;
+                return <Words {...props} category={item.text} categoryId={item.id} />;
               };
               return <Route path={`/${item.text}-category/words`} key={item.id} component={WrappedWords} />;
             })}

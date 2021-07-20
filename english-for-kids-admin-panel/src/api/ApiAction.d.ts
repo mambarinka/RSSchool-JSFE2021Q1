@@ -21,6 +21,7 @@ export interface IApiActionSuccess extends AnyAction {
     [k: string]: any;
   };
   categories?: any;
+  words?: any;
   data?: any;
 }
 
