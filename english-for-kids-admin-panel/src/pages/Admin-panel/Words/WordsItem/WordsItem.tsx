@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
-import { updateCategory } from '@/api/actions';
+import { deleteWord, updateCategory } from '@/api/actions';
 import { useDispatch } from 'react-redux';
 import styles from './WordsItem.scss';
 
@@ -28,6 +28,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
   const dispatch = useDispatch();
+  const extensionSound = linkSound.toLowerCase().split('.').pop();
 
   const handleClickChange = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -38,6 +39,10 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
     setValueInputText('');
     setValueInputFile({});
   }, []);
+
+  const handleClickButtonDelete = useCallback(() => {
+    dispatch(deleteWord(JSON.stringify(id)));
+  }, [dispatch]);
 
   const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
@@ -85,18 +90,23 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
   return (
     <li className={styles.wordsItem}>
       <div className={styles.itemWrapper}>
-        <button className={styles.itemCloseButton}></button>
+        <button className={styles.itemCloseButton} onClick={handleClickButtonDelete}></button>
         <div className={styles.textWrapper}>
-          <p>Word:</p>
-          <span className={styles.countWords}>{textRu}</span>
+          <p className={styles.name}>Word:</p>
+          <span>{textRu}</span>
         </div>
         <div className={styles.textWrapper}>
-          <p>Translation:</p>
-          <span className={styles.countWords}>{textEn}</span>
+          <p className={styles.name}>Translate:</p>
+          <span>{textEn}</span>
         </div>
-        {/* {console.log(linkImage)}
-        {console.log(linkSound)} */}
-        <img className={styles.imageCategory} src={linkImage} alt={`${category} category`} />
+        <div className={styles.textWrapper}>
+          <p className={styles.name}>Sound:</p>
+          <span>{`${textRu}.${extensionSound}`}</span>
+        </div>
+        <div className={styles.textWrapper}>
+          <p className={styles.name}>Image:</p>
+          <img className={styles.imageCategory} src={linkImage} alt={`${category} category`} />
+        </div>
         <div className={styles.buttonCategoryWrapper}>
           <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickChange}>
             Change

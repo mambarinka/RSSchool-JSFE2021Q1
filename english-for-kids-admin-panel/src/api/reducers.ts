@@ -2,6 +2,7 @@ import {
   CREATE_CATEGORY_SUCCESS,
   CREATE_WORD_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
+  DELETE_WORD_SUCCESS,
   getCategories,
   getCategoriesActionCreator,
   GET_CATEGORIES_SUCCESS,
@@ -108,6 +109,17 @@ export function api(
         ...state,
         // data,
         words: state.words,
+      };
+    }
+
+    case DELETE_WORD_SUCCESS: {
+      const {
+        response: { data },
+      } = action;
+
+      return {
+        ...state,
+        words: state.words.filter((word: { id: any }) => word.id !== data),
       };
     }
 

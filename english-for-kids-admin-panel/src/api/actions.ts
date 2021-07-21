@@ -20,6 +20,8 @@ export const CREATE_WORD = 'CREATE_WORD';
 export const CREATE_WORD_SUCCESS = 'CREATE_WORD_SUCCESS';
 export const GET_WORDS = 'GET_WORDS';
 export const GET_WORDS_SUCCESS = 'GET_WORDS_SUCCESS';
+export const DELETE_WORD = 'DELETE_WORD';
+export const DELETE_WORD_SUCCESS = 'DELETE_WORD_SUCCESS';
 
 // export interface IGetData extends IApiAction {
 //   type: typeof TEST_ACTION;
@@ -151,6 +153,21 @@ export const getWords = (): IGetWords => ({
   },
 });
 
+export interface IDeleteWord extends IApiAction {
+  type: typeof DELETE_WORD;
+}
+export interface IDeleteWordSuccess extends IApiAction {
+  type: typeof DELETE_WORD_SUCCESS;
+}
+
+export const deleteWord = (id: string): IDeleteWord => ({
+  type: DELETE_WORD,
+  request: {
+    url: `${WORDS_ENDPOINT}/${id}`,
+    method: 'DELETE',
+  },
+});
+
 export type IApiActions =
   | IGetDataSuccess
   | IGetDataError
@@ -165,4 +182,6 @@ export type IApiActions =
   | ICreateWord
   | ICreateWordSuccess
   | IGetWords
-  | IGetWordsSuccess;
+  | IGetWordsSuccess
+  | IDeleteWord
+  | IDeleteWordSuccess;
