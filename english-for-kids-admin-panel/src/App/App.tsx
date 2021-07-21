@@ -21,7 +21,10 @@ import { AppFooter } from './AppFooter';
 export const App = () => {
   const dispatch = useDispatch();
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
+  const [arrayWordApi, setArrayCWordApi] = useState([]);
   const { categories } = useSelector(apiSelector);
+  const { words } = useSelector(apiSelector);
+
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -29,8 +32,13 @@ export const App = () => {
   useEffect(() => {
     setArrayCategoryApi(categories);
   }, [categories]);
+
+  useEffect(() => {
+    setArrayCWordApi(words);
+  }, [words]);
+
   console.log(
-    'Уважаемый проверяющий, если вас не сильно затруднит, проверьте, пожалуйста мою работу в среду/четверг или как можно позже! Я буду очень вам признательна! ❤️️❤️️❤️️ Мой телеграм https://t.me/anya_tav'
+    'Уважаемый проверяющий, если вас не сильно затруднит, проверьте, пожалуйста мою работу в четверг или как можно позже! Я буду очень вам признательна! ❤️️❤️️❤️️ Мой телеграм https://t.me/anya_tav'
   );
   return (
     <PersistGate loading={null} persistor={persistor}>
@@ -44,7 +52,7 @@ export const App = () => {
               <Route
                 path={`/${item.text}`}
                 key={item.id}
-                render={(props: any) => <BaseComponentCategory {...props} category={item.text} />}
+                render={(props: any) => <BaseComponentCategory {...props} category={item.text} categoryId={item.id} />}
               />
             ))}
             <Route path="/statistics" component={Statistics} />

@@ -10,13 +10,15 @@ import { index } from '@/components/CardList/CardItem/Card-item';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
 import { clearArrayStars } from '@/pages/Main/actions';
 import { useHistory } from 'react-router-dom';
+import { apiSelector } from '@/api/reducers';
 import styles from './BaseComponentCategory.scss';
 
 export interface IBaseComponentCategoryProps {
   category: string | React.Key | null | undefined;
+  categoryId: string;
 }
 
-export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProps> = ({ category }) => {
+export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProps> = ({ category, categoryId }) => {
   const dispatch = useDispatch();
   // const { categories } = useSelector(mainSelector);
   // const arrayCategory: Category[] = Object.values(categories);
@@ -24,7 +26,9 @@ export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProp
   // const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
   // const shuffleArray = result[0].shuffleCards;
   const { arrayStars } = useSelector(mainSelector);
+  const [arrayWordsApi, setArrayWordsApi] = useState([]);
   const history = useHistory();
+  const { words } = useSelector(apiSelector);
 
   const { isPlayMode } = useSelector(appHeaderViewSelector);
   const [openClassButtonStart, setOpenClassButtonStart] = useState(false);
@@ -44,6 +48,10 @@ export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProp
   useEffect(() => {
     dispatch(clearArrayStars());
   }, [dispatch, clearArrayStars]);
+
+  useEffect(() => {
+    setArrayWordsApi(words);
+  }, [words]);
 
   const arrayFilterStars = arrayStars.filter((item) => item === true);
   const errors = arrayStars.filter((item) => item === false).length;
@@ -76,6 +84,15 @@ export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProp
     <main className={cn(styles.pageBaseComponentCategory, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageBaseComponentCategoryTitle}>{category}</h1>
       <PointStarsBlock isInitialState={openClassPointStarsBlock} />
+      <CardList
+        categoryId={categoryId}
+        key={categoryId}
+        // {arrayWordsApi.map((item: { categoryId: string }) => {
+        //   console.log('categoryId', categoryId);
+        //   console.log('item.categoryId', item.categoryId);
+        //   categoryId === item.categoryId ? <CardList categoryId={item.categoryId} /> : null;
+        // })}
+      />
       <button
         className={cn(
           styles.pageBaseComponentCategoryButtonStart,

@@ -5,16 +5,17 @@ import { Category, mainSelector } from '@/pages/Main/reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories } from '@/api/actions';
 import { baseURL } from '@/api/api';
+import { apiSelector } from '@/api/reducers';
 import { CategoryItem } from './CategoryItem';
 import styles from './CategoryList.scss';
 
 export const CategoryList: () => JSX.Element = () => {
-  const dispatch = useDispatch();
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
+  const { categories } = useSelector(apiSelector);
 
   useEffect(() => {
-    dispatch(getCategories()).then((arr: any) => setArrayCategoryApi(arr.data));
-  }, [dispatch]);
+    setArrayCategoryApi(categories);
+  }, [categories]);
 
   return (
     <ul className={cn(styles.category)}>

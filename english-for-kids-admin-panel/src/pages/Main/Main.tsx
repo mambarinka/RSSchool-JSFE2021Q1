@@ -8,10 +8,6 @@ import styles from './Main.scss';
 
 export const Main: () => JSX.Element = () => {
   const { isPlayMode } = useSelector(appHeaderViewSelector);
-  // const { isAdminHere } = useSelector(appHeaderViewSelector);
-  // alert(
-  //   'Уважаемый проверяющий, будьте так добры - проверьте, пожалуйста, мою работу в выходные! 🙏❤️ или в конце кросс-чека, если позволяет такая возможность! Мой ник в discord mambarinka, в телеграмме https://t.me/anya_tav'
-  // );
   return (
     <main className={cn(styles.pageMain, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageMainTitle}>English for kids</h1>
