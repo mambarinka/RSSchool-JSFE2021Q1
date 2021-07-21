@@ -2,6 +2,7 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
 import { deleteWord, updateCategory, updateWord } from '@/api/actions';
 import { useDispatch } from 'react-redux';
+import { baseURL } from '@/api/api';
 import styles from './WordsItem.scss';
 
 export interface IWordsItemProps {
@@ -129,6 +130,13 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
     setValueInputFileImage({});
   };
 
+  const handleClickButtonSound = useCallback((evt) => {
+    const audio = new Audio();
+    audio.currentTime = 0;
+    audio.src = linkSound;
+    audio.play();
+  }, []);
+
   return (
     <li className={styles.wordsItem}>
       <div className={styles.itemWrapper}>
@@ -143,7 +151,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
         </div>
         <div className={styles.textWrapper}>
           <p className={styles.name}>Sound:</p>
-          <span>{`${textRu}.${extensionSound}`}</span>
+          <button className={styles.buttonSound} onClick={handleClickButtonSound}></button>
         </div>
         <div className={styles.textWrapper}>
           <p className={styles.name}>Image:</p>
@@ -167,7 +175,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
           className={styles.textInput}
           type="text"
           name="word-name"
-          id="word-name-item"
           onChange={(event) => handleInputTextName(event)}
           value={valueInputTextName}
         />
@@ -176,7 +183,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
           className={styles.textInput}
           type="text"
           name="word-translate"
-          id="word-translate-item"
           onChange={(event) => handleInputTextTranslate(event)}
           value={valueInputTextTranslate}
         />
@@ -186,7 +192,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
             className={styles.fileInput}
             type="file"
             name="word-sound"
-            id="word-sound-item"
             accept="audio/*,text/html,text/css"
             onChange={(event) => handleInputSound(event)}
           />
@@ -197,7 +202,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
             className={styles.fileInput}
             type="file"
             name="word-image"
-            id="word-image-item"
             accept="image/png, image/jpeg, image/svg"
             onChange={(event) => handleInputImage(event)}
           />
