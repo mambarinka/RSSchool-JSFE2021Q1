@@ -8,8 +8,8 @@ import {
   GET_CATEGORIES_SUCCESS,
   GET_WORDS_SUCCESS,
   IApiActions,
-  updateCategoryActionCreator,
   UPDATE_CATEGORY_SUCCESS,
+  UPDATE_WORD_SUCCESS,
 } from './actions';
 
 export interface IApiState {
@@ -54,8 +54,6 @@ export function api(
       const {
         response: { data },
       } = action;
-      // console.log('data', data);
-      const actions = [updateCategoryActionCreator()];
       return {
         ...state,
         categories: state.categories.map((item: { id: any }) => {
@@ -64,7 +62,6 @@ export function api(
           }
           return item;
         }),
-        actions,
       };
     }
 
@@ -120,6 +117,21 @@ export function api(
       return {
         ...state,
         words: state.words.filter((word: { id: any }) => word.id !== data),
+      };
+    }
+
+    case UPDATE_WORD_SUCCESS: {
+      const {
+        response: { data },
+      } = action;
+      return {
+        ...state,
+        words: state.words.map((item: { id: any }) => {
+          if (item.id === data.id) {
+            return data;
+          }
+          return item;
+        }),
       };
     }
 

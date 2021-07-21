@@ -104,7 +104,6 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
     setOpenClassFormUpdate((openClass) => !openClass);
 
     const dataForm = new FormData();
-
     if (
       valueInputTextName === '' ||
       valueInputTextTranslate === '' ||
@@ -170,7 +169,7 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
           <button className={styles.wordsButtonNew} onClick={handleClickButtonNew}></button>
           <form
             className={cn(styles.formUpdate, openClassFormUpdate ? styles.formUpdateOpen : null)}
-            action="/api/Words"
+            action="/api/words"
             method="post"
             encType="multipart/form-data"
             onSubmit={(evt) => handleFormSubmit(evt)}

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
-import { deleteWord, updateCategory } from '@/api/actions';
+import { deleteWord, updateCategory, updateWord } from '@/api/actions';
 import { useDispatch } from 'react-redux';
 import styles from './WordsItem.scss';
 
@@ -24,9 +24,12 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
   category,
 }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
-  const [initialImageCategory, setInitialImageCategory] = useState('./../images/image-category-default.png');
-  const [valueInputText, setValueInputText] = useState('');
-  const [valueInputFile, setValueInputFile] = useState({});
+  const [initialImageWord, setInitialImageWord] = useState('./../images/image-category-default.png');
+  const [initialSoundWord, setInitialSoundWord] = useState('');
+  const [valueInputTextName, setValueInputTextName] = useState('');
+  const [valueInputTextTranslate, setValueInputTextTranslate] = useState('');
+  const [valueInputFileSound, setValueInputFileSound] = useState({});
+  const [valueInputFileImage, setValueInputFileImage] = useState({});
   const dispatch = useDispatch();
   const extensionSound = linkSound.toLowerCase().split('.').pop();
 
@@ -36,21 +39,49 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
 
   const handleClickButtonCancel = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
+    setValueInputTextName('');
+    setValueInputTextTranslate('');
+    setValueInputFileSound({});
+    setValueInputFileImage({});
   }, []);
 
   const handleClickButtonDelete = useCallback(() => {
     dispatch(deleteWord(JSON.stringify(id)));
   }, [dispatch]);
 
-  const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputTextName = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
-    setValueInputText(inputText.value);
-  };
-  const handleInputFile = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setValueInputTextName(inputText.value);
+  }, []);
+
+  const handleInputTextTranslate = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    const inputText = evt.currentTarget;
+    setValueInputTextTranslate(inputText.value);
+  }, []);
+
+  const handleInputSound = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
-    setValueInputFile(inputFile.files![0]);
+    setValueInputFileSound(inputFile.files![0]);
+    // const FILE_TYPES = ['aac', '', 'jpeg', 'png'];
+    if (inputFile.files !== null) {
+      const file: File = inputFile.files[0];
+      // const fileName = file.name.toLowerCase();
+      // const matches = FILE_TYPES.some((it) => fileName.endsWith(`.${it}`));
+      // if (matches) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        if (reader.result !== null) {
+          setInitialSoundWord(reader.result as string);
+        }
+      });
+      reader.readAsDataURL(file);
+      // }
+    }
+  }, []);
+
+  const handleInputImage = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    const inputFile = evt.currentTarget;
+    setValueInputFileImage(inputFile.files![0]);
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
@@ -62,29 +93,40 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
 
         reader.addEventListener('load', () => {
           if (reader.result !== null) {
-            setInitialImageCategory(reader.result as string);
+            setInitialImageWord(reader.result as string);
           }
         });
 
         reader.readAsDataURL(file);
       }
     }
-  };
+  }, []);
 
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
-    // const data = new FormData();
-    // if (valueInputText === '' || valueInputFile === {}) {
-    //   alert('Заполните, пожалуйста, все поля');
-    // } else {
-    //   data.append('name', valueInputText);
-    //   data.append('image', valueInputFile as Blob);
-    //   data.append('id', categoryId);
-    //   dispatch(updateCategory(data));
-    // }
+    const dataForm = new FormData();
+    if (
+      valueInputTextName === '' ||
+      valueInputTextTranslate === '' ||
+      valueInputFileSound === {} ||
+      valueInputFileImage === {}
+    ) {
+      alert('Заполните, пожалуйста, все поля');
+    } else {
+      dataForm.append('id', id);
+      dataForm.append('category-id', categoryId);
+      dataForm.append('word-name', valueInputTextName);
+      dataForm.append('word-translate', valueInputTextTranslate);
+      dataForm.append('word-sound', valueInputFileSound as Blob);
+      dataForm.append('word-image', valueInputFileImage as Blob);
+      dispatch(updateWord(dataForm));
+    }
+
+    setValueInputTextName('');
+    setValueInputTextTranslate('');
+    setValueInputFileSound({});
+    setValueInputFileImage({});
   };
 
   return (
@@ -115,30 +157,58 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
       </div>
       <form
         className={cn(styles.formUpdate, openClassFormUpdate ? styles.formUpdateOpen : null)}
-        action="/api/Words"
+        action="/api/words"
         method="post"
         encType="multipart/form-data"
         onSubmit={(evt) => handleFormSubmit(evt)}
       >
-        <label htmlFor="category-name">Category name</label>
-        <input className={styles.textInput} type="text" name="name" onChange={(event) => handleInputText(event)} />
+        <label htmlFor="word-name">Word name</label>
+        <input
+          className={styles.textInput}
+          type="text"
+          name="word-name"
+          id="word-name-item"
+          onChange={(event) => handleInputTextName(event)}
+          value={valueInputTextName}
+        />
+        <label htmlFor="word-translate">Word translate</label>
+        <input
+          className={styles.textInput}
+          type="text"
+          name="word-translate"
+          id="word-translate-item"
+          onChange={(event) => handleInputTextTranslate(event)}
+          value={valueInputTextTranslate}
+        />
         <div className={styles.fileWrapper}>
-          <label htmlFor="category-image">Category image</label>
+          <label htmlFor="word-sound">Word Sound</label>
           <input
             className={styles.fileInput}
             type="file"
-            name="image"
-            accept="image/png, image/jpeg, image/svg"
-            onChange={(event) => handleInputFile(event)}
+            name="word-sound"
+            id="word-sound-item"
+            accept="audio/*,text/html,text/css"
+            onChange={(event) => handleInputSound(event)}
           />
-          <img className={styles.imageCategory} src={initialImageCategory} alt="image category default" />
+        </div>
+        <div className={styles.fileWrapper}>
+          <label htmlFor="word-image">Word image</label>
+          <input
+            className={styles.fileInput}
+            type="file"
+            name="word-image"
+            id="word-image-item"
+            accept="image/png, image/jpeg, image/svg"
+            onChange={(event) => handleInputImage(event)}
+          />
+          <img className={styles.imageWord} src={initialImageWord} alt="image word default" />
         </div>
         <div className={styles.buttonFormWrapper}>
-          <button className={cn(styles.button, styles.buttonCancel)} type="button" onClick={handleClickButtonCancel}>
+          <button className={cn(styles.button, styles.buttonCancel)} onClick={handleClickButtonCancel} type="button">
             Cancel
           </button>
           <button className={cn(styles.button, styles.buttonCreate)} type="submit">
-            Save
+            Create
           </button>
         </div>
       </form>

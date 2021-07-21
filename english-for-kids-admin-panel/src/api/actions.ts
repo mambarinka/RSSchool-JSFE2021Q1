@@ -22,6 +22,8 @@ export const GET_WORDS = 'GET_WORDS';
 export const GET_WORDS_SUCCESS = 'GET_WORDS_SUCCESS';
 export const DELETE_WORD = 'DELETE_WORD';
 export const DELETE_WORD_SUCCESS = 'DELETE_WORD_SUCCESS';
+export const UPDATE_WORD = 'UPDATE_WORD';
+export const UPDATE_WORD_SUCCESS = 'UPDATE_WORD_SUCCESS';
 
 // export interface IGetData extends IApiAction {
 //   type: typeof TEST_ACTION;
@@ -83,12 +85,6 @@ export const updateCategory = (data: FormData): IUpdateCategory => ({
     method: 'PUT',
     body: data,
   },
-});
-
-export const updateCategoryActionCreator: () => {
-  type: string;
-} = () => ({
-  type: 'UPDATE_CATEGORY',
 });
 
 export interface IDeleteCategory extends IApiAction {
@@ -168,6 +164,22 @@ export const deleteWord = (id: string): IDeleteWord => ({
   },
 });
 
+export interface IUpdateWord extends IApiAction {
+  type: typeof UPDATE_WORD;
+}
+export interface IUpdateWordSuccess extends IApiAction {
+  type: typeof UPDATE_WORD_SUCCESS;
+}
+
+export const updateWord = (data: FormData): IUpdateWord => ({
+  type: UPDATE_WORD,
+  request: {
+    url: WORDS_ENDPOINT,
+    method: 'PUT',
+    body: data,
+  },
+});
+
 export type IApiActions =
   | IGetDataSuccess
   | IGetDataError
@@ -184,4 +196,6 @@ export type IApiActions =
   | IGetWords
   | IGetWordsSuccess
   | IDeleteWord
-  | IDeleteWordSuccess;
+  | IDeleteWordSuccess
+  | IUpdateWord
+  | IUpdateWordSuccess;

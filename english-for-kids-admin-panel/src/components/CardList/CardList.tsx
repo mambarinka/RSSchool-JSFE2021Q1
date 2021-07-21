@@ -42,6 +42,7 @@ export const CardList: FunctionComponent<ICardListProps> = (categoryId) => {
               textEn={wordItem.textEn}
               linkSound={wordItem.linkSound}
               linkImage={wordItem.linkImage}
+              key={wordItem.id}
             />
           ) : null
       )}
