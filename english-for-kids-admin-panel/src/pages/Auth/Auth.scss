@@ -1,0 +1,37 @@
+@import '../../components/style.scss';
+
+// .overlay {
+//   display: none;
+//   transition: 0.3s ease;
+// }
+
+// .overlay-open {
+//   display: block;
+//   height: calc(100vh + 0px);
+//   width: calc(100vw + 0px);
+//   position: fixed;
+//   z-index: 1;
+//   top: 0;
+//   left: 0;
+//   background: rgba(255, 255, 255, 0.4);
+// }
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}

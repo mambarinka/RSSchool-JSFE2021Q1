@@ -21,9 +21,8 @@ import { AppFooter } from './AppFooter';
 export const App = () => {
   const dispatch = useDispatch();
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
-  const [arrayWordApi, setArrayCWordApi] = useState([]);
+  const [modalActive, setModalActive] = useState(true);
   const { categories } = useSelector(apiSelector);
-  const { words } = useSelector(apiSelector);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -33,20 +32,15 @@ export const App = () => {
     setArrayCategoryApi(categories);
   }, [categories]);
 
-  useEffect(() => {
-    setArrayCWordApi(words);
-  }, [words]);
-
   console.log(
     'Уважаемый проверяющий, если вас не сильно затруднит, проверьте, пожалуйста мою работу в четверг или как можно позже по возможности! Я буду очень вам признательна! ❤️️❤️️❤️️ Мой телеграм https://t.me/anya_tav'
   );
   return (
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
-        <Auth>
-          <AppHeader />
+        <Auth active={modalActive} setActive={setModalActive}>
+          <AppHeader active={modalActive} setActive={setModalActive} />
           <Switch>
-            {/* {console.log('arrayCategoryApi', arrayCategoryApi)} */}
             <Route path="/main" component={Main} />
             {arrayCategoryApi.map((item: { text: PropsWithChildren<IBaseComponentCategoryProps>; id: string }) => (
               <Route

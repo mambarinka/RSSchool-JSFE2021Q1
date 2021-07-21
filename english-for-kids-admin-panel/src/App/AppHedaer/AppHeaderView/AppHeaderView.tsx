@@ -1,32 +1,35 @@
 import { Menu } from '@/components/Menu';
 import { Switch } from '@/components/Switсh';
 import { Toggle } from '@/components/Toggle';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { FunctionComponent, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { appHeaderViewSelector } from './reducers';
-import { switchAdminHere, switchAuthorization, switchPlayMode } from './actions';
+import { switchAuthorization, switchPlayMode } from './actions';
 import styles from './AppHeaderView.scss';
 
-export const AppHeaderView: () => JSX.Element = () => {
+export interface IAppHeaderViewProps {
+  active: any;
+  setActive?: any;
+}
+
+export const AppHeaderView: FunctionComponent<IAppHeaderViewProps> = ({ active, setActive }) => {
   const dispatch = useDispatch();
   const [openClassToggle, setOpenClassToggle] = useState(true);
   const [openClassMenu, setOpenClassMenu] = useState(true);
   const [openClassOverlay, setOpenClassOverlay] = useState(true);
   const [playMode, setPlayMode] = useState(true);
-  const [authorizationOpen, setAuthorizationOpen] = useState(false);
-  const [adminIsHere, setAdminIsHere] = useState(false);
-  const { isAdminHere } = useSelector(appHeaderViewSelector);
+  // const [authorizationOpen, setAuthorizationOpen] = useState(false);
+  const [auth, setAuth] = useState(false);
+  // const { isAdminHere } = useSelector(appHeaderViewSelector);
   // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
   // const { isAdminHere } = useSelector(appHeaderViewSelector);
   // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
 
   const toggleClickHandler = useCallback(() => {
-    dispatch(switchAuthorization(false));
-    // dispatch(switchAdminHere(false));
-    dispatch(switchAdminHere(false));
+    // dispatch(switchAuthorization(false));
     setOpenClassToggle(!openClassToggle);
     setOpenClassMenu(!openClassMenu);
     setOpenClassOverlay(!openClassOverlay);
@@ -43,19 +46,19 @@ export const AppHeaderView: () => JSX.Element = () => {
     setPlayMode((isPlayMode) => !isPlayMode);
   }, [playMode, switchPlayMode, dispatch]);
 
-  const handleSwitchAuthorization = useCallback(() => {
-    dispatch(switchAuthorization(authorizationOpen));
-    setAuthorizationOpen((isAuth) => !isAuth);
-    // console.log(authorizationOpen);
-  }, [authorizationOpen, switchAuthorization, dispatch]);
+  // const handleOpenAuth = useCallback(() => {
+  //   // setAuth(!isAuth);
+  //   // dispatch(switchAuthorization(false));
+  //   // console.log(authorizationOpen);
+  // }, []);
 
-  useEffect(() => {
-    if (isAdminHere) {
-      setAdminIsHere((isAdmin) => !isAdmin);
-    } else {
-      setAdminIsHere((isAdmin) => isAdmin);
-    }
-  }, [isAdminHere]);
+  // useEffect(() => {
+  //   if (isAdminHere) {
+  //     setAdminIsHere((isAdmin) => !isAdmin);
+  //   } else {
+  //     setAdminIsHere((isAdmin) => isAdmin);
+  //   }
+  // }, [isAdminHere]);
 
   return (
     <header className={styles.pageHeader}>
@@ -67,8 +70,15 @@ export const AppHeaderView: () => JSX.Element = () => {
         <Link to={'/admin-panel-categories'} className={cn(styles.button, styles.linkCategories)}>
           Categories
         </Link>
-        <button className={cn(styles.login, styles.button)} onClick={handleSwitchAuthorization}>
-          {adminIsHere ? 'Log out' : 'Log in'}
+        {console.log('active', active)}
+        {console.log('setactive', setActive)}
+        <button
+          className={cn(styles.login, styles.button)}
+          onClick={() => {
+            setActive(true);
+          }}
+        >
+          {'Log in'}
         </button>
         <Switch htmlType="checkbox" id="switch__input" tabindex={0} onClick={switchClickHandler} />
         <Link to={'/statistics'} className={cn(styles.pageHeaderLink, styles.button)}>

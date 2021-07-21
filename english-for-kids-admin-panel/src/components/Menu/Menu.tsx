@@ -18,7 +18,7 @@ export interface IMenuProps {
 
 export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick }) => {
   const dispatch = useDispatch();
-  const { isAdminHere } = useSelector(appHeaderViewSelector);
+  // const { isAdminHere } = useSelector(appHeaderViewSelector);
   const [adminIsHere, setAdminIsHere] = useState(false);
   const { categories } = useSelector(apiSelector);
   // const { categories } = useSelector(mainSelector);
@@ -27,13 +27,13 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
 
-  useEffect(() => {
-    if (isAdminHere) {
-      setAdminIsHere((isAdmin) => !isAdmin);
-    } else {
-      setAdminIsHere((isAdmin) => isAdmin);
-    }
-  }, [isAdminHere]);
+  // useEffect(() => {
+  //   if (isAdminHere) {
+  //     setAdminIsHere((isAdmin) => !isAdmin);
+  //   } else {
+  //     setAdminIsHere((isAdmin) => isAdmin);
+  //   }
+  // }, [isAdminHere]);
 
   useEffect(() => {
     dispatch(getCategories());

@@ -44,18 +44,18 @@ export const switchAuthorization = (AuthorizationValue: boolean): ISwitchAuthori
   },
 });
 
-export interface ISwitchAdminHere extends AnyAction {
-  type: typeof SWITCH_ADMIN_HERE;
-  payload: {
-    isAdminHere: boolean;
-  };
-}
+// export interface ISwitchAdminHere extends AnyAction {
+//   type: typeof SWITCH_ADMIN_HERE;
+//   payload: {
+//     isAdminHere: boolean;
+//   };
+// }
 
-export const switchAdminHere = (AdminHere: boolean): ISwitchAdminHere => ({
-  type: SWITCH_ADMIN_HERE,
-  payload: {
-    isAdminHere: AdminHere,
-  },
-});
+// export const switchAdminHere = (AdminHere: boolean): ISwitchAdminHere => ({
+//   type: SWITCH_ADMIN_HERE,
+//   payload: {
+//     isAdminHere: AdminHere,
+//   },
+// });
 
-export type IHeaderViewAction = ISwitchPlayMode | ISwitchAuthorization | ISwitchAdminHere;
+export type IHeaderViewAction = ISwitchPlayMode | ISwitchAuthorization /* ISwitchAdminHere */;

@@ -1,11 +1,10 @@
 import { Caption } from '@/components/Caption/Caption';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { Input } from '@/components/Input';
 import { Modal } from '@/components/Modal';
+import cn from 'classnames';
 
 import styles from './AuthView.scss';
-
-// import { Modal, Input, Button, Caption } from '@/components';
 
 export interface IAuthViewProps {
   onAccept: () => void;
@@ -14,24 +13,22 @@ export interface IAuthViewProps {
 }
 
 export const AuthView: FunctionComponent<IAuthViewProps> = ({ onAccept, onChangeLogin, onChangePassword }) => (
-  <Modal zIndex={100} overlay>
-    <div className={styles.content}>
-      <div className={styles.header}>
-        <div className={styles.label}>Authorization</div>
+  <div className={styles.content}>
+    <div className={styles.header}>
+      <div className={styles.label}>Authorization</div>
+    </div>
+    <div className={styles.main}>
+      <div className={styles.inputArea}>
+        <Caption className={styles.caption}>Login</Caption>
+        <Input onChange={onChangeLogin} />
       </div>
-      <div className={styles.main}>
-        <div className={styles.inputArea}>
-          <Caption className={styles.caption}>Login</Caption>
-          <Input onChange={onChangeLogin} />
-        </div>
-        <div className={styles.inputArea}>
-          <Caption className={styles.caption}>Password</Caption>
-          <Input onChange={onChangePassword} htmlType="password" isShowEyeCloseUp />
-        </div>
-      </div>
-      <div className={styles.footer}>
-        <button onClick={onAccept}>Log in</button>
+      <div className={styles.inputArea}>
+        <Caption className={styles.caption}>Password</Caption>
+        <Input onChange={onChangePassword} htmlType="password" isShowEyeCloseUp />
       </div>
     </div>
-  </Modal>
+    <div className={styles.footer}>
+      <button onClick={onAccept}>Log in</button>
+    </div>
+  </div>
 );
