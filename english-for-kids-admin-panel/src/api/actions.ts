@@ -84,6 +84,7 @@ export const updateCategory = (data: FormData): IUpdateCategory => ({
     url: CATEGORIES_ENDPOINT,
     method: 'PUT',
     body: data,
+    mode: 'cors',
   },
 });
 

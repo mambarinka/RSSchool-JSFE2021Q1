@@ -30,8 +30,8 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
     // event.stopPropagation();
     // event.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
+    // setValueInputText('');
+    // setValueInputFile({});
   }, []);
 
   const handleInputText = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +41,9 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
 
   const handleInputFile = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
+    console.log('inputFile in categoriessss', inputFile.files);
     setValueInputFile(inputFile.files![0]);
+    console.log('valueInputFile', valueInputFile);
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
@@ -65,9 +67,11 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
+    // setValueInputText('');
+    // setValueInputFile({});
 
+    console.log('valueInputText in cat', valueInputText);
+    console.log('valueInputFile in cat', valueInputFile);
     const dataForm = new FormData();
     dataForm.append('name', valueInputText);
     dataForm.append('image', valueInputFile as Blob);

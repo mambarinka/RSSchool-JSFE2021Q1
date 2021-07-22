@@ -6,12 +6,14 @@ export interface IApiRequest {
   body?: any;
   headers?: { [k: string]: any };
   responseType?: null | 'arraybuffer' | 'blob' | 'formData' | 'json' | 'text';
+  mode?: any;
 }
 
 export interface IApiAction extends AnyAction {
   type: string;
   request: IApiRequest;
   meta?: any;
+  mode?: any;
 }
 
 export interface IApiActionSuccess extends AnyAction {

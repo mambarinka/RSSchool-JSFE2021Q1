@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, { FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { deleteCategory, updateCategory } from '@/api/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +20,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
 
   const dispatch = useDispatch();
   const { words } = useSelector(apiSelector);
+  const { categories } = useSelector(apiSelector);
 
   const handleClickUpdate = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -27,8 +28,8 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
 
   const handleClickButtonCancel = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
+    // setValueInputText('');
+    // setValueInputFile({});
   }, []);
 
   const handleClickButtonDelete = useCallback(() => {
@@ -36,26 +37,18 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
     console.log(categoryId);
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(deleteCategory(categoryId));
-  // }, [dispatch]);
-
-  // useEffect(()=> {
-
-  // },[words])
-
   const countWordsinCategory = words.filter((obj: { categoryId: string }) => obj.categoryId === categoryId).length;
-  // console.log(countWordsinCategory);
-  // const [countWords, setCounstWords] = useState(countWordsinCategory);
-  // db = db.filter((el: { id: number; }) => el.id !== categoryId);
 
-  const handleInputText = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputText = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
     setValueInputText(inputText.value);
-  };
-  const handleInputFile = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  }, []);
+
+  const handleInputFile = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
-    setValueInputFile(inputFile.files![0]);
+    console.log('evt.currentTarget.files', evt.currentTarget.files);
+    setValueInputFile(evt.currentTarget.files![0]);
+    console.log('valueInputFile', valueInputFile);
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
@@ -68,32 +61,37 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
         reader.addEventListener('load', () => {
           if (reader.result !== null) {
             setInitialImageCategory(reader.result as string);
+            console.log('reader.result', reader.result);
           }
         });
 
         reader.readAsDataURL(file);
       }
     }
-  };
+  }, []);
 
-  const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputText('');
-    setValueInputFile({});
+    // setValueInputText('');
+    // setValueInputFile({});
 
     const data = new FormData();
+
+    console.log(valueInputText);
+    console.log(valueInputFile);
+    console.log(categoryId);
+
     if (valueInputText === '' || valueInputFile === {}) {
       alert('Заполните, пожалуйста, все поля');
     } else {
       data.append('name', valueInputText);
+      // data.append('name', valueInputText as string);
       data.append('image', valueInputFile as Blob);
       data.append('id', categoryId);
-
       dispatch(updateCategory(data));
     }
   };
-
   return (
     <li className={styles.categoriesItem}>
       <div className={styles.itemWrapper}>
@@ -121,7 +119,16 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
         onSubmit={(evt) => handleFormSubmit(evt)}
       >
         <label htmlFor="category-name">Category name</label>
-        <input className={styles.textInput} type="text" name="name" onChange={(event) => handleInputText(event)} />
+        <input
+          className={styles.textInput}
+          type="text"
+          name="name"
+          onChange={(event) => {
+            handleInputText(event);
+            setValueInputText(event.target.value);
+          }}
+          // value={valueInputText as string}
+        />
         <div className={styles.fileWrapper}>
           <label htmlFor="category-image">Category image</label>
           <input
@@ -130,6 +137,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
             name="image"
             accept="image/png, image/jpeg, image/svg"
             onChange={(event) => handleInputFile(event)}
+            // value={valueInputFile}
           />
           <img className={styles.imageCategory} src={initialImageCategory} alt="image category default" />
         </div>

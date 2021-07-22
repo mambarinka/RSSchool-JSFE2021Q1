@@ -25,35 +25,40 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
   category,
 }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
+
   const [initialImageWord, setInitialImageWord] = useState('./../images/image-category-default.png');
   const [initialSoundWord, setInitialSoundWord] = useState('');
+
   const [valueInputTextName, setValueInputTextName] = useState('');
   const [valueInputTextTranslate, setValueInputTextTranslate] = useState('');
   const [valueInputFileSound, setValueInputFileSound] = useState({});
   const [valueInputFileImage, setValueInputFileImage] = useState({});
   const dispatch = useDispatch();
-  const extensionSound = linkSound.toLowerCase().split('.').pop();
 
   const handleClickChange = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
+    setValueInputFileSound(linkSound);
   }, [openClassFormUpdate]);
 
   const handleClickButtonCancel = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputTextName('');
-    setValueInputTextTranslate('');
-    setValueInputFileSound({});
-    setValueInputFileImage({});
+    // setValueInputTextName('');
+    // setValueInputTextTranslate('');
+    // setValueInputFileSound({});
+    // setValueInputFileImage({});
   }, []);
 
   const handleClickButtonDelete = useCallback(() => {
     dispatch(deleteWord(JSON.stringify(id)));
   }, [dispatch]);
 
-  const handleInputTextName = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
-    const inputText = evt.currentTarget;
-    setValueInputTextName(inputText.value);
-  }, []);
+  const handleInputTextName = useCallback(
+    (evt: React.ChangeEvent<HTMLInputElement>) => {
+      const inputText = evt.currentTarget;
+      setValueInputTextName(inputText.value);
+    },
+    [valueInputTextName]
+  );
 
   const handleInputTextTranslate = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
@@ -63,12 +68,8 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
   const handleInputSound = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
     setValueInputFileSound(inputFile.files![0]);
-    // const FILE_TYPES = ['aac', '', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
-      // const fileName = file.name.toLowerCase();
-      // const matches = FILE_TYPES.some((it) => fileName.endsWith(`.${it}`));
-      // if (matches) {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         if (reader.result !== null) {
@@ -76,7 +77,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
         }
       });
       reader.readAsDataURL(file);
-      // }
     }
   }, []);
 
@@ -123,11 +123,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
       dataForm.append('word-image', valueInputFileImage as Blob);
       dispatch(updateWord(dataForm));
     }
-
-    setValueInputTextName('');
-    setValueInputTextTranslate('');
-    setValueInputFileSound({});
-    setValueInputFileImage({});
   };
 
   const handleClickButtonSound = useCallback((evt) => {
@@ -176,7 +171,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
           type="text"
           name="word-name"
           onChange={(event) => handleInputTextName(event)}
-          value={valueInputTextName}
         />
         <label htmlFor="word-translate">Word translate</label>
         <input
@@ -184,7 +178,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
           type="text"
           name="word-translate"
           onChange={(event) => handleInputTextTranslate(event)}
-          value={valueInputTextTranslate}
         />
         <div className={styles.fileWrapper}>
           <label htmlFor="word-sound">Word Sound</label>
