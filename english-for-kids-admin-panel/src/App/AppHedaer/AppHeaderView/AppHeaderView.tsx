@@ -60,6 +60,8 @@ export const AppHeaderView: FunctionComponent<IAppHeaderViewProps> = ({ active, 
   //   }
   // }, [isAdminHere]);
 
+  const statusCode = sessionStorage.getItem('status');
+
   return (
     <header className={styles.pageHeader}>
       <div className={styles['page-header__wrapper']}>
@@ -70,15 +72,16 @@ export const AppHeaderView: FunctionComponent<IAppHeaderViewProps> = ({ active, 
         <Link to={'/admin-panel-categories'} className={cn(styles.button, styles.linkCategories)}>
           Categories
         </Link>
-        {console.log('active', active)}
-        {console.log('setactive', setActive)}
         <button
           className={cn(styles.login, styles.button)}
           onClick={() => {
             setActive(true);
+            if (statusCode === '200') {
+              sessionStorage.removeItem('status');
+            }
           }}
         >
-          {'Log in'}
+          {statusCode !== '200' ? 'Log in' : 'Log out'}
         </button>
         <Switch htmlType="checkbox" id="switch__input" tabindex={0} onClick={switchClickHandler} />
         <Link to={'/statistics'} className={cn(styles.pageHeaderLink, styles.button)}>

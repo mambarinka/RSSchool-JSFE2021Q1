@@ -104,6 +104,10 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
     setOpenClassFormUpdate((openClass) => !openClass);
 
     const dataForm = new FormData();
+    console.log('valueInputTextName', valueInputTextName);
+    console.log('valueInputTextTranslate', valueInputTextName);
+    console.log('valueInputFileSound', valueInputTextName);
+    console.log('valueInputFileImage', valueInputTextName);
     if (
       valueInputTextName === '' ||
       valueInputTextTranslate === '' ||

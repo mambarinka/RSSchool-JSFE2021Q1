@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '@/store/store';
 import { apiSelector } from '@/api/reducers';
 import { Main } from '@/pages/Main';
-import { Auth } from '@/pages/Auth/Auth';
+import { Auth /* responseStatus */ } from '@/pages/Auth/Auth';
 import { DifficultWords } from '@/pages/DifficultWords';
 import { Statistics } from '@/pages/Statistics';
 import { Categories } from '@/pages/Admin-panel/Categories';
@@ -21,7 +21,7 @@ import { AppFooter } from './AppFooter';
 export const App = () => {
   const dispatch = useDispatch();
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
-  const [modalActive, setModalActive] = useState(true);
+  const [modalActive, setModalActive] = useState(false);
   const { categories } = useSelector(apiSelector);
 
   useEffect(() => {
@@ -32,9 +32,11 @@ export const App = () => {
     setArrayCategoryApi(categories);
   }, [categories]);
 
-  console.log(
-    'Уважаемый проверяющий, если вас не сильно затруднит, проверьте, пожалуйста мою работу в четверг или как можно позже по возможности! Я буду очень вам признательна! ❤️️❤️️❤️️ Мой телеграм https://t.me/anya_tav'
-  );
+  useEffect(() => {
+    sessionStorage.setItem('status', '401');
+  }, []);
+  // console.log('responseStatus', responseStatus);
+
   return (
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
@@ -51,7 +53,10 @@ export const App = () => {
             ))}
             <Route path="/statistics" component={Statistics} />
             <Route path="/difficult-words" component={DifficultWords} />
-            <Route path="/admin-panel-categories" component={Categories} />
+            <Route
+              path="/admin-panel-categories"
+              render={(props: any) => <Categories {...props} active={modalActive} setActive={setModalActive} />}
+            />
             {arrayCategoryApi.map((item: any) => {
               const WrappedWords = function (
                 props: JSX.IntrinsicAttributes & IWordsProps & { children?: React.ReactNode }

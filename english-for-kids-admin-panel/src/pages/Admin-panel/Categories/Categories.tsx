@@ -1,13 +1,19 @@
-import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
+import React, { FunctionComponent, SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, deleteCategory, getCategories, getWords, updateCategory } from '@/api/actions';
 import { baseURL } from '@/api/api';
 import { apiSelector } from '@/api/reducers';
+import { useHistory } from 'react-router-dom';
 import { CategoriesItem } from './CaregoriesItem';
 import styles from './Categories.scss';
 
-export const Categories: () => JSX.Element = () => {
+export interface ICategoriesAdminProps {
+  active: boolean;
+  setActive?: any;
+}
+
+export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, setActive) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
@@ -77,6 +83,16 @@ export const Categories: () => JSX.Element = () => {
   useEffect(() => {
     setArrayCategoryApi(categories);
   }, [categories]);
+
+  const statusCode = sessionStorage.getItem('status');
+  const history = useHistory();
+  useEffect(() => {
+    if (statusCode !== '200') {
+      alert('Вы не авторизованы');
+      // setActive(true);
+      history.push('main');
+    }
+  }, [statusCode]);
 
   return (
     <main className={styles.pageAdminCategories}>
