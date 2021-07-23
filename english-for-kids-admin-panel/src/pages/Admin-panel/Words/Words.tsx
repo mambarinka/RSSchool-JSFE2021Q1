@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { baseURL } from '@/api/api';
 import { apiSelector } from '@/api/reducers';
 import { createWord } from '@/api/actions';
+import { useHistory } from 'react-router-dom';
 import { WordsItem } from './WordsItem';
 import styles from './Words.scss';
 
@@ -19,11 +20,14 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
   const [valueInputTextTranslate, setValueInputTextTranslate] = useState('');
   const [valueInputFileSound, setValueInputFileSound] = useState({});
   const [valueInputFileImage, setValueInputFileImage] = useState({});
-  const [arrayWordsApi, setArrayWordsApi] = useState([] as any[]);
   const dispatch = useDispatch();
   const { words } = useSelector(apiSelector);
   const [imageCategory, setImageCategory] = useState('');
   const [soundCategory, setSoundCategory] = useState('');
+
+  const [arrayWordsApi, setArrayWordsApi] = useState([] as any[]);
+  const numInRow = 4;
+  const [amountWordsScroll, setAmountWordsScroll] = useState(numInRow);
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -101,9 +105,33 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
     }
   };
 
+  const statusCode = sessionStorage.getItem('status');
+  const history = useHistory();
   useEffect(() => {
-    setArrayWordsApi(words);
-  }, [words]);
+    if (statusCode !== '200') {
+      alert('Вы не авторизованы');
+      history.push('main');
+    }
+  }, [statusCode]);
+
+  const handleScroll = (event: React.UIEvent<HTMLElement>) => {
+    const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+
+    if (scrollHeight - scrollTop === clientHeight) {
+      setAmountWordsScroll((prev) => prev + numInRow);
+    }
+  };
+  const filterArrayOnCategory = words.filter((word) => word.categoryId === categoryId);
+
+  useEffect(() => {
+    const loadCategoriesScroll = async () => {
+      const newCategories = filterArrayOnCategory.slice(amountWordsScroll - numInRow, amountWordsScroll);
+
+      setArrayWordsApi((prev) => [...prev, ...newCategories]);
+    };
+
+    loadCategoriesScroll();
+  }, [amountWordsScroll]);
 
   return (
     <main className={styles.pageAdminWords}>
@@ -111,18 +139,17 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
       <p className={styles.pageAdminWordsCategory}>
         Category: <span>{category}</span>
       </p>
-      <ul className={styles.wordsList}>
-        {/* {console.log(arrayWordsApi)} */}
-        {arrayWordsApi.map(
-          (item: {
-            id: string;
-            categoryId: string;
-            textRu: string;
-            textEn: string;
-            linkSound: string;
-            linkImage: string;
-          }) =>
-            categoryId === item.categoryId ? (
+      <ul className={styles.wordsList} onScroll={handleScroll}>
+        {arrayWordsApi &&
+          arrayWordsApi.map(
+            (item: {
+              id: string;
+              categoryId: string;
+              textRu: string;
+              textEn: string;
+              linkSound: string;
+              linkImage: string;
+            }) => (
               <WordsItem
                 id={item.id}
                 categoryId={item.categoryId}
@@ -133,9 +160,9 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
                 linkImage={`${baseURL}${item.linkImage}`}
                 category={category}
               />
-            ) : null
-        )}
-        <li className={styles.wordsItem}>
+            )
+          )}
+        <li className={cn(amountWordsScroll >= filterArrayOnCategory.length ? styles.wordsItem : styles.hide)}>
           <h2 className={styles.wordsItemTitle}>Add new word</h2>
           <button className={styles.wordsButtonNew} onClick={handleClickButtonNew}></button>
           <form

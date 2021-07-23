@@ -13,7 +13,7 @@ export interface ICategoriesAdminProps {
   setActive?: any;
 }
 
-export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, setActive) => {
+export const Categories: FunctionComponent<ICategoriesAdminProps> = () => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
@@ -25,7 +25,6 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   const [arrayCategoryApi, setArrayCategoryApi] = useState([] as any[]);
   const numInRow = 4;
   const [amountCategoriesScroll, setAmountCategoriesScroll] = useState(numInRow);
-  const [loading, setLoading] = useState(true);
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -113,12 +112,9 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
 
   useEffect(() => {
     const loadCategoriesScroll = async () => {
-      setLoading(true);
-
       const newCategories = categories.slice(amountCategoriesScroll - numInRow, amountCategoriesScroll);
 
       setArrayCategoryApi((prev) => [...prev, ...newCategories]);
-      setLoading(false);
     };
 
     loadCategoriesScroll();
