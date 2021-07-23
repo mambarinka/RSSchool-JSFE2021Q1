@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
-import { deleteWord, updateCategory, updateWord } from '@/api/actions';
+import { deleteWord, updateWord } from '@/api/actions';
 import { useDispatch } from 'react-redux';
-import { baseURL } from '@/api/api';
 import styles from './WordsItem.scss';
 
 export interface IWordsItemProps {
@@ -25,10 +24,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
   category,
 }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
-
   const [initialImageWord, setInitialImageWord] = useState('./../images/image-category-default.png');
-  const [initialSoundWord, setInitialSoundWord] = useState('');
-
   const [valueInputTextName, setValueInputTextName] = useState('');
   const [valueInputTextTranslate, setValueInputTextTranslate] = useState('');
   const [valueInputFileSound, setValueInputFileSound] = useState({});
@@ -75,7 +71,6 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         if (reader.result !== null) {
-          setInitialSoundWord(reader.result as string);
           setSoundCategory(reader.result as string);
         }
       });
@@ -111,14 +106,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
     const dataForm = new FormData();
-    if (
-      valueInputTextName === '' ||
-      valueInputTextTranslate === '' ||
-      // Object.keys(valueInputFileSound).length === 0 ||
-      // Object.keys(valueInputFileImage).length === 0
-      imageCategory === '' ||
-      soundCategory === ''
-    ) {
+    if (valueInputTextName === '' || valueInputTextTranslate === '' || imageCategory === '' || soundCategory === '') {
       alert('Заполните, пожалуйста, все поля');
     } else {
       dataForm.append('id', id);
@@ -131,7 +119,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
     }
   };
 
-  const handleClickButtonSound = useCallback((evt) => {
+  const handleClickButtonSound = useCallback(() => {
     const audio = new Audio();
     audio.currentTime = 0;
     audio.src = linkSound;
@@ -144,11 +132,11 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
         <button className={styles.itemCloseButton} onClick={handleClickButtonDelete}></button>
         <div className={styles.textWrapper}>
           <p className={styles.name}>Word:</p>
-          <span>{textRu}</span>
+          <span>{textEn}</span>
         </div>
         <div className={styles.textWrapper}>
           <p className={styles.name}>Translate:</p>
-          <span>{textEn}</span>
+          <span>{textRu}</span>
         </div>
         <div className={styles.textWrapper}>
           <p className={styles.name}>Sound:</p>

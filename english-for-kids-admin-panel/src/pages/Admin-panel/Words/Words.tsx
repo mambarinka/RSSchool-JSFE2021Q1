@@ -1,28 +1,25 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getWords } from '@/api/actions';
 import { baseURL } from '@/api/api';
 import { apiSelector } from '@/api/reducers';
-import { createWord, getWords } from '@/api/actions';
+import { createWord } from '@/api/actions';
 import { WordsItem } from './WordsItem';
 import styles from './Words.scss';
 
 export interface IWordsProps {
   category: string | React.Key | null | undefined;
   categoryId: string;
-  // src: string;
 }
 
 export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) => {
   const [openClassFormUpdate, setOpenClassFormUpdate] = useState(false);
   const [initialImageWord, setInitialImageWord] = useState('./../images/image-category-default.png');
-  const [initialSoundWord, setInitialSoundWord] = useState('');
   const [valueInputTextName, setValueInputTextName] = useState('');
   const [valueInputTextTranslate, setValueInputTextTranslate] = useState('');
   const [valueInputFileSound, setValueInputFileSound] = useState({});
   const [valueInputFileImage, setValueInputFileImage] = useState({});
-  const [arrayWordsApi, setArrayWordsApi] = useState([]);
+  const [arrayWordsApi, setArrayWordsApi] = useState([] as any[]);
   const dispatch = useDispatch();
   const { words } = useSelector(apiSelector);
   const [imageCategory, setImageCategory] = useState('');
@@ -30,21 +27,11 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    // if (openClassFormUpdate) {
-    // setValueInputTextName('');
-    // setValueInputTextTranslate('');
-    // setValueInputFileSound({});
-    // setValueInputFileImage({});
-    // }
   }, []);
 
   const handleClickButtonCancel = useCallback(() => {
     if (openClassFormUpdate) {
       setOpenClassFormUpdate((openClass) => !openClass);
-      // setValueInputTextName('');
-      // setValueInputTextTranslate('');
-      // setValueInputFileSound({});
-      // setValueInputFileImage({});
     }
   }, []);
 
@@ -61,21 +48,15 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
   const handleInputSound = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
     setValueInputFileSound(inputFile.files![0]);
-    // const FILE_TYPES = ['aac', '', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
-      // const fileName = file.name.toLowerCase();
-      // const matches = FILE_TYPES.some((it) => fileName.endsWith(`.${it}`));
-      // if (matches) {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         if (reader.result !== null) {
-          setInitialSoundWord(reader.result as string);
           setSoundCategory(reader.result as string);
         }
       });
       reader.readAsDataURL(file);
-      // }
     }
   }, []);
 
@@ -108,41 +89,17 @@ export const Words: FunctionComponent<IWordsProps> = ({ category, categoryId }) 
     setOpenClassFormUpdate((openClass) => !openClass);
 
     const dataForm = new FormData();
-    // console.log('valueInputTextName', valueInputTextName === '');
-    // console.log('valueInputTextTranslate', valueInputTextTranslate === '');
-    // console.log('valueInputFileSound', Object.keys(valueInputFileSound).length === 0);
-    // console.log('valueInputFileImage', Object.keys(valueInputFileImage).length === 0);
-    // // console.log('valueInputTextName', valueInputTextName);
-    // // console.log('valueInputTextTranslate', valueInputTextTranslate);
-    // console.log('valueInputFileSound', valueInputFileSound);
-    // console.log('valueInputFileImage', valueInputFileImage);
-    if (
-      valueInputTextName === '' ||
-      valueInputTextTranslate === '' ||
-      imageCategory === '' ||
-      soundCategory === ''
-      // Object.keys(valueInputFileSound).length === 0 ||
-      // Object.keys(valueInputFileImage).length === 0
-    ) {
+    if (valueInputTextName === '' || valueInputTextTranslate === '' || imageCategory === '' || soundCategory === '') {
       alert('Заполните, пожалуйста, все поля');
     } else {
       dataForm.append('category-id', categoryId);
-      dataForm.append('word-name', valueInputTextName);
-      dataForm.append('word-translate', valueInputTextTranslate);
+      dataForm.append('word-name', valueInputTextTranslate);
+      dataForm.append('word-translate', valueInputTextName);
       dataForm.append('word-sound', valueInputFileSound as Blob);
       dataForm.append('word-image', valueInputFileImage as Blob);
       dispatch(createWord(dataForm));
     }
-
-    // setValueInputTextName('');
-    // setValueInputTextTranslate('');
-    // setValueInputFileSound({});
-    // setValueInputFileImage({});
   };
-
-  // useEffect(() => {
-  //   dispatch(getWords());
-  // }, [dispatch]);
 
   useEffect(() => {
     setArrayWordsApi(words);

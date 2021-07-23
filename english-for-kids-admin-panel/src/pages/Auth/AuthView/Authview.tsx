@@ -1,8 +1,6 @@
 import { Caption } from '@/components/Caption/Caption';
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Input } from '@/components/Input';
-import { Modal } from '@/components/Modal';
-import cn from 'classnames';
 
 import styles from './AuthView.scss';
 

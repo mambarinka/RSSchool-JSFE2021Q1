@@ -68,7 +68,7 @@ export const CardItemDifficult: FunctionComponent<ICardItemDifficultProps> = ({
             index++;
             setObjCardsChecked(true);
             if (index < arrshuffle.length) {
-              const pathNext = repeatArrayCards.find((item, i) => item.value === arrshuffle[index]);
+              const pathNext = repeatArrayCards.find((item) => item.value === arrshuffle[index]);
               playAudio(isPlayMode, pathNext.name, arrshuffle[index]);
             }
           }

@@ -1,30 +1,32 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import { Category, mainSelector } from '@/pages/Main/reducer';
 import { useSelector } from 'react-redux';
 import { apiSelector } from '@/api/reducers';
 import { CardItem } from './CardItem';
 import styles from './CardList.scss';
+
+export let shuffleArray: any[];
 
 export interface ICardListProps {
   categoryId?: string;
 }
 
 export const CardList: FunctionComponent<ICardListProps> = (categoryId) => {
-  const [arrayWordsApi, setArrayWordsApi] = useState([]);
+  const [arrayWordsApi, setArrayWordsApi] = useState([] as any[]);
   const { words } = useSelector(apiSelector);
+
+  const arrayWords = words.filter((obj: { categoryId: string }) => obj.categoryId === categoryId);
+  arrayWords.forEach((word) => {
+    shuffleArray.push(word.textEn);
+  });
 
   useEffect(() => {
     setArrayWordsApi(words);
   }, [words]);
 
-  // const path = window.location.pathname.slice(1);
-  // const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
-
   return (
     <ul className={cn(styles.cardList)}>
-      {console.log('categoryId', categoryId)}
       {arrayWordsApi.map(
         (wordItem: {
           id: string;

@@ -4,13 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { CardList } from '@/components/CardList';
-import { Category, mainSelector } from '@/pages/Main/reducer';
-import { playAudio } from '@/helpers/utils';
-import { index } from '@/components/CardList/CardItem/Card-item';
+import { mainSelector } from '@/pages/Main/reducer';
 import { PointStarsBlock } from '@/components/PointStarsBlock';
 import { clearArrayStars } from '@/pages/Main/actions';
 import { useHistory } from 'react-router-dom';
-import { apiSelector } from '@/api/reducers';
 import styles from './BaseComponentCategory.scss';
 
 export interface IBaseComponentCategoryProps {
@@ -20,15 +17,8 @@ export interface IBaseComponentCategoryProps {
 
 export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProps> = ({ category, categoryId }) => {
   const dispatch = useDispatch();
-  // const { categories } = useSelector(mainSelector);
-  // const arrayCategory: Category[] = Object.values(categories);
-  // const path = window.location.pathname.slice(1);
-  // const result = arrayCategory.filter((categoryItem) => categoryItem.value === `${path}`);
-  // const shuffleArray = result[0].shuffleCards;
   const { arrayStars } = useSelector(mainSelector);
-  const [arrayWordsApi, setArrayWordsApi] = useState([]);
   const history = useHistory();
-  const { words } = useSelector(apiSelector);
 
   const { isPlayMode } = useSelector(appHeaderViewSelector);
   const [openClassButtonStart, setOpenClassButtonStart] = useState(false);
@@ -36,22 +26,19 @@ export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProp
   const [openClassPointStarsBlock, setOpenClassPointStarsBlock] = useState(true);
   const [isWin, setIsWin] = useState(false);
   const audio = new Audio();
+  const path = window.location.pathname.slice(1);
   audio.currentTime = 0;
 
-  // useEffect(() => {
-  //   if (openClassButtonStart) {
-  //     setOpenClassButtonStart((openClass) => !openClass);
-  //     setOpenClassOverlay((openClass) => !openClass);
-  //   }
-  // }, [isPlayMode, path]);
+  useEffect(() => {
+    if (openClassButtonStart) {
+      setOpenClassButtonStart((openClass) => !openClass);
+      setOpenClassOverlay((openClass) => !openClass);
+    }
+  }, [isPlayMode, path]);
 
   useEffect(() => {
     dispatch(clearArrayStars());
   }, [dispatch, clearArrayStars]);
-
-  useEffect(() => {
-    setArrayWordsApi(words);
-  }, [words]);
 
   const arrayFilterStars = arrayStars.filter((item) => item === true);
   const errors = arrayStars.filter((item) => item === false).length;
@@ -84,15 +71,7 @@ export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProp
     <main className={cn(styles.pageBaseComponentCategory, isPlayMode ? 'play-mode' : null)}>
       <h1 className={styles.pageBaseComponentCategoryTitle}>{category}</h1>
       <PointStarsBlock isInitialState={openClassPointStarsBlock} />
-      <CardList
-        categoryId={categoryId}
-        key={categoryId}
-        // {arrayWordsApi.map((item: { categoryId: string }) => {
-        //   console.log('categoryId', categoryId);
-        //   console.log('item.categoryId', item.categoryId);
-        //   categoryId === item.categoryId ? <CardList categoryId={item.categoryId} /> : null;
-        // })}
-      />
+      <CardList categoryId={categoryId} key={categoryId} />
       <button
         className={cn(
           styles.pageBaseComponentCategoryButtonStart,
@@ -105,7 +84,6 @@ export const BaseComponentCategory: FunctionComponent<IBaseComponentCategoryProp
           styles.pageBaseComponentCategoryButtonRepeat,
           !isPlayMode ? null : openClassButtonStart ? styles.repeat : null
         )}
-        /* onClick={() => playAudio(isPlayMode, path, shuffleArray[index])} */
       ></button>
 
       <div className={cn(styles.overlay, !isPlayMode ? null : openClassOverlay ? styles.overlayOpen : null)}></div>

@@ -1,13 +1,9 @@
-import { switchAuthorization } from '@/App/AppHedaer/AppHeaderView/actions';
-import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
-import React, { ReactNode, FunctionComponent, useCallback, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { ReactNode, FunctionComponent, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import styles from './Auth.scss';
 
 import { AuthView } from './AuthView';
-import { useAuth } from './hooks';
 
 export interface IAuthProps {
   children: ReactNode;
@@ -34,7 +30,6 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children, active, setActiv
       })
         .then((response) => {
           console.log('File sent successful');
-          // console.log(new Error(`${response.status}: ${response.statusText}`));
           sessionStorage.setItem('status', JSON.stringify(response.status));
         })
         .catch((e) => {
@@ -56,17 +51,6 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children, active, setActiv
   const handleChangePassword = useCallback((value: string) => {
     setPassword(value);
   }, []);
-
-  //   const overlayClickHandler = useCallback(() => {
-  //   setOpenClassOverlay(!openClassOverlay);
-  // }, [openClassOverlay]);
-
-  const statusCode = sessionStorage.getItem('status');
-  // let openAuth;
-  // useEffect(() => {
-  //   openAuth = active;
-  // }, [statusCode, active, setActive]);
-
   return (
     <>
       {!active ? (
@@ -84,5 +68,4 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children, active, setActiv
       )}
     </>
   );
-  // return <>{children}</>;
 };

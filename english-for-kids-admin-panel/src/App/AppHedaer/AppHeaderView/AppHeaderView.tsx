@@ -5,9 +5,8 @@ import React, { FunctionComponent, PropsWithChildren, useCallback, useEffect, us
 import cn from 'classnames';
 
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { appHeaderViewSelector } from './reducers';
-import { switchAuthorization, switchPlayMode } from './actions';
+import { useDispatch } from 'react-redux';
+import { switchPlayMode } from './actions';
 import styles from './AppHeaderView.scss';
 
 export interface IAppHeaderViewProps {
@@ -21,15 +20,8 @@ export const AppHeaderView: FunctionComponent<IAppHeaderViewProps> = ({ active, 
   const [openClassMenu, setOpenClassMenu] = useState(true);
   const [openClassOverlay, setOpenClassOverlay] = useState(true);
   const [playMode, setPlayMode] = useState(true);
-  // const [authorizationOpen, setAuthorizationOpen] = useState(false);
-  const [auth, setAuth] = useState(false);
-  // const { isAdminHere } = useSelector(appHeaderViewSelector);
-  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
-  // const { isAdminHere } = useSelector(appHeaderViewSelector);
-  // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
 
   const toggleClickHandler = useCallback(() => {
-    // dispatch(switchAuthorization(false));
     setOpenClassToggle(!openClassToggle);
     setOpenClassMenu(!openClassMenu);
     setOpenClassOverlay(!openClassOverlay);
@@ -45,20 +37,6 @@ export const AppHeaderView: FunctionComponent<IAppHeaderViewProps> = ({ active, 
     dispatch(switchPlayMode(playMode));
     setPlayMode((isPlayMode) => !isPlayMode);
   }, [playMode, switchPlayMode, dispatch]);
-
-  // const handleOpenAuth = useCallback(() => {
-  //   // setAuth(!isAuth);
-  //   // dispatch(switchAuthorization(false));
-  //   // console.log(authorizationOpen);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (isAdminHere) {
-  //     setAdminIsHere((isAdmin) => !isAdmin);
-  //   } else {
-  //     setAdminIsHere((isAdmin) => isAdmin);
-  //   }
-  // }, [isAdminHere]);
 
   const statusCode = sessionStorage.getItem('status');
 

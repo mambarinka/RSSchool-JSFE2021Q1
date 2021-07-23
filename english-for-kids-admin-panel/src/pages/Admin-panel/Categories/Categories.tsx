@@ -1,7 +1,7 @@
-import React, { FunctionComponent, SyntheticEvent, useCallback, useEffect, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCategory, deleteCategory, getCategories, getWords, updateCategory } from '@/api/actions';
+import { createCategory, getCategories, getWords } from '@/api/actions';
 import { baseURL } from '@/api/api';
 import { apiSelector } from '@/api/reducers';
 import { useHistory } from 'react-router-dom';
@@ -22,21 +22,14 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   const { categories } = useSelector(apiSelector);
   const [imageCategory, setImageCategory] = useState('');
 
-  // const [page, setPage] = useState(1);
   const [arrayCategoryApi, setArrayCategoryApi] = useState([] as any[]);
-  // const [categoriesScroll, setCategoriesScroll] = useState([]);
-  // const [loading, setLoading] = useState(true);
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
   }, []);
 
-  const handleClickButtonCancel = useCallback((event: SyntheticEvent) => {
-    // event.stopPropagation();
-    // event.preventDefault();
+  const handleClickButtonCancel = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    // setValueInputText('');
-    // setValueInputFile({});
   }, []);
 
   const handleInputText = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,14 +66,11 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
-    // setValueInputText('');
-    // setValueInputFile({});
 
     console.log('valueInputText in cat', valueInputText);
     console.log('valueInputFile in cat', valueInputFile);
 
     if (valueInputText === '' || imageCategory === '') {
-      // if (valueInputText === '' || Object.keys(valueInputFile).length !== 0) {
       alert('Заполните, пожалуйста, все поля');
     } else {
       const dataForm = new FormData();
@@ -105,7 +95,6 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   useEffect(() => {
     if (statusCode !== '200') {
       alert('Вы не авторизованы');
-      // setActive(true);
       history.push('main');
     }
   }, [statusCode]);
@@ -135,7 +124,6 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
     <main className={styles.pageAdminCategories}>
       <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
       <ul className={styles.categoriesList}>
-        {/* {console.log('arrayCategoryApi', arrayCategoryApi)} */}
         {arrayCategoryApi &&
           arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
             <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />

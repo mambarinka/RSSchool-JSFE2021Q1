@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import { Category, mainSelector } from '@/pages/Main/reducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCategories } from '@/api/actions';
+import { useSelector } from 'react-redux';
 import { baseURL } from '@/api/api';
 import { apiSelector } from '@/api/reducers';
 import { CategoryItem } from './CategoryItem';

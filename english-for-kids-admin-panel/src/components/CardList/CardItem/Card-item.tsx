@@ -3,16 +3,9 @@ import cn from 'classnames';
 
 import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { playAudio } from '@/helpers/utils';
-import { Category, mainSelector } from '@/pages/Main/reducer';
-import {
-  setCorrectPercent,
-  updateErrorClicks,
-  updateSuccessClicks,
-  updateTrainClicks,
-} from '@/pages/Statistics/actions';
-import { addStar } from '@/pages/Main/actions';
 import { baseURL } from '@/api/api';
+import { playAudio } from '@/helpers/utils';
+import { updateTrainClicks } from '@/pages/Statistics/actions';
 import styles from './Card-item.scss';
 
 export interface ICardItemProps {
@@ -67,32 +60,35 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({
 
   const frontCardClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     // currentAudio = shuffleArray[index];
-    // if (event!.currentTarget) {
-    //   if (!isPlayMode) {
-    //     playAudio(isPlayMode, path, category);
-    //     dispatch(updateTrainClicks(path, category));
-    //   } else if (isPlayMode) {
-    //     if (!isChecked) {
-    //       if (category !== currentAudio) {
-    //         dispatch(addStar(isChecked));
-    //         setObjCardsChecked(false);
-    //         dispatch(updateErrorClicks(path, category));
-    //         if (index < shuffleArray.length) {
-    //           playAudio(isPlayMode, null, null, false);
-    //         }
-    //       } else {
-    //         playAudio(isPlayMode, null, null, true);
-    //         dispatch(updateSuccessClicks(path, category));
-    //         dispatch(addStar(!isChecked));
-    //         index++;
-    //         setObjCardsChecked(true);
-    //         if (index < shuffleArray.length) {
-    //           playAudio(isPlayMode, path, shuffleArray[index]);
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    if (event!.currentTarget) {
+      if (!isPlayMode) {
+        const audio = new Audio();
+        audio.currentTime = 0;
+        audio.src = `${baseURL}${linkSound}`;
+        audio.play();
+        dispatch(updateTrainClicks(path, textEn));
+        //   } else if (isPlayMode) {
+        //     if (!isChecked) {
+        //       if (category !== currentAudio) {
+        //         dispatch(addStar(isChecked));
+        //         setObjCardsChecked(false);
+        //         dispatch(updateErrorClicks(path, category));
+        //         if (index < shuffleArray.length) {
+        //           playAudio(isPlayMode, null, null, false);
+        //         }
+        //       } else {
+        //         playAudio(isPlayMode, null, null, true);
+        //         dispatch(updateSuccessClicks(path, category));
+        //         dispatch(addStar(!isChecked));
+        //         index++;
+        //         setObjCardsChecked(true);
+        //         if (index < shuffleArray.length) {
+        //           playAudio(isPlayMode, path, shuffleArray[index]);
+        //         }
+        //       }
+        //     }
+      }
+    }
   };
 
   return (
@@ -107,12 +103,12 @@ export const CardItem: FunctionComponent<ICardItemProps> = ({
     >
       <div className={cn(styles.front)} onClick={(event) => frontCardClickHandler(event)}>
         <img src={`${baseURL}${linkImage}`} alt={`${textRu} card`} />
-        <span className={styles.cardName}>{textRu}</span>
+        <span className={styles.cardName}>{textEn}</span>
       </div>
 
       <div className={styles.back}>
-        <img src={linkImage} alt={`${textEn} category`} />
-        <span className={styles.cardName}>{textEn}</span>
+        <img src={`${baseURL}${linkImage}`} alt={`${textEn} category`} />
+        <span className={styles.cardName}>{textRu}</span>
       </div>
 
       <button type="button" className={styles.cardButtonFlip} onClick={buttonFlipClickHandler}></button>

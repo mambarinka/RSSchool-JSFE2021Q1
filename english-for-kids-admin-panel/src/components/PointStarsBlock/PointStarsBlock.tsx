@@ -1,7 +1,6 @@
-import React, { FunctionComponent, useEffect, useCallback } from 'react';
+import React, { FunctionComponent } from 'react';
 import cn from 'classnames';
 
-import { appHeaderViewSelector } from '@/App/AppHedaer/AppHeaderView/reducers';
 import { useSelector } from 'react-redux';
 import { mainSelector } from '@/pages/Main/reducer';
 import { StarBlock } from './StarBlock';

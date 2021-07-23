@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '@/store/store';
 import { apiSelector } from '@/api/reducers';
 import { Main } from '@/pages/Main';
-import { Auth /* responseStatus */ } from '@/pages/Auth/Auth';
+import { Auth } from '@/pages/Auth/Auth';
 import { DifficultWords } from '@/pages/DifficultWords';
 import { Statistics } from '@/pages/Statistics';
 import { Categories } from '@/pages/Admin-panel/Categories';
@@ -35,7 +35,6 @@ export const App = () => {
   useEffect(() => {
     sessionStorage.setItem('status', '401');
   }, []);
-  // console.log('responseStatus', responseStatus);
 
   return (
     <PersistGate loading={null} persistor={persistor}>
