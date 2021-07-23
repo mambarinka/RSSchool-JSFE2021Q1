@@ -10,7 +10,7 @@ import { CategoryItem } from './CategoryItem';
 import styles from './CategoryList.scss';
 
 export const CategoryList: () => JSX.Element = () => {
-  const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
+  const [arrayCategoryApi, setArrayCategoryApi] = useState([] as any[]);
   const { categories } = useSelector(apiSelector);
 
   useEffect(() => {

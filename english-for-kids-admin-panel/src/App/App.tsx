@@ -20,7 +20,7 @@ import { AppFooter } from './AppFooter';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
+  const [arrayCategoryApi, setArrayCategoryApi] = useState([] as any[]);
   const [modalActive, setModalActive] = useState(false);
   const { categories } = useSelector(apiSelector);
 

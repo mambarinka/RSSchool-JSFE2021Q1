@@ -3,8 +3,6 @@ import {
   CREATE_WORD_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
   DELETE_WORD_SUCCESS,
-  getCategories,
-  getCategoriesActionCreator,
   GET_CATEGORIES_SUCCESS,
   GET_WORDS_SUCCESS,
   IApiActions,
@@ -13,8 +11,8 @@ import {
 } from './actions';
 
 export interface IApiState {
-  categories: any;
-  words: any;
+  categories: any[];
+  words: any[];
   error: any;
 }
 
@@ -42,11 +40,9 @@ export function api(
       const {
         response: { data },
       } = action;
-      const actions = [getCategoriesActionCreator()];
       return {
         ...state,
         categories: data,
-        actions,
       };
     }
 

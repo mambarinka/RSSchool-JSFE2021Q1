@@ -39,6 +39,7 @@
     "react-router-dom": "^5.2.0",
     "react-table": "^7.3.2",
     "redux": "^4.0.5",
+    "redux-infinite-scroll": "^1.0.9",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-reducer-actions": "^1.0.0",

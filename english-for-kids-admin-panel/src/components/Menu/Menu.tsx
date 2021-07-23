@@ -25,7 +25,7 @@ export const Menu: FunctionComponent<IMenuProps> = ({ isInitialState, onClick })
   // const arrayCategory: Category[] = Object.values(categories);
 
   // const { isAuthorizationOpen } = useSelector(appHeaderViewSelector);
-  const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
+  const [arrayCategoryApi, setArrayCategoryApi] = useState([] as any[]);
 
   // useEffect(() => {
   //   if (isAdminHere) {

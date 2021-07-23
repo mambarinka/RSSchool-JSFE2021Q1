@@ -1,5 +1,3 @@
-import { getCategoriesActionCreator, GET_CATEGORIES_ACTION } from '@/api/actions';
-import { shuffleArray } from '@/helpers/utils';
 import { IMainAction, ADD_STAR, CLEAR_ARRAY_STARS } from './actions';
 
 export interface Category {

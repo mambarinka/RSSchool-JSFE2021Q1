@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
-import { compareNumbers } from '@/helpers/utils';
 import { Link } from 'react-router-dom';
 import { resetStatistics, setCorrectPercent } from './actions';
 import { statisticsSelector } from './reducers';

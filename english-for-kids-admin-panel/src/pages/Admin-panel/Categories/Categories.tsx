@@ -18,10 +18,14 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
-  const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
   const dispatch = useDispatch();
   const { categories } = useSelector(apiSelector);
   const [imageCategory, setImageCategory] = useState('');
+
+  // const [page, setPage] = useState(1);
+  const [arrayCategoryApi, setArrayCategoryApi] = useState([] as any[]);
+  // const [categoriesScroll, setCategoriesScroll] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -106,14 +110,36 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
     }
   }, [statusCode]);
 
+  // const handleScroll = (event: React.UIEvent<HTMLElement>) => {
+  //   const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+
+  //   if (scrollHeight - scrollTop === clientHeight) {
+  //     setPage((prev) => prev + 1);
+  //     console.log(page);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const loadCategoriesScroll = async () => {
+  //     setLoading(true);
+  //     // const newCategories = await getCategories().categories;
+  //     // const newCategories = categories;
+  //     setArrayCategoryApi((prev) => [...prev, ...categories]);
+  //     setLoading(false);
+  //   };
+
+  //   loadCategoriesScroll();
+  // }, [page]);
+
   return (
     <main className={styles.pageAdminCategories}>
       <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
       <ul className={styles.categoriesList}>
         {/* {console.log('arrayCategoryApi', arrayCategoryApi)} */}
-        {arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
-          <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
-        ))}
+        {arrayCategoryApi &&
+          arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
+            <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
+          ))}
         <li className={styles.categoriesItem}>
           <h2 className={styles.categoriesItemTitle}>Create new Category</h2>
           <button className={styles.categoriesButtonNew} onClick={handleClickButtonNew}></button>

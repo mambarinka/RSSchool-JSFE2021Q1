@@ -65,12 +65,6 @@ export const getCategories = (): IGetCategories => ({
   },
 });
 
-export const getCategoriesActionCreator: () => {
-  type: string;
-} = () => ({
-  type: 'GET_CATEGORIES',
-});
-
 export interface IUpdateCategory extends IApiAction {
   type: typeof UPDATE_CATEGORY;
 }
