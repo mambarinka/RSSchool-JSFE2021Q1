@@ -21,6 +21,7 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   const [arrayCategoryApi, setArrayCategoryApi] = useState([]);
   const dispatch = useDispatch();
   const { categories } = useSelector(apiSelector);
+  const [imageCategory, setImageCategory] = useState('');
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -56,6 +57,7 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
         reader.addEventListener('load', () => {
           if (reader.result !== null) {
             setInitialImageCategory(reader.result as string);
+            setImageCategory(reader.result as string);
           }
         });
 
@@ -72,11 +74,17 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
 
     console.log('valueInputText in cat', valueInputText);
     console.log('valueInputFile in cat', valueInputFile);
-    const dataForm = new FormData();
-    dataForm.append('name', valueInputText);
-    dataForm.append('image', valueInputFile as Blob);
 
-    dispatch(createCategory(dataForm));
+    if (valueInputText === '' || imageCategory === '') {
+      // if (valueInputText === '' || Object.keys(valueInputFile).length !== 0) {
+      alert('Заполните, пожалуйста, все поля');
+    } else {
+      const dataForm = new FormData();
+      dataForm.append('name', valueInputText);
+      dataForm.append('image', valueInputFile as Blob);
+
+      dispatch(createCategory(dataForm));
+    }
   };
 
   useEffect(() => {

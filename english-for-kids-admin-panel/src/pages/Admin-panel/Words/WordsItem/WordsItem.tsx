@@ -33,6 +33,8 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
   const [valueInputTextTranslate, setValueInputTextTranslate] = useState('');
   const [valueInputFileSound, setValueInputFileSound] = useState({});
   const [valueInputFileImage, setValueInputFileImage] = useState({});
+  const [imageCategory, setImageCategory] = useState(linkImage);
+  const [soundCategory, setSoundCategory] = useState('');
   const dispatch = useDispatch();
 
   const handleClickChange = useCallback(() => {
@@ -74,6 +76,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
       reader.addEventListener('load', () => {
         if (reader.result !== null) {
           setInitialSoundWord(reader.result as string);
+          setSoundCategory(reader.result as string);
         }
       });
       reader.readAsDataURL(file);
@@ -95,6 +98,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
         reader.addEventListener('load', () => {
           if (reader.result !== null) {
             setInitialImageWord(reader.result as string);
+            setImageCategory(reader.result as string);
           }
         });
 
@@ -110,8 +114,10 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
     if (
       valueInputTextName === '' ||
       valueInputTextTranslate === '' ||
-      valueInputFileSound === {} ||
-      valueInputFileImage === {}
+      // Object.keys(valueInputFileSound).length === 0 ||
+      // Object.keys(valueInputFileImage).length === 0
+      imageCategory === '' ||
+      soundCategory === ''
     ) {
       alert('Заполните, пожалуйста, все поля');
     } else {
@@ -150,7 +156,7 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
         </div>
         <div className={styles.textWrapper}>
           <p className={styles.name}>Image:</p>
-          <img className={styles.imageCategory} src={linkImage} alt={`${category} category`} />
+          <img className={styles.imageCategory} src={imageCategory} alt={`${category} category`} />
         </div>
         <div className={styles.buttonCategoryWrapper}>
           <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickChange}>

@@ -25,7 +25,7 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children, active, setActiv
       const hash = Buffer.from(`${encodeURIComponent(login)}:${encodeURIComponent(password)}`).toString('base64');
 
       // await fetch('http://localhost:3000/api/auth', {
-        await fetch('https://server-english-for-kids.herokuapp.com/api/auth', {
+      await fetch('https://server-english-for-kids.herokuapp.com/api/auth', {
         method: 'POST',
         headers: new Headers({
           Authorization: `Basic ${hash}`,
@@ -34,7 +34,7 @@ export const Auth: FunctionComponent<IAuthProps> = ({ children, active, setActiv
       })
         .then((response) => {
           console.log('File sent successful');
-          console.log(new Error(`${response.status}: ${response.statusText}`));
+          // console.log(new Error(`${response.status}: ${response.statusText}`));
           sessionStorage.setItem('status', JSON.stringify(response.status));
         })
         .catch((e) => {

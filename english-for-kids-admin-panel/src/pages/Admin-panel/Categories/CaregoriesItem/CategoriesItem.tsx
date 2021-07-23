@@ -17,6 +17,8 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
   const [initialImageCategory, setInitialImageCategory] = useState('./images/image-category-default.png');
   const [valueInputText, setValueInputText] = useState('');
   const [valueInputFile, setValueInputFile] = useState({});
+  const [imageCategory, setImageCategory] = useState(src);
+  // const [soundCategory, setSoundCategory] = useState(src);
 
   const dispatch = useDispatch();
   const { words } = useSelector(apiSelector);
@@ -62,6 +64,8 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
           if (reader.result !== null) {
             setInitialImageCategory(reader.result as string);
             console.log('reader.result', reader.result);
+            setImageCategory(reader.result as string);
+            console.log('src', src);
           }
         });
 
@@ -69,6 +73,10 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
       }
     }
   }, []);
+
+  useEffect(() => {
+    setImageCategory(src);
+  }, [src]);
 
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -82,7 +90,8 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
     console.log(valueInputFile);
     console.log(categoryId);
 
-    if (valueInputText === '' || valueInputFile === {}) {
+    if (valueInputText === '' || imageCategory === '') {
+      // if (valueInputText === '' || Object.keys(valueInputFile).length === 0) {
       alert('Заполните, пожалуйста, все поля');
     } else {
       data.append('name', valueInputText);
@@ -101,7 +110,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
           <p>WORDS:</p>
           <span className={styles.countWords}>{countWordsinCategory}</span>
         </div>
-        <img className={styles.imageCategory} src={src} alt={`${category} category`} />
+        <img className={styles.imageCategory} src={imageCategory} alt={`${category} category`} />
         <div className={styles.buttonCategoryWrapper}>
           <button className={cn(styles.button, styles.buttonUpdate)} onClick={handleClickUpdate}>
             Update
