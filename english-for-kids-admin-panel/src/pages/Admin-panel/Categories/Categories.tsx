@@ -23,6 +23,9 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
   const [imageCategory, setImageCategory] = useState('');
 
   const [arrayCategoryApi, setArrayCategoryApi] = useState([] as any[]);
+  const numInRow = 4;
+  const [amountCategoriesScroll, setAmountCategoriesScroll] = useState(numInRow);
+  const [loading, setLoading] = useState(true);
 
   const handleClickButtonNew = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
@@ -86,9 +89,9 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
     dispatch(getWords());
   }, [dispatch]);
 
-  useEffect(() => {
-    setArrayCategoryApi(categories);
-  }, [categories]);
+  // useEffect(() => {
+  //   setArrayCategoryApi(categories);
+  // }, [categories]);
 
   const statusCode = sessionStorage.getItem('status');
   const history = useHistory();
@@ -99,36 +102,37 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = (active, set
     }
   }, [statusCode]);
 
-  // const handleScroll = (event: React.UIEvent<HTMLElement>) => {
-  //   const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+  const handleScroll = (event: React.UIEvent<HTMLElement>) => {
+    const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
 
-  //   if (scrollHeight - scrollTop === clientHeight) {
-  //     setPage((prev) => prev + 1);
-  //     console.log(page);
-  //   }
-  // };
+    if (scrollHeight - scrollTop === clientHeight) {
+      setAmountCategoriesScroll((prev) => prev + numInRow);
+      console.log(amountCategoriesScroll);
+    }
+  };
 
-  // useEffect(() => {
-  //   const loadCategoriesScroll = async () => {
-  //     setLoading(true);
-  //     // const newCategories = await getCategories().categories;
-  //     // const newCategories = categories;
-  //     setArrayCategoryApi((prev) => [...prev, ...categories]);
-  //     setLoading(false);
-  //   };
+  useEffect(() => {
+    const loadCategoriesScroll = async () => {
+      setLoading(true);
 
-  //   loadCategoriesScroll();
-  // }, [page]);
+      const newCategories = categories.slice(amountCategoriesScroll - numInRow, amountCategoriesScroll);
+
+      setArrayCategoryApi((prev) => [...prev, ...newCategories]);
+      setLoading(false);
+    };
+
+    loadCategoriesScroll();
+  }, [amountCategoriesScroll]);
 
   return (
     <main className={styles.pageAdminCategories}>
       <h1 className={styles.pageAdminCategoriesTitle}>Categories</h1>
-      <ul className={styles.categoriesList}>
+      <ul className={styles.categoriesList} onScroll={handleScroll}>
         {arrayCategoryApi &&
           arrayCategoryApi.map((item: { text: string; id: string; link: string }) => (
             <CategoriesItem category={item.text} key={item.id} categoryId={item.id} src={`${baseURL}${item.link}`} />
           ))}
-        <li className={styles.categoriesItem}>
+        <li className={cn(amountCategoriesScroll >= categories.length ? styles.categoriesItem : styles.hide)}>
           <h2 className={styles.categoriesItemTitle}>Create new Category</h2>
           <button className={styles.categoriesButtonNew} onClick={handleClickButtonNew}></button>
           <form
