@@ -35,28 +35,20 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
 
   const handleClickChange = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    setValueInputFileSound(linkSound);
   }, [openClassFormUpdate]);
 
   const handleClickButtonCancel = useCallback(() => {
     setOpenClassFormUpdate((openClass) => !openClass);
-    // setValueInputTextName('');
-    // setValueInputTextTranslate('');
-    // setValueInputFileSound({});
-    // setValueInputFileImage({});
   }, []);
 
   const handleClickButtonDelete = useCallback(() => {
     dispatch(deleteWord(JSON.stringify(id)));
   }, [dispatch]);
 
-  const handleInputTextName = useCallback(
-    (evt: React.ChangeEvent<HTMLInputElement>) => {
-      const inputText = evt.currentTarget;
-      setValueInputTextName(inputText.value);
-    },
-    [valueInputTextName]
-  );
+  const handleInputTextName = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    const inputText = evt.currentTarget;
+    setValueInputTextName(inputText.value);
+  }, []);
 
   const handleInputTextTranslate = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputText = evt.currentTarget;
@@ -102,11 +94,16 @@ export const WordsItem: FunctionComponent<IWordsItemProps> = ({
     }
   }, []);
 
-  const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
     const dataForm = new FormData();
-    if (valueInputTextName === '' || valueInputTextTranslate === '' || imageCategory === '' || soundCategory === '') {
+    if (
+      valueInputTextName === '' ||
+      valueInputTextTranslate === '' ||
+      valueInputFileSound === {} ||
+      valueInputFileImage === {}
+    ) {
       alert('Заполните, пожалуйста, все поля');
     } else {
       dataForm.append('id', id);

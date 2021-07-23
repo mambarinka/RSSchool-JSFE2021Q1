@@ -20,13 +20,17 @@
 }
 
 .page-admin-words-category {
-  @include text-options(16px, 20px, 400, $text-main-color);
+  @include text-options(20px, 23px, 600, $text-main-color);
   margin-bottom: 50px;
   text-align: center;
   text-transform: uppercase;
 
   & span {
+    padding: 12px;
+    color: $button-main-color;
     text-decoration: underline;
+    background-color: $main-color;
+    border-radius: 42px;
   }
 }
 
@@ -34,7 +38,7 @@
   @include list-reset;
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
+  height: 550px;
   overflow: auto;
 }
 

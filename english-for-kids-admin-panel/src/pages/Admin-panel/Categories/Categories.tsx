@@ -41,9 +41,7 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = () => {
 
   const handleInputFile = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     const inputFile = evt.currentTarget;
-    console.log('inputFile in categoriessss', inputFile.files);
     setValueInputFile(inputFile.files![0]);
-    console.log('valueInputFile', valueInputFile);
     const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     if (inputFile.files !== null) {
       const file: File = inputFile.files[0];
@@ -68,9 +66,6 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = () => {
   const handleFormSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setOpenClassFormUpdate((openClass) => !openClass);
-
-    console.log('valueInputText in cat', valueInputText);
-    console.log('valueInputFile in cat', valueInputFile);
 
     if (valueInputText === '' || imageCategory === '') {
       alert('Заполните, пожалуйста, все поля');
@@ -106,7 +101,6 @@ export const Categories: FunctionComponent<ICategoriesAdminProps> = () => {
 
     if (scrollHeight - scrollTop === clientHeight) {
       setAmountCategoriesScroll((prev) => prev + numInRow);
-      console.log(amountCategoriesScroll);
     }
   };
 

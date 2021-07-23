@@ -83,12 +83,13 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
       data.append('image', valueInputFile as Blob);
       data.append('id', categoryId);
       dispatch(updateCategory(data));
+      setValueInputText(valueInputText);
     }
   };
   return (
     <li className={styles.categoriesItem}>
       <div className={styles.itemWrapper}>
-        <h2 className={styles.itemTitle}>{category}</h2>
+        <h2 className={styles.itemTitle}>{valueInputText === '' ? category : valueInputText}</h2>
         <button className={styles.itemCloseButton} onClick={handleClickButtonDelete}></button>
         <div className={styles.textWrapper}>
           <p>WORDS:</p>
@@ -120,6 +121,7 @@ export const CategoriesItem: FunctionComponent<ICategoriesItemProps> = ({ catego
             handleInputText(event);
             setValueInputText(event.target.value);
           }}
+          value={valueInputText}
         />
         <div className={styles.fileWrapper}>
           <label htmlFor="category-image">Category image</label>
