@@ -17,9 +17,9 @@ https://mambarinka-jsfe2021q1-english-for-kids.netlify.app/
 
 https://mambarinka-jsfe2021q1-english-for-kids-admin-panel.netlify.app/ 
 
-https://www.youtube.com/watch?v=kjGyBrsu8Vc
-https://mambarinka-presentation.netlify.app/
-- presentation (theme: GIT, GIT-FLOW, GITHUB-FLOW)
+https://www.youtube.com/watch?v=kjGyBrsu8Vc  
+https://mambarinka-presentation.netlify.app/  
+-presentation (theme: GIT, GIT-FLOW, GITHUB-FLOW)
 
-https://www.youtube.com/watch?v=pzIQb6sn4jU
+https://www.youtube.com/watch?v=pzIQb6sn4jU  
 -self introduction
